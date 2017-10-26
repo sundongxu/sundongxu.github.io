@@ -2,6 +2,13 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>dongdongdong.me/2017/10/26/hello-world/</loc>
+    
+    <lastmod>2017-10-26T14:53:14.000Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>dongdongdong.me/tags/index.html</loc>
     
     <lastmod>2017-10-26T14:25:59.000Z</lastmod>
@@ -19,13 +26,6 @@
     <loc>dongdongdong.me/about/index.html</loc>
     
     <lastmod>2017-10-26T14:22:20.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>dongdongdong.me/2017/10/26/hello-world/</loc>
-    
-    <lastmod>2017-10-26T14:13:27.000Z</lastmod>
     
   </url>
   
