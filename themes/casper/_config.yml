@@ -1,0 +1,10 @@
+# config
+cover: //blog.ghost.org/content/images/2013/Nov/cover.png
+logo: //blog.ghost.org/content/images/2013/Nov/bloglogo_1-1.png
+bio: 'A developer, traveler, and diehard Laker fan.'
+
+# Content
+excerpt_link: Read More
+
+# Miscellaneous
+rss:
