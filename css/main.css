@@ -1218,6 +1218,14 @@ pre .javascript .function {
 .use-motion .menu-item {
   opacity: 0;
 }
+.post-body p a {
+  color: #0593d3;
+  border-bottom: none;
+}
+.post-body p a:hover {
+  color: #0477ab;
+  text-decoration: underline;
+}
 .post-body {
   font-family: 'Lato', "PingFang SC", "Microsoft YaHei", sans-serif;
 }
@@ -2047,7 +2055,7 @@ img:hover {
   width: 4px;
   height: 4px;
   border-radius: 50%;
-  background: #ff58ff;
+  background: #c4bddd;
 }
 .links-of-blogroll {
   font-size: 13px;
@@ -3120,7 +3128,7 @@ hr {
 }
 .footer-inner {
   margin: 0 auto;
-  text-align: left;
+  text-align: center;
 }
 @media (max-width: 767px) {
   .footer-inner {
