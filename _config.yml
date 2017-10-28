@@ -77,6 +77,28 @@ pagination_dir: page
 # theme: casper
 theme: next
 
+# Qiniu cloud plugin
+plugins:
+    -hexo-qiniu-sync
+
+qiniu:
+    offline: false
+    sync: true
+    bucket: dongdongdong-blog 
+    access_key: lv1NFMBSpsVDDMqOUPO-DW6eEjziOyCWboF8YzCo
+    secret_key: 3K93gKfRyPVlD1h2jtyTFtH1nroCeBHyNOyR025Z 
+    dirPrefix:
+    urlPrefix: http://oyj8xdeki.bkt.clouddn.com
+    local_dir: cdn
+    update_exist: true
+    image:
+        folder: images
+        extend:
+    js:
+        folder: js
+    css:
+        folder: css
+
 # Search
 search: 
   path: search.xml
