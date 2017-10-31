@@ -9,16 +9,20 @@ tags:
 - Network Visualization
 ---
 
+## 全文概要
+软件定义网络([Software Defined Network, SDN](https://en.wikipedia.org/wiki/Software-defined_networking))核心在于网络转发设备的数据转发平面(Data Plane)和控制平面(Control Plane)的分离和解耦，以实现可编程按需定制、集中式统一管理、动态流量监控、自动化部署，2014年P4语言横空出世，进一步提高了面向交换机编程的可行性和效率，成为SDN领域的又一里程碑式的成果。本文从宣告P4诞生的SIGCOMM会议论文出发，介绍了P4的背景起源、基本原理和广阔的应用前景。
+<!--more-->
+
 ## 行业趋势
 ---
 SDN is the future, and P4 defines it. 
 SDN是未来，P4定义未来。
 
-<!--more-->
 
 ## 相关论文
 ---
-[《P4: Programming Protocol-Independent Packet Processors》](https://arxiv.org/pdf/1312.1719.pdf), SIGCOMM Communication Review, 2014.
+Proposed in [SIGCOMM Communication Review[J]](https://www.sigcomm.org/publications/computer-communication-review), 2014.
+-[《P4: Programming Protocol-Independent Packet Processors》](https://arxiv.org/pdf/1312.1719.pdf)
 
 ## 背景起源
 ---
