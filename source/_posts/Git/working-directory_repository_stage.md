@@ -45,19 +45,19 @@ Git版本库里存了很多东西，其中最重要的就是称为"Stage"的暂�
 
 流程按照上图中显示的git版本库继续操作，所有操作均在本地分支Master上完成：
 
-{% qnimg Git/working-directory_repository_stage/1-untracked-file %}
+{% qnimg Git/working-directory_repository_stage/1-untracked-file.png %}
 
 工作区中包含未被追踪的文件(Untracked files)：**a.txt**，按提示使用命令：**git add <文件名>**，就可以将该文件添加至**暂存区**，并使用命令**git status**，查看当前版本完整视图：
 
 {% qnimg Git/working-directory_repository_stage/2-git-add.png %}
 
-根据提示使用命令：**git rm --cached <文件名>**，可取消缓存在暂存区的文件修改：
+根据提示使用命令：**git rm - -cached <文件名>**，可取消缓存在暂存区的文件修改：
 
 {% qnimg Git/working-directory_repository_stage/3-git-rm-cached.png %}
 
-发现暂存区的文件被弹出，**a.txt**重新回到了**Untracked files**下，再次执行**git add>**将其加入暂存区：
+发现暂存区的文件被弹出，**a.txt**重新回到了**Untracked files**下，再次执行**git add**将其加入暂存区：
 
-{% qnimg Git/working-directory_repository_stage/4-git-add.png %}
+{% qnimg Git/working-directory_repository_stage/4-git-add-again.png %}
 
 接下来使用命令：**git commit -m "message"**，将暂存区文件提交，此时终端显示“nothing to commit, working directory clean”(没有可提交的内容，工作区是干净的)，这是因为工作区中的文件修改已全部提交至版本库中的本地分支Master上，工作区与Master分支内容完全一致，即没有“脏”内容(类比数据库的“脏读”(Dirty Read)，脏读是指一个事务读到了另一个事务还未提交的数据，实际就是存在有未提交的数据)的情况：
 
@@ -152,9 +152,7 @@ Git版本库里存了很多东西，其中最重要的就是称为"Stage"的暂�
 ## 小结
 ---
 1. **工作区**：本地目录，包含所有被Git追踪的文件的实时内容；
-
 2. **版本库**：工作区中的.git文件夹，实际包含暂存区和当前分支指针HEAD，通过命令：**git init**可以初始化创建版本库；
-
 3. **暂存区**：暂存被追踪的文件修改，为正式提交到本地分支提供内容。
 
 - **工作区**文件修改后通过命令：**git add <文件名>**，将文件添加至**暂存区**。
