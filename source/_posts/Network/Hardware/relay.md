@@ -163,10 +163,10 @@ tags:
 
 ## 参考资料
 ---
-[1] http://blog.csdn.net/gongda2014306/article/details/52442981 
-[2] http://blog.csdn.net/u012243115/article/details/47008903
-[3] http://blog.csdn.net/zhongyou2009/article/details/4768807
-[4] http://hextwolf.blog.51cto.com/59501/29696
-[5] http://www.nowamagic.net/academy/detail/72150314
-[6] http://www.eepw.com.cn/article/275540.htm
-[7] http://blog.sina.com.cn/s/blog_5e1a889d0101370d.html
+[1] [网络设备解析：中继器、集线器、网桥、交换机、路由器、网关的区别](http://blog.csdn.net/gongda2014306/article/details/52442981)
+[2] [转发器、集线器、网桥、交换机、路由器和网关简介](http://blog.csdn.net/u012243115/article/details/47008903)
+[3] [交换机和网桥的区别](http://blog.csdn.net/zhongyou2009/article/details/4768807)
+[4] [广播域与冲突域详细解析](http://hextwolf.blog.51cto.com/59501/29696)
+[5] [集线器、交换机和路由器通俗点的解释](http://www.nowamagic.net/academy/detail/72150314)
+[6] [交换机工作原理](http://www.eepw.com.cn/article/275540.htm)
+[7] [交换机的工作原理(二、三、四层交换原理)](http://blog.sina.com.cn/s/blog_5e1a889d0101370d.html)
