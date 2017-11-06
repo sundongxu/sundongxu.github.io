@@ -1,5 +1,5 @@
 ---
-title: P4学习笔记(一)：背景起源与基本原理
+title: P4学习笔记：背景起源与基本原理
 date: 2017-10-28 10:29:26
 categories:
 - Network
