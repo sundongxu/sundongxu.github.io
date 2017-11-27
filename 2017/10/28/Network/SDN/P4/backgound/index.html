@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="Hexo, NexT" />
+  <meta name="keywords" content="P4,SDN,Network Visualization," />
 
 
 
@@ -87,16 +87,20 @@
 
 
 
-<meta name="description" content="Consistency refines Efficiency.">
-<meta property="og:type" content="website">
-<meta property="og:title" content="Sun Dongxu&#39;s Blog">
-<meta property="og:url" content="dongdongdong.me/archives/2017/10/index.html">
+<meta name="description" content="全文概要软件定义网络(Software Defined Network, SDN)核心在于网络转发设备的数据转发平面(Data Plane)和控制平面(Control Plane)的分离和解耦，以实现可编程按需定制、集中式统一管理、动态流量监控、自动化部署，2014年P4语言横空出世，进一步提高了面向交换机编程的可行性和效率，成为SDN领域的又一里程碑式的成果。本文从宣告P4诞生的SIGCOMM会">
+<meta name="keywords" content="P4,SDN,Network Visualization">
+<meta property="og:type" content="article">
+<meta property="og:title" content="P4学习笔记(1)：背景起源与基本原理">
+<meta property="og:url" content="dongdongdong.me/2017/10/28/Network/SDN/P4/backgound/index.html">
 <meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
-<meta property="og:description" content="Consistency refines Efficiency.">
+<meta property="og:description" content="全文概要软件定义网络(Software Defined Network, SDN)核心在于网络转发设备的数据转发平面(Data Plane)和控制平面(Control Plane)的分离和解耦，以实现可编程按需定制、集中式统一管理、动态流量监控、自动化部署，2014年P4语言横空出世，进一步提高了面向交换机编程的可行性和效率，成为SDN领域的又一里程碑式的成果。本文从宣告P4诞生的SIGCOMM会">
 <meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/P4/P4vsOpenFlow.png">
+<meta property="og:updated_time" content="2017-10-31T05:46:22.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="Sun Dongxu&#39;s Blog">
-<meta name="twitter:description" content="Consistency refines Efficiency.">
+<meta name="twitter:title" content="P4学习笔记(1)：背景起源与基本原理">
+<meta name="twitter:description" content="全文概要软件定义网络(Software Defined Network, SDN)核心在于网络转发设备的数据转发平面(Data Plane)和控制平面(Control Plane)的分离和解耦，以实现可编程按需定制、集中式统一管理、动态流量监控、自动化部署，2014年P4语言横空出世，进一步提高了面向交换机编程的可行性和效率，成为SDN领域的又一里程碑式的成果。本文从宣告P4诞生的SIGCOMM会">
+<meta name="twitter:image" content="http://oyj8xdeki.bkt.clouddn.com/images/P4/P4vsOpenFlow.png">
 
 
 
@@ -126,13 +130,13 @@
 
 
 
-  <link rel="canonical" href="dongdongdong.me/archives/2017/10/"/>
+  <link rel="canonical" href="dongdongdong.me/2017/10/28/Network/SDN/P4/backgound/"/>
 
 
 
 
 
-  <title>归档 | Sun Dongxu's Blog</title>
+  <title>P4学习笔记(1)：背景起源与基本原理 | Sun Dongxu's Blog</title>
   
 
 
@@ -161,7 +165,7 @@
     
   
 
-  <div class="container sidebar-position-left page-archive">
+  <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
 
     <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
@@ -299,148 +303,341 @@
           <div id="content" class="content">
             
 
-  
-  
-  
-  <div class="post-block archive">
-    <div id="posts" class="posts-collapse">
-      <span class="archive-move-on"></span>
+  <div id="posts" class="posts-expand">
+    
 
-      <span class="archive-page-counter">
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="dongdongdong.me/2017/10/28/Network/SDN/P4/backgound/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sun Dongxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/la.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sun Dongxu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
         
         
+          <h1 class="post-title" itemprop="name headline">P4学习笔记(1)：背景起源与基本原理</h1>
         
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-28T10:29:26+08:00">
+                2017-10-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
           
-        
-        嗯..! 目前共计 3 篇日志。 继续努力。
-      </span>
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Network/" itemprop="url" rel="index">
+                    <span itemprop="name">Network</span>
+                  </a>
+                </span>
 
-      
-
-        
-        
-        
-
-        
+                
+                
+              
+            </span>
           
-          <div class="collection-title">
-            <h1 class="archive-year" id="archive-year-2017">2017</h1>
-          </div>
-        
-        
 
-        
+          
+            
+          
 
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
+          
+          
+             <span id="/2017/10/28/Network/SDN/P4/backgound/" class="leancloud_visitors" data-flag-title="P4学习笔记(1)：背景起源与基本原理">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
 
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/30/Network/Hardware/relay/" itemprop="url">
+          
+
+          
+            <div class="post-wordcount">
               
-                <span itemprop="name">网络互连设备小结</span>
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  1,184
+                </span>
               
-            </a>
-        
-      </h2>
 
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-30T15:18:30+08:00"
-              content="2017-10-30" >
-          10-30
-        </time>
-      </div>
+              
+                <span class="post-meta-divider">|</span>
+              
 
-    </header>
-  </article>
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  5
+                </span>
+              
+            </div>
+          
 
+          
 
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
 
       
-
-        
-        
-        
-
-        
-        
-
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/28/Network/SDN/P4/backgound/" itemprop="url">
-              
-                <span itemprop="name">P4学习笔记(1)：背景起源与基本原理</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-28T10:29:26+08:00"
-              content="2017-10-28" >
-          10-28
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
-
       
 
-        
-        
-        
+      
+        <h2 id="全文概要"><a href="#全文概要" class="headerlink" title="全文概要"></a>全文概要</h2><p>软件定义网络(<a href="https://en.wikipedia.org/wiki/Software-defined_networking" target="_blank" rel="external">Software Defined Network, SDN</a>)核心在于网络转发设备的数据转发平面(Data Plane)和控制平面(Control Plane)的分离和解耦，以实现可编程按需定制、集中式统一管理、动态流量监控、自动化部署，2014年P4语言横空出世，进一步提高了面向交换机编程的可行性和效率，成为SDN领域的又一里程碑式的成果。本文从宣告P4诞生的SIGCOMM会议论文出发，介绍了P4的背景起源、基本原理和广阔的应用前景。<br><a id="more"></a></p>
+<h2 id="行业趋势"><a href="#行业趋势" class="headerlink" title="行业趋势"></a>行业趋势</h2><hr>
+<p>SDN is the future, and P4 defines it.<br>SDN是未来，P4定义未来。</p>
+<h2 id="相关论文"><a href="#相关论文" class="headerlink" title="相关论文"></a>相关论文</h2><hr>
+<p>Proposed in <a href="https://www.sigcomm.org/publications/computer-communication-review" target="_blank" rel="external">SIGCOMM Communication Review[J]</a>, 2014.<br>-<a href="https://arxiv.org/pdf/1312.1719.pdf" target="_blank" rel="external">《P4: Programming Protocol-Independent Packet Processors》</a></p>
+<h2 id="背景起源"><a href="#背景起源" class="headerlink" title="背景起源"></a>背景起源</h2><hr>
+<p>P4是由P.Bosshart等人提出的一种用于处理数据包转发的高层抽象语言，协议独立(Protocol-Independent)是其核心特点，如OpenFlow一样是一种<a href="https://zhuanlan.zhihu.com/p/26743952" target="_blank" rel="external">南向协议</a>，但是其应用范围要比OpenFlow还要大：不仅可以指导数据流转发，更提供了对交换机等网络转发设备的SDN数据平面的编程接口，实现了在设备层对数据处理流程进行软件定义，是真正意义上的软件定义网络(Software Defined Network, SDN)。</p>
+<p>就如论文中所说：</p>
+<blockquote>
+<p>We propose P4 as a strawman proposal for how OpenFlow should evolve in the Future.</p>
+</blockquote>
+<p>目前，P4语言作为一种潜在的OpenFlow2.0的发展方向在努力。</p>
+<p>与华为POF提出目的类似，P4的提出的目的也是为了解决OpenFlow可编程能力不足及其协议设计本身所带来的高复杂度(Complexity)和较差可扩展性(Scalability)的难题。</p>
+<p>自从OpenFlow 1.0发布以来，其版本目前已演进到<a href="https://www.opennetworking.org/wp-content/uploads/2014/10/openflow-switch-v1.5.1.pdf" target="_blank" rel="external">1.5</a>，为了兼容多种不同的网络协议，使OpenFlow交换机能够处理具有不同头部的数据包，其匹配域(Header Field)的个数从1.0版本的12元组，变成1.3版本的40个，到最新1.5版本的45个，其匹配域数目随着新版本支持特性的更新不断增加，OpenFlow匹配域个数随版本演变情况具体见下表：</p>
+<style> 
+  table th:nth-of-type(1) {
+      width: 150px; 
+  }
+</style>
 
-        
-        
+<style>
+  table th:nth-of-type(2) {
+      width: 150px;
+}
+</style>
 
-        
-
-  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
-    <header class="post-header">
-
-      <h2 class="post-title">
-        
-            <a class="post-title-link" href="/2017/10/26/hello-world/" itemprop="url">
-              
-                <span itemprop="name">Hello World</span>
-              
-            </a>
-        
-      </h2>
-
-      <div class="post-meta">
-        <time class="post-time" itemprop="dateCreated"
-              datetime="2017-10-26T22:11:00+08:00"
-              content="2017-10-26" >
-          10-26
-        </time>
-      </div>
-
-    </header>
-  </article>
-
-
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Version</th>
+<th style="text-align:center">Date</th>
+<th style="text-align:center">Header Fields</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">OF 1.0</td>
+<td style="text-align:center">Dec 2009</td>
+<td style="text-align:center">12 fields(Ethernet, TCP/IPv4)</td>
+</tr>
+<tr>
+<td style="text-align:center">OF 1.1</td>
+<td style="text-align:center">Feb 2011</td>
+<td style="text-align:center">15 fields(MPLS, inter-table metadata)</td>
+</tr>
+<tr>
+<td style="text-align:center">OF 1.2</td>
+<td style="text-align:center">Dec 2011</td>
+<td style="text-align:center">36 fields(ARP, ICMP, IPv6, etc)</td>
+</tr>
+<tr>
+<td style="text-align:center">OF 1.3</td>
+<td style="text-align:center">Jun 2012</td>
+<td style="text-align:center">40 fields</td>
+</tr>
+<tr>
+<td style="text-align:center">OF 1.4</td>
+<td style="text-align:center">Oct 2013</td>
+<td style="text-align:center">41 fields</td>
+</tr>
+<tr>
+<td style="text-align:center">OF 1.5</td>
+<td style="text-align:center">Dec 2014</td>
+<td style="text-align:center">45 fields</td>
+</tr>
+</tbody>
+</table>
+<p>但OpenFlow本身并不支持弹性增加匹配域，因此每次增加一个匹配域就需要重新编写控制器(Controller)和交换机两端的协议栈以及交换机的数据包处理逻辑，这无疑大大增加了交换机设计的难度，也严重影响OpenFlow协议的版本稳定性，影响OpenFlow的推广。</p>
+<h2 id="语言特性"><a href="#语言特性" class="headerlink" title="语言特性"></a>语言特性</h2><hr>
+<p>根据论文所述，P4致力于实现以下三个目标：</p>
+<ol>
+<li><p><strong>可重配置性(Reconfigurability)</strong></p>
+<blockquote>
+<p>Programmers should be able to change the way switches process packets once they are deployed.</p>
+</blockquote>
+<p> 可灵活定义转发设备数据处理流程，且能够做到转发无中断的重配置。OpenFlow能够在已经固化在交换机上的数据处理逻辑之上，通过流表项指导数据流转发处理，而无法重新定义交换机处理数据的逻辑，每次增加新的网络协议支持，都必须将相关设备宕机下线并重新配置后再重新部署上线，即无法在不中断其它数据包转发的情况下弹性支持新协议。但是P4的卖点恰恰在于其拥有对交换机的数据平面，即数据包处理逻辑即时编程的能力。</p>
+</li>
+<li><p><strong>协议无关性(Protocol-Independence)</strong></p>
+<blockquote>
+<p>Switches should not be tied to any specific network protocols.</p>
+</blockquote>
+<p> 交换机等转发设备无需关心协议语法和语义等内容，依然能够完成数据处理转发任务。这是因为P4可以自定义数据处理逻辑，并通过控制器对交换机等转发设备编程实现对应的协议处理逻辑，而这个行为(Behavior)将被翻译成对应的匹配(Match)和动作(Action)，从而被转发设备理解和执行。</p>
+</li>
+<li><p><strong>目标设备无关性(Target-Independence)</strong></p>
+<blockquote>
+<p>Programmers should be able to describe packet-processing functionality independently of the underlying hardware.</p>
+</blockquote>
+<p> 正如写C和Java(CPU-oriented Languauge，面向CPU编程语言)代码时并不需要关系CPU的相关信息，使用P4语言()进行网络编程同样无需关心底层设备的具体信息。P4的编译器(Compiler)会将通用的P4语言处理逻辑翻译成设备所能理解的机器指令，从而写入转发设备，完成配置和编程。</p>
+</li>
+</ol>
+<h2 id="P4-vs-OpenFlow"><a href="#P4-vs-OpenFlow" class="headerlink" title="P4 vs OpenFlow"></a>P4 vs OpenFlow</h2><hr>
+<img src="http://oyj8xdeki.bkt.clouddn.com/images/P4/P4vsOpenFlow.png">
+<h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><hr>
 
       
-
     </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>我知道是不会有人点的，但万一有人想不开呢？！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Sun Dongxu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/P4/" rel="tag"><i class="fa fa-tag"></i> P4</a>
+          
+            <a href="/tags/SDN/" rel="tag"><i class="fa fa-tag"></i> SDN</a>
+          
+            <a href="/tags/Network-Visualization/" rel="tag"><i class="fa fa-tag"></i> Network Visualization</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/10/26/hello-world/" rel="next" title="Hello World">
+                <i class="fa fa-chevron-left"></i> Hello World
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2017/10/30/Network/Hardware/relay/" rel="prev" title="网络互连设备小结">
+                网络互连设备小结 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
   </div>
   
   
   
+  </article>
 
-  
 
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59f1e74daa26cba5" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
 
 
           </div>
@@ -448,6 +645,22 @@
 
 
           
+  <div class="comments" id="comments"></div>
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='/lib/Valine.min.js'></script>
+    <script>
+        new Valine({
+            av: AV,
+            el: '.comments' ,
+            verify: true,
+            app_id: '',
+            app_key: '',
+            placeholder: 'Welcome to teach me something!'
+        });
+    </script>
+    
+
 
         </div>
         
@@ -468,8 +681,17 @@
       
 
       
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
 
-      <section class="site-overview-wrap sidebar-panel sidebar-panel-active">
+      <section class="site-overview-wrap sidebar-panel">
         <div class="site-overview">
           <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
             
@@ -576,6 +798,22 @@
         </div>
       </section>
 
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全文概要"><span class="nav-number">1.</span> <span class="nav-text">全文概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#行业趋势"><span class="nav-number">2.</span> <span class="nav-text">行业趋势</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#相关论文"><span class="nav-number">3.</span> <span class="nav-text">相关论文</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景起源"><span class="nav-number">4.</span> <span class="nav-text">背景起源</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#语言特性"><span class="nav-number">5.</span> <span class="nav-text">语言特性</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#P4-vs-OpenFlow"><span class="nav-number">6.</span> <span class="nav-text">P4 vs OpenFlow</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#基本原理"><span class="nav-number">7.</span> <span class="nav-text">基本原理</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
       
 
       
@@ -726,6 +964,10 @@
   
 
   
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
 
   
 
@@ -764,6 +1006,21 @@
 
 
 
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.7-rc3/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'GahxsYhy86LRoRJ6jNOKbsjd-gzGzoHsz',
+        app_key: '3LFhgQbpJqib03QEIBwCbAN4',
+        placeholder: ''
+    });
+  </script>
 
 
 
