@@ -2,44 +2,58 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
-    <loc>dongdongdong.me/2017/10/30/Network/Hardware/relay/</loc>
+    <loc>dongdongdong.me/tags/index.html</loc>
     
-    <lastmod>2017-10-31T05:46:22.000Z</lastmod>
+    <lastmod>2017-11-27T14:28:33.726Z</lastmod>
     
   </url>
   
   <url>
     <loc>dongdongdong.me/2017/10/28/Network/SDN/P4/backgound/</loc>
     
-    <lastmod>2017-10-31T05:46:22.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>dongdongdong.me/2017/10/26/hello-world/</loc>
-    
-    <lastmod>2017-10-26T14:53:14.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>dongdongdong.me/tags/index.html</loc>
-    
-    <lastmod>2017-10-26T14:25:59.000Z</lastmod>
-    
-  </url>
-  
-  <url>
-    <loc>dongdongdong.me/categories/index.html</loc>
-    
-    <lastmod>2017-10-26T14:24:11.000Z</lastmod>
+    <lastmod>2017-11-27T14:28:33.725Z</lastmod>
     
   </url>
   
   <url>
     <loc>dongdongdong.me/about/index.html</loc>
     
-    <lastmod>2017-10-26T14:22:20.000Z</lastmod>
+    <lastmod>2017-11-27T14:28:33.725Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>dongdongdong.me/categories/index.html</loc>
+    
+    <lastmod>2017-11-27T14:28:33.725Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>dongdongdong.me/2017/10/30/Network/Hardware/relay/</loc>
+    
+    <lastmod>2017-11-27T14:28:33.724Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>dongdongdong.me/2017/11/05/Network/Hardware/switch_router/</loc>
+    
+    <lastmod>2017-11-27T14:28:33.724Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>dongdongdong.me/2017/10/31/Git/working-directory_repository_stage/</loc>
+    
+    <lastmod>2017-11-27T14:28:33.723Z</lastmod>
+    
+  </url>
+  
+  <url>
+    <loc>dongdongdong.me/2017/11/07/Network/Mechanism/forwarding_mac_routing/</loc>
+    
+    <lastmod>2017-11-06T16:22:25.000Z</lastmod>
     
   </url>
   
