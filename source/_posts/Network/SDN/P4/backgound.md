@@ -88,7 +88,7 @@ P4是由P.Bosshart等人提出的一种用于处理数据包转发的高层抽�
 
 论文中提出的数据包转发抽象模型如下图所示，交换机通过一个可编程的解析器(**Parser**)以及其后紧跟的多个"匹配-动作"操作阶段，或顺序，或并行，或组合两种模式，完成数据包的转发任务。
 
-{% qnimg P4/forwarding-model.png %}
+{% qnimg Network/SDN/P4/forwarding-model.png %}
 
 模型概括了数据包是如何在**不同转发设备**(包括：以太网交换机、负载均衡器、路由器)中，通过**不同技术**(包括：固定功能交换机ASIC芯片、网络处理器(Network Processor Unit，NPU)、现场可编程门阵列(Field Programmable Gate Array，FPGA)、可重配置交换机、软件交换机)处理的。
 
@@ -115,7 +115,7 @@ P4是由P.Bosshart等人提出的一种用于处理数据包转发的高层抽�
 2. P4可执行串行(**Serial**)和并行(**Parallel**)的Match-Action操作，而OpenFlow仅支持串行操作；
 3. 由于P4模型包含程序编译器，负责完成将P4程序到具体交换设备配置的映射，从而支持协议无关的转发，而OpenFlow支持的协议需要在初始时配置，此后每次修改都需要宕机，编写新的协议数据包处理逻辑再配置到交换机，不能做到无转发中断的弹性增加所支持的协议。
 
-{% qnimg P4/P4vsOpenFlow.png %}
+{% qnimg Network/SDN/P4/P4vsOpenFlow.png %}
 
 ### 核心部件(Key Component)
 
@@ -334,7 +334,7 @@ P4支持的原语动作集包括：
 
 下图显示了在边缘交换机上**mTag**包处理逻辑示例的控制流：
 
-{% qnimg P4/flow-for-mTag.png %}
+{% qnimg Network/SDN/P4/flow-for-mTag.png %}
 
 被解析(**parser mTag**)之后的数据包，先进入**source\_check**表，验证接收到的包和进入端口(Ingress Port)是否和表中的匹配要求一致，即数据包是否包含**mTag**头部，进入端口是否与核心交换机相连。根据该表中的**reads**属性匹配到对应数据包后，由**action**属性指定要采取的动作是：**strip\_tag**，即将**mTag**头部从数据包中剥落，并将该数据包是否包含**mTag**头部记录在元数据中，流水线后部分的表可能还会匹配到该元数据，从而避免再次给该数据包打上**mTag**。
 

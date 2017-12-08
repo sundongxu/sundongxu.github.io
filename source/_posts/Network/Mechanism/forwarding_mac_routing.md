@@ -42,7 +42,7 @@ MAC地址共48位，即6个字节，通常每4位构成一个16进制数，从�
 
 下面会以图示的方式详细讲解交换机传输数据帧的过程，下面先来看看单个交换机转发的情形：
 
-{% qnimg Hardware/forwarding-single-switch.png %}
+{% qnimg Network/Hardware/forwarding-single-switch.png %}
 
 步骤如下：
 1. 主机A会将一个源MAC地址为本机网卡物理地址，目的MAC地址为主机B网卡物理地址的数据帧发送给交换机1；
@@ -53,7 +53,7 @@ MAC地址共48位，即6个字节，通常每4位构成一个16进制数，从�
 
 那么当局域网内存在多个交换机互连的时候，交换机的MAC地址表是如何记录的呢？下图就展示了该种情形：
 
-{% qnimg Hardware/forwarding-multiple-switch.png %}
+{% qnimg Network/Hardware/forwarding-multiple-switch.png %}
 
 步骤如下：
 1. 主机A将一个源MAC地址为本机网卡物理地址，目的MAC地址为主机C网卡物理地址的数据帧发送给交换机1；
@@ -79,7 +79,7 @@ ARP协议，即地址解析协议，它是一个网络层协议，运行在各�
 ### 工作流
 接下来根据下图，详细讲解一下ARP协议的工作原理：
 
-{% qnimg Hardware/arp-protocol.png %}
+{% qnimg Network/Hardware/arp-protocol.png %}
 
 步骤如下：
 1. 如果主机A想发送数据包给同一网段内的另一台主机B(通过交换机相连的节点处于同一网段)，很明显，A的用户应用程序要么已经知道B的IP地址，或者说域名(Domain Name，DNS协议会完成主机名到IP地址的映射，这里不是重点)，那么主机A首先会检查自己的ARP缓存表(ARP Cache)，查看是否有主机B的IP地址与其MAC地址的对应关系，如果有，则直接将主机B网络设备的MAC地址作为目的MAC地址封装到数据帧中，无需进一步操作即获取到数据帧封装所需的全部信息，此后完成封装并发送数据帧到目的MAC地址。如果没有，主机A则会发送一个ARP请求信息(ARP Request)，请求的目的IP地址是主机B的IP地址，目的MAC地址是MAC层的广播地址(即ff:ff:ff:ff:ff:ff)，源IP地址和MAC地址是主机A的IP地址及其MAC地址；
@@ -202,7 +202,7 @@ table th:nth-of-type(3) {
 
 利用下图详细介绍路由器的工作原理：
 
-{% qnimg Hardware/routing-mac-frame.png %}
+{% qnimg Network/Hardware/routing-mac-frame.png %}
 
 步骤如下：
 1. 主机A在网络层将来自上层的报文封装成IP数据报，IP首部中的源IP地址为自己的IP地址，目的IP地址为主机B的IP地址。主机A会用本机配置的24位子网掩码与目的地址进行“与”运算，得出目的地址与本机不在同一个网段(主机A位于192.168.1.0/24网段，主机B位于192.168.2.0/24网段，或称属于不同子网)，因此发送给主机B的数据包需要经过网关路由器1的转发；
