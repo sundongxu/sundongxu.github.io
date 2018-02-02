@@ -6,9 +6,9 @@ categories:
 tags:
 - Linux
 - Ubuntu
-- Reinstallation
 - VPN
 - ShadowSocks
+- Proxychain
 ---
 
 ## 全文概要

@@ -21,25 +21,25 @@ tags:
 
 以下梳理一下Bug出现的前因后果：
 > 硬件配置：
-> （1）**操作系统**：Ubuntu 16.04
-> （2）**内核版本**：4.13.0-26-generic
-> （3）**有线网卡**：Realtek RTL8111/8168/8411   驱动：r8169
-> （4）**无线网卡**：TPLINK RTL8812   驱动：[**rtl8812**](https://github.com/gnab/rtl8812au)
+>（1）**操作系统**：Ubuntu 16.04
+>（2）**内核版本**：4.13.0-26-generic
+>（3） **有线网卡**：Realtek RTL8111/8168/8411   驱动：r8169
+>（4）**无线网卡**：TPLINK RTL8812   驱动：[**rtl8812**](https://github.com/gnab/rtl8812au)
 
 > Bug现象：有线网无法连接到**校园网登录门户**，当然就不能上网了。
 
 > 可能原因：
 >（1）**硬件故障**
-> 	 ① 网线坏了？ ---毕竟不是一次两次了...
-	   ② 网口坏了？ ---学子莘莘，独坑我一人？
-> 	 ③ 网卡坏了？ ---可能性比我写程序出Bug大大大多了...
+	① 网线坏了？ ---毕竟不是一次两次了...
+	② 网口坏了？ ---学子莘莘，独坑我一人？
+	③ 网卡坏了？ ---可能性比我写程序出Bug大大大多了...
 >（2）**软件故障**
-> 	 ① 网卡驱动不匹配？ ---可为啥之前都是好的...
-> 	 ② 内核中除了网卡驱动之外的网络相关模块故障？ ---“可为啥之前是好的”二连...我干了啥？
+	① 网卡驱动不匹配？ ---可为啥之前都是好的...
+	② 内核中除了网卡驱动之外的网络相关模块故障？ ---“可为啥之前是好的”二连...我干了啥？
 >（3）**DNS配置错误**
->	 ① /etc/resolve.conf
->	 ② /etc/resolveconf.d/base
->	 ③ /etc/resolveconf.d/head
+	① /etc/resolve.conf
+	② /etc/resolveconf.d/base
+	③ /etc/resolveconf.d/head
 
 哦对，忘记说了，出事儿之前我正在配置[**P4环境**](https://www.sdnlab.com/19912.html)，编译安装了一堆东西，会不会...嗯，下次还是在虚拟机里试试，这个回头再说...
 
@@ -50,7 +50,7 @@ tags:
 
 网站无法连接，很大可能是域名解析出了问题，Ubuntu中两个与DNS相关的配置文件出错，测试发现最重要的一个配置文件——**/etc/resolv.conf**，“居然”会根据连接的网络的不同而动态变化：
 {% codeblock %}
-cat /etc/resolv.conf
+$ cat /etc/resolv.conf
 {% endcodeblock %}
 
 呐，连接到无线网OpenWrt的时候，是这样：
@@ -65,7 +65,7 @@ cat /etc/resolv.conf
 
 根据[**经验帖**](http://www.cnblogs.com/duwanjiang/p/5907634.html)，先确定当前以太网卡型号(注意**grep**命令对大小写敏感，搜关键字**ethernet**你是真的找不到网卡...)：
 {% codeblock %}
-sudo lspci | grep Ethernet
+$ sudo lspci | grep Ethernet
 {% endcodeblock %}
 
 网卡型号如下图所示，很普通的以太网卡：
@@ -73,7 +73,7 @@ sudo lspci | grep Ethernet
 
 进一步查看网卡所用驱动：
 {% codeblock %}
-sudo lshw -C network
+$ sudo lshw -C network
 {% endcodeblock %}
 
 注意输出中的driver字段：
@@ -84,18 +84,18 @@ sudo lshw -C network
 
 解压后，进入驱动源码目录进行安装：
 {% codeblock %}
-cd r8168-8.045.08
-sudo ./autorun.sh
+$ cd r8168-8.045.08
+$ sudo ./autorun.sh
 {% endcodeblock %}
 
 驱动安装完成后重启系统，重复上述命令，或者执行**lsmod**可以发现**r8168**驱动已经生效，然而，联网问题依然存在，也许是我与原博主发生的故障原因根本就不一样，自然不能适用。
 
 驱动问题应该是可以排除了，痛定思痛，决定在线升级系统，兴许能解决网络模块故障：
 {% codeblock %}
-sudo apt-get update
-sudo apt-get dist-upgrade
-sudo reboot # 重启完成上述更新的安装
-sudo update-manager -d # 打开更新管理器
+$ sudo apt-get update
+$ sudo apt-get dist-upgrade
+$ sudo reboot # 重启完成上述更新的安装
+$ sudo update-manager -d # 打开更新管理器
 {% endcodeblock %}
 
 一连串更新操作之后，应该是这个界面：
@@ -131,7 +131,7 @@ PC里面的文件目录将被设计成和浏览器中的书签一样都是精心
 主要在用户**home**目录下新建若干常用目录**Mine**、**Code**、**Software**。
 安装**tree**命令
 {% codeblock %}
-sudo apt-get install tree
+$ sudo apt-get install tree
 {% endcodeblock %}
 
 查看目录树型结构如下：
@@ -151,22 +151,22 @@ sudo apt-get install tree
 
 第一步，安装**Unity Tweak Tool**：
 {% codeblock %}
-sudo apt-get install unity-tweak-tool
+$ sudo apt-get install unity-tweak-tool
 {% endcodeblock %}
 
 win键搜索后**Unity Tweak Tool**打开后是这样，其中**theme**和**icon**是在第三步要配置的：
 {% qnimg OS/Reinstallation/theme-unity-tweak-tool.png %}
 
-第二步，配置ppa源安装**Flatabulous**主题和i**Flat Icon**图标：
+第二步，配置PPA源安装**Flatabulous**主题和i**Flat Icon**图标：
 {% codeblock %}
 # theme
-sudo add-apt-repository ppa:noobslab/themes
-sudo apt-get update
-sudo apt-get install flatabulous-theme
+$ sudo add-apt-repository ppa:noobslab/themes
+$ sudo apt-get update
+$ sudo apt-get install flatabulous-theme
 # icon
-sudo add-apt-repository ppa:noobslab/icons
-sudo apt-get update
-sudo apt-get install ultra-flat-icons
+$ sudo add-apt-repository ppa:noobslab/icons
+$ sudo apt-get update
+$ sudo apt-get install ultra-flat-icons
 {% endcodeblock %}
 
 第三步，使用**Unity Tweak Tool**配置主题和图标：
@@ -175,17 +175,17 @@ sudo apt-get install ultra-flat-icons
 ### 输入法
 Ubuntu上面的中文输入法不是很好用，可以安装[**搜狗输入法**](https://pinyin.sogou.com/linux/?r=pinyin)进行替代，配置如下：
 {% codeblock %}
-sudo add-apt-repository ppa:fcitx-team/nightly
-sudo apt-get update
-sudo apt-get -y install fcitx
-sudo apt-get -y install fcitx-config-gtk
-sudo apt-get -y install fcitx-table-all
-sudo apt-get -y install im-switch
+$ sudo add-apt-repository ppa:fcitx-team/nightly
+$ sudo apt-get update
+$ sudo apt-get -y install fcitx
+$ sudo apt-get -y install fcitx-config-gtk
+$ sudo apt-get -y install fcitx-table-all
+$ sudo apt-get -y install im-switch
 {% endcodeblock %}
 
 检查**fcitx**是否安装完成：win键搜索fcitx，再安装搜狗官网下载linux版本的deb包：
 {% codeblock %}
-sudo dpkg -i  文件名.deb
+$ sudo dpkg -i  文件名.deb
 {% endcodeblock %}
 
 在系统设置里面点击语言支持，将输入法从**ibus**改为**fcitx**：
@@ -196,20 +196,20 @@ sudo dpkg -i  文件名.deb
 
 配置完成即可使用，有细心的童鞋还会可能发现一个问题，那就是桌面右上角的任务栏会有两个输入法的图标，一个是搜狗的，另一个是fcitx，并且在打字时还会发现桌面同时出现两个输入框，觉得碍眼的朋友，请这么做，终端执行：
 {% codeblock %}
-ps aux | grep fcitx
+$ ps aux | grep fcitx
 {% endcodeblock %}
 
-在输入中找到**fcitx-panel**那一行，然后将本行的第二个字段(pid，即进程号)对应数字记下，杀掉该进程即可：
+在输入中找到**fcitx-qimpanel**那一行，然后将本行的第二个字段(pid，即进程号)对应数字记下，杀掉该进程即可：
 {% codeblock %}
-kill -9 进程号
+$ kill -9 进程号
 {% endcodeblock %}
 
 好了，多余的输入框和任务栏图标都没啦～
 
 ### 运行环境
 下面是各种开发环境的配置，包括：
-1. **zsh & oh-my-zsh**(fish也蛮不错的)
-2. **git**
+1. **git**
+2. **zsh & oh-my-zsh**(fish也蛮不错的)
 3. **vim & vimplus**
 4. **gcc & g++**
 5. **jdk**
@@ -242,7 +242,7 @@ Markdown编辑器的话，比较喜欢[**Remarkable**](https://remarkableapp.git
 （2）[**VMware**](https://my.vmware.com/cn/group/vmware/info/slug/desktop_end_user_computing/vmware_workstation_pro/14_0)
 下载官方.deb包使用命令**sudo dpkg -i 文件名.deb**安装即可，如有因缺乏依赖导致安装失败时，根据命令行提示，执行：
 {% codeblock %}
-sudo apt-get -f install 
+$ sudo apt-get -f install 
 {% endcodeblock %}
 一键安装之前缺乏的依赖，再次安装.deb包即可成功。
 
@@ -271,18 +271,18 @@ sudo apt-get install shutter
 - **编译安装的文件一般安装在/usr/local/filename**
 具体命令如下：
 {% codeblock %}
-cd 源码文件夹
-./autogen.sh # 生成configure脚本
-./configure --prefix=/usr/local/软件名
-make -j4 # 多(四)线程编译
-sudo make install # 安装
+$ cd 源码文件夹
+$ ./autogen.sh # 生成configure脚本
+$ ./configure --prefix=/usr/local/软件名
+$ make -j4 # 多(四)线程编译
+$ sudo make install # 安装
 {% endcodeblock %}
 以上命令会将此软件相关的文件都会”安装“到同一个文件夹**/usr/local/软件名**下去，这样做的一个显而易见的好处是：如果之后想要删除该文件，或安装更新版本时要求彻底卸载旧版本，只需删除此文件夹即可实现完全删除，再也不用担心由于卸载不干净导致影响新版本安装配置失败的问题。
 然而这样做在方便软件管理的同时也带来了一个额外的操作：每次安装新命令时，需要配置**PATH**环境变量，将该命令的安装文件夹下的**bin**文件夹的绝对路径添加到原有**PATH**变量后方才能使用新安装软件命令：
 {% codeblock %}
-vim ~/.zshrc # 本人习惯将环境变量定义在此配置文件中
+$ vim ~/.zshrc # 本人习惯将环境变量定义在此配置文件中 
 # 末尾增加一行 export PATH=$PATH:/usr/local/软件名/bin
-source ~/.zshrc # 令新修改的配置文件生效
+$ source ~/.zshrc # 令新修改的配置文件生效
 {% endcodeblock %}
 再来理解一下软件“**安装**“的概念：其实就是把软件的编译好的**可执行文件**和**依赖库文件**放到一个系统能够发现的合适位置。那么放在什么路径下才能让系统自动找到呢？这就是环境变量的作用了，在Linux乃至Windows系统中，**PATH**无疑是最重要的一个系统环境变量，它是一个由”:“(Linux)或”;“(Windows)分隔的，由多个软件可执行文件所在路径连接所构成的字符串，在未显式指定可执行文件的情况下，在终端中执行命令，都会到由**PATH**变量中包含的文件路径下面去找该命令对应的可执行文件，如果没有，就会报”**Command Not  Found**“的错误。
 
@@ -290,9 +290,9 @@ source ~/.zshrc # 令新修改的配置文件生效
 1. **sudo apt-get -f install** 
 正确安装之前由于缺乏依赖而失败的安装过程中全部必要依赖，避免要对照着安装错误日志上面的依赖名称一个个安装。
 2. **sudo add-apt-repository ppa:x** 
-添加ppa软件源，加入-r参数则表示remove即删除某个之前添加的ppa软件源，回车两下后操作生效，对应的ppa源的增删情况可以在两个地方得到验证：
-**（1）系统设置(System Settings) -> 软件更新(Software & Update) -> 其它软件(Other Software)**：列表中会显示/移除对应的ppa源地址，你当然可以在该UI上直接操作；
-**（2）/etc/apt/source.list.d**：目录下会出现/删除对应ppa源的.list和.list.save文件。
+添加PPA软件源，加入-r参数则表示remove即删除某个之前添加的PPA软件源，回车两下后操作生效，对应的PPA源的增删情况可以在两个地方得到验证：
+**（1）系统设置(System Settings) -> 软件更新(Software & Update) -> 其它软件(Other Software)**：列表中会显示/移除对应的PPA源地址，当然也可以在该UI上直接操作；
+**（2）/etc/apt/source.list.d**：目录下会出现/删除对应PPA源的.list和.list.save文件。
 
 3. **whereis、local和which**
 （1）**whereis**
@@ -309,11 +309,11 @@ source ~/.zshrc # 令新修改的配置文件生效
 在**Shell**编程过程很多时候会使用**echo**并输入到日志文件中。写日志的时候有两种情况，一种是一次写入文件空，再写的时候就将之前的内容给覆盖掉，如何实现追加内容呢？
 （1）**覆盖写入**
 {% codeblock %}
-echo "日志内容"  > 文件
+$ echo "日志内容"  > 文件
 {% endcodeblock %}
 （2）**追加写入**
 {% codeblock %}
-echo "日志内容"  >> 文件
+$ echo "日志内容"  >> 文件
 {% endcodeblock %}
 
 5. **lspci和lsmod**
@@ -336,28 +336,28 @@ echo "日志内容"  >> 文件
 7. **查看操作系统及内核版本**
 （1）系统版本
 {% codeblock %}
-cat /etc/issue
+$ cat /etc/issue
 {% endcodeblock %}
 直接显示Ubuntu 16.04.3 LTS
 或：
 {% codeblock %}
-sudo lsb_release -a
+$ sudo lsb_release -a
 {% endcodeblock %}
 显示系统版本号(Release)：Ubuntu 16.04.3 LTS，及代号(Codename)：Xenial
 （2）内核版本
 {% codeblock %}
-uname -r
+$ uname -r
 {% endcodeblock %}
 显示当前内核版本：4.13.0-26-generic
 
 8. **查看CPU信息**
 （1）按单个逻辑核粒度
 {% codeblock %}
-cat /proc/cpuinfo
+$ cat /proc/cpuinfo
 {% endcodeblock %}
 （2）按总核粒度
 {% codeblock %}
-lscpu
+$ lscpu
 {% endcodeblock %}
 
 ### 认识配置文件
@@ -381,9 +381,8 @@ lscpu
 （3）**/etc/resolvconf/resolvconf.d/head**
 里面最关键的就是**nameserver**字段，在其**IP**所对应的**DNS Server**处**search**当前想要连接的**域名**，如**nju.edu.cn**或**lan**等，一般来讲在Ubuntu 16.04系统中，每次更换网络连接后，**resolv.conf**都会自动重新加载，**nameserver**一般为**127.0.1.1**，一个很奇怪的**IP**地址，我们知道本机的回环地址**lo**的**IP**为**127.0.0.1**。查找资料后才知道，原来Ubuntu下是有一个本地DNS服务，叫做**dnsmasq**，由NetworkManager控制，通过以下命令能发现此服务进程信息：
 {% codeblock %}
-ps aux | grep dnsmasq
-# 以下命令效果同上
-ps -ef | grep dnsmasq
+$ ps aux | grep dnsmasq # 以下命令效果同上
+$ ps -ef | grep dnsmasq
 {% endcodeblock %}
 输出如下：
 {% qnimg OS/Reinstallation/dnsmasq-listen-addr.png %}
@@ -393,7 +392,7 @@ ps -ef | grep dnsmasq
 
 5. **软件源配置文件：**
 （1）**/etc/apt/source.list**:通常放的是[**官方镜像源**](http://cn.archive.ubuntu.com/ubuntu/)，但是中间偶然一天遇到了官方源挂掉的情况，考虑到教育网的缘故，我就更换成了[**清华的源**](https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/)；
-（2）**/etc/apt/source.list.d**：通常放的是ppa等第三方镜像源。
+（2）**/etc/apt/source.list.d**：通常放的是PPA等第三方镜像源。
 
 ### 掌握实用操作
 好奇之人对新知识总是充满着渴望，这次掌握几个小**Trick**，提(ke)高(xue)效(tou)率(lan)再进一步！
@@ -411,7 +410,7 @@ ps -ef | grep dnsmasq
 但这样操作过于繁琐。而且如果只是想暂存此文件，还需要接着修改，则希望保留**Vim**的工作状态，比如编辑历史，**buffer**状态等等，该怎么办？能不能在不退出**Vim**的情况下获得**root**权限来保存这个文件？
 答案是肯定的，执行这样一条命令即可(原理参见[**这篇**](http://feihu.me/blog/2014/vim-write-read-only-file/))：
 {% codeblock %}
-:w !sudo tee %
+$ :w !sudo tee %
 {% endcodeblock %}
 
 （2）待更...
@@ -424,7 +423,7 @@ ps -ef | grep dnsmasq
 [4][Ubuntux新安装后的软件准备—秋波](http://www.cnblogs.com/burningTheStar/p/6978209.html)
 [5][dpkg安装deb缺少依赖包的解决方法](http://blog.csdn.net/seek_of/article/details/77920639)
 [6][Ubuntu截图软件shutter](http://www.cnblogs.com/EasonJim/p/7114679.html)
-[7][在Ubuntu中添加和删除ppar软件源](http://blog.csdn.net/lu_embedded/article/details/55803500)
+[7][在Ubuntu中添加和删除PPA软件源](http://blog.csdn.net/lu_embedded/article/details/55803500)
 [8][Linux的五个查找命令-阮一峰](http://www.ruanyifeng.com/blog/2009/10/5_ways_to_search_for_files_using_the_terminal.html)
 [9][每天一个Linux命令](http://www.cnblogs.com/peida/)
 [10][echo写入文件](http://blog.csdn.net/jakemanse/article/details/8043603)
