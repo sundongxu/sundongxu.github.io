@@ -10,6 +10,7 @@ tags:
 ---
 
 ## 全文概要
+---
 软件定义网络([**Software Defined Network, SDN**](https://en.wikipedia.org/wiki/Software-defined_networking))核心在于网络转发设备的数据转发平面(**Data Plane**)和控制平面(**Control Plane**)的分离和解耦，以实现可编程按需定制、集中式统一管理、动态流量监控、自动化部署。2014年[**P4**](https://p4.org/)语言横空出世，进一步提高了面向交换机编程的可行性和效率，成为SDN领域的又一里程碑式的成果。本文从宣告P4诞生的[**SIGCOMM**](https://www.sigcomm.org/)会议论文出发，介绍其背景起源、基本原理以及未来广阔的应用前景。
 <!--more-->
 
@@ -17,7 +18,6 @@ tags:
 ---
 **SDN is the future, and P4 defines it. 
 SDN是未来，P4定义未来。**
-
 
 ## 相关论文
 ---
@@ -85,10 +85,8 @@ P4是由P.Bosshart等人提出的一种用于处理数据包转发的高层抽�
 ## 基本原理
 ---
 ### 转发模型(Forwarding Model)
-
 论文中提出的数据包转发抽象模型如下图所示，交换机通过一个可编程的解析器(**Parser**)以及其后紧跟的多个"匹配-动作"操作阶段，或顺序，或并行，或组合两种模式，完成数据包的转发任务。
-
-{% qnimg Network/SDN/P4/forwarding-model.png %}
+{% qnimg Network/SDN/Language/P4/origin-background/forwarding-model.png %}
 
 模型概括了数据包是如何在**不同转发设备**(包括：以太网交换机、负载均衡器、路由器)中，通过**不同技术**(包括：固定功能交换机ASIC芯片、网络处理器(Network Processor Unit，NPU)、现场可编程门阵列(Field Programmable Gate Array，FPGA)、可重配置交换机、软件交换机)处理的。
 
@@ -109,16 +107,13 @@ P4是由P.Bosshart等人提出的一种用于处理数据包转发的高层抽�
 排队机制(**Queuing Discipline**)则是借鉴了OpenFlow中的做法：一个动作将一个数据包映射到一个队列，每个队列都会接受某种在交换机配置阶段就选定的服务类型(**Service Discipline，受限水平这里不太理解，还请指教～**)的数据包。
 
 #### P4 VS OpenFlow
-
 与OpenFlow相比，P4的设计有三个优点：
 1. P4可编程定制数据解析流程，即**Programmable Parser**，而OpenFlow交换机只支持固定的包处理解析逻辑，即**Fixed Parser**；
 2. P4可执行串行(**Serial**)和并行(**Parallel**)的Match-Action操作，而OpenFlow仅支持串行操作；
 3. 由于P4模型包含程序编译器，负责完成将P4程序到具体交换设备配置的映射，从而支持协议无关的转发，而OpenFlow支持的协议需要在初始时配置，此后每次修改都需要宕机，编写新的协议数据包处理逻辑再配置到交换机，不能做到无转发中断的弹性增加所支持的协议。
-
-{% qnimg Network/SDN/P4/P4vsOpenFlow.png %}
+{% qnimg Network/SDN/Language/P4/origin-background/p4-vs-openflow.png %}
 
 ### 核心部件(Key Component)
-
 #### 头部(Header)
 对数据包的处理都需要根据包头的字段内容来决定对其采取什么操作，所以在P4程序中需要定义对应的包头。
 
@@ -325,7 +320,6 @@ P4支持的原语动作集包括：
 
 
 #### 控制程序(Control Program)
-
 一旦表和动作都已完成定义，剩下的任务就是指定从一个表到下一个表的控制流。在P4程序中，控制流通过一系列函数(**Functions**)、条件(**Conditionals**)和表引用(**Table References**)来指定。
 
 > The control program determines the order of match+action tables that are applied to a packet. A simple imperative program describe the flow of control between match+action tables.
@@ -333,8 +327,7 @@ P4支持的原语动作集包括：
 控制程序决定了数据包处理阶段的具体顺序，即数据包在不同匹配表中间的跳转关系。当表和动作被定义和实现之后，还需要控制程序来确定不同表之间的控制流。P4的控制流包括用于数据处理的表、判决条件以及条件成立时所需采取的操作等组件。
 
 下图显示了在边缘交换机上**mTag**包处理逻辑示例的控制流：
-
-{% qnimg Network/SDN/P4/flow-for-mTag.png %}
+{% qnimg Network/SDN/Language/P4/origin-background/control-flow-for-mTag.png %}
 
 被解析(**parser mTag**)之后的数据包，先进入**source\_check**表，验证接收到的包和进入端口(Ingress Port)是否和表中的匹配要求一致，即数据包是否包含**mTag**头部，进入端口是否与核心交换机相连。根据该表中的**reads**属性匹配到对应数据包后，由**action**属性指定要采取的动作是：**strip\_tag**，即将**mTag**头部从数据包中剥落，并将该数据包是否包含**mTag**头部记录在元数据中，流水线后部分的表可能还会匹配到该元数据，从而避免再次给该数据包打上**mTag**。
 
@@ -377,11 +370,11 @@ control main() {
 目前P4程序可在软件交换机、拥有RAM和TCAM存储设备的硬件交换机、支持并行表处理的交换机、支持在流水线最后阶段才执行动作的交换机以及拥有少量表资源的交换机等多种交换设备上实现。
 
 ### 工作流(Work Flow)
-
 1. 数据包到来后，首先进入可编程定制(**Programmable**)的解析器，用于实现自定义的数据解析流程(针对头部字段，可将网络字节流解析成对应的协议数据包；
 2. 数据包解析完毕后是与OpenFlow类似的匹配-动作操作，其流水线(**Pipeline**)支持串行和并行两种模式。受OpenFlow 1.4启发，P4设计的匹配过程也分为入口流水线(**Ingress Pipeline**)和出口流水线(**Egress Pipeline**)两个分离的数据处理流水线；
 
 3. 在定义交换机的处理逻辑时，需要定义数据包处理的依赖关系(**Dependency**)，即数据包头部字段之间的依赖关系，比如要处理IPv4头部字段，可能需要依赖于以太网头部字段的处理。这些依赖关系可以通过P4描述出来，并编译生成表依赖图TDG，其中每个表都是对应的一种协议或者一个类别的数据包的处理。TDG描述了匹配表之间的逻辑关系，输入和对应操作等行为，用于指导交换机进行数据处理。TDG被定义出来之后，将被编译器翻译成交换机所能理解的逻辑(机器指令)，并写入到交换机等交换实体中去，从而完成自定义的数据包处理流程。
+{% qnimg Network/SDN/Language/P4/origin-background/table-dependency-graph.png %}
 
 ## 发展趋势
 ---

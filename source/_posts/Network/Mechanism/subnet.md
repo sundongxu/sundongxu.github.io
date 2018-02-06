@@ -109,10 +109,8 @@ tags:
 > echo 1 > /proc/sys/net/ipv4/ip_forward
 
 得到的抓包结果如下图所示：
-
-{% qnimg Network/Mechanism/wireshark-ping-arp.png %}
-
-{% qnimg Network/Mechanism/wireshark-ping-icmp.png %}
+{% qnimg Network/Mechanism/subnet/wireshark-ping-arp.png %}
+{% qnimg Network/Mechanism/subnet/wireshark-ping-icmp.png %}
 
 根据以上Wireshark的抓包结果，结合其中数据包出现的先后顺序，可将**B ping A**的通信流程作如下分析：
 
@@ -153,8 +151,7 @@ tags:
 </br>
 
 分析完这几个包，面试题的答案有了，原来通信流程是这样：B先把ping请求交给默认网关，默认网关再转发给A，而A收到请求后直接把ping回复给B，形成如下所示的三角环路：
-
-{% qnimg Network/Mechanism/triangle-loop.png %}
+{% qnimg Network/Mechanism/subnet/triangle-loop.png %}
 
 让我们再回到之前的那个问题：为什么以**B ping A**为例，而不是**A ping B**呢？
 
@@ -214,8 +211,8 @@ IPv4地址总共32位，最多支持2^32=4294967296个IP地址，而地址分类
 出于安全等多方面的考虑，分配地址仍只能以网络为单位，故这种分配机制的不灵活性和浪费问题无法从根本上解决，CIDR就是提供了一种缓和机制：划分IP地址时以1位作为递增步长，这样不仅支持8、16、24三种网络位数，网络位数位小于32位的任意位数都为合法IP地址，这时的网络位数还是由子网掩码来确定。
 
 下图展示了将子网掩码应用于A、B、C等类别(Classful)网络，以及无类别(Classless)网络的情况：
-{% qnimg  Network/Mechanism/subnet-mask-example-1.png %}
-{% qnimg Network/Mechanism/subnet-mask-example-2.png %}
+{% qnimg  Network/Mechanism/subnet/subnet-mask-example-part1.png %}
+{% qnimg Network/Mechanism/subnet/subnet-mask-example-part2.png %}
 
 当然，CIDR机制仅仅只是缓和了IPv4地址消耗过快的事实，使得IP地址能够以一种更加高校的方式被管理结构分配给网络服务提供商(Internet Service Provider，ISP)和用户，但是正如上文所说，随着互联网设备和用户规模与日俱增，这“治标不治本”。到目前为止，要想真正解决网络地址短缺的问题，及早普及在1993年引入的IPv6协议才是终极方法，在IPv6协议下，网络地址为IPv6地址，包含128位(bit)，支持的独立地址数量达到了2^128这一根本无法企及的天文数字。
 

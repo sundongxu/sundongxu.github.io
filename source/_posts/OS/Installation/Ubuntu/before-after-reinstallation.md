@@ -10,6 +10,7 @@ tags:
 ---
 
 ## 全文概要
+---
 前几天实验室PC网络功能出Bug，有线网连不上nju登录站点，而加载内核驱动模块后的无线网卡却妥妥的没有问题，本来懒癌发作打算用一世无线网...可又想到之后虚拟机中的虚拟网卡NAT上网会有坑，且无线网本身速度不够稳定，考虑再三，拉上[**Quber**](http://www.cnblogs.com/burningTheStar/)一起“愉快”地开始了找坑之旅。然而，嗯...虽然折腾的结果并不总是那么令人振奋，但付出总有回报。谨以此文纪念本人各种努(chui)力(si)尝(zheng)试(zha)，以及此后愤而重装的心路历程。
 <!--more-->
 
@@ -54,10 +55,10 @@ $ cat /etc/resolv.conf
 {% endcodeblock %}
 
 呐，连接到无线网OpenWrt的时候，是这样：
-{% qnimg OS/Reinstallation/resolv-conf-wireless-openwrt.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wireless-openwrt.png %}
 
 连接到有线网的时候，又变成介样：
-{% qnimg OS/Reinstallation/resolv-conf-wired.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wired.png %}
 
 网上的建议都是增加新的**nameserver**，比如全国通用DNS地址**114.114.114.114(114.114.115.115备用)**，还有全球通用的Google的DNS服务器IP：**8.8.8.8(8.8.4.4备用)**，OK，每个都试了下，都在这里不管用，可见问题并不出在这里。在后文总结部分再回来讨论这些配置文件。
 
@@ -69,7 +70,7 @@ $ sudo lspci | grep Ethernet
 {% endcodeblock %}
 
 网卡型号如下图所示，很普通的以太网卡：
-{% qnimg OS/Reinstallation/ethernet-controller-type.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/ethernet-controller-type.png %}
 
 进一步查看网卡所用驱动：
 {% codeblock %}
@@ -77,7 +78,7 @@ $ sudo lshw -C network
 {% endcodeblock %}
 
 注意输出中的driver字段：
-{% qnimg OS/Reinstallation/driver-8169.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/driver-8169.png %}
 
 参考他人说法，更换驱动为r8168极有可能解决问题，于是去到官网找对应内核版本的[**驱动**](http://www.realtek.com.tw/downloads/downloadsView.aspx?Langid=1&PNid=13&PFid=5&Level=5&Conn=4&DownTypeID=3&GetDown=false#2)，发现提供Linux内核版本最新至4.7的驱动。
 {% asset_link 0010-r8168-8.045.08.tar.bz2 r8168驱动下载 %}
@@ -99,7 +100,7 @@ $ sudo update-manager -d # 打开更新管理器
 {% endcodeblock %}
 
 一连串更新操作之后，应该是这个界面：
-{% qnimg OS/Reinstallation/update-manager.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/update-manager.png %}
 
 然后在某人的怂恿下...冒着软件配置在新系统Ubuntu 18(连官网都没有release...)上面各种不兼容报错的风险，我还是干了，其实这时候已经做好重装的准备了。
 
@@ -126,7 +127,7 @@ $ sudo update-manager -d # 打开更新管理器
 
 ### 目录结构
 PC里面的文件目录将被设计成和浏览器中的书签一样都是精心整理过的，一是强迫症，二是方便找。
-{% qnimg OS/Reinstallation/chrome-bookmark.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/chrome-bookmark.png %}
 
 主要在用户**home**目录下新建若干常用目录**Mine**、**Code**、**Software**。
 安装**tree**命令
@@ -135,17 +136,17 @@ $ sudo apt-get install tree
 {% endcodeblock %}
 
 查看目录树型结构如下：
-{% qnimg OS/Reinstallation/dir-mine.png %}
-{% qnimg OS/Reinstallation/dir-code.png %}
-{% qnimg OS/Reinstallation/dir-software.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/dir-mine.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/dir-code.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/dir-software.png %}
 {% asset_link dir.sh 目录配置脚本下载 %}
 
 ### 桌面主题
 平时看厌了Ubuntu默认的玫红色桌面和终端，就想换个口味，这里推荐一款Ubuntu的扁平化桌面主题**Flatabulous**，加上扁平化的**icon**，显示效果是这样：
-{% qnimg OS/Reinstallation/theme-flatabulou-desktop-terminal.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/theme-flatabulou-desktop-terminal.png %}
 
 按下win键触发搜索，界面是这样的：
-{% qnimg OS/Reinstallation/theme-flatabulous-search.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/theme-flatabulous-search.png %}
 
 怎么样，喜不喜欢？只需三步你值得拥有：
 
@@ -155,7 +156,7 @@ $ sudo apt-get install unity-tweak-tool
 {% endcodeblock %}
 
 win键搜索后**Unity Tweak Tool**打开后是这样，其中**theme**和**icon**是在第三步要配置的：
-{% qnimg OS/Reinstallation/theme-unity-tweak-tool.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/theme-unity-tweak-tool.png %}
 
 第二步，配置PPA源安装**Flatabulous**主题和i**Flat Icon**图标：
 {% codeblock %}
@@ -189,10 +190,10 @@ $ sudo dpkg -i  文件名.deb
 {% endcodeblock %}
 
 在系统设置里面点击语言支持，将输入法从**ibus**改为**fcitx**：
-{% qnimg OS/Reinstallation/sougou-ibus-to-fcitx.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/sougou-ibus-to-fcitx.png %}
 
 注销一次，找到fcitx的配置，添加**sougou pinyin**并设为第一输入法即可：
-{% qnimg OS/Reinstallation/sougou-fcitx-add-sougou.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/sougou-fcitx-add-sougou.png %}
 
 配置完成即可使用，有细心的童鞋还会可能发现一个问题，那就是桌面右上角的任务栏会有两个输入法的图标，一个是搜狗的，另一个是fcitx，并且在打字时还会发现桌面同时出现两个输入框，觉得碍眼的朋友，请这么做，终端执行：
 {% codeblock %}
@@ -234,8 +235,8 @@ $ kill -9 进程号
 觉得哪用得上这么多的看过来，**Microsoft**家的[**VSCode**](https://code.visualstudio.com/)绝对能满足你，丰富的插件支持多种常见语言开发：C/C++、Java、Python等，文本编辑则有**MarkDown**和**LaTex**，配置简单，保证够用！
 还嫌(re)弃(ai)麻(zhe)烦(teng)的，您出门右转那儿有个[**Sublimetext**](https://www.sublimetext.com/)，我就不送了...
 Markdown编辑器的话，比较喜欢[**Remarkable**](https://remarkableapp.github.io/linux.html)的风格：
-{% qnimg OS/Reinstallation/ide-markdown-remarkable.png %}
-伸手党配置同一效果：**View -> Night Mode，Style -> Screen**
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/ide-markdown-remarkable.png %}
+伸手党据此配置同一效果：**View -> Night Mode，Style -> Screen**
 
 2. **虚拟化**
 （1）[**Virtualbox**](https://www.virtualbox.org/wiki/Linux_Downloads)
@@ -248,7 +249,7 @@ $ sudo apt-get -f install
 
 3. **阅读器**
 推荐[**Okular**](https://apps.ubuntu.com/cat/applications/quantal/okular/)，系统自带应用商店**Ubuntu Software**就有：
-{% qnimg OS/Reinstallation/okular.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/reader-okular.png %}
 快捷键F6进入文档操作模式，再按数字键4，即可高亮文档，但是有个坑就是它高亮部分的文件状态信息大概是维护在软件内部的，也就是说根本不会对源文件做修改...这导致换个程序换个机器打开文档后都只能看到未经处理的源文档...
 
 4. **截图**
@@ -257,7 +258,7 @@ $ sudo apt-get -f install
 sudo apt-get install shutter
 {% endcodeblock %}
 为其配置系统快捷键**Ctrl+Alt+A**为调用**shutter**进行区域截图，快捷键Name随意起，Command填入**shutter -s**：
-{% qnimg OS/Reinstallation/shutter.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/screenshot-shutter.png %}
 
 5. **音乐、翻译**
 [**网易云**](https://music.163.com/#/download)Ubuntu 16.04版和[**有道**](http://cidian.youdao.com/index-linux.html)Deepin版，不多说，官网的.deb直接安装
@@ -369,7 +370,7 @@ $ lscpu
 
 2. **sudo配置文件：**
 **/etc/sudoers**：从源码编译安装[**mininet**](http://mininet.org/)时，执行安装脚本：**sudo ./install.sh**，怎么配置也找不到之前安装好的**git**和**vim**，我们都知道"Command Not Found"错误的原因就是没配置好对应命令的环境变量，于是我把上面提到的配置文件都加上了**GIT_HOME**和**VIM_HOME**，即使切换到**root**用户，仍然报错，于是猜想**sudo**命令虽然是让普通用户能够在执行命令时以**root**权限运行，但是仍不是真正的**root**，上述对所有用户都生效的环境变量都对**sudo**不适用，原因应该是**sudo**自己有特殊的环境变量定义。google到的结果证实了我这一想法，在**/etc**目录下有一个**sudo**命令的配置文件**sudoers**：
-{% qnimg OS/Reinstallation/sudoers-secure-path.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/sudoers-secure-path.png %}
 以**sudo**执行命令都会从**/etc/sudoers**这个配置文件中变量**secure_path**的值作为**sudo**的**PATH**环境变量，会去这个变量指定的路径下去找命令对应的可执行文件。将**GIT_HOME**和**VIM_HOME**的添加到**secure_path**末尾，命令就能顺利找到执行了。
 
 3. **内核驱动文件：**
@@ -385,7 +386,7 @@ $ ps aux | grep dnsmasq # 以下命令效果同上
 $ ps -ef | grep dnsmasq
 {% endcodeblock %}
 输出如下：
-{% qnimg OS/Reinstallation/dnsmasq-listen-addr.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/dnsmasq-listen-addr.png %}
 可以看到它监听的本地地址，**--listen-address=127.0.1.1**(ubuntu12.04及之前的版本是 127.0.0.1)， 这个地址是一个本地回环地址，而你真实的dns服务器地址，是被这个服务管理维护着的。(之后我会写篇[**文章**](http://localhost:4000/2018/01/21/OS/Reinstallation/ubuntu-dns/)专门讨论**Ubuntu**下的**DNS**配置)
 即，用户进程想要访问某个**IP**未知、只知道主机名的服务器时，其发起DNS请求的流程如下：
 > local process -> local dnsmasq -> router -> ISP DNS
@@ -398,13 +399,13 @@ $ ps -ef | grep dnsmasq
 好奇之人对新知识总是充满着渴望，这次掌握几个小**Trick**，提(ke)高(xue)效(tou)率(lan)再进一步！
 （1）**vim中临时提升编辑者权限**
 在Linux上工作的朋友很可能遇到过这样一种情况，当你用**Vim**编辑完一个文件时，运行**:wq**保存退出，突然蹦出一个错误：
-{% qnimg OS/Reinstallation/vim-readonly.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/vim-readonly.png %}
 
 这表明文件是只读的，按照提示，加上!强制保存：:w!，结果又一个错误出现：
-{% qnimg OS/Reinstallation/vim-cannot-open-file-for-writing.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/vim-cannot-open-file-for-writing.png %}
 
 文件明明存在，为何提示无法打开？查看**Vim帮助文档**对**E212**错误的解释如下：
-{% qnimg OS/Reinstallation/vim-help-e212.png %}
+{% qnimg OS/Installation/Ubuntu/before-after-reinstallation/vim-help-e212.png %}
 
 原来是可能没有权限造成的，此时你才想起，这个文件需要**root**权限才能编辑，而当前登陆的只是普通用户，在编辑之前你忘了使用**sudo**来启动**Vim**，所以才保存失败。于是为了防止修改丢失，你只好先把它保存为另外一个临时文件**temp-file-name**，然后退出**Vim**，再运行**sudo mv temp-file-name readonly-file-name**覆盖原文件。
 但这样操作过于繁琐。而且如果只是想暂存此文件，还需要接着修改，则希望保留**Vim**的工作状态，比如编辑历史，**buffer**状态等等，该怎么办？能不能在不退出**Vim**的情况下获得**root**权限来保存这个文件？
