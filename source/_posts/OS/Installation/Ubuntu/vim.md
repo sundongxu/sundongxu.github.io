@@ -11,7 +11,7 @@ tags:
 
 ## 全文概要
 ---
-关于**Vim** ，不消多说，熟练了就是Linux上最好的文本代码编辑器，丰富的命令和强大的插件支持几乎能满足即使最挑剔的那一部分人的需求。本文详细介绍了安 **Vim** 的正确姿势以及一款超强大的 **Vim** 插件 **VimPlus** 的配置过程，更多的 **Vim** 使用技巧会在后续的博文随本文学习总结的进度同步推出。
+关于**Vim** ，不消多说，熟练了就是Linux上最好的文本代码编辑器，丰富的命令和强大的插件支持几乎能满足即使最挑剔的那一部分人的需求。本文详细介绍了安装 **Vim** 的正确姿势以及一款超强大的 **Vim** 插件 **VimPlus** 的配置过程，更多的 **Vim** 使用技巧会在后续的博文随本文学习总结的进度同步推出。
 <!--more-->
 
 > VIM is the God of editors, EMACS is God’s editor.
@@ -138,6 +138,26 @@ $ ./install.py --clang-completer
 （12）DirDiff：DirDiff <dir1> <dir2>
 （13）重复 .
 （14）前后更换Vim界面主题：F9与F10
+
+## Vim教程
+---
+入门教程就放 [**简明 Vim 练级教程 - 酷壳**](https://coolshell.cn/articles/5426.html)
+
+这里放几张 **Vim** 使用技巧的示意图，便于学习掌握：
+
+先来张 **Vi/Vim** 键盘图： 
+{% qnimg OS/Installation/Ubuntu/vim/vi-vim-cheat-sheet.png %}
+
+英文看不懂？没关系，下面是中文版：
+{% qnimg OS/Installation/Ubuntu/vim/vi-vim-cheat-sheet-cn.png %}
+
+程序员或许更喜欢这样的：
+{% qnimg OS/Installation/Ubuntu/vim/vim-cheat-sheet-for-programmers-screen.png %}
+
+还有这样的：
+{% qnimg OS/Installation/Ubuntu/vim/vim-cheat-sheet-en-visual.png %}
+
+总而言之，**Vim** 是一款功能超乎想象地强大齐全的编辑器。然而，使用者不可能会用到其所有的特性，我们只需掌握基本常用的操作命令，其余的在要使用时再去查阅教程或者攻略即可。
 
 ## 参考资料
 ---

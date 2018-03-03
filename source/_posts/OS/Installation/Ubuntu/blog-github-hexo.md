@@ -1,5 +1,5 @@
 ---
-title: Ubuntu + GitHub + Hexo 搭建个人博客
+title: Ubuntu + GitHub Pages + Hexo 搭建个人博客
 date: 2018-01-25 13:13:13
 categories:
 - Operating System
@@ -12,7 +12,7 @@ tags:
 
 ## 全文概要
 ---
-本博客站点采用 **GitHub** + **Hexo** 框架搭建，其中 **GitHub** 作为内容托管平台，**Hexo** 是一款静态博客框架，提供了多种多样的主题与插件，使得用户可以对个人站点进行个性化定制及管理，支持归档、分类、标签、搜索、资源管理等基本功能。用户可以在本地的博客项目中新建 **Markdown** 文档编辑博文内容，并利用 **Hexo** 提供的命令行工具将 **Markdown** 文档转换为个人网络站点所展示的 **HTML** 页面。本文详细介绍了博客框架的配置全记录。
+本博客站点采用 **GitHub Pages** + **Hexo** 框架搭建，其中 [**GitHub Pages**](https://pages.github.com/) 作为内容托管平台，[**Hexo**](https://hexo.io/zh-cn/index.html) 是一款静态博客框架，提供了多种多样的主题与插件，使得用户可以对个人站点进行个性化定制及管理，支持归档、分类、标签、搜索、资源管理等基本功能。用户可以在本地的博客项目中新建 [**Markdown**](http://wowubuntu.com/markdown/) 文档编辑博文内容，并利用 **Hexo** 提供的命令行工具将 **Markdown** 文档转换为个人网络站点所展示的 **HTML** 页面。本文详细介绍了博客框架的配置全记录。
 <!--more-->
 
 ## GitHub

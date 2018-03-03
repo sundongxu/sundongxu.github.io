@@ -241,7 +241,7 @@ $ g++ [options] [filenames]
 
 通过在 **GDB** 下输入 **help** 或在命令行上输入 **gdb h** 查看关于 **gdb** 选项说明的简单列表。键入 **help** 后跟命令的分类名。可以获得该类命令的详细清单。搜索和 **word** 相关的命令可用 **apropos word**。
 
-为使 **gdb** 能正常工作，必须在程序编译时包含调试信息。即 **-g** 选项。前文有讲解。
+为使 **GDB** 能正常工作，必须在程序编译时包含调试信息。即 **-g** 选项。前文有讲解。
 
 简单的调试步骤示例：
 1. 载入test可执行文件：gdb test --silent
@@ -255,6 +255,9 @@ $ g++ [options] [filenames]
 9. 重新运行会在断点处停止。用 set variable 修改变量值
 10. 继续运行：continue，看结果是否正确
 11. 退出gdb：quit
+
+再放一张 **GDB** 命令示意图：
+{% qnimg OS/Installation/Ubuntu/runtime/gdb-commands-list.png %}
 
 ### Java
 高级编程语言都会有自己专门的开发环境，即 **Software Development Kit**，简称 **SDK**，对于 **Java** 而言，最常用的就是 **Oracle** 公司提供的 **[JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)**，全称是 **Java SE Development Kit**，现在官网最新版本是 **jdk-8u161**。
@@ -332,7 +335,8 @@ $ python2 get-pip.py
 和 **Python** 分为 **python2** 和 **python3** 一样，**pip** 同样分为 **pip2** 和 **pip3** ，且分别为当前安装的 **python2** 和 **python3** 服务，即 **pip2** 安装的包只供 **python2** 环境导入使用的，**pip3** 安装的包只供 **python3** 环境导入使用。
 
 ## 博客框架
-参见[此篇](http://dongdongdong.me/2018/01/25/OS/Installation/Ubuntu/blog-github-hexo.md/)
+---
+参见[**此篇**](http://dongdongdong.me/2018/01/25/OS/Installation/Ubuntu/blog-github-hexo.md/)
 
 ## 参考资料
 ---
