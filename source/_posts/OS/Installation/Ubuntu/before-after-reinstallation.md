@@ -255,7 +255,7 @@ $ sudo apt-get -f install
 4. **截图**
 推荐**Shutter**，安装命令如下：
 {% codeblock %}
-sudo apt-get install shutter
+$ sudo apt-get install shutter
 {% endcodeblock %}
 为其配置系统快捷键**Ctrl+Alt+A**为调用**shutter**进行区域截图，快捷键Name随意起，Command填入**shutter -s**：
 {% qnimg OS/Installation/Ubuntu/before-after-reinstallation/screenshot-shutter.png %}
