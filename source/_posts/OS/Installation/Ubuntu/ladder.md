@@ -8,6 +8,8 @@ tags:
 - Shadowsocks
 - Amazon EC2
 - Proxychain
+- Privoxy
+- SwitchyOmega
 ---
 
 ## 全文概要
