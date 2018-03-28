@@ -72,4 +72,37 @@ tags:
 |70|[**Climbing Stairs**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/70-ClimbingStairs.cc)|Easy|
 |112|[**Path Sum**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/112-PathSum.cc)|Easy|
 |113|[**Path Sum(2)**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/113-PathSum2.cc)|Medium|
-|120|[**Triange**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/120-Triangle.cc)|Medium|
+|120|[**Triangle**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/120-Triangle.cc)|Medium|
+
+### Day4
+---
+**2018-03-27, Hot.**
+**8 Problems Finished.**
+
+|No|Title|Difficulty|
+|:--:|:----:|:----------:|
+|83|[**Remove Duplicates From Sorted List**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/83-RemoveDuplicatesFromSortedList.cc)|Easy|
+|94|[**Binary Tree Inorder Traversal**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/94-BinaryTreeInorderTraversal.cc)|Medium|
+|144|[**Binary Tree Preorder Traversal**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/144-BinaryTreePreorderTraversal.cc)|Medium|
+|145|[**Binary Tree Postorder Traversal**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Hard/145-BinaryTreePostorderTraversal.cc)|Hard|
+|102|[**Binary Tree Level Order Traversal**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/102-BinaryTreeLevelOrderTraversal.cc)|Medium|
+|107|[**Binary Tree Level Order Traversal(2)**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/107-BinaryTreeLevelOrderTraversal2.cc)|Easy|
+|100|[**Same Tree**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/100-SameTree.cc)|Easy|
+|101|[**SymmetricTree**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/101-SymmetricTree.cc)|Easy|
+
+### Day5
+---
+**2018-03-28, Too Hot.**
+**8 Problems Finished.**
+
+|No|Title|Difficulty|
+|:--:|:----:|:----------:|
+|11|[**Container With Most Water**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/11-ContainerWithMostWater.cc)|Medium|
+|62|[**Unique Path**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/62-UniquePath.cc)|Medium|
+|104|[**Maximum Depth Of Binary Tree**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/104-MaximumDepthOfBinaryTree.cc)|Easy|
+|110|[**Balanced Binary Tree**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/110-BalancedBinaryTree.cc)|Easy|
+|111|[**Minimum Depth Of Binary Tree**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/111-MinimumDepthOfBinaryTree.cc)|Easy|
+|114|[**Flatten Binary Tree To LinkedList**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/114-FlattenBinaryTreeToLinkedList.cc)|Medium|
+|118|[**Pascal Triangle**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/118-PascalTriangle.cc)|Easy|
+|617|[**Merge Two Binary Trees**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/617-MergeTwoBinaryTrees.cc)|Easy|
+
