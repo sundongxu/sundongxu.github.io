@@ -1,0 +1,43 @@
+---
+title: LeetCode 算法思想小结
+date: 2018-04-02 12:12:12
+categories:
+- Algorithm
+tags:
+- LeetCode
+- Algorithm
+---
+
+## 全文概要
+理论指导实践，实践验证理论。
+实时总结经验，方可举一反三。
+<!--more-->
+
+### 暴力枚举(Brute Force)
+---
+
+### 递归(Recursion)
+---
+
+### 迭代(Iteration)
+---
+
+### 贪心(Greedy)
+---
+每一步都得到当前条件下的最优解，即局部最优，完成全部步骤后，即得到全局最优。
+
+### 回溯(Tracebacking)
+---
+
+### 深度搜索(DFS)
+---
+
+### 动态规划(Dynamic Programming)
+---
+
+### 备忘录
+---
+
+### 夹逼
+---
+
