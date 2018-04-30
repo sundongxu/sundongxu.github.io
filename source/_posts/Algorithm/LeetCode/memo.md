@@ -194,3 +194,61 @@ tags:
 |434|[**Number Of Segments In A String**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/434-NumberOfSegmentsInAString.cc)|Easy|
 |459|[**Repeated Substring Pattern**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/459-RepeatedSubstringPattern.cc)|Easy|
 |686|[**Repeated String Match**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/686-RepeatedStringMatch.cc)|Easy|
+
+### Day11
+---
+**2018-04-14, Hot.**
+**10 Problems Finished.**
+
+|No|Title|Difficulty|
+|:--:|:----:|:----------:|
+|33|[**Search In Rotated Sorted Array**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/33-SearchInRotatedSortedArray.cc)|Medium|
+|36|[**Valid Sudoku**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/36-ValidSudoku.cc)|Medium|
+|43|[**Multiply Strings**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/43-MultiplyStrings.cc)|Medium|
+|46|[**Permutations**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/46-Permutations.cc)|Medium|
+|47|[**Permutations(2)**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/47-Permutations2.cc)|Medium|
+|48|[**Rotate Image**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/48-RotateImage.cc)|Medium|
+|60|[**Permutation Sequence**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/60-PermutationSequence.cc)|Medium|
+|77|[**Combinations**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/77-Combinations.cc)|Medium|
+|81|[**Search In Rotated Sorted Array(2)**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/81-SearchInRotatedSortedArray2.cc)|Medium|
+|153|[**Find Minimum In Rotated Sorted Array**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/153-FindMinimumInRotatedSortedArray.cc)|Medium|
+
+### Day12
+---
+**2018-04-15, Hot.**
+**12 Problems Finished.**
+
+|No|Title|Difficulty|
+|:--:|:----:|:----------:|
+|49|[**Group Anagrams**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/49-GroupAnagrams.cc)|Medium|
+|54|[**Spiral Matrix**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/54-SpiralMatrix.cc)|Medium|
+|55|[**Jump Game**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/55-JumpGame.cc)|Medium|
+|56|[**Merge Intervals**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/56-MergeIntervals.cc)|Medium|
+|57|[**Insert Interval**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Hard/57-InsertInterval.cc)|Hard|
+|59|[**Spiral Matrix(2)**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/59-SpiralMatrix2.cc)|Medium|
+|63|[**Unique Path(2)**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/63-UniquePath2.cc)|Medium|
+|71|[**Simplify Path**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/71-SimplifyPath.cc)|Medium|
+|73|[**Set Matrix Zeroes**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/73-SetMatrixZeroes.cc)|Medium|
+|289|[**Game Of Life**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/289-GameOfLife.cc)|Medium|
+|365|[**Water And Jug Problem**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/365-WaterAndJugProblem.cc)|Medium|
+|786|[**Kth Smallest Prime Fraction**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Hard/786-KthSmallestPrimeFraction.cc)|Hard|
+|59|[**Spiral Matrix(2)**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/59-SpiralMatrix2.cc)|Medium|
+
+### Day13
+---
+**2018-04-21, Cool.**
+**10 Problems Finished.**
+
+|No|Title|Difficulty|
+|:--:|:----:|:----------:|
+|74|[**Search A 2D Matrix**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/74-SearchA2DMatrix.cc)|Medium|
+|75|[**Sort Colors**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/75-SortColors.cc)|Medium|
+|78|[**Subsets**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/78-Subsets.cc)|Medium|
+|79|[**Word Search**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/79-WordSearch.cc)|Medium|
+|82|[**Remove Duplicates From Sorted List(2)**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/82-RemoveDuplicatesFromSortedList2.cc)|Medium|
+|89|[**GrayCode**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/89-GrayCode.cc)|Medium|
+|90|[**Subsets(2)**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/90-Subsets2.cc)|Medium|
+|146|[**LRUCache**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Hard/146-LRUCache.cc)|Hard|
+|373|[**Find K Pairs With Smallest Sums**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/373-FindKPairsWithSmallestSums.cc)|Medium|
+|378|[**Kth Smallest Element In A Sorted Matrix**](https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/378-KthSmallestElementInASortedMatrix.cc)|Medium|
+

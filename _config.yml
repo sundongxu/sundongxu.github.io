@@ -99,6 +99,13 @@ qiniu:
     css:
         folder: css
 
+math:
+    engine: 'mathjax' # or 'katex'
+    mathjax:
+        # src: custom_mathjax_source
+        config:
+            # MathJax config
+
 # Search
 search: 
   path: search.xml
