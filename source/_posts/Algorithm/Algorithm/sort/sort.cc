@@ -380,27 +380,10 @@ void MergeSort(vector<int> &elem, int n)
     MergeSortHelp(elem, tmpElem, 0, n - 1);
 }
 
-void merge(vector<int> &, int, int, int); // 声明merge()
-
 // 精简版递归实现的归并排序
-void RecursionMergeSort(vector<int> &elem, int start, int end)
+void RecursionMerge(vector<int> &elem, int start, int mid, int end)
 {
-    //当子序列就只有一个元素的时候就弹出
-    if (start == end)
-        return;
-
-    //分治
-    int mid = (start + end) / 2;
-    RecursionMergeSort(elem, start, mid);
-    RecursionMergeSort(elem, mid + 1, end);
-
-    //合并
-    merge(elem, start, mid, end);
-}
-
-void merge(vector<int> &elem, int start, int mid, int end)
-{
-    vector<int> tmpElem(end - start + 1, 0);
+    vector<int> tmpElem(elem.size(), 0);
 
     int i = start, j = mid + 1;
     for (int k = start; k <= end; k++)
@@ -423,54 +406,119 @@ void merge(vector<int> &elem, int start, int mid, int end)
         elem[i] = tmpElem[i];
 }
 
+void RecursionMergeSortHelp(vector<int> &elem, int start, int end)
+{
+    //当子序列就只有一个元素的时候就弹出
+    if (start == end)
+        return;
+
+    //分治
+    int mid = (start + end) / 2;
+    RecursionMergeSortHelp(elem, start, mid);
+    RecursionMergeSortHelp(elem, mid + 1, end);
+
+    //合并
+    RecursionMerge(elem, start, mid, end);
+}
+
+void RecursionMergeSort(vector<int> &elem, int n)
+{
+    RecursionMergeSortHelp(elem, 0, n - 1);
+}
+
+// // 非递归实现的归并排序 - 参考他人
+// void NonRecursionMergeSort(vector<int> &elem, int n)
+// {
+//     int s = 2, i;
+
+//     while (s <= n)
+//     {
+//         i = 0;
+//         while (i + s <= n)
+//         {
+//             merge(elem, i, i + s / 2 - 1, i + s - 1);
+//             i += s;
+//         }
+//         //处理末尾残余部分
+//         merge(elem, i, i + s / 2 - 1, n - 1);
+//         s *= 2;
+//     }
+//     //最后再从头到尾处理一遍
+//     merge(elem, 0, s / 2 - 1, n - 1);
+// }
+
 // 非递归实现的归并排序
+void NonRecursionMerge(vector<int> &elem, int left, int mid, int right)
+{
+    vector<int> tmpElem(elem.size(), 0);
+    int l = left, r = mid + 1, k = left;
+    for (; k <= right; k++) // 合并两个区间
+    {
+        if (l > mid)
+            tmpElem[k] = elem[r++];
+        else if (r > right)
+            tmpElem[k] = elem[l++];
+        else if (elem[l] < elem[r])
+            tmpElem[k] = elem[l++];
+        else
+            tmpElem[k] = elem[r++];
+    }
+    for (int j = left; j <= right; j++)
+        elem[j] = tmpElem[j];
+}
+
 void NonRecursionMergeSort(vector<int> &elem, int n)
 {
-    int s = 2, i;
-
-    while (s <= n)
+    int step = 2;
+    for (; step <= n; step *= 2) // 每次对相邻的step个元素进行归并
     {
-        i = 0;
-        while (i + s <= n)
+        bool flag = false;
+        int i = 0;
+        for (; i < n; i += step) // i指示每个子序列的起始位置，当前子序列含有step个元素(最后一个可能少于step个)
         {
-            merge(elem, i, i + s / 2 - 1, i + s - 1);
-            i += s;
+            // 对当前子序列内元素进行归并排序，分成两个区间：[left,mid]和[mid+1,right]
+            // 特殊情形 right > n-1，即最后一个区间少于step个元素
+            int left = i, mid = i + step / 2 - 1, right = i + step - 1;
+            if (right > n - 1) // 最后一个区间少于step个元素，不应再做简单的归并，跳出然后特殊处理
+            {
+                flag = true;
+                break;
+            }
+            NonRecursionMerge(elem, left, mid, right);
         }
-        //处理末尾残余部分
-        merge(elem, i, i + s / 2 - 1, n - 1);
-        s *= 2;
+        if (flag) // 特殊处理right>n-1的情况
+            NonRecursionMerge(elem, i, i + step / 2 - 1, n - 1);
     }
-    //最后再从头到尾处理一遍
-    merge(elem, 0, s / 2 - 1, n - 1);
+    NonRecursionMerge(elem, 0, step / 2 - 1, n - 1); // 从头到尾再归并一次
 }
 
 int main()
 {
     // 测试用例
-    vector<int> elem = {18, 8, 56, 9, 68, 8};
+    vector<int> elem = {18, 8, 56, 9, 68, 8, 11};
 
-    // StraightInsertSort(elem, 6);
+    // StraightInsertSort(elem, elem.size());
 
-    // BinaryInsertSort(elem, 6);
+    // BinaryInsertSort(elem, elem.size());
 
     // vector<int> incr = {4, 2, 1};
-    // ShellSort(elem, 6, incr, 3);
+    // ShellSort(elem, elem.size(), incr, incr.size());
 
-    // BubbleSort(elem, 6);
-    // AdvancedBubbleSort(elem, 6);
+    // BubbleSort(elem, elem.size());
+    // AdvancedBubbleSort(elem, elem.size());
 
-    // RecursionQuickSort(elem, 6);
-    // NonRecursionQuickSort(elem, 6);
+    // RecursionQuickSort(elem, elem.size());
+    // NonRecursionQuickSort(elem, elem.size());
 
-    // SimpleSelectionSort(elem, 6);
+    // SimpleSelectionSort(elem, elem.size());
 
-    // HeapSort(elem, 6);
+    // HeapSort(elem, elem.size());
 
-    // SimpleMergeSort(elem, 6);
-    // MergeSort(elem, 6);
+    // SimpleMergeSort(elem, elem.size());
+    // MergeSort(elem, elem.size());
 
-    // RecursionMergeSort(elem, 0, 5);
-    // NonRecursionMergeSort(elem, 6);
+    RecursionMergeSort(elem, elem.size());
+    // NonRecursionMergeSort(elem, elem.size());
 
     for (auto e : elem)
         cout << e << " ";
