@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="全文概要计算机网络往往由多种不同类型的网络通过特殊的设备相互连接而成，本文简要介绍了转发器、集线器、网桥、桥接器、交换机、路由器等多种网络互连设备的功能原理。">
+<meta name="description" content="全文概要 计算机网络往往由多种不同类型的网络通过特殊的设备相互连接而成，本文简要介绍了转发器、集线器、网桥、桥接器、交换机、路由器等多种网络互连设备的功能原理。">
 <meta name="keywords" content="Interconnect,Switch,Router">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络互连设备小结">
 <meta property="og:url" content="dongdongdong.me/2017/10/30/Network/Hardware/relay/index.html">
 <meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
-<meta property="og:description" content="全文概要计算机网络往往由多种不同类型的网络通过特殊的设备相互连接而成，本文简要介绍了转发器、集线器、网桥、桥接器、交换机、路由器等多种网络互连设备的功能原理。">
+<meta property="og:description" content="全文概要 计算机网络往往由多种不同类型的网络通过特殊的设备相互连接而成，本文简要介绍了转发器、集线器、网桥、桥接器、交换机、路由器等多种网络互连设备的功能原理。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2017-11-27T14:28:33.724Z">
+<meta property="og:updated_time" content="2018-04-27T08:17:36.922Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络互连设备小结">
-<meta name="twitter:description" content="全文概要计算机网络往往由多种不同类型的网络通过特殊的设备相互连接而成，本文简要介绍了转发器、集线器、网桥、桥接器、交换机、路由器等多种网络互连设备的功能原理。">
+<meta name="twitter:description" content="全文概要 计算机网络往往由多种不同类型的网络通过特殊的设备相互连接而成，本文简要介绍了转发器、集线器、网桥、桥接器、交换机、路由器等多种网络互连设备的功能原理。">
 
 
 
@@ -165,8 +165,7 @@
 
   <div class="container sidebar-position-left page-post-detail">
     <div class="headband"></div>
-
-    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <a href="https://github.com/sundongxu"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
       <div class="header-inner"><div class="site-brand-wrapper">
   <div class="site-meta ">
     
@@ -446,7 +445,8 @@
       
 
       
-        <h2 id="全文概要"><a href="#全文概要" class="headerlink" title="全文概要"></a>全文概要</h2><p>计算机网络往往由多种不同类型的网络通过特殊的设备相互连接而成，本文简要介绍了转发器、集线器、网桥、桥接器、交换机、路由器等多种网络互连设备的功能原理。</p>
+        <h2 id="全文概要"><a href="#全文概要" class="headerlink" title="全文概要"></a>全文概要</h2><hr>
+<p>计算机网络往往由多种不同类型的网络通过特殊的设备相互连接而成，本文简要介绍了转发器、集线器、网桥、桥接器、交换机、路由器等多种网络互连设备的功能原理。</p>
 <a id="more"></a>
 <h2 id="网络互连设备"><a href="#网络互连设备" class="headerlink" title="网络互连设备"></a>网络互连设备</h2><hr>
 <p>计算机网络往往由多种不同类型的网络互连(Interconnect)连接而成。如果几个计算机网络只是物理上连接在一起，它们之间并不能进行通信，那么这种形式上的“互连”毫无意义。因此在描述这些网络“互连”的同时，实际暗示这些相互连接的计算机是可以以某种方式进行通信的，由约定共同遵守的网络协议决定通信的方式和细节。换句话说，从逻辑和功能上来讲，这些计算机已经组成了一个大型的计算机网络，或称为“互联网络”(internet，注意首字母小写，Internet已经用来形容全球范围内最大的互联网络)。</p>
@@ -475,7 +475,8 @@
 </ol>
 <h3 id="应用趋势"><a href="#应用趋势" class="headerlink" title="应用趋势"></a>应用趋势</h3><p>由于集线器会把收到的任何数字信号，经过再生和放大，再向集线器的所有端口提交，这会造成信号之间碰撞的机会很大，而且信号也很有可能被窃听。这还意味着所有连接到该集线器的设备，都是属于同一个碰撞域和广播域，因此大部分集线器现在都已经被交换机所取代。</p>
 <h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>集线器工作在物理层，负责局域网内部通信，将其接收到的数据帧广播至全部端口，与其相连的全部网络节点属于同一个冲突域。</p>
-<h2 id="网桥"><a href="#网桥" class="headerlink" title="网桥"></a>网桥</h2><h3 id="基本原理-1"><a href="#基本原理-1" class="headerlink" title="基本原理"></a>基本原理</h3><p>网桥(Bridge)负责数据链路层的数据中继，互连两个独立的、仅在低两层(物理层和数据链路层)实现上有差异的子网。</p>
+<h2 id="网桥"><a href="#网桥" class="headerlink" title="网桥"></a>网桥</h2><hr>
+<h3 id="基本原理-1"><a href="#基本原理-1" class="headerlink" title="基本原理"></a>基本原理</h3><p>网桥(Bridge)负责数据链路层的数据中继，互连两个独立的、仅在低两层(物理层和数据链路层)实现上有差异的子网。</p>
 <h3 id="核心功能-1"><a href="#核心功能-1" class="headerlink" title="核心功能"></a>核心功能</h3><p>数据链路层的作用包括：链路建立、维护和拆除、帧封装、帧传输、帧同步、帧错误控制以及流量控制。网桥工作在数据链路层，将两个局域网(LAN)连接起来，根据MAC地址(物理地址)来转发帧，可以看做是一个“低层路由器”(说路由器是三层交换机是一个道理，路由器工作在网络层，根据网络地址即IP地址进行转发)。它可以有效连接两个LAN，将本地通信范围限制在本网段内，并转发相应的信号到另一网段。网桥通常用于连接数量不多的、同一类型的网段。</p>
 <h3 id="隔离冲突域"><a href="#隔离冲突域" class="headerlink" title="隔离冲突域"></a>隔离冲突域</h3><p>多个集线器连接在一起时，由于是广播通信，碰撞几率极大，所以需要一种设备，能够有效隔离子网，即不同网段，让各网段的广播通信仅仅发生在自身内部，网桥正好起到了隔离冲突域的作用。</p>
 <h3 id="存储转发"><a href="#存储转发" class="headerlink" title="存储转发"></a>存储转发</h3><p>网桥能够识别数据链路层中的数据帧，并将这些帧临时存储于自身内存之中，再重新生成信号作为一个全新的数据帧转发给相连的另一个网段，由于网桥可以对数据帧进行拆包、暂存和重新打包(称为“存储转发机制”,Store-and-Forward)，网桥能够连接不同技术参数、传输速率的数据链路。</p>
@@ -510,7 +511,7 @@
 <li>网桥的端口数较少，通常只有2个，当然也有多端口的网桥设备，交换机则一般拥有多个物理端口；</li>
 <li>交换机工作时，实际上允许许多组端口间的数据转发通道同时工作，相当于多个网桥集成在一个设备中同时完成转发工作，所以交换机的转发能力远强于一般仅有两个端口的网桥；</li>
 <li>由于交换机能够支持多端口，因此可以把网络系统划分为更多的物理网网段，使得整个网络系统具有更高的带宽；</li>
-<li>交换机内部一般使用<a href="https://en.wikipedia.org/wiki/Application-specific_integrated_circuit" target="_blank" rel="external">ASIC(Application Specific Integrated Circuit， 特定用途集成电路)</a>的硬件芯片来实现转发，同时由于是硬件转发，其转发性能非常高，数据传输速率要快于网桥；</li>
+<li>交换机内部一般使用<a href="https://en.wikipedia.org/wiki/Application-specific_integrated_circuit" target="_blank" rel="noopener">ASIC(Application Specific Integrated Circuit， 特定用途集成电路)</a>的硬件芯片来实现转发，同时由于是硬件转发，其转发性能非常高，数据传输速率要快于网桥；</li>
 <li>网桥在发送数据帧前，通常要接收到完整的数据帧并执行帧检测序列FCS后，才开始转发该数据帧。交换机具有存储转发和直接转发两种帧转发方式。直接转发方式在发送数据以前，不需要在接收完整个数据帧和经过32BIT循环冗余校验码CRC的计算检查后的等待时间。</li>
 </ol>
 <h3 id="小结-2"><a href="#小结-2" class="headerlink" title="小结"></a>小结</h3><p>交换机可以认为是网桥的全方位加强版：同样通过自学习维护转发表确定数据帧转发的目的端口，用来隔离冲突域，每个与交换机的一个物理端口相连的LAN就是一个冲突域。但交换机拥有更多物理端口从而支持更多网段，其多组端口并行工作以及通过ASIC硬件芯片转发从而具有更强的转发能力(数据帧处理能力、传输速率)。</p>
@@ -537,12 +538,13 @@
 <p>路由器使用距离矢量算法，判断到达目的地址的优先路径的标准就只有一个，那就是跳数，认为具有最小跳数的路径是最短/优路径，而不理会其带宽，可靠性，时延等因素。并且认为跳数大于15跳的目的地址是不可到达的。</p>
 <p>另外，路由还有一个二层设备不具有的功能，那就是隔绝广播，它可以将广播限制在一个网络之内，进而增大网络之间的带宽。</p>
 <h3 id="小结-3"><a href="#小结-3" class="headerlink" title="小结"></a>小结</h3><p>路由器工作在网络层，负责连接不同类型的网络，构造广域网(Wide Area Network, WAN)，隔离广播域，根据数据包的IP地址查找路由表对应表项完成转发。</p>
-<h2 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h2><h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>网关（Gateway）负责网络层以上的数据中继服务，实现不同体系结构的网络协议转换，它通常采用<strong>软件</strong>的方法实现，并且与特定的应用服务一一对应。比如：OSI的文件传输服务FTAM与TCP/IP的文件传输服务FTP，尽管二者都是文件传输但是由于所执行的协议不同不能直接进行通信，而需要网关将两个文件传输系统互连，达到相互进行文件传输的目的。 </p>
+<h2 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h2><hr>
+<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>网关（Gateway）负责网络层以上的数据中继服务，实现不同体系结构的网络协议转换，它通常采用<strong>软件</strong>的方法实现，并且与特定的应用服务一一对应。比如：OSI的文件传输服务FTAM与TCP/IP的文件传输服务FTP，尽管二者都是文件传输但是由于所执行的协议不同不能直接进行通信，而需要网关将两个文件传输系统互连，达到相互进行文件传输的目的。 </p>
 <p>网关是一种复杂的网络连接设备，可以支持不同协议之间的转换，实现不同协议网络之间的互连。<strong>网关具有对不兼容的高层协议进行转换的能力，为了实现异构设备之间的通信，网关需要对不同的链路层、专用会话层、表示层和应用层协议进行翻译和转换</strong>。所以网关兼有路由器、网桥、中继器的特性。</p>
 <p>若要使两个完全不同的网络(异构网)连接在一起，一般使用网关，在Internet中两个网络也要通过一台称为网关的计算机实现互联。这台计算机能根据用户通信目标计算机的IP地址，决定是否将用户发出的信息送出本地网络，同时，它还将外界发送给属于本地网络计算机的信息接收过来，它是一个网络与另一个网络相联的通道。为了使TCP/IP协议能够寻址，该通道被赋予一个IP地址，这个IP地址称为网关地址。</p>
 <h3 id="小结-4"><a href="#小结-4" class="headerlink" title="小结"></a>小结</h3><p>网关的作用就是将两个使用不同协议的网络段连接在一起的设备，对两个网络段中的使用不同传输协议的数据进行互相的翻译转换。在互连设备中，由于协议转换的复杂性，一般只能进行一对一的转换，或是少数几种特定应用协议的转换。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><hr>
-<p>[1] <a href="http://blog.csdn.net/gongda2014306/article/details/52442981" target="_blank" rel="external">网络设备解析：中继器、集线器、网桥、交换机、路由器、网关的区别</a><br>[2] <a href="http://blog.csdn.net/u012243115/article/details/47008903" target="_blank" rel="external">转发器、集线器、网桥、交换机、路由器和网关简介</a><br>[3] <a href="http://blog.csdn.net/zhongyou2009/article/details/4768807" target="_blank" rel="external">交换机和网桥的区别</a><br>[4] <a href="http://hextwolf.blog.51cto.com/59501/29696" target="_blank" rel="external">广播域与冲突域详细解析</a><br>[5] <a href="http://www.nowamagic.net/academy/detail/72150314" target="_blank" rel="external">集线器、交换机和路由器通俗点的解释</a><br>[6] <a href="http://www.eepw.com.cn/article/275540.htm" target="_blank" rel="external">交换机工作原理</a><br>[7] <a href="http://blog.sina.com.cn/s/blog_5e1a889d0101370d.html" target="_blank" rel="external">交换机的工作原理(二、三、四层交换原理)</a></p>
+<p>[1] <a href="http://blog.csdn.net/gongda2014306/article/details/52442981" target="_blank" rel="noopener">网络设备解析：中继器、集线器、网桥、交换机、路由器、网关的区别</a><br>[2] <a href="http://blog.csdn.net/u012243115/article/details/47008903" target="_blank" rel="noopener">转发器、集线器、网桥、交换机、路由器和网关简介</a><br>[3] <a href="http://blog.csdn.net/zhongyou2009/article/details/4768807" target="_blank" rel="noopener">交换机和网桥的区别</a><br>[4] <a href="http://hextwolf.blog.51cto.com/59501/29696" target="_blank" rel="noopener">广播域与冲突域详细解析</a><br>[5] <a href="http://www.nowamagic.net/academy/detail/72150314" target="_blank" rel="noopener">集线器、交换机和路由器通俗点的解释</a><br>[6] <a href="http://www.eepw.com.cn/article/275540.htm" target="_blank" rel="noopener">交换机工作原理</a><br>[7] <a href="http://blog.sina.com.cn/s/blog_5e1a889d0101370d.html" target="_blank" rel="noopener">交换机的工作原理(二、三、四层交换原理)</a></p>
 
       
     </div>
@@ -601,7 +603,7 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/28/Network/SDN/P4/backgound/" rel="next" title="P4学习笔记：背景起源与基本原理">
+              <a href="/2017/10/28/Network/SDN/Language/P4/origin-background/" rel="next" title="P4学习笔记：背景起源与基本原理">
                 <i class="fa fa-chevron-left"></i> P4学习笔记：背景起源与基本原理
               </a>
             
@@ -611,7 +613,7 @@
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/10/31/Git/working-directory_repository_stage/" rel="prev" title="Git工作区、版本库与暂存区">
+              <a href="/2017/10/31/VC/Git/working_directory-repository-stage/" rel="prev" title="Git工作区、版本库与暂存区">
                 Git工作区、版本库与暂存区 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -712,7 +714,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">6</span>
+                  <span class="site-state-item-count">19</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -723,7 +725,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">2</span>
+                  <span class="site-state-item-count">4</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -734,7 +736,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">15</span>
+                  <span class="site-state-item-count">59</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -832,7 +834,7 @@
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; <span itemprop="copyrightYear">2017</span>
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -857,7 +859,7 @@
       <span class="post-meta-item-icon">
       <i class="fa fa-pencil"></i></span>
       博客全站共
-      <span title="Site words total count">31.0k 字</span>
+      <span title="Site words total count">82.8k 字</span>
     
    </div>
 
@@ -912,6 +914,8 @@
   
 
 
+  
+
 
 
 
@@ -950,6 +954,11 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -1464,10 +1473,36 @@
   
 
   
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
 
   
 
   
 
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
 </body>
 </html>

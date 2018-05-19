@@ -1,0 +1,1588 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Linux,Ubuntu,Reinstallation," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Sun Dongxu's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="全文概要 前几天实验室PC网络功能出Bug，有线网连不上nju登录站点，而加载内核驱动模块后的无线网卡却妥妥的没有问题，本来懒癌发作打算用一世无线网…可又想到之后虚拟机中的虚拟网卡NAT上网会有坑，且无线网本身速度不够稳定，考虑再三，拉上Quber一起“愉快”地开始了找坑之旅。然而，嗯…虽然折腾的结果并不总是那么令人振奋，但付出总有回报。谨以此文纪念本人各种努(chui)力(si)尝(zheng)">
+<meta name="keywords" content="Linux,Ubuntu,Reinstallation">
+<meta property="og:type" content="article">
+<meta property="og:title" content="记一次 Ubuntu 16.04 重装前后">
+<meta property="og:url" content="dongdongdong.me/2018/01/15/OS/Installation/Ubuntu/before-after-reinstallation/index.html">
+<meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
+<meta property="og:description" content="全文概要 前几天实验室PC网络功能出Bug，有线网连不上nju登录站点，而加载内核驱动模块后的无线网卡却妥妥的没有问题，本来懒癌发作打算用一世无线网…可又想到之后虚拟机中的虚拟网卡NAT上网会有坑，且无线网本身速度不够稳定，考虑再三，拉上Quber一起“愉快”地开始了找坑之旅。然而，嗯…虽然折腾的结果并不总是那么令人振奋，但付出总有回报。谨以此文纪念本人各种努(chui)力(si)尝(zheng)">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wireless-openwrt.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wired.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/ethernet-controller-type.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/driver-8169.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/update-manager.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/chrome-bookmark.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-mine.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-code.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-software.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-flatabulou-desktop-terminal.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-flatabulous-search.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-unity-tweak-tool.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/sougou-ibus-to-fcitx.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/sougou-fcitx-add-sougou.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/ide-markdown-remarkable.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/reader-okular.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/screenshot-shutter.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/sudoers-secure-path.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dnsmasq-listen-addr.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-readonly.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-cannot-open-file-for-writing.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-help-e212.png">
+<meta property="og:updated_time" content="2018-04-27T08:17:36.928Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="记一次 Ubuntu 16.04 重装前后">
+<meta name="twitter:description" content="全文概要 前几天实验室PC网络功能出Bug，有线网连不上nju登录站点，而加载内核驱动模块后的无线网卡却妥妥的没有问题，本来懒癌发作打算用一世无线网…可又想到之后虚拟机中的虚拟网卡NAT上网会有坑，且无线网本身速度不够稳定，考虑再三，拉上Quber一起“愉快”地开始了找坑之旅。然而，嗯…虽然折腾的结果并不总是那么令人振奋，但付出总有回报。谨以此文纪念本人各种努(chui)力(si)尝(zheng)">
+<meta name="twitter:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wireless-openwrt.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="dongdongdong.me/2018/01/15/OS/Installation/Ubuntu/before-after-reinstallation/"/>
+
+
+
+
+
+  <title>记一次 Ubuntu 16.04 重装前后 | Sun Dongxu's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6b59978ef5e74a1232a0ca20456b8fda";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+      <a href="https://github.com/sundongxu"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sun Dongxu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Reorganizing the Organization, Rebuilding the Building.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="dongdongdong.me/2018/01/15/OS/Installation/Ubuntu/before-after-reinstallation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sun Dongxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/la.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sun Dongxu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">记一次 Ubuntu 16.04 重装前后</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-15T11:11:11+08:00">
+                2018-01-15
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Operating-System/" itemprop="url" rel="index">
+                    <span itemprop="name">Operating System</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/01/15/OS/Installation/Ubuntu/before-after-reinstallation/" class="leancloud_visitors" data-flag-title="记一次 Ubuntu 16.04 重装前后">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  6,166
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  23
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="全文概要"><a href="#全文概要" class="headerlink" title="全文概要"></a>全文概要</h2><hr>
+<p>前几天实验室PC网络功能出Bug，有线网连不上nju登录站点，而加载内核驱动模块后的无线网卡却妥妥的没有问题，本来懒癌发作打算用一世无线网…可又想到之后虚拟机中的虚拟网卡NAT上网会有坑，且无线网本身速度不够稳定，考虑再三，拉上<a href="http://www.cnblogs.com/burningTheStar/" target="_blank" rel="noopener"><strong>Quber</strong></a>一起“愉快”地开始了找坑之旅。然而，嗯…虽然折腾的结果并不总是那么令人振奋，但付出总有回报。谨以此文纪念本人各种努(chui)力(si)尝(zheng)试(zha)，以及此后愤而重装的心路历程。<br><a id="more"></a></p>
+<h2 id="重装的前夜"><a href="#重装的前夜" class="headerlink" title="重装的前夜"></a>重装的前夜</h2><hr>
+<h3 id="挣扎是徒劳的"><a href="#挣扎是徒劳的" class="headerlink" title="挣扎是徒劳的"></a>挣扎是徒劳的</h3><p>遇事儿的第一反应总是想解决问题，只不过每每碰上超出能力范围的…<br>不！还是要挣扎一下，万一成功了呢！</p>
+<p>以下梳理一下Bug出现的前因后果：</p>
+<blockquote>
+<p>硬件配置：<br>（1）<strong>操作系统</strong>：Ubuntu 16.04<br>（2）<strong>内核版本</strong>：4.13.0-26-generic<br>（3） <strong>有线网卡</strong>：Realtek RTL8111/8168/8411   驱动：r8169<br>（4）<strong>无线网卡</strong>：TPLINK RTL8812   驱动：<a href="https://github.com/gnab/rtl8812au" target="_blank" rel="noopener"><strong>rtl8812</strong></a></p>
+<p>Bug现象：有线网无法连接到<strong>校园网登录门户</strong>，当然就不能上网了。</p>
+<p>可能原因：<br>（1）<strong>硬件故障</strong><br>    ① 网线坏了？ —毕竟不是一次两次了…<br>    ② 网口坏了？ —学子莘莘，独坑我一人？<br>    ③ 网卡坏了？ —可能性比我写程序出Bug大大大多了…<br>（2）<strong>软件故障</strong><br>    ① 网卡驱动不匹配？ —可为啥之前都是好的…<br>    ② 内核中除了网卡驱动之外的网络相关模块故障？ —“可为啥之前是好的”二连…我干了啥？<br>（3）<strong>DNS配置错误</strong><br>    ① /etc/resolve.conf<br>    ② /etc/resolveconf.d/base<br>    ③ /etc/resolveconf.d/head</p>
+</blockquote>
+<p>哦对，忘记说了，出事儿之前我正在配置<a href="https://www.sdnlab.com/19912.html" target="_blank" rel="noopener"><strong>P4环境</strong></a>，编译安装了一堆东西，会不会…嗯，下次还是在虚拟机里试试，这个回头再说…</p>
+<p>以上，在我的水平范围内委实只能想到这么多，毕竟…知识总有盲点，宋公常这么安(chao)慰(feng)我们。可很快，它们还是被我一一否决了！</p>
+<p>具体我是这么做的：<br>对于硬件故障，easy，网线坏了换几根好的，网口坏了插几个好的，排除！网卡嘛…暂时咱不折腾了，还得把主机拆开，有点小麻烦，并且可能性微乎其微，讲道理一插上网线就可以<strong>ifconfig</strong>查到已自动分配好校园网IP或者<strong>wireshark</strong>抓到DHCP包的话，其实硬件基本就没毛病了。</p>
+<p>网站无法连接，很大可能是域名解析出了问题，Ubuntu中两个与DNS相关的配置文件出错，测试发现最重要的一个配置文件——<strong>/etc/resolv.conf</strong>，“居然”会根据连接的网络的不同而动态变化：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat /etc/resolv.conf</span></span><br></pre></td></tr></table></figure></p>
+<p>呐，连接到无线网OpenWrt的时候，是这样：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wireless-openwrt.png"></p>
+<p>连接到有线网的时候，又变成介样：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wired.png"></p>
+<p>网上的建议都是增加新的<strong>nameserver</strong>，比如全国通用DNS地址<strong>114.114.114.114(114.114.115.115备用)</strong>，还有全球通用的Google的DNS服务器IP：<strong>8.8.8.8(8.8.4.4备用)</strong>，OK，每个都试了下，都在这里不管用，可见问题并不出在这里。在后文总结部分再回来讨论这些配置文件。</p>
+<p>至于软件故障，驱动程序首当其冲，google搜索相同系统和网卡，类似不能上网的故障还不少，解决方案也都还完备，一度来了信心，完全把“之前为啥是好的”抛诸脑后，试呗。</p>
+<p>根据<a href="http://www.cnblogs.com/duwanjiang/p/5907634.html" target="_blank" rel="noopener"><strong>经验帖</strong></a>，先确定当前以太网卡型号(注意<strong>grep</strong>命令对大小写敏感，搜关键字<strong>ethernet</strong>你是真的找不到网卡…)：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo lspci | grep Ethernet</span></span><br></pre></td></tr></table></figure></p>
+<p>网卡型号如下图所示，很普通的以太网卡：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/ethernet-controller-type.png"></p>
+<p>进一步查看网卡所用驱动：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo lshw -C network</span></span><br></pre></td></tr></table></figure></p>
+<p>注意输出中的driver字段：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/driver-8169.png"></p>
+<p>参考他人说法，更换驱动为r8168极有可能解决问题，于是去到官网找对应内核版本的<a href="http://www.realtek.com.tw/downloads/downloadsView.aspx?Langid=1&amp;PNid=13&amp;PFid=5&amp;Level=5&amp;Conn=4&amp;DownTypeID=3&amp;GetDown=false#2" target="_blank" rel="noopener"><strong>驱动</strong></a>，发现提供Linux内核版本最新至4.7的驱动。<br><a href="/2018/01/15/OS/Installation/Ubuntu/before-after-reinstallation/0010-r8168-8.045.08.tar.bz2" title="r8168驱动下载">r8168驱动下载</a></p>
+<p>解压后，进入驱动源码目录进行安装：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> r8168-8.045.08</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo ./autorun.sh</span></span><br></pre></td></tr></table></figure></p>
+<p>驱动安装完成后重启系统，重复上述命令，或者执行<strong>lsmod</strong>可以发现<strong>r8168</strong>驱动已经生效，然而，联网问题依然存在，也许是我与原博主发生的故障原因根本就不一样，自然不能适用。</p>
+<p>驱动问题应该是可以排除了，痛定思痛，决定在线升级系统，兴许能解决网络模块故障：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get update</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get dist-upgrade</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo reboot <span class="comment"># 重启完成上述更新的安装</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo update-manager -d <span class="comment"># 打开更新管理器</span></span></span><br></pre></td></tr></table></figure></p>
+<p>一连串更新操作之后，应该是这个界面：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/update-manager.png"></p>
+<p>然后在某人的怂恿下…冒着软件配置在新系统Ubuntu 18(连官网都没有release…)上面各种不兼容报错的风险，我还是干了，其实这时候已经做好重装的准备了。</p>
+<p>然后你还问然后？死心了！<br>一顿操作猛如虎，殊途同归重装苦/(ㄒoㄒ)/~~。</p>
+<h3 id="辩证地看问题"><a href="#辩证地看问题" class="headerlink" title="辩证地看问题"></a>辩证地看问题</h3><p>重装系统这个事儿吧，熟练了就是很简单的一件事儿，无非就是这么几步：</p>
+<blockquote>
+<p>(1) 找个<strong>系统镜像</strong>，如<a href="https://www.ubuntu.com/download/desktop" target="_blank" rel="noopener"><strong>Ubuntu</strong></a>；<br>(2) 做个<strong>系统启动盘</strong>，推荐<a href="https://cn.ultraiso.net/" target="_blank" rel="noopener"><strong>UltraISO</strong></a>；<br>(3) BIOS设置成从<strong>U盘启动</strong>，<a href="https://jingyan.baidu.com/article/f0e83a25c2e28a22e5910134.html" target="_blank" rel="noopener"><strong>懒人教程</strong></a>送上；<br>(4) U盘启动后根据对应操作系统装机提示按步操作。</p>
+</blockquote>
+<p>以上，操作系统即安装完成，倒不算麻烦，顺利的话20多分钟(Ubuntu)应该能够搞定，日常使用的软件也都提前安装好了或者在应用商店基本都可以找到，基本的工作娱乐需求也基本满足了，但是，有一个问题，装Linux的人会仅仅满足于这些基本的软件功能嘛？——毕竟，以用户友好著称的Windows(仅限于Office…)显然才更应该是大多数人的首选。</p>
+<p>(⊙v⊙)嗯…其实我想说的是，对于追求极致效率、捣鼓不倦的Coder们来说，重装系统的工作明明才刚刚开始好伐！</p>
+<p>既然无可避免，何不带着享(xiang)受(shi)的心情，重新打造自己的虚拟空间？</p>
+<h2 id="重装进行时"><a href="#重装进行时" class="headerlink" title="重装进行时"></a>重装进行时</h2><hr>
+<p>俗话说：“年轻不怕重来，生命在于折腾”，那么，开始吧！<br>(以下系统配置与本人喜好有关，仅供参考)</p>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>PC里面的文件目录将被设计成和浏览器中的书签一样都是精心整理过的，一是强迫症，二是方便找。<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/chrome-bookmark.png"></p>
+<p>主要在用户<strong>home</strong>目录下新建若干常用目录<strong>Mine</strong>、<strong>Code</strong>、<strong>Software</strong>。<br>安装<strong>tree</strong>命令<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-<span class="builtin-name">get</span> install tree</span><br></pre></td></tr></table></figure></p>
+<p>查看目录树型结构如下：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-mine.png"><br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-code.png"><br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-software.png"><br><a href="/2018/01/15/OS/Installation/Ubuntu/before-after-reinstallation/dir.sh" title="目录配置脚本下载">目录配置脚本下载</a></p>
+<h3 id="桌面主题"><a href="#桌面主题" class="headerlink" title="桌面主题"></a>桌面主题</h3><p>平时看厌了Ubuntu默认的玫红色桌面和终端，就想换个口味，这里推荐一款Ubuntu的扁平化桌面主题<strong>Flatabulous</strong>，加上扁平化的<strong>icon</strong>，显示效果是这样：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-flatabulou-desktop-terminal.png"></p>
+<p>按下win键触发搜索，界面是这样的：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-flatabulous-search.png"></p>
+<p>怎么样，喜不喜欢？只需三步你值得拥有：</p>
+<p>第一步，安装<strong>Unity Tweak Tool</strong>：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-<span class="builtin-name">get</span> install unity-tweak-tool</span><br></pre></td></tr></table></figure></p>
+<p>win键搜索后<strong>Unity Tweak Tool</strong>打开后是这样，其中<strong>theme</strong>和<strong>icon</strong>是在第三步要配置的：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-unity-tweak-tool.png"></p>
+<p>第二步，配置PPA源安装<strong>Flatabulous</strong>主题和i<strong>Flat Icon</strong>图标：<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># theme</span></span><br><span class="line">$ sudo<span class="built_in"> add-apt-repository </span>ppa:noobslab/themes</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install flatabulous-theme</span><br><span class="line"><span class="comment"># icon</span></span><br><span class="line">$ sudo<span class="built_in"> add-apt-repository </span>ppa:noobslab/icons</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install ultra-flat-icons</span><br></pre></td></tr></table></figure></p>
+<p>第三步，使用<strong>Unity Tweak Tool</strong>配置主题和图标：<br>打开<strong>Unity Tweak Tool</strong>，设置<strong>theme</strong>为<strong>Flatabulou</strong>，<strong>icon</strong>为<strong>Ultra Flat</strong>即可。</p>
+<h3 id="输入法"><a href="#输入法" class="headerlink" title="输入法"></a>输入法</h3><p>Ubuntu上面的中文输入法不是很好用，可以安装<a href="https://pinyin.sogou.com/linux/?r=pinyin" target="_blank" rel="noopener"><strong>搜狗输入法</strong></a>进行替代，配置如下：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo add-apt-repository ppa:fcitx-team/nightly</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get update</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get -y install fcitx</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get -y install fcitx-config-gtk</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get -y install fcitx-table-all</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo apt-get -y install im-switch</span></span><br></pre></td></tr></table></figure></p>
+<p>检查<strong>fcitx</strong>是否安装完成：win键搜索fcitx，再安装搜狗官网下载linux版本的deb包：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo dpkg -i  文件名.deb</span></span><br></pre></td></tr></table></figure></p>
+<p>在系统设置里面点击语言支持，将输入法从<strong>ibus</strong>改为<strong>fcitx</strong>：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/sougou-ibus-to-fcitx.png"></p>
+<p>注销一次，找到fcitx的配置，添加<strong>sougou pinyin</strong>并设为第一输入法即可：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/sougou-fcitx-add-sougou.png"></p>
+<p>配置完成即可使用，有细心的童鞋还会可能发现一个问题，那就是桌面右上角的任务栏会有两个输入法的图标，一个是搜狗的，另一个是fcitx，并且在打字时还会发现桌面同时出现两个输入框，觉得碍眼的朋友，请这么做，终端执行：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps aux | grep fcitx</span></span><br></pre></td></tr></table></figure></p>
+<p>在输入中找到<strong>fcitx-qimpanel</strong>那一行，然后将本行的第二个字段(pid，即进程号)对应数字记下，杀掉该进程即可：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">kill</span> -9 进程号</span></span><br></pre></td></tr></table></figure></p>
+<p>好了，多余的输入框和任务栏图标都没啦～</p>
+<h3 id="运行环境"><a href="#运行环境" class="headerlink" title="运行环境"></a>运行环境</h3><p>下面是各种开发环境的配置，包括：</p>
+<ol>
+<li><strong>git</strong></li>
+<li><strong>zsh &amp; oh-my-zsh</strong>(fish也蛮不错的)</li>
+<li><strong>vim &amp; vimplus</strong></li>
+<li><strong>gcc &amp; g++</strong></li>
+<li><strong>jdk</strong></li>
+<li><strong>python2 &amp; python3 &amp; pip</strong></li>
+<li><strong>nodejs &amp; hexo</strong></li>
+<li><strong>mysql &amp; workbench</strong></li>
+<li><strong>ssh</strong></li>
+<li><strong>wireshark</strong></li>
+<li><strong>Unix Network Programming</strong></li>
+</ol>
+<p>配置详见<a href="http://localhost:4000/2018/01/16/OS/Reinstallation/ubuntu-config-runtime/" target="_blank" rel="noopener"><strong>此篇</strong></a></p>
+<h3 id="工作利器"><a href="#工作利器" class="headerlink" title="工作利器"></a>工作利器</h3><p>顺便再安利几款Ubuntu下好用的利器：</p>
+<ol>
+<li><p><strong>IDE</strong><br><strong>JetBrains</strong>家的几个亲儿子就不用多说啦，选择合适量级的新版本装好：<br>（1）<a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener"><strong>Java - Intellij</strong></a><br>（2）<a href="https://www.jetbrains.com/clion/" target="_blank" rel="noopener"><strong>C/C++ - Clion</strong></a>（vim大神求放过…个人觉得用IDE来管理工程模块代码还是会方便一些）<br>（3）<a href="https://www.jetbrains.com/pycharm/" target="_blank" rel="noopener"><strong>Python - PyCharm</strong></a><br>（4）<a href="https://www.jetbrains.com/webstorm/" target="_blank" rel="noopener"><strong>Java Script - WebStorm</strong></a><br>下载后解压，进入<strong>bin</strong>目录执行<strong>x.sh</strong>(x为IDE名称)的脚本即可打开，回头固定到<strong>Launcher</strong>上就好。<br>觉得哪用得上这么多的看过来，<strong>Microsoft</strong>家的<a href="https://code.visualstudio.com/" target="_blank" rel="noopener"><strong>VSCode</strong></a>绝对能满足你，丰富的插件支持多种常见语言开发：C/C++、Java、Python等，文本编辑则有<strong>MarkDown</strong>和<strong>LaTex</strong>，配置简单，保证够用！<br>还嫌(re)弃(ai)麻(zhe)烦(teng)的，您出门右转那儿有个<a href="https://www.sublimetext.com/" target="_blank" rel="noopener"><strong>Sublimetext</strong></a>，我就不送了…<br>Markdown编辑器的话，比较喜欢<a href="https://remarkableapp.github.io/linux.html" target="_blank" rel="noopener"><strong>Remarkable</strong></a>的风格：</p>
+<img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/ide-markdown-remarkable.png">
+<p>伸手党据此配置同一效果：<strong>View -&gt; Night Mode，Style -&gt; Screen</strong></p>
+</li>
+<li><p><strong>虚拟化</strong><br>（1）<a href="https://www.virtualbox.org/wiki/Linux_Downloads" target="_blank" rel="noopener"><strong>Virtualbox</strong></a><br>（2）<a href="https://my.vmware.com/cn/group/vmware/info/slug/desktop_end_user_computing/vmware_workstation_pro/14_0" target="_blank" rel="noopener"><strong>VMware</strong></a><br>下载官方.deb包使用命令<strong>sudo dpkg -i 文件名.deb</strong>安装即可，如有因缺乏依赖导致安装失败时，根据命令行提示，执行：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-<span class="builtin-name">get</span> -f install </span><br></pre></td></tr></table></figure>
+<p>一键安装之前缺乏的依赖，再次安装.deb包即可成功。</p>
+</li>
+<li><p><strong>阅读器</strong><br>推荐<a href="https://apps.ubuntu.com/cat/applications/quantal/okular/" target="_blank" rel="noopener"><strong>Okular</strong></a>，系统自带应用商店<strong>Ubuntu Software</strong>就有：</p>
+<img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/reader-okular.png">
+<p>快捷键F6进入文档操作模式，再按数字键4，即可高亮文档，但是有个坑就是它高亮部分的文件状态信息大概是维护在软件内部的，也就是说根本不会对源文件做修改…这导致换个程序换个机器打开文档后都只能看到未经处理的源文档…</p>
+</li>
+<li><p><strong>截图</strong><br>推荐<strong>Shutter</strong>，安装命令如下：</p>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-<span class="builtin-name">get</span> install shutter</span><br></pre></td></tr></table></figure>
+<p>为其配置系统快捷键<strong>Ctrl+Alt+A</strong>为调用<strong>shutter</strong>进行区域截图，快捷键Name随意起，Command填入<strong>shutter -s</strong>：</p>
+<img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/screenshot-shutter.png">
+</li>
+<li><p><strong>音乐、翻译</strong><br><a href="https://music.163.com/#/download" target="_blank" rel="noopener"><strong>网易云</strong></a>Ubuntu 16.04版和<a href="http://cidian.youdao.com/index-linux.html" target="_blank" rel="noopener"><strong>有道</strong></a>Deepin版，不多说，官网的.deb直接安装</p>
+</li>
+<li><p><strong>VPN</strong><br>使用<strong>ShadowSocks</strong>在Ubuntu下科学上网，浏览器和终端翻墙都花了不少功夫，详见<a href="http://localhost:4000/2018/01/21/OS/Reinstallation/ubuntu-config-vpn/" target="_blank" rel="noopener"><strong>此篇</strong></a></p>
+</li>
+</ol>
+<h2 id="重装的收获"><a href="#重装的收获" class="headerlink" title="重装的收获"></a>重装的收获</h2><hr>
+<h3 id="遵循基本规定"><a href="#遵循基本规定" class="headerlink" title="遵循基本规定"></a>遵循基本规定</h3><ul>
+<li><strong>编译安装的文件一般安装在/usr/local/filename</strong><br>具体命令如下：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> 源码文件夹</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./autogen.sh <span class="comment"># 生成configure脚本</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ./configure --prefix=/usr/<span class="built_in">local</span>/软件名</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> make -j4 <span class="comment"># 多(四)线程编译</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> sudo make install <span class="comment"># 安装</span></span></span><br></pre></td></tr></table></figure>
+以上命令会将此软件相关的文件都会”安装“到同一个文件夹<strong>/usr/local/软件名</strong>下去，这样做的一个显而易见的好处是：如果之后想要删除该文件，或安装更新版本时要求彻底卸载旧版本，只需删除此文件夹即可实现完全删除，再也不用担心由于卸载不干净导致影响新版本安装配置失败的问题。<br>然而这样做在方便软件管理的同时也带来了一个额外的操作：每次安装新命令时，需要配置<strong>PATH</strong>环境变量，将该命令的安装文件夹下的<strong>bin</strong>文件夹的绝对路径添加到原有<strong>PATH</strong>变量后方才能使用新安装软件命令：<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> vim ~/.zshrc <span class="comment"># 本人习惯将环境变量定义在此配置文件中 </span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> 末尾增加一行 <span class="built_in">export</span> PATH=<span class="variable">$PATH</span>:/usr/<span class="built_in">local</span>/软件名/bin</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> ~/.zshrc <span class="comment"># 令新修改的配置文件生效</span></span></span><br></pre></td></tr></table></figure>
+再来理解一下软件“<strong>安装</strong>“的概念：其实就是把软件的编译好的<strong>可执行文件</strong>和<strong>依赖库文件</strong>放到一个系统能够发现的合适位置。那么放在什么路径下才能让系统自动找到呢？这就是环境变量的作用了，在Linux乃至Windows系统中，<strong>PATH</strong>无疑是最重要的一个系统环境变量，它是一个由”:“(Linux)或”;“(Windows)分隔的，由多个软件可执行文件所在路径连接所构成的字符串，在未显式指定可执行文件的情况下，在终端中执行命令，都会到由<strong>PATH</strong>变量中包含的文件路径下面去找该命令对应的可执行文件，如果没有，就会报”<strong>Command Not  Found</strong>“的错误。</li>
+</ul>
+<h3 id="善用系统命令"><a href="#善用系统命令" class="headerlink" title="善用系统命令"></a>善用系统命令</h3><ol>
+<li><strong>sudo apt-get -f install</strong><br>正确安装之前由于缺乏依赖而失败的安装过程中全部必要依赖，避免要对照着安装错误日志上面的依赖名称一个个安装。</li>
+<li><p><strong>sudo add-apt-repository ppa:x</strong><br>添加PPA软件源，加入-r参数则表示remove即删除某个之前添加的PPA软件源，回车两下后操作生效，对应的PPA源的增删情况可以在两个地方得到验证：<br><strong>（1）系统设置(System Settings) -&gt; 软件更新(Software &amp; Update) -&gt; 其它软件(Other Software)</strong>：列表中会显示/移除对应的PPA源地址，当然也可以在该UI上直接操作；<br><strong>（2）/etc/apt/source.list.d</strong>：目录下会出现/删除对应PPA源的.list和.list.save文件。</p>
+</li>
+<li><p><strong>whereis、local和which</strong><br>（1）<strong>whereis</strong><br><strong>whereis</strong>命令只能用于程序名的搜索，而且只搜索<strong>二进制文件</strong>（参数-b）、<strong>man说明文件</strong>（参数-m）和<strong>源代码文件</strong>（参数-s）。如果省略参数，则返回所有信息。<br>和<strong>find</strong>相比，<strong>whereis</strong>查找的速度非常快，这是因为linux系统会将 系统内的所有文件都记录在一个数据库文件中，当使用<strong>whereis</strong>和下面即将介绍的<strong>locate</strong>时，会从数据库中查找数据，而不是像<strong>find</strong>命令那样，通过遍历硬盘来查找，效率自然会很高。<br>但是该数据库文件并不是实时更新，<strong>默认情况下时一星期更新一次</strong>，因此，我们在用<strong>whereis</strong>和<strong>locate</strong> 查找文件时，有时会找到已经被删除的数据，或者刚刚建立文件，却无法查找到，原因就是因为数据库文件没有被更新。<br>（2）<strong>locate</strong><br><strong>locate</strong>让使用者可以很快速的搜寻档案系统内是否有指定的档案。其方法是先建立一个包括系统内所有档案名称及路径的数据库，之后当寻找时就只需查询这个数据库，而不必实际深入档案系统之中了。在一般的发行版中，数据库的建立都被放在<strong>crontab</strong>中自动执行。<br><strong>locate</strong>命令其实是”<strong>find -name</strong>“的另一种写法，但要比后者快得多，原因在于它不搜索具体目录，而是搜索一个数据库（Ubuntu下是/var/lib/mlocate/mlocate.db），这个数据库中含有本地所有文件信息。Linux系统自动创建这个数据库，并且每天自动更新一次，所以使用<strong>locate</strong>命令查不到最新变动过的文件。为了避免这种情况，可以在使用<strong>locate</strong>之前，先使用<strong>updatedb</strong>命令，手动更新数据库。<br>（3）<strong>which</strong><br><strong>which</strong>命令的作用是，在<strong>PATH</strong>变量指定的路径中，搜索某个系统命令的位置，并且返回第一个搜索结果。也就是说，使用<strong>which</strong>命令，就可以看到某个系统命令是否存在，以及执行的到底是哪一个位置的命令。</p>
+</li>
+<li><p><strong>echo &gt;&gt; 和echo &gt;</strong><br>在<strong>Shell</strong>编程过程很多时候会使用<strong>echo</strong>并输入到日志文件中。写日志的时候有两种情况，一种是一次写入文件空，再写的时候就将之前的内容给覆盖掉，如何实现追加内容呢？<br>（1）<strong>覆盖写入</strong></p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">echo</span> <span class="string">"日志内容"</span>  &gt; 文件</span></span><br></pre></td></tr></table></figure>
+<p>（2）<strong>追加写入</strong></p>
+<figure class="highlight ruby"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ echo <span class="string">"日志内容"</span>  <span class="meta">&gt;&gt; </span>文件</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><strong>lspci和lsmod</strong><br>（1）<strong>lspci</strong><br><strong>lspci</strong>命令用于显示当前主机的所有PCI总线信息，以及所有已连接的PCI设备信息。<br>（2）<strong>lsmod</strong><br><strong>lsmod</strong>命令用于显示已经加载到内核中的模块的状态信息。执行<strong>lsmod</strong>命令后会列出所有已载入系统的模块。<strong>Linux</strong>内核具有模块化的特性，应此在编译内核时，务须把全部的功能都放入内核。可以将这些功能编译成一个个单独的模块，待需要时再分别载入。</p>
+</li>
+<li><p><strong>insmod、rmmod、modprobe、depmod</strong><br>（1）<strong>insmod</strong><br><strong>insmod</strong>命令用于将给定的模块加载到内核中。Linux有许多功能是通过模块的方式，在需要时才载入内核执行。如此可使内核较为精简，进而提高效率，以及保有较大的弹性。这类可载入的模块，通常是<strong>设备驱动程序</strong>。<br>（2）<strong>rmmod</strong><br><strong>rmmod</strong>命令用于从当前运行的内核中移除指定的内核模块。执行<strong>rmmod</strong>可删除不需要的模块。<br>（3）<strong>modprobe</strong><br><strong>modprobe</strong>命令用于智能地向内核中加载模块或者从内核中移除模块。<br><strong>modprobe</strong>可载入指定的个别模块，或是载入一组相依的模块。<strong>modprobe</strong>会根据<strong>depmod</strong>所产生的相依关系，决定要载入哪些模块。若在载入过程中发生错误，在<strong>modprobe</strong>会卸载整组的模块。<br>（4）<strong>depmod</strong><br><strong>depmod</strong>命令可产生模块依赖的映射文件，在构建嵌入式系统时，需要由这个命令来生成相应的文件，由<strong>modprobe</strong>使用。</p>
+</li>
+<li><p><strong>查看操作系统及内核版本</strong><br>（1）系统版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat /etc/issue</span></span><br></pre></td></tr></table></figure>
+<p>直接显示Ubuntu 16.04.3 LTS<br>或：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo lsb_release -a</span></span><br></pre></td></tr></table></figure>
+<p>显示系统版本号(Release)：Ubuntu 16.04.3 LTS，及代号(Codename)：Xenial<br>（2）内核版本</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> uname -r</span></span><br></pre></td></tr></table></figure>
+<p>显示当前内核版本：4.13.0-26-generic</p>
+</li>
+<li><p><strong>查看CPU信息</strong><br>（1）按单个逻辑核粒度</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> cat /proc/cpuinfo</span></span><br></pre></td></tr></table></figure>
+<p>（2）按总核粒度</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> lscpu</span></span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="认识配置文件"><a href="#认识配置文件" class="headerlink" title="认识配置文件"></a>认识配置文件</h3><ol>
+<li><p><strong>环境变量配置文件：</strong><br>（1）<strong>/etc/profile</strong>：此文件为系统的<strong>每个用户</strong>设置环境信息。当用户登录时，该文件被执行一次，并从 <strong>/etc/profile.d</strong>目录的配置文件中搜集<strong>shell</strong>的设置。一般用于<strong>设置所有用户使用的全局变量</strong>；<br>（2）<strong>~/.bashrc</strong>：只对<strong>单个用户</strong>生效，当登录以及每次打开新的<strong>bash shell</strong>时，该文件被读取；<br>（3）<strong>~/.zshrc</strong>：只对<strong>单个用户</strong>生效，当登录以及每次打开新的<strong>zsh shell</strong>时，该文件被读取。<br>我的环境变量一般都配置在<strong>~/.zshrc</strong>中，保存文件后别忘了用<strong>source</strong>使之立即生效。</p>
+</li>
+<li><p><strong>sudo配置文件：</strong><br><strong>/etc/sudoers</strong>：从源码编译安装<a href="http://mininet.org/" target="_blank" rel="noopener"><strong>mininet</strong></a>时，执行安装脚本：<strong>sudo ./install.sh</strong>，怎么配置也找不到之前安装好的<strong>git</strong>和<strong>vim</strong>，我们都知道”Command Not Found”错误的原因就是没配置好对应命令的环境变量，于是我把上面提到的配置文件都加上了<strong>GIT_HOME</strong>和<strong>VIM_HOME</strong>，即使切换到<strong>root</strong>用户，仍然报错，于是猜想<strong>sudo</strong>命令虽然是让普通用户能够在执行命令时以<strong>root</strong>权限运行，但是仍不是真正的<strong>root</strong>，上述对所有用户都生效的环境变量都对<strong>sudo</strong>不适用，原因应该是<strong>sudo</strong>自己有特殊的环境变量定义。google到的结果证实了我这一想法，在<strong>/etc</strong>目录下有一个<strong>sudo</strong>命令的配置文件<strong>sudoers</strong>：</p>
+<img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/sudoers-secure-path.png">
+<p>以<strong>sudo</strong>执行命令都会从<strong>/etc/sudoers</strong>这个配置文件中变量<strong>secure_path</strong>的值作为<strong>sudo</strong>的<strong>PATH</strong>环境变量，会去这个变量指定的路径下去找命令对应的可执行文件。将<strong>GIT_HOME</strong>和<strong>VIM_HOME</strong>的添加到<strong>secure_path</strong>末尾，命令就能顺利找到执行了。</p>
+</li>
+<li><p><strong>内核驱动文件：</strong><br><strong>/lib/modules/$(uname -r)/kernel/drivers/</strong>：网卡驱动会放在<strong>net</strong>文件夹中，<strong>ethernet</strong>表示以太网卡，<strong>wireless</strong>中放的是无线网卡驱动。</p>
+</li>
+<li><p><strong>DNS配置文件：</strong><br>（1）<strong>/etc/resolv.conf</strong><br>（2）<strong>/etc/resolvconf/resolvconf.d/base</strong><br>（3）<strong>/etc/resolvconf/resolvconf.d/head</strong><br>里面最关键的就是<strong>nameserver</strong>字段，在其<strong>IP</strong>所对应的<strong>DNS Server</strong>处<strong>search</strong>当前想要连接的<strong>域名</strong>，如<strong>nju.edu.cn</strong>或<strong>lan</strong>等，一般来讲在Ubuntu 16.04系统中，每次更换网络连接后，<strong>resolv.conf</strong>都会自动重新加载，<strong>nameserver</strong>一般为<strong>127.0.1.1</strong>，一个很奇怪的<strong>IP</strong>地址，我们知道本机的回环地址<strong>lo</strong>的<strong>IP</strong>为<strong>127.0.0.1</strong>。查找资料后才知道，原来Ubuntu下是有一个本地DNS服务，叫做<strong>dnsmasq</strong>，由NetworkManager控制，通过以下命令能发现此服务进程信息：</p>
+<figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> ps aux | grep dnsmasq <span class="comment"># 以下命令效果同上</span></span></span><br><span class="line"><span class="meta">$</span><span class="bash"> ps -ef | grep dnsmasq</span></span><br></pre></td></tr></table></figure>
+<p>输出如下：</p>
+<img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dnsmasq-listen-addr.png">
+<p>可以看到它监听的本地地址，<strong>–listen-address=127.0.1.1</strong>(ubuntu12.04及之前的版本是 127.0.0.1)， 这个地址是一个本地回环地址，而你真实的dns服务器地址，是被这个服务管理维护着的。(之后我会写篇<a href="http://localhost:4000/2018/01/21/OS/Reinstallation/ubuntu-dns/" target="_blank" rel="noopener"><strong>文章</strong></a>专门讨论<strong>Ubuntu</strong>下的<strong>DNS</strong>配置)<br>即，用户进程想要访问某个<strong>IP</strong>未知、只知道主机名的服务器时，其发起DNS请求的流程如下：</p>
+<blockquote>
+<p>local process -&gt; local dnsmasq -&gt; router -&gt; ISP DNS</p>
+</blockquote>
+</li>
+<li><p><strong>软件源配置文件：</strong><br>（1）<strong>/etc/apt/source.list</strong>:通常放的是<a href="http://cn.archive.ubuntu.com/ubuntu/" target="_blank" rel="noopener"><strong>官方镜像源</strong></a>，但是中间偶然一天遇到了官方源挂掉的情况，考虑到教育网的缘故，我就更换成了<a href="https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/" target="_blank" rel="noopener"><strong>清华的源</strong></a>；<br>（2）<strong>/etc/apt/source.list.d</strong>：通常放的是PPA等第三方镜像源。</p>
+</li>
+</ol>
+<h3 id="掌握实用操作"><a href="#掌握实用操作" class="headerlink" title="掌握实用操作"></a>掌握实用操作</h3><p>好奇之人对新知识总是充满着渴望，这次掌握几个小<strong>Trick</strong>，提(ke)高(xue)效(tou)率(lan)再进一步！<br>（1）<strong>vim中临时提升编辑者权限</strong><br>在Linux上工作的朋友很可能遇到过这样一种情况，当你用<strong>Vim</strong>编辑完一个文件时，运行<strong>:wq</strong>保存退出，突然蹦出一个错误：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-readonly.png"></p>
+<p>这表明文件是只读的，按照提示，加上!强制保存：:w!，结果又一个错误出现：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-cannot-open-file-for-writing.png"></p>
+<p>文件明明存在，为何提示无法打开？查看<strong>Vim帮助文档</strong>对<strong>E212</strong>错误的解释如下：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-help-e212.png"></p>
+<p>原来是可能没有权限造成的，此时你才想起，这个文件需要<strong>root</strong>权限才能编辑，而当前登陆的只是普通用户，在编辑之前你忘了使用<strong>sudo</strong>来启动<strong>Vim</strong>，所以才保存失败。于是为了防止修改丢失，你只好先把它保存为另外一个临时文件<strong>temp-file-name</strong>，然后退出<strong>Vim</strong>，再运行<strong>sudo mv temp-file-name readonly-file-name</strong>覆盖原文件。<br>但这样操作过于繁琐。而且如果只是想暂存此文件，还需要接着修改，则希望保留<strong>Vim</strong>的工作状态，比如编辑历史，<strong>buffer</strong>状态等等，该怎么办？能不能在不退出<strong>Vim</strong>的情况下获得<strong>root</strong>权限来保存这个文件？<br>答案是肯定的，执行这样一条命令即可(原理参见<a href="http://feihu.me/blog/2014/vim-write-read-only-file/" target="_blank" rel="noopener"><strong>这篇</strong></a>)：<br><figure class="highlight elixir"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable">$ </span><span class="symbol">:w</span> !sudo tee %</span><br></pre></td></tr></table></figure></p>
+<p>（2）待更…</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><hr>
+<p>[1]<a href="(https://shipengliang.com/software-exp/ubuntu-16-04-rtl811181688411-%E4%B8%8D%E8%83%BD%E4%B8%8A%E7%BD%91-%E7%BB%8F%E5%B8%B8%E6%96%AD%E7%BD%91%E8%A7%A3%E5%86%B3%E5%8A%9E%E6%B3%95.html">Ubuntu 16.04 RTL8111/8168/8411 不能上网 经常断网解决办法</a><br>[2]<a href="http://topspeedsnail.com/upgrade-to-ubuntu-16_04-LTS/" target="_blank" rel="noopener">Ubuntu系统升级</a><br>[3]<a href="https://www.jianshu.com/p/463f229c0a20" target="_blank" rel="noopener">Ubuntu下超好看的主题Flatabulous</a><br>[4]<a href="http://www.cnblogs.com/burningTheStar/p/6978209.html" target="_blank" rel="noopener">Ubuntux新安装后的软件准备—秋波</a><br>[5]<a href="http://blog.csdn.net/seek_of/article/details/77920639" target="_blank" rel="noopener">dpkg安装deb缺少依赖包的解决方法</a><br>[6]<a href="http://www.cnblogs.com/EasonJim/p/7114679.html" target="_blank" rel="noopener">Ubuntu截图软件shutter</a><br>[7]<a href="http://blog.csdn.net/lu_embedded/article/details/55803500" target="_blank" rel="noopener">在Ubuntu中添加和删除PPA软件源</a><br>[8]<a href="http://www.ruanyifeng.com/blog/2009/10/5_ways_to_search_for_files_using_the_terminal.html" target="_blank" rel="noopener">Linux的五个查找命令-阮一峰</a><br>[9]<a href="http://www.cnblogs.com/peida/" target="_blank" rel="noopener">每天一个Linux命令</a><br>[10]<a href="http://blog.csdn.net/jakemanse/article/details/8043603" target="_blank" rel="noopener">echo写入文件</a><br>[11]<a href="https://www.jianshu.com/p/8f36fe09e39e" target="_blank" rel="noopener">ubuntu dns服务器127.0.1.1的问题</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>我知道是不会有人点的，但万一有人想不开呢？！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Sun Dongxu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
+          
+            <a href="/tags/Ubuntu/" rel="tag"><i class="fa fa-tag"></i> Ubuntu</a>
+          
+            <a href="/tags/Reinstallation/" rel="tag"><i class="fa fa-tag"></i> Reinstallation</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2017/12/05/Network/Mechanism/Network-Layer/subnet/" rel="next" title="细说子网">
+                <i class="fa fa-chevron-left"></i> 细说子网
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/01/16/OS/Installation/Ubuntu/runtime/" rel="prev" title="Ubuntu 16.04 下一键配置编程开发环境">
+                Ubuntu 16.04 下一键配置编程开发环境 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59f1e74daa26cba5" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments"></div>
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='/lib/Valine.min.js'></script>
+    <script>
+        new Valine({
+            av: AV,
+            el: '.comments' ,
+            verify: true,
+            app_id: '',
+            app_key: '',
+            placeholder: 'Welcome to teach me something!'
+        });
+    </script>
+    
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/la.png"
+                alt="Sun Dongxu" />
+            
+              <p class="site-author-name" itemprop="name">Sun Dongxu</p>
+              <p class="site-description motion-element" itemprop="description">Consistency refines Efficiency.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/sundongxu" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/sun-dong-xu-6/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/2864802550" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.cnblogs.com/burningTheStar" title="秋波园" target="_blank">秋波园</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全文概要"><span class="nav-number">1.</span> <span class="nav-text">全文概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重装的前夜"><span class="nav-number">2.</span> <span class="nav-text">重装的前夜</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#挣扎是徒劳的"><span class="nav-number">2.1.</span> <span class="nav-text">挣扎是徒劳的</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#辩证地看问题"><span class="nav-number">2.2.</span> <span class="nav-text">辩证地看问题</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重装进行时"><span class="nav-number">3.</span> <span class="nav-text">重装进行时</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#目录结构"><span class="nav-number">3.1.</span> <span class="nav-text">目录结构</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#桌面主题"><span class="nav-number">3.2.</span> <span class="nav-text">桌面主题</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#输入法"><span class="nav-number">3.3.</span> <span class="nav-text">输入法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#运行环境"><span class="nav-number">3.4.</span> <span class="nav-text">运行环境</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作利器"><span class="nav-number">3.5.</span> <span class="nav-text">工作利器</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#重装的收获"><span class="nav-number">4.</span> <span class="nav-text">重装的收获</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#遵循基本规定"><span class="nav-number">4.1.</span> <span class="nav-text">遵循基本规定</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#善用系统命令"><span class="nav-number">4.2.</span> <span class="nav-text">善用系统命令</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#认识配置文件"><span class="nav-number">4.3.</span> <span class="nav-text">认识配置文件</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#掌握实用操作"><span class="nav-number">4.4.</span> <span class="nav-text">掌握实用操作</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">5.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sun Dongxu</span>
+</div>
+
+
+  <div class="powered-by">
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    访客数  <span id="busuanzi_value_site_uv"></span></span>
+  <span class="post-meta-divider">|</span>
+  </div>
+
+  <div class="powered-by">
+    <i class="fa fa-bolt"></i><span id="busuanzi_container_site_pv">
+    点击量  <span id="busuanzi_value_site_pv"></span></span>
+  <span class="post-meta-divider">|</span>
+  </div>
+
+  <div class="powered-by">
+    
+      <span class="post-meta-item-icon">
+      <i class="fa fa-pencil"></i></span>
+      博客全站共
+      <span title="Site words total count">82.8k 字</span>
+    
+   </div>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.7-rc3/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'GahxsYhy86LRoRJ6jNOKbsjd-gzGzoHsz',
+        app_key: '3LFhgQbpJqib03QEIBwCbAN4',
+        placeholder: ''
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("YGwn9ugsopQVcGsCsO02SAak-gzGzoHsz", "lpK3dw1VUUeKtFIouqwCMjuz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>

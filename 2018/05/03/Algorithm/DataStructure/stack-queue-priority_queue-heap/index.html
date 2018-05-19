@@ -1,0 +1,1623 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Data Structure,C++,Stack,Queue,Priority Queue,Heap," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Sun Dongxu's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="全文概要 栈与队列是两种重要的特殊线性表，从结构上讲，两者都是线性表，但从操作上讲，两者支持的基本操作却只是线性表操作的子集，是操作受限制的线性表。栈与队列两者最大的区别在于，栈元素后进先出(LIFO，Last In First Out)，而队列元素先进先出(FIFO，First In First Out)。此外，针对队列这一特殊数据结构，有时需考虑队列元素的优先级的关系，即根据用户自定义的优先级">
+<meta name="keywords" content="Data Structure,C++,Stack,Queue,Priority Queue,Heap">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构之栈与队列(优先队列&#x2F;堆)">
+<meta property="og:url" content="dongdongdong.me/2018/05/03/Algorithm/DataStructure/stack-queue-priority_queue-heap/index.html">
+<meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
+<meta property="og:description" content="全文概要 栈与队列是两种重要的特殊线性表，从结构上讲，两者都是线性表，但从操作上讲，两者支持的基本操作却只是线性表操作的子集，是操作受限制的线性表。栈与队列两者最大的区别在于，栈元素后进先出(LIFO，Last In First Out)，而队列元素先进先出(FIFO，First In First Out)。此外，针对队列这一特殊数据结构，有时需考虑队列元素的优先级的关系，即根据用户自定义的优先级">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-05-14T07:48:17.272Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="数据结构之栈与队列(优先队列&#x2F;堆)">
+<meta name="twitter:description" content="全文概要 栈与队列是两种重要的特殊线性表，从结构上讲，两者都是线性表，但从操作上讲，两者支持的基本操作却只是线性表操作的子集，是操作受限制的线性表。栈与队列两者最大的区别在于，栈元素后进先出(LIFO，Last In First Out)，而队列元素先进先出(FIFO，First In First Out)。此外，针对队列这一特殊数据结构，有时需考虑队列元素的优先级的关系，即根据用户自定义的优先级">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="dongdongdong.me/2018/05/03/Algorithm/DataStructure/stack-queue-priority_queue-heap/"/>
+
+
+
+
+
+  <title>数据结构之栈与队列(优先队列/堆) | Sun Dongxu's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6b59978ef5e74a1232a0ca20456b8fda";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+      <a href="https://github.com/sundongxu"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sun Dongxu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Reorganizing the Organization, Rebuilding the Building.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="dongdongdong.me/2018/05/03/Algorithm/DataStructure/stack-queue-priority_queue-heap/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sun Dongxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/la.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sun Dongxu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">数据结构之栈与队列(优先队列/堆)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-03T10:10:10+08:00">
+                2018-05-03
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/03/Algorithm/DataStructure/stack-queue-priority_queue-heap/" class="leancloud_visitors" data-flag-title="数据结构之栈与队列(优先队列/堆)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,220
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  19
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="全文概要"><a href="#全文概要" class="headerlink" title="全文概要"></a>全文概要</h2><hr>
+<p><strong>栈</strong>与<strong>队列</strong>是两种重要的特殊线性表，从结构上讲，两者都是线性表，但从操作上讲，两者支持的基本操作却只是线性表操作的子集，是操作受限制的线性表。栈与队列两者最大的区别在于，栈元素后进先出(LIFO，Last In First Out)，而队列元素先进先出(FIFO，First In First Out)。此外，针对队列这一特殊数据结构，有时需考虑队列元素的优先级的关系，即根据用户自定义的优先级排序，出队时优先弹出优先级更高(低)的元素，<strong>优先队列</strong>能更好地满足实际问题中的需求，而在优先队列的各种实现中，<strong>堆</strong>是一种最高效的数据结构。本文分别介绍了<strong>顺序栈</strong>、<strong>链式栈</strong>、<strong>链式队列</strong>和<strong>循环队列</strong>以及对应与前两种队列实现的<strong>最大/最小优先级队列</strong>，还有两种堆结构，<strong>最大堆</strong>与<strong>最小堆</strong>的基本结构，并给出了相应的C++类代码实现。<br><a id="more"></a></p>
+<h2 id="栈-Stack"><a href="#栈-Stack" class="headerlink" title="栈(Stack)"></a>栈(Stack)</h2><hr>
+<p>栈是限定只能在表头进行插入(入栈)与删除(出栈)操作的线性表，表头端称为栈顶，表尾端称为栈底。</p>
+<p>设有栈 $S=(a_1, a_2,…, a_n)$ ，则一般称 $a_1$ 为栈底元素，$a_n$为栈顶元素，按 $a_1, a_2,…,a_n$ 的顺序依次进栈，则根据元素入栈的规定，从栈顶到栈底的元素依次为 $a_n,…,a_2, a_1$，出栈时弹出的第一个元素为栈顶元素，即 $a_n$，也就是说栈是按<strong>后进先出</strong>的原则进行。故，栈可称为<strong>后进先出(Last In First Out, LIFO)</strong>的线性表。</p>
+<p>栈有顺序表和链表两种实现方式。</p>
+<h3 id="顺序栈-Sequence-Stack"><a href="#顺序栈-Sequence-Stack" class="headerlink" title="顺序栈(Sequence Stack)"></a>顺序栈(Sequence Stack)</h3><hr>
+<p>在顺序实现中，利用一组地址连续的存储单元即数组依次存放从栈底到栈顶的数据元素，将数据类型为<code>ElemType</code>的数据元素存放在数组中，并用<code>count</code>存储数组中存储的栈的实际元素个数。每次插入新的栈顶元素，如栈未满，则操作成功，<code>count</code>值加一，而当删除栈顶元素时，如栈不空，操作成功，并且<code>count</code>值减一。</p>
+<p>顺序栈的类声明及定义如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Header</th>
+<th style="text-align:center">Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/SqStack.h" target="_blank" rel="noopener"><strong>SqStack.h</strong></a></td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/SqStack.cc" target="_blank" rel="noopener"><strong>SqStack.cc</strong></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="链式栈-Link-Stack"><a href="#链式栈-Link-Stack" class="headerlink" title="链式栈(Link Stack)"></a>链式栈(Link Stack)</h3><hr>
+<p>在程序中同时使用多个栈的情况下，使用链式栈不仅可以提高存储效率，同时还可以达到共享存储空间的目的。链表实现的栈，入栈和出栈都非常简单，一般也都不使用头结点直接实现。</p>
+<p>链式栈的类声明及定义如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Header</th>
+<th style="text-align:center">Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/LinkStack.h" target="_blank" rel="noopener"><strong>LinkStack.h</strong></a></td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/LinkStack.cc" target="_blank" rel="noopener"><strong>LinkStack.cc</strong></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="队列-Queue"><a href="#队列-Queue" class="headerlink" title="队列(Queue)"></a>队列(Queue)</h2><hr>
+<p>队列是一种先进先出(First In First Out，FIFO)的线性表，只允许在一端进行插入(入队)操作，而在另一端进行删除(出队)操作。</p>
+<p>在队列中，允许入队操作的一端称为队尾，允许出队操作的一端称为队头。</p>
+<p>设有队列 $q=(a_1, a_2,…,a_n)$，则 $a_1$ 称为队头元素，$a_n$ 称为队尾元素，队列中元素是按 $a_1, a_2,…,a_n$ 的顺序入队，同时也要求按照相同的顺序出队。</p>
+<p>队列也有两种存储结构：顺序存储结构和链式存储结构。</p>
+<h3 id="链队列-Link-Queue"><a href="#链队列-Link-Queue" class="headerlink" title="链队列(Link Queue)"></a>链队列(Link Queue)</h3><hr>
+<p>用链表表示的队列称为链队列，一个链队列应用两个分别指示队头与队尾的指针，分别称为头指针(<code>front</code>)和尾指针(<code>rear</code>)。其中头指针指向该队列的头结点，即不包含实际数据域的结点，而尾指针指向队列最后一个结点，是包含实际数据域的结点。</p>
+<p>如果要从队列中弹出一个元素，必须从单链表的第一个结点中取出队头元素，并删除此节点，而入队的新元素是存放在队尾处的，也就是单链表的最后一个元素的后面，并且此结点将成为新的队尾。</p>
+<p>链队列适合于数据元素个数变动比较大的情况，一般不存在溢出的问题，如果程序中要使用多个队列，最好使用链队列，这样将不会出现存储分配的问题，也不必进行数据元素的移动。</p>
+<p>链队列的类声明及定义如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Header</th>
+<th style="text-align:center">Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/LinkQueue.h" target="_blank" rel="noopener"><strong>LinkQueue.h</strong></a></td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/LinkQueue.cc" target="_blank" rel="noopener"><strong>LinkQueue.cc</strong></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="循环队列-Circular-Queue"><a href="#循环队列-Circular-Queue" class="headerlink" title="循环队列(Circular Queue)"></a>循环队列(Circular Queue)</h3><hr>
+<p>如果用C++描述队列的顺序存储结构，实际是利用一个一位数组<code>elem</code>作为队列的元素存储结构，并分别设立了两个指针<code>front</code>和<code>rear</code>分别表示队头和队尾，<code>maxSize</code>是队列的最大元素个数。</p>
+<p>但这样容易导致一个问题，试想，假设新创建一个队列，最大空间<code>maxSize</code>为5，那么依次入队5个元素，此时<code>front</code>依然指向队头，即数组第一个位置之前的位置，<code>rear</code>则指向队尾，即数组最后一个位置，然后出队2个元素，即从队头开始弹出2个元素，即删除数组<code>elem</code>前两个元素，此时队头指针<code>front</code>后移至数组第2个位置(有效元素从第3个位置，<code>front</code>永远指向第1个有效元素所在位置之前的一个位置)。若此时想再入队一个新元素，即从队尾插入新元素，但是由于队尾指针<code>rear</code>已经到达数组最后一个位置，不能再后移，即不允许再插入元素，而数组前2个位置由于之前的两次出队操作空出了2个位置，即此时队列的实际可用空间还没有使用完，这种情况下再插入一个新元素产生的溢出称为<strong>“假溢出”</strong>。</p>
+<p>解决<strong>假溢出</strong>的一个较巧妙的方法是将顺序队列从逻辑上看成一个环，成为一个循环队列，循环队列的首尾相接，当队头<code>front</code>和队尾<code>rear</code>进入到<code>maxSize-1</code>时，再进一个位置就自动移动到0，可用取余运算(%)简单地实现：</p>
+<blockquote>
+<p>队头前进1个位置：<code>front = (front + 1) % maxSize</code><br>队尾前进1个位置：<code>rear = (rear + 1) % maxSize</code></p>
+</blockquote>
+<p>但仅仅这样处理带来一个问题，不难发现当队列为满时，有  <code>front == rear</code>，而当队列为空时，依然有 <code>front == rear</code>。<br>可知，仅从<code>front == rear</code>这一条件并不能判断究竟是队空还是队满，那我们也有两种处理方法：</p>
+<ol>
+<li>另设一个标志位区别是队空还是队满</li>
+<li>少用一个元素空间，约定队头在队尾指针的下一个位置时作为队满的标志</li>
+</ol>
+<p>本文采用第2种，即浪费一个元素空间方法，那么在这种情况下：</p>
+<blockquote>
+<p>队空时，有<code>front == rear</code><br>队满时，有<code>(rear - front + maxSize) % maxSize == maxSize - 1</code></p>
+</blockquote>
+<p>而队列中的元素个数即为 <code>(rear - front + maxSize) % maxSize</code>，在牺牲一个位置不存储元素的情况下，若元素个数 <code>== maxSize - 1</code>，当然队列也就是满的。 </p>
+<p>循环队列的类声明及定义如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Header</th>
+<th style="text-align:center">Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/CircQueue.h" target="_blank" rel="noopener"><strong>CircQueue.h</strong></a></td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/CircQueue.cc" target="_blank" rel="noopener"><strong>CircQueue.cc</strong></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="优先级队列-Priority-Queue"><a href="#优先级队列-Priority-Queue" class="headerlink" title="优先级队列(Priority Queue)"></a>优先级队列(Priority Queue)</h2><p>在许多情况下，前面介绍的普通队列是不够用的，先进先出的机制有时需要某些优先规则来完善使其更能适用于实际场景。比如在医院中，病危患者应具有更高的优先级，若还是按先来后到顺序对排队患者依次治疗，显然是不合理的，也就是说，当医生有空时，应立刻从患者中选择病情最危急者优先救治，此处的患者的病情危重程度就决定了其就诊的优先级。</p>
+<p>一般地，优先级高低实际就决定了队列中元素的出队顺序。</p>
+<p>优先队列是一种基于队列并同时考虑了优先级的数据结构，其中元素的固有顺序决定了对基本操作的执行结果，优先队列有两种类型：最小优先队列和最大优先队列。最小优先队列的出队操作<code>OutQueue()</code>将删除最小的数据元素值，最大优先队列的出队操作<code>OutQueue()</code>将删除最大的数据元素值。</p>
+<p>优先队列有多种实现方法，一种比较简单的实现方法是在作入队操作<code>InQueue()</code>时，元素不是排在队列的末尾，而是根据其优先级将其插入到队列中的合适位置，使队列的元素有序，优先队列类可作为队列类的派生类来实现，只需覆盖队列类的入队操作<code>InQueue()</code>即可。</p>
+<p>基于链队列和循环队列，每种队列又可派生出最大、最小两种优先队列，共计四种优先队列的类声明及定义如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Header</th>
+<th style="text-align:center">Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/MaxPriorityLinkQueue.h" target="_blank" rel="noopener"><strong>MaxPriorityLinkQueue.h</strong></a></td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/MaxPriorityLinkQueue.cc" target="_blank" rel="noopener"><strong>MaxPriorityLinkQueue.cc</strong></a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/MinPriorityLinkQueue.h" target="_blank" rel="noopener"><strong>MinPriorityLinkQueue.h</strong></a></td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/MinPriorityLinkQueue.cc" target="_blank" rel="noopener"><strong>MinPriorityLinkQueue.cc</strong></a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/MaxPriorityCircQueue.h" target="_blank" rel="noopener"><strong>MaxPriorityCircQueue.h</strong></a></td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/MaxPriorityCircQueue.cc" target="_blank" rel="noopener"><strong>MaxPriorityCircQueue.cc</strong></a></td>
+</tr>
+<tr>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/MinPriorityCircQueue.h" target="_blank" rel="noopener"><strong>MinPriorityCircQueue.h</strong></a></td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/MinPriorityCircQueue.cc" target="_blank" rel="noopener"><strong>MinPriorityCircQueue.cc</strong></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="堆-Heap"><a href="#堆-Heap" class="headerlink" title="堆(Heap)"></a>堆(Heap)</h2><hr>
+<p>在上节介绍优先队列时提到，构造优先队列的方法是通过简单地在普通队列将新元素入队时，为其按优先级高低(元素值大小)找到合适的位置再插入，而不是直接插入在队尾，这种方式得到的优先队列的元素是严格有序排列的，如最大优先队列中，元素从大到小排列，最大元素即队头元素。这种优先队列的实现，思想简单，但同时开销也比较大，效率不够高，本节会介绍一种叫做堆的数据结构，在优先队列的各种实现中，堆是最高效的一种数据结构。</p>
+<p>不难想象，若数据集合严格有序，将为各种操作带来遍历，如上节的优先队列的实现，但是，有些场景并不要求数据全部有序，或者在操作开始前就完全有序。在许多应用中，通常需要收集一部分数据，从中挑选具有最小或最大关键码(优先级)的记录开始处理。接着，可能会收集更多数据，并处理当前数据集中具有最小或最大关键码的记录。对于此类应用，我们期望的数据结构，应能支持插入操作，并能方便地从中取出具有最小或最大关键码的记录，这样的数据结构其实就是优先队列。也就是说，优先队列仅仅要求能够方便地找到数据中关键码最小或最大，即优先级最低或最高的记录，其实并不要求数据严格排好序，并能保证出队时总能找到关键码最小或最大的记录优先出队，堆正好可以满足这一需求，而堆是局部有序的，并非严格有序。</p>
+<p>假定在各个数据记录或元素中，存在一个能够标识数据记录或元素的数据项，并将依据该数据项对数据进行组织，则可称此数据项为关键码(key)。</p>
+<p>如果有一个关键码的集合，把它的所有元素按<strong>完全二叉树</strong>的顺序存储方式存放在一个一位数组中。如果有：</p>
+<blockquote>
+<p>每个父结点的关键码总比其孩子结点的关键码大<br>于是位于堆顶(即二叉树根结点)的结点的关键码最大，故称该集合为<strong>最大堆</strong></p>
+</blockquote>
+<p>或者：</p>
+<blockquote>
+<p>每个父结点的关键码总比其孩子结点的关键码小<br>于是位于堆顶(即二叉树根结点)的结点的关键码最小，故称该集合为<strong>最小堆</strong></p>
+</blockquote>
+<p>在堆中，所有的结点具有称之为<strong>“堆序列”</strong>的关系，同样，“堆序”分为最小堆序和最大堆序。具有最小堆序的结点之间存在小于或等于关系，具有最大堆序的结点之间存在大于或等于的关系。</p>
+<p>根据<strong>完全二叉树</strong>的性质，由堆存储在下标为0开始计数的数组中，因此，在堆(数组)中给定下标为 $i$的结点时：</p>
+<ol>
+<li>如 $i=0$，则结点 $i$ 为根结点，无父结点，否则结点 $i$ 的父结点为结点 $\lfloor\frac{i-1}{2}\rfloor$</li>
+<li>如 $2i+1&gt;n-1$，则结点 $i$ 无左子女，否则结点 $i$ 的左子女为结点 $2i+1$</li>
+<li>如 $2i+2&gt;n-1$，则结点 $i$ 无右子女，否则结点 $i$ 的右子女为结点 $2i+2$</li>
+</ol>
+<p>另外还会用到的一个性质：</p>
+<ul>
+<li>完全二叉树最后一个非叶结点的下标为 $\lfloor\frac{n-2}{2}\rfloor$</li>
+</ul>
+<p>下节会以<strong>最小堆</strong>为例讲解堆的构造和调整过程。</p>
+<h3 id="最小堆"><a href="#最小堆" class="headerlink" title="最小堆"></a>最小堆</h3><hr>
+<p>父结点的关键码总是小于其孩子结点的完全二叉树称为最小堆。</p>
+<h4 id="堆的构造"><a href="#堆的构造" class="headerlink" title="堆的构造"></a>堆的构造</h4><p>当给出一个记录的关键码集合时，首先把它的记录顺序放在堆的<code>Heap</code>数组中，最初数据的排列显示它不是一个最小堆，因此需要把它调整成为一个堆。</p>
+<p>我们采用从下向上逐步调整形成堆的方法：轮流以完全二叉树结点编号从 $\lfloor\frac{n-2}{2}\rfloor$ ，即完全二叉树最后一个非叶结点开始，一直到编号为0，即根结点，调用下滑调整算法<code>SiftDown()</code>，将以它们为根的子树调整成为最小堆，从局部到整体，将最小堆逐步扩大，直到在根结点处也调整完成后，整个树即被调整成为最小堆。</p>
+<p><code>SiftDown()</code>是一个自上而下的调整算法，其基本思想是：</p>
+<ol>
+<li>对有 $m$ 个记录的集合 $R$，将它置为完全二叉树的顺序存储。首先从结点 $i$ 开始向下调整，即把以它为根结点的子树调整成为最小堆，前提条件是假定它的两棵子树都已成为最小堆(所以一开始要从完全二叉树的第一个非叶结点开始整个调整过程，因此非叶结点的子树即叶子结点，单个结点本身就是最小堆)。</li>
+<li>如果结点 $i$ 的左孩子的关键码小于右孩子的关键码：$R[j].key &lt; R[j+1].key$，其中 $j=2i+1，即j是i的左孩子，j+1是i的右孩子$，则按结点 $i$ 的左分支进行调整，否则沿右分支调整。让 $j$ 指向参加调整的孩子结点，调整的方法是以 $R[i] 与 R[j]$ 进行关键码的比较：若 $R[i].key &gt; R[j].key$，则把关键码小的孩子 $j$ 上浮到 $i$ 的位置。</li>
+<li>然后 $i和j$ 进一步下沉，即令 $i=j, j=2j+1$，继续向下一层进行比较；若 $R[i].key \leq R[j].key$，则不对调，也不再向下一层继续比较，因为此时可判定以 $i$ 为根结点的子树已经是最小堆了，算法终止。</li>
+<li>最后结果是关键码最小的结点上浮到了堆顶，且完全二叉树的每个局部都是一个最小堆，符合最小堆定义，最小堆形成。</li>
+</ol>
+<p>给出<code>SiftDown()</code>代码实现如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ElemType</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">MinHeap</span>&lt;ElemType&gt;:</span>:siftDown(<span class="keyword">int</span> start, <span class="keyword">int</span> m)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 从结点start开始到结点m为止，自上向下比较，如果子女的值小于父结点的值</span></span><br><span class="line">    <span class="comment">// 则关键码更小的子女上浮，继续向下层比较，这样将一个集合局部调整为最小堆</span></span><br><span class="line">    <span class="keyword">int</span> i = start, j = <span class="number">2</span> * i + <span class="number">1</span>; <span class="comment">// j是i的左孩子</span></span><br><span class="line">    ElemType temp = heap[i];</span><br><span class="line">    <span class="keyword">while</span> (j &lt;= m)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (j &lt; m &amp;&amp; heap[j] &gt; heap[j + <span class="number">1</span>]) <span class="comment">// i的右孩子比j(i的左孩子)更小，j指向右孩子(更小的)</span></span><br><span class="line">            j++;</span><br><span class="line">        <span class="keyword">if</span> (temp &lt;= heap[j]) <span class="comment">// i已经比其子女j小了，调整结束</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            heap[i] = heap[j]; <span class="comment">// i比子女j大，则j上浮替代i的位置，调整位置i和j均下降</span></span><br><span class="line">            i = j;</span><br><span class="line">            j = <span class="number">2</span> * j + <span class="number">1</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    heap[i] = temp; <span class="comment">// 放回start结点</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>以上代码中值得一提的一个细节是：关键码比较时用的是比较运算符<strong>“&gt;”</strong>和<strong>“&lt;=”</strong>，这些运算符应该在元素类型<code>ElemType</code>中重载定义。如果堆中元素各不相同的话，其实可以只需”&gt;”便足够，将<code>temp &lt;= heap[j]</code>改为<code>heap[j] &gt; temp</code>即可，此运算符应该在元素类型<code>ElemType</code>中重载定义。从而可以总结如下规律：</p>
+<blockquote>
+<p>在元素互异的理想情况下，实现最小堆要求元素类型重载<strong>“&lt;“</strong>运算符，而实现最大堆则要求元素类型重载<strong>”&gt;“</strong>运算符。</p>
+</blockquote>
+<p>给出堆的构造函数<code>MinHeap()</code>代码实现如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ElemType</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">MinHeap</span>&lt;ElemType&gt;:</span>:MinHeap(ElemType arr[], <span class="keyword">int</span> n)</span><br><span class="line">&#123;</span><br><span class="line">    maxHeapSize = (DEFAULT_SIZE &lt; n) ? n : DEFAULT_SIZE;</span><br><span class="line">    heap = <span class="keyword">new</span> ElemType[maxHeapSize];</span><br><span class="line">    <span class="keyword">if</span> (heap == <span class="literal">nullptr</span>)</span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cerr</span> &lt;&lt; <span class="string">"heap create failed!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="built_in">exit</span>(<span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">    <span class="keyword">for</span> (<span class="keyword">int</span> pos = <span class="number">0</span>; pos &lt; n; pos++)</span><br><span class="line">        heap[pos] = arr[pos];</span><br><span class="line">    currentSize = n;</span><br><span class="line">    <span class="keyword">int</span> currentPos = (currentSize - <span class="number">2</span>) / <span class="number">2</span>; <span class="comment">// 找最初调整位置：最后分支结点(最后一个有孩子的结点)</span></span><br><span class="line">    <span class="keyword">while</span> (currentPos &gt;= <span class="number">0</span>)                 <span class="comment">// 自底向上逐步调整形成堆</span></span><br><span class="line">    &#123;</span><br><span class="line">        siftDown(currentPos, currentSize - <span class="number">1</span>); <span class="comment">// 局部自上向下下滑调整</span></span><br><span class="line">        currentPos--;                          <span class="comment">// 再向前换一个分支结点</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="堆的插入"><a href="#堆的插入" class="headerlink" title="堆的插入"></a>堆的插入</h4><p>最小堆的插入算法则调用了另一种的调整算法<code>SiftUp()</code>，实现自下而上的上滑调整。因为每次新结点总是插在已经建成的最小堆的后面，这是必须遵循与<code>SiftDown()</code>相反的比较路径，从下而上，与父结点的关键码进行比较、对调。</p>
+<p>给出<code>SiftUp()</code>代码实现如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ElemType</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">void</span> <span class="title">MinHeap</span>&lt;ElemType&gt;:</span>:siftUp(<span class="keyword">int</span> start)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="comment">// 从结点start开始到结点0为止，自下而上比较，如果子女的值小于父结点的值</span></span><br><span class="line">    <span class="comment">// 则子女上浮，继续向上层比较，这样将一个集合重新调整为最小堆，元素类型ElemType应自行定义"&lt;="运算符</span></span><br><span class="line">    <span class="keyword">int</span> j = start, i = (j - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">    ElemType temp = heap[j];</span><br><span class="line">    <span class="keyword">while</span> (j &gt; <span class="number">0</span>) <span class="comment">// 沿父结点路径向上直达根，i是j的父结点</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="keyword">if</span> (heap[i] &lt;= temp) <span class="comment">// 父结点值小，无需调整</span></span><br><span class="line">            <span class="keyword">break</span>;</span><br><span class="line">        <span class="keyword">else</span></span><br><span class="line">        &#123;</span><br><span class="line">            heap[j] = heap[i]; <span class="comment">// i比子女j大，则i下滑取代j的位置，调整位置i和j均上滑</span></span><br><span class="line">            j = i;</span><br><span class="line">            i = (i - <span class="number">1</span>) / <span class="number">2</span>;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    heap[j] = temp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>同样地，<code>SiftUp()</code>中用到了比较运算符<strong>“&lt;=”</strong>，它应该在元素类型<code>ElemType</code>中重载定义。</p>
+<p>给出<code>Insert()</code>代码实现如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ElemType</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">bool</span> <span class="title">MinHeap</span>&lt;ElemType&gt;:</span>:Insert(<span class="keyword">const</span> ElemType &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (currentSize == maxHeapSize) <span class="comment">// 堆满</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cerr</span> &lt;&lt; <span class="string">"Heap already full!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    heap[currentSize] = e; <span class="comment">// 每次新元素总会插入到堆末尾</span></span><br><span class="line">    siftUp(currentSize);   <span class="comment">// 从当前元素即尾元素开始向上调整</span></span><br><span class="line">    currentSize++;</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<h4 id="堆的删除"><a href="#堆的删除" class="headerlink" title="堆的删除"></a>堆的删除</h4><p>通常，从最小堆中删除具有最小关键码记录的操作是将最小堆的堆顶元素，即其对应完全二叉树的顺序表示的第0号元素删去。把这个元素取走后，一般以堆的最后一个结点填补取走的堆顶元素，并将堆的实际元素个数减1。但是用最后一个元素取代堆顶元素将破坏堆，需要调用<code>SiftDown()</code>算法从堆顶向下调整。</p>
+<p>给出<code>RemoveMin()</code>代码实现如下：<br><figure class="highlight cpp"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"></span><br><span class="line"><span class="keyword">template</span> &lt;<span class="class"><span class="keyword">class</span> <span class="title">ElemType</span>&gt;</span></span><br><span class="line"><span class="class"><span class="title">bool</span> <span class="title">MinHeap</span>&lt;ElemType&gt;:</span>:RemoveMin(ElemType &amp;e)</span><br><span class="line">&#123;</span><br><span class="line">    <span class="keyword">if</span> (currentSize == <span class="number">0</span>) <span class="comment">// 堆空</span></span><br><span class="line">    &#123;</span><br><span class="line">        <span class="built_in">cerr</span> &lt;&lt; <span class="string">"Heap already empty!"</span> &lt;&lt; <span class="built_in">endl</span>;</span><br><span class="line">        <span class="keyword">return</span> <span class="literal">false</span>;</span><br><span class="line">    &#125;</span><br><span class="line">    e = heap[<span class="number">0</span>];</span><br><span class="line">    heap[<span class="number">0</span>] = heap[currentSize - <span class="number">1</span>]; <span class="comment">// 最后元素填补到根结点</span></span><br><span class="line">    currentSize--;</span><br><span class="line">    siftDown(<span class="number">0</span>, currentSize - <span class="number">1</span>); <span class="comment">// 因为尾元素放到了堆顶，故从堆顶元素开始自上而下调整</span></span><br><span class="line">    <span class="keyword">return</span> <span class="literal">true</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>从完全二叉树的性质可知，$n$ 个结点的完全二叉树的深度为 $k=\lceil\log{(n+1)}\rceil$，应用堆的调整算法<code>SiftDown()</code>时，<code>while</code>循环次数最大为树的深度减1，所以堆的删除算法的时间复杂度为 $O(\log{n})$。而在插入一个新结点时，使用了一个堆的上滑调整算法<code>SiftUp()</code>，其中<code>while</code>循环次数不超过树的深度减1，所以堆的插入算法的时间复杂度也是 $O(\log{n})$。建树操作执行了 $\lfloor\frac{n}{2}\rfloor$ 次<code>SiftDown()</code>算法，其时间复杂度为 $O(n\log{n})$。</p>
+<p>最小堆的类声明及定义如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Header</th>
+<th style="text-align:center">Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/MinHeap.h" target="_blank" rel="noopener"><strong>MinHeap.h</strong></a></td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/MinHeap.cc" target="_blank" rel="noopener"><strong>MinHeap.cc</strong></a></td>
+</tr>
+</tbody>
+</table>
+<h3 id="最大堆"><a href="#最大堆" class="headerlink" title="最大堆"></a>最大堆</h3><hr>
+<p>父结点的关键码总是大于其孩子结点的完全二叉树称为最大堆。</p>
+<p>最大堆的类声明及定义如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">Header</th>
+<th style="text-align:center">Implementation</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/MaxHeap.h" target="_blank" rel="noopener"><strong>MaxHeap.h</strong></a></td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/data-structure/blob/master/MaxHeap.cc" target="_blank" rel="noopener"><strong>MaxHeap.cc</strong></a></td>
+</tr>
+</tbody>
+</table>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><hr>
+<p>[1]<a href="https://www.amazon.cn/dp/B001TREOXM" target="_blank" rel="noopener">数据结构与算法(C++版) - 唐宁九主编</a><br>[2]<a href="https://www.amazon.cn/dp/B0011F7UHO" target="_blank" rel="noopener">数据结构(用面向对象方法与C++语言描述) - 殷人昆主编</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>我知道是不会有人点的，但万一有人想不开呢？！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Sun Dongxu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Data-Structure/" rel="tag"><i class="fa fa-tag"></i> Data Structure</a>
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+            <a href="/tags/Stack/" rel="tag"><i class="fa fa-tag"></i> Stack</a>
+          
+            <a href="/tags/Queue/" rel="tag"><i class="fa fa-tag"></i> Queue</a>
+          
+            <a href="/tags/Priority-Queue/" rel="tag"><i class="fa fa-tag"></i> Priority Queue</a>
+          
+            <a href="/tags/Heap/" rel="tag"><i class="fa fa-tag"></i> Heap</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/04/23/Algorithm/Algorithm/binary-tree-traversal/" rel="next" title="常见算法之二叉树遍历">
+                <i class="fa fa-chevron-left"></i> 常见算法之二叉树遍历
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/05/12/Algorithm/Algorithm/primer/" rel="prev" title="素数筛选算法">
+                素数筛选算法 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59f1e74daa26cba5" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments"></div>
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='/lib/Valine.min.js'></script>
+    <script>
+        new Valine({
+            av: AV,
+            el: '.comments' ,
+            verify: true,
+            app_id: '',
+            app_key: '',
+            placeholder: 'Welcome to teach me something!'
+        });
+    </script>
+    
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/la.png"
+                alt="Sun Dongxu" />
+            
+              <p class="site-author-name" itemprop="name">Sun Dongxu</p>
+              <p class="site-description motion-element" itemprop="description">Consistency refines Efficiency.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/sundongxu" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/sun-dong-xu-6/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/2864802550" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.cnblogs.com/burningTheStar" title="秋波园" target="_blank">秋波园</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全文概要"><span class="nav-number">1.</span> <span class="nav-text">全文概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#栈-Stack"><span class="nav-number">2.</span> <span class="nav-text">栈(Stack)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#顺序栈-Sequence-Stack"><span class="nav-number">2.1.</span> <span class="nav-text">顺序栈(Sequence Stack)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#链式栈-Link-Stack"><span class="nav-number">2.2.</span> <span class="nav-text">链式栈(Link Stack)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#队列-Queue"><span class="nav-number">3.</span> <span class="nav-text">队列(Queue)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#链队列-Link-Queue"><span class="nav-number">3.1.</span> <span class="nav-text">链队列(Link Queue)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#循环队列-Circular-Queue"><span class="nav-number">3.2.</span> <span class="nav-text">循环队列(Circular Queue)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#优先级队列-Priority-Queue"><span class="nav-number">4.</span> <span class="nav-text">优先级队列(Priority Queue)</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#堆-Heap"><span class="nav-number">5.</span> <span class="nav-text">堆(Heap)</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最小堆"><span class="nav-number">5.1.</span> <span class="nav-text">最小堆</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#堆的构造"><span class="nav-number">5.1.1.</span> <span class="nav-text">堆的构造</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆的插入"><span class="nav-number">5.1.2.</span> <span class="nav-text">堆的插入</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#堆的删除"><span class="nav-number">5.1.3.</span> <span class="nav-text">堆的删除</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最大堆"><span class="nav-number">5.2.</span> <span class="nav-text">最大堆</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sun Dongxu</span>
+</div>
+
+
+  <div class="powered-by">
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    访客数  <span id="busuanzi_value_site_uv"></span></span>
+  <span class="post-meta-divider">|</span>
+  </div>
+
+  <div class="powered-by">
+    <i class="fa fa-bolt"></i><span id="busuanzi_container_site_pv">
+    点击量  <span id="busuanzi_value_site_pv"></span></span>
+  <span class="post-meta-divider">|</span>
+  </div>
+
+  <div class="powered-by">
+    
+      <span class="post-meta-item-icon">
+      <i class="fa fa-pencil"></i></span>
+      博客全站共
+      <span title="Site words total count">82.8k 字</span>
+    
+   </div>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.7-rc3/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'GahxsYhy86LRoRJ6jNOKbsjd-gzGzoHsz',
+        app_key: '3LFhgQbpJqib03QEIBwCbAN4',
+        placeholder: ''
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("YGwn9ugsopQVcGsCsO02SAak-gzGzoHsz", "lpK3dw1VUUeKtFIouqwCMjuz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>

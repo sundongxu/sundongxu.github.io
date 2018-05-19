@@ -1,0 +1,2229 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Algorithm,C++,LeetCode," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Sun Dongxu's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="全文概要算法修炼，结构通透，逻辑分明。滴水穿石，非一日之功。">
+<meta name="keywords" content="Algorithm,C++,LeetCode">
+<meta property="og:type" content="article">
+<meta property="og:title" content="LeetCode 刷题纪要">
+<meta property="og:url" content="dongdongdong.me/2018/03/28/Algorithm/LeetCode/memo/index.html">
+<meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
+<meta property="og:description" content="全文概要算法修炼，结构通透，逻辑分明。滴水穿石，非一日之功。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-04-30T09:31:06.915Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="LeetCode 刷题纪要">
+<meta name="twitter:description" content="全文概要算法修炼，结构通透，逻辑分明。滴水穿石，非一日之功。">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="dongdongdong.me/2018/03/28/Algorithm/LeetCode/memo/"/>
+
+
+
+
+
+  <title>LeetCode 刷题纪要 | Sun Dongxu's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6b59978ef5e74a1232a0ca20456b8fda";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+      <a href="https://github.com/sundongxu"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sun Dongxu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Reorganizing the Organization, Rebuilding the Building.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="dongdongdong.me/2018/03/28/Algorithm/LeetCode/memo/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sun Dongxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/la.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sun Dongxu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">LeetCode 刷题纪要</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-28T12:12:12+08:00">
+                2018-03-28
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Algorithm/" itemprop="url" rel="index">
+                    <span itemprop="name">Algorithm</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/03/28/Algorithm/LeetCode/memo/" class="leancloud_visitors" data-flag-title="LeetCode 刷题纪要">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  452
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  3
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="全文概要"><a href="#全文概要" class="headerlink" title="全文概要"></a>全文概要</h2><p>算法修炼，结构通透，逻辑分明。<br>滴水穿石，非一日之功。<br><a id="more"></a></p>
+<h2 id="1st-Round"><a href="#1st-Round" class="headerlink" title="1st Round"></a>1st Round</h2><h3 id="Day1"><a href="#Day1" class="headerlink" title="Day1"></a>Day1</h3><hr>
+<p><strong>2018-03-23, Sunny.</strong><br><strong>7 Problems Finished.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">No</th>
+<th style="text-align:center">Title</th>
+<th style="text-align:center">Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">1</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/1-TwoSum.cc" target="_blank" rel="noopener"><strong>Two Sum</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">7</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/7-ReverseInteger.cc" target="_blank" rel="noopener"><strong>Reverse Integer</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">9</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/9-PalindromeNumber.cc" target="_blank" rel="noopener"><strong>Palindrome Number</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">13</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/13-RomanToInteger.cc" target="_blank" rel="noopener"><strong>Roman to Integer</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">14</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/14-LongestCommonPrefix.cc" target="_blank" rel="noopener"><strong>Longest Common Prefix</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">39</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/39-CombinationSum.cc" target="_blank" rel="noopener"><strong>Combination Sum(DFS)</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">593</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/593-ValidSquare.cc" target="_blank" rel="noopener"><strong>Valid Square</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Day2"><a href="#Day2" class="headerlink" title="Day2"></a>Day2</h3><hr>
+<p><strong>2018-03-24, Wild.</strong><br><strong>10 Problems Finished.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">No</th>
+<th style="text-align:center">Title</th>
+<th style="text-align:center">Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">8</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/8-StringToIntegerAToI.cc" target="_blank" rel="noopener"><strong>String To Integer(atoi</strong>)</a></td>
+<td style="text-align:center">Meidum</td>
+</tr>
+<tr>
+<td style="text-align:center">21</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/21-MergeTwoSortedLists.cc" target="_blank" rel="noopener"><strong>Merge Two Sorted Lists</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">23</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Hard/23-MergeKSortedLists.cc" target="_blank" rel="noopener"><strong>Merge K Sorted Lists</strong></a></td>
+<td style="text-align:center">hard</td>
+</tr>
+<tr>
+<td style="text-align:center">26</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/26-RemoveDuplicatesFromSortedArray.cc" target="_blank" rel="noopener"><strong>Remove Duplicates From Sorted Array</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">27</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/27-RemoveElement.cc" target="_blank" rel="noopener"><strong>Remove Element</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">28</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/28-ImplementStrstr.cc" target="_blank" rel="noopener"><strong>Implement strStr</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">80</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/80-RemoveDuplicatesFromSortedArray2.cc" target="_blank" rel="noopener"><strong>Remove Duplicates From Sorted Array(2)</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">88</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/88-MergeSortedArray.cc" target="_blank" rel="noopener"><strong>Merge Sorted Array</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">168</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/168-ExcelSheetColumnTitle.cc" target="_blank" rel="noopener"><strong>Excel Sheet Column Title</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">171</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/171-ExcelSheetColumnNumber.cc" target="_blank" rel="noopener"><strong>Exvel Sheet Column Number</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+</tbody>
+</table>
+<p><strong>some tip</strong>: <a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/trick_sync_with_stdio.cc" target="_blank" rel="noopener"><strong>trick_sync_with_stdio.cc</strong></a></p>
+<h3 id="Day3"><a href="#Day3" class="headerlink" title="Day3"></a>Day3</h3><hr>
+<p><strong>2018-03-26, Hot.</strong><br><strong>15 Problems Finished.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">No</th>
+<th style="text-align:center">Title</th>
+<th style="text-align:center">Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">2</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/2-AddTwoNumbers.cc" target="_blank" rel="noopener"><strong>Add Two Numbers</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">34</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/34-SearchForARange.cc" target="_blank" rel="noopener"><strong>Search For A Range</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">35</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/35-SearchInsertPosition.cc" target="_blank" rel="noopener"><strong>Search Insert Position</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">38</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/38-CountAndSay.cc" target="_blank" rel="noopener"><strong>Count And Say</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">50</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/50-Pow.cc" target="_blank" rel="noopener"><strong>Pow</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">53</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/53-MaximumSubArray.cc" target="_blank" rel="noopener"><strong>Maximum SubArray</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">58</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/58-LengthOfLastWord.cc" target="_blank" rel="noopener"><strong>Length Of Last Word</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">64</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/64-MinimumPathSum.cc" target="_blank" rel="noopener"><strong>Minimum Path Sum</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">66</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/66-PlusOne.cc" target="_blank" rel="noopener"><strong>Plus One</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">67</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/67-AddBinary.cc" target="_blank" rel="noopener"><strong>Add Binary</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">69</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/69-Sqrt.cc" target="_blank" rel="noopener"><strong>Sqrt</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">70</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/70-ClimbingStairs.cc" target="_blank" rel="noopener"><strong>Climbing Stairs</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">112</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/112-PathSum.cc" target="_blank" rel="noopener"><strong>Path Sum</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">113</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/113-PathSum2.cc" target="_blank" rel="noopener"><strong>Path Sum(2)</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">120</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/120-Triangle.cc" target="_blank" rel="noopener"><strong>Triangle</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Day4"><a href="#Day4" class="headerlink" title="Day4"></a>Day4</h3><hr>
+<p><strong>2018-03-27, Hot.</strong><br><strong>8 Problems Finished.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">No</th>
+<th style="text-align:center">Title</th>
+<th style="text-align:center">Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">83</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/83-RemoveDuplicatesFromSortedList.cc" target="_blank" rel="noopener"><strong>Remove Duplicates From Sorted List</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">94</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/94-BinaryTreeInorderTraversal.cc" target="_blank" rel="noopener"><strong>Binary Tree Inorder Traversal</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">144</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/144-BinaryTreePreorderTraversal.cc" target="_blank" rel="noopener"><strong>Binary Tree Preorder Traversal</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">145</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Hard/145-BinaryTreePostorderTraversal.cc" target="_blank" rel="noopener"><strong>Binary Tree Postorder Traversal</strong></a></td>
+<td style="text-align:center">Hard</td>
+</tr>
+<tr>
+<td style="text-align:center">102</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/102-BinaryTreeLevelOrderTraversal.cc" target="_blank" rel="noopener"><strong>Binary Tree Level Order Traversal</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">107</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/107-BinaryTreeLevelOrderTraversal2.cc" target="_blank" rel="noopener"><strong>Binary Tree Level Order Traversal(2)</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">100</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/100-SameTree.cc" target="_blank" rel="noopener"><strong>Same Tree</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">101</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/101-SymmetricTree.cc" target="_blank" rel="noopener"><strong>SymmetricTree</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Day5"><a href="#Day5" class="headerlink" title="Day5"></a>Day5</h3><hr>
+<p><strong>2018-03-28, Too Hot.</strong><br><strong>8 Problems Finished.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">No</th>
+<th style="text-align:center">Title</th>
+<th style="text-align:center">Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">11</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/11-ContainerWithMostWater.cc" target="_blank" rel="noopener"><strong>Container With Most Water</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">62</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/62-UniquePath.cc" target="_blank" rel="noopener"><strong>Unique Path</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">104</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/104-MaximumDepthOfBinaryTree.cc" target="_blank" rel="noopener"><strong>Maximum Depth Of Binary Tree</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">110</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/110-BalancedBinaryTree.cc" target="_blank" rel="noopener"><strong>Balanced Binary Tree</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">111</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/111-MinimumDepthOfBinaryTree.cc" target="_blank" rel="noopener"><strong>Minimum Depth Of Binary Tree</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">114</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/114-FlattenBinaryTreeToLinkedList.cc" target="_blank" rel="noopener"><strong>Flatten Binary Tree To LinkedList</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">118</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/118-PascalTriangle.cc" target="_blank" rel="noopener"><strong>Pascal Triangle</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">617</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/617-MergeTwoBinaryTrees.cc" target="_blank" rel="noopener"><strong>Merge Two Binary Trees</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Day6"><a href="#Day6" class="headerlink" title="Day6"></a>Day6</h3><hr>
+<p><strong>2018-04-01, Wild.</strong><br><strong>11 Problems Finished.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">No</th>
+<th style="text-align:center">Title</th>
+<th style="text-align:center">Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">15</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/15-3Sum.cc" target="_blank" rel="noopener"><strong>3 Sum</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">16</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/16-3SumClosest.cc" target="_blank" rel="noopener"><strong>3 Sum Closest</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">18</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/18-4Sum.cc" target="_blank" rel="noopener"><strong>4 Sum</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">24</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/24-SwapNodesInPairs.cc" target="_blank" rel="noopener"><strong>Swap Nodes In Pairs</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">25</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Hard/25-ReverseNodesInKGroup.cc" target="_blank" rel="noopener"><strong>Reverse Nodes In K-Group</strong></a></td>
+<td style="text-align:center">Hard</td>
+</tr>
+<tr>
+<td style="text-align:center">61</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/61-RotateList.cc" target="_blank" rel="noopener"><strong>Rotate List</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">86</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/86-PartitionList.cc" target="_blank" rel="noopener"><strong>Partition List</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">92</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/92-ReverseLinkedList2.cc" target="_blank" rel="noopener"><strong>Reverse Linked List(2)</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">147</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/147-InsertionSortList.cc" target="_blank" rel="noopener"><strong>Insertion Sort List</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">148</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/148-SortList.cc" target="_blank" rel="noopener"><strong>Sort List</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">206</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/206-ReverseLinkedList.cc" target="_blank" rel="noopener"><strong>Reverse Linked List</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Day7"><a href="#Day7" class="headerlink" title="Day7"></a>Day7</h3><hr>
+<p><strong>2018-04-02, Wild.</strong><br><strong>12 Problems Finished.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">No</th>
+<th style="text-align:center">Title</th>
+<th style="text-align:center">Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">121</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/121-BestTimeToBuyAndSellStock.cc" target="_blank" rel="noopener"><strong>Best Time To Buy And Sell Stock</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">122</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/122-BestTimeToBuyAndSellStock2.cc" target="_blank" rel="noopener"><strong>Best Time To Buy And Sell Stock(2)</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">123</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Hard/123-BestTimeToBuyAndSellStock3.cc" target="_blank" rel="noopener"><strong>Best Time To Buy And Sell Stock(3)</strong></a></td>
+<td style="text-align:center">Hard</td>
+</tr>
+<tr>
+<td style="text-align:center">125</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/125-ValidPalindrome.cc" target="_blank" rel="noopener"><strong>Valid Palindrome</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">136</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/136-SingleNumber.cc" target="_blank" rel="noopener"><strong>Single Number</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">137</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/137-SingleNumber2.cc" target="_blank" rel="noopener"><strong>SingleNumber2</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">141</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/141-LinkedListCycle.cc" target="_blank" rel="noopener"><strong>Linked List Cycle</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">142</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/142-LinkedListCycle2.cc" target="_blank" rel="noopener"><strong>Linked List Cycle(2)</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">155</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/155-MinStack.cc" target="_blank" rel="noopener"><strong>Min Stack</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">159</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/159-MajorityElement.cc" target="_blank" rel="noopener"><strong>Majority Element</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">160</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/160-IntersectionOfTwoLinkedList.cc" target="_blank" rel="noopener"><strong>Intersection Of Two Linked List</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">172</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/172-FactorialTrailingZeroes.cc" target="_blank" rel="noopener"><strong>Factorial Trailing Zeroes</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Day8"><a href="#Day8" class="headerlink" title="Day8"></a>Day8</h3><hr>
+<p><strong>2018-04-03, Cool.</strong><br><strong>6 Problems Finished.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">No</th>
+<th style="text-align:center">Title</th>
+<th style="text-align:center">Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">189</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/189-RotateArray.cc" target="_blank" rel="noopener"><strong>Rotate Array</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">190</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/190-ReverseBits.cc" target="_blank" rel="noopener"><strong>Reverse Bits</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">191</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/191-NumberOfOneBits.cc" target="_blank" rel="noopener"><strong>Number Of One Bits</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">198</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/198-HouseRobber.cc" target="_blank" rel="noopener"><strong>House Robber</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">213</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/213-HouseRobber2.cc" target="_blank" rel="noopener"><strong>House Robber(2)</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">231</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/231-PowerOfTwo.cc" target="_blank" rel="noopener"><strong>Power Of Two</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Day9"><a href="#Day9" class="headerlink" title="Day9"></a>Day9</h3><hr>
+<p><strong>2018-04-09, Sunny.</strong><br><strong>14 Problems Finished.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">No</th>
+<th style="text-align:center">Title</th>
+<th style="text-align:center">Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">3</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/3-LongestSubstringWithoutRepeatingCharacters.cc" target="_blank" rel="noopener"><strong>Longest Substring Without Repeating Characters</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">5</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/5-LongestPalindromicSubstring.cc" target="_blank" rel="noopener"><strong>Longest Palindromic Substring</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">6</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/6-ZigZagConversion.cc" target="_blank" rel="noopener"><strong>Zigzag Conversion</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">17</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/17-LetterCombinationOfAPhoneNumber.cc" target="_blank" rel="noopener"><strong>Letter Combination Of A Phone Number</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">19</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/19-RemoveNthNodeFromEndOfList.cc" target="_blank" rel="noopener"><strong>Remove Nth Node From End of List</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">22</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/22-GenerateParentheses.cc" target="_blank" rel="noopener"><strong>Generate Parentheses</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">29</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/29-DivideTwoIntegers.cc" target="_blank" rel="noopener"><strong>Divide Two Integers</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">31</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/31-NextPermutation.cc" target="_blank" rel="noopener"><strong>Next Permutation</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">103</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/103-BinaryTreeZigzagLevelOrderTraversal.cc" target="_blank" rel="noopener"><strong>Binary Tree Zigzag Level Order Traversal</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">116</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/116-PoplulatingNextRightPointersInEachNode.cc" target="_blank" rel="noopener"><strong>Populating Next Right Pointers In Each Node</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">117</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/117-PopulatingNextRightPointersInEachNode2.cc" target="_blank" rel="noopener"><strong>Populating Next Right Pointers In Each Node(2)</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">192</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/192-WordFrequency.cc" target="_blank" rel="noopener"><strong>Word Frequecy</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">215</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/215-KthLargestElementInAnArray.cc" target="_blank" rel="noopener"><strong>Kth Largest Element In An Array</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">347</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/347-TopKFrequentElements.cc" target="_blank" rel="noopener"><strong>Top K Frequent Elements</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Day10"><a href="#Day10" class="headerlink" title="Day10"></a>Day10</h3><hr>
+<p><strong>2018-04-10, Hot.</strong><br><strong>6 Problems Finished.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">No</th>
+<th style="text-align:center">Title</th>
+<th style="text-align:center">Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">10</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Hard/10-RegularExpressionMatching.cc" target="_blank" rel="noopener"><strong>Regular Expression Matching</strong></a></td>
+<td style="text-align:center">Hard</td>
+</tr>
+<tr>
+<td style="text-align:center">44</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Hard/44-WildcardMatching.cc" target="_blank" rel="noopener"><strong>Wildcard Matching</strong></a></td>
+<td style="text-align:center">Hard</td>
+</tr>
+<tr>
+<td style="text-align:center">371</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/371-SumOfTwoIntegers.cc" target="_blank" rel="noopener"><strong>Sum Of Two Integers</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">434</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/434-NumberOfSegmentsInAString.cc" target="_blank" rel="noopener"><strong>Number Of Segments In A String</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">459</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/459-RepeatedSubstringPattern.cc" target="_blank" rel="noopener"><strong>Repeated Substring Pattern</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+<tr>
+<td style="text-align:center">686</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Easy/686-RepeatedStringMatch.cc" target="_blank" rel="noopener"><strong>Repeated String Match</strong></a></td>
+<td style="text-align:center">Easy</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Day11"><a href="#Day11" class="headerlink" title="Day11"></a>Day11</h3><hr>
+<p><strong>2018-04-14, Hot.</strong><br><strong>10 Problems Finished.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">No</th>
+<th style="text-align:center">Title</th>
+<th style="text-align:center">Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">33</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/33-SearchInRotatedSortedArray.cc" target="_blank" rel="noopener"><strong>Search In Rotated Sorted Array</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">36</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/36-ValidSudoku.cc" target="_blank" rel="noopener"><strong>Valid Sudoku</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">43</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/43-MultiplyStrings.cc" target="_blank" rel="noopener"><strong>Multiply Strings</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">46</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/46-Permutations.cc" target="_blank" rel="noopener"><strong>Permutations</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">47</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/47-Permutations2.cc" target="_blank" rel="noopener"><strong>Permutations(2)</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">48</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/48-RotateImage.cc" target="_blank" rel="noopener"><strong>Rotate Image</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">60</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/60-PermutationSequence.cc" target="_blank" rel="noopener"><strong>Permutation Sequence</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">77</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/77-Combinations.cc" target="_blank" rel="noopener"><strong>Combinations</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">81</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/81-SearchInRotatedSortedArray2.cc" target="_blank" rel="noopener"><strong>Search In Rotated Sorted Array(2)</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">153</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/153-FindMinimumInRotatedSortedArray.cc" target="_blank" rel="noopener"><strong>Find Minimum In Rotated Sorted Array</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Day12"><a href="#Day12" class="headerlink" title="Day12"></a>Day12</h3><hr>
+<p><strong>2018-04-15, Hot.</strong><br><strong>12 Problems Finished.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">No</th>
+<th style="text-align:center">Title</th>
+<th style="text-align:center">Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">49</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/49-GroupAnagrams.cc" target="_blank" rel="noopener"><strong>Group Anagrams</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">54</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/54-SpiralMatrix.cc" target="_blank" rel="noopener"><strong>Spiral Matrix</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">55</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/55-JumpGame.cc" target="_blank" rel="noopener"><strong>Jump Game</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">56</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/56-MergeIntervals.cc" target="_blank" rel="noopener"><strong>Merge Intervals</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">57</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Hard/57-InsertInterval.cc" target="_blank" rel="noopener"><strong>Insert Interval</strong></a></td>
+<td style="text-align:center">Hard</td>
+</tr>
+<tr>
+<td style="text-align:center">59</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/59-SpiralMatrix2.cc" target="_blank" rel="noopener"><strong>Spiral Matrix(2)</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">63</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/63-UniquePath2.cc" target="_blank" rel="noopener"><strong>Unique Path(2)</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">71</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/71-SimplifyPath.cc" target="_blank" rel="noopener"><strong>Simplify Path</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">73</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/73-SetMatrixZeroes.cc" target="_blank" rel="noopener"><strong>Set Matrix Zeroes</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">289</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/289-GameOfLife.cc" target="_blank" rel="noopener"><strong>Game Of Life</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">365</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/365-WaterAndJugProblem.cc" target="_blank" rel="noopener"><strong>Water And Jug Problem</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">786</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Hard/786-KthSmallestPrimeFraction.cc" target="_blank" rel="noopener"><strong>Kth Smallest Prime Fraction</strong></a></td>
+<td style="text-align:center">Hard</td>
+</tr>
+<tr>
+<td style="text-align:center">59</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/59-SpiralMatrix2.cc" target="_blank" rel="noopener"><strong>Spiral Matrix(2)</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+</tbody>
+</table>
+<h3 id="Day13"><a href="#Day13" class="headerlink" title="Day13"></a>Day13</h3><hr>
+<p><strong>2018-04-21, Cool.</strong><br><strong>10 Problems Finished.</strong></p>
+<table>
+<thead>
+<tr>
+<th style="text-align:center">No</th>
+<th style="text-align:center">Title</th>
+<th style="text-align:center">Difficulty</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:center">74</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/74-SearchA2DMatrix.cc" target="_blank" rel="noopener"><strong>Search A 2D Matrix</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">75</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/75-SortColors.cc" target="_blank" rel="noopener"><strong>Sort Colors</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">78</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/78-Subsets.cc" target="_blank" rel="noopener"><strong>Subsets</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">79</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/79-WordSearch.cc" target="_blank" rel="noopener"><strong>Word Search</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">82</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/82-RemoveDuplicatesFromSortedList2.cc" target="_blank" rel="noopener"><strong>Remove Duplicates From Sorted List(2)</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">89</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/89-GrayCode.cc" target="_blank" rel="noopener"><strong>GrayCode</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">90</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/90-Subsets2.cc" target="_blank" rel="noopener"><strong>Subsets(2)</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">146</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Hard/146-LRUCache.cc" target="_blank" rel="noopener"><strong>LRUCache</strong></a></td>
+<td style="text-align:center">Hard</td>
+</tr>
+<tr>
+<td style="text-align:center">373</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/373-FindKPairsWithSmallestSums.cc" target="_blank" rel="noopener"><strong>Find K Pairs With Smallest Sums</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+<tr>
+<td style="text-align:center">378</td>
+<td style="text-align:center"><a href="https://github.com/sundongxu/LeetCode/blob/master/Difficulty/Medium/378-KthSmallestElementInASortedMatrix.cc" target="_blank" rel="noopener"><strong>Kth Smallest Element In A Sorted Matrix</strong></a></td>
+<td style="text-align:center">Medium</td>
+</tr>
+</tbody>
+</table>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>我知道是不会有人点的，但万一有人想不开呢？！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Sun Dongxu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Algorithm/" rel="tag"><i class="fa fa-tag"></i> Algorithm</a>
+          
+            <a href="/tags/C/" rel="tag"><i class="fa fa-tag"></i> C++</a>
+          
+            <a href="/tags/LeetCode/" rel="tag"><i class="fa fa-tag"></i> LeetCode</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/31/OS/Installation/Ubuntu/ladder/" rel="next" title="Shadowsocks 搭梯全教程">
+                <i class="fa fa-chevron-left"></i> Shadowsocks 搭梯全教程
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/04/11/Algorithm/DataStructure/linear-list/" rel="prev" title="数据结构之线性表">
+                数据结构之线性表 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59f1e74daa26cba5" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments"></div>
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='/lib/Valine.min.js'></script>
+    <script>
+        new Valine({
+            av: AV,
+            el: '.comments' ,
+            verify: true,
+            app_id: '',
+            app_key: '',
+            placeholder: 'Welcome to teach me something!'
+        });
+    </script>
+    
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/la.png"
+                alt="Sun Dongxu" />
+            
+              <p class="site-author-name" itemprop="name">Sun Dongxu</p>
+              <p class="site-description motion-element" itemprop="description">Consistency refines Efficiency.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/sundongxu" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/sun-dong-xu-6/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/2864802550" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.cnblogs.com/burningTheStar" title="秋波园" target="_blank">秋波园</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全文概要"><span class="nav-number">1.</span> <span class="nav-text">全文概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#1st-Round"><span class="nav-number">2.</span> <span class="nav-text">1st Round</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Day1"><span class="nav-number">2.1.</span> <span class="nav-text">Day1</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day2"><span class="nav-number">2.2.</span> <span class="nav-text">Day2</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day3"><span class="nav-number">2.3.</span> <span class="nav-text">Day3</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day4"><span class="nav-number">2.4.</span> <span class="nav-text">Day4</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day5"><span class="nav-number">2.5.</span> <span class="nav-text">Day5</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day6"><span class="nav-number">2.6.</span> <span class="nav-text">Day6</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day7"><span class="nav-number">2.7.</span> <span class="nav-text">Day7</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day8"><span class="nav-number">2.8.</span> <span class="nav-text">Day8</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day9"><span class="nav-number">2.9.</span> <span class="nav-text">Day9</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day10"><span class="nav-number">2.10.</span> <span class="nav-text">Day10</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day11"><span class="nav-number">2.11.</span> <span class="nav-text">Day11</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day12"><span class="nav-number">2.12.</span> <span class="nav-text">Day12</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Day13"><span class="nav-number">2.13.</span> <span class="nav-text">Day13</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sun Dongxu</span>
+</div>
+
+
+  <div class="powered-by">
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    访客数  <span id="busuanzi_value_site_uv"></span></span>
+  <span class="post-meta-divider">|</span>
+  </div>
+
+  <div class="powered-by">
+    <i class="fa fa-bolt"></i><span id="busuanzi_container_site_pv">
+    点击量  <span id="busuanzi_value_site_pv"></span></span>
+  <span class="post-meta-divider">|</span>
+  </div>
+
+  <div class="powered-by">
+    
+      <span class="post-meta-item-icon">
+      <i class="fa fa-pencil"></i></span>
+      博客全站共
+      <span title="Site words total count">82.8k 字</span>
+    
+   </div>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.7-rc3/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'GahxsYhy86LRoRJ6jNOKbsjd-gzGzoHsz',
+        app_key: '3LFhgQbpJqib03QEIBwCbAN4',
+        placeholder: ''
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("YGwn9ugsopQVcGsCsO02SAak-gzGzoHsz", "lpK3dw1VUUeKtFIouqwCMjuz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>

@@ -1,0 +1,1512 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Measurement,NSDI,End-Host,Packet-Level," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Sun Dongxu's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="全文概要NSDI 2014年中，由斯坦福大学”SDN之父”，Nick Mckeown教授带领的实验室发表了题为《I Know What Yout Packet Did Last Hop: Using Packet Histories to Troubleshoot Networks》的论文。基于本文设计的NetSight系统，运行在端系统之上，并利用已有的OpenFlow交换机的功能特性，实现了P">
+<meta name="keywords" content="Measurement,NSDI,End-Host,Packet-Level">
+<meta property="og:type" content="article">
+<meta property="og:title" content="网络测量之NetSight(NSDI 14)">
+<meta property="og:url" content="dongdongdong.me/2018/05/18/Network/Measurement/related-work-netsight/index.html">
+<meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
+<meta property="og:description" content="全文概要NSDI 2014年中，由斯坦福大学”SDN之父”，Nick Mckeown教授带领的实验室发表了题为《I Know What Yout Packet Did Last Hop: Using Packet Histories to Troubleshoot Networks》的论文。基于本文设计的NetSight系统，运行在端系统之上，并利用已有的OpenFlow交换机的功能特性，实现了P">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-netsight/architecture.png">
+<meta property="og:updated_time" content="2018-05-19T08:35:21.151Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="网络测量之NetSight(NSDI 14)">
+<meta name="twitter:description" content="全文概要NSDI 2014年中，由斯坦福大学”SDN之父”，Nick Mckeown教授带领的实验室发表了题为《I Know What Yout Packet Did Last Hop: Using Packet Histories to Troubleshoot Networks》的论文。基于本文设计的NetSight系统，运行在端系统之上，并利用已有的OpenFlow交换机的功能特性，实现了P">
+<meta name="twitter:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-netsight/architecture.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="dongdongdong.me/2018/05/18/Network/Measurement/related-work-netsight/"/>
+
+
+
+
+
+  <title>网络测量之NetSight(NSDI 14) | Sun Dongxu's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6b59978ef5e74a1232a0ca20456b8fda";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+      <a href="https://github.com/sundongxu"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sun Dongxu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Reorganizing the Organization, Rebuilding the Building.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="dongdongdong.me/2018/05/18/Network/Measurement/related-work-netsight/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sun Dongxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/la.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sun Dongxu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">网络测量之NetSight(NSDI 14)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-18T15:00:00+08:00">
+                2018-05-18
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Network/" itemprop="url" rel="index">
+                    <span itemprop="name">Network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/05/18/Network/Measurement/related-work-netsight/" class="leancloud_visitors" data-flag-title="网络测量之NetSight(NSDI 14)">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  3,549
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  13
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="全文概要"><a href="#全文概要" class="headerlink" title="全文概要"></a>全文概要</h2><p><a href="https://www.usenix.org/conference/nsdi14" target="_blank" rel="noopener"><strong>NSDI 2014</strong></a>年中，由斯坦福大学”SDN之父”，<strong>Nick Mckeown</strong>教授带领的实验室发表了题为《I Know What Yout Packet Did Last Hop: Using Packet Histories to Troubleshoot Networks》的论文。基于本文设计的<strong>NetSight</strong>系统，运行在端系统之上，并利用已有的<strong>OpenFlow</strong>交换机的功能特性，实现了<strong>Packet-Level</strong>的网络数据监测。本文尝试概述了该系统的核心思想，作为网络测量领域相关工作的一次备忘。<br><a id="more"></a></p>
+<h2 id="Paper"><a href="#Paper" class="headerlink" title="Paper"></a>Paper</h2><hr>
+<p>Proposed in <a href="https://www.usenix.org/conference/nsdi14" target="_blank" rel="noopener">NSDI.2014</a><br>-<a href="https://www.usenix.org/system/files/conference/nsdi14/nsdi14-paper-handigol.pdf" target="_blank" rel="noopener"><strong>《I Know What Yout Packet Did Last Hop: Using Packet Histories to Troubleshoot Networks》</strong></a></p>
+<h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><hr>
+<p>在网络中的每一个数据包流经的每一跳都会为该数据包产生一个称作<strong>Postcard</strong>的日志条目(包含Switch ID、输出端口号以及转发状态的版本号)，并发送至服务器集群，在集群内部实现负载均衡(压缩-&gt;洗牌-&gt;解压)，对于某个数据包，其<strong>Postcard</strong>最终会被发送至同一个服务器进行处理，在该服务器处，关于此数据包的全部<strong>Postcard</strong>会被根据网络拓扑信息组装成为<strong>Packet History</strong>并作持久化存储，它将可以回答所有关于此数据包在网络中的经历的问题。网络用户基于<strong>NetSight</strong>提供的API开发用于调试的各类应用程序，将其所关注的网络事件或行为通过文中提出的<strong>Packet History Filter(PHF)</strong>进行表达，并在已有的<strong>Packet History</strong>处执行查询匹配(分为实时的(Live)和历史的(Historical))，以获知网络事件是否发生。</p>
+<h2 id="Terminology"><a href="#Terminology" class="headerlink" title="Terminology"></a>Terminology</h2><hr>
+<p>① <strong>Packet History</strong> 定义如下：</p>
+<blockquote>
+<p>The route a packet takes through a network plus the switch state and header mofification it encounters at each hop.</p>
+</blockquote>
+<p>即<strong>数据包历史</strong>，包含该数据包流经网络采用的路由(路径)，和它在经过每一跳(交换机)时，交换机的状态以及在本跳受到的首部修改情况。<br><strong>Packet History</strong>反映了该<strong>Packet</strong>在网络中的“种种遭遇”，它提供给我们如下信息：</p>
+<ul>
+<li><strong>What</strong> the packet looked like as it entered the network (Headers)</li>
+<li><strong>Where</strong> the packet was forwarded (Switches + Ports)</li>
+<li><strong>How</strong> it was changed (Header Modification)</li>
+<li><strong>Why</strong> is was forwarded that way (Matched Flow/Actions + Flow Table)</li>
+</ul>
+<p>② <strong>Packet History Filter(PHF)</strong>：一种类似正则表达式的语言，可十分方便简洁地为所关注的数据包历史指定需匹配的 <strong>数据包路径</strong>、<strong>交换机状态</strong>和<strong>数据包首部字段</strong>。</p>
+<p>③ <strong>Postcard</strong>：每个数据包在流经每个交换机时，都会生成一个称作 <strong>Postcard</strong> 的事件记录，它是包括数据包首部、交换机ID、输出端口号以及交换机转发状态的版本号等信息的一个拷贝。最终，同一个数据包流经各个交换机时产生的<strong>Postcard</strong>都在同一台处理服务器处，根据事先知道的网络拓扑信息，重新组装成为一个关于此数据包的<strong>Packet History</strong>，用于匹配用户查询。</p>
+<p>④ <strong>Postcard Filter(PF)</strong>：<strong>PHF</strong>语言中的原子元素(最小元素)，用于在某一跳处匹配一个数据包。<strong>PF</strong>实际上是以下字段过滤器的联合：数据包首部、交换机ID(数据路径ID，dpid)、输入端口号(inport)、输出端口号(outport)和该数据包“遭遇”的交换机状态(用一个版本号表示，version)。<strong>PF</strong>可写作如下形式：</p>
+<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--bpf [<span class="keyword">not</span>] &lt;BPF&gt; --dpid [<span class="keyword">not</span>] &lt;<span class="keyword">switch</span> ID&gt; --inport [<span class="keyword">not</span>] &lt;<span class="keyword">input</span> port&gt; -- outport [<span class="keyword">not</span>] &lt;output port&gt; --version [<span class="keyword">not</span>] &lt;version&gt;</span><br></pre></td></tr></table></figure>
+<p><strong>BPF</strong>是Berkeley Packet Filter<strong>表达式。</strong>[not]<strong>是可选项，表示当前字段不可取后面的值。一个</strong>PF**至少应该包含上述字段的中的一个。</p>
+<p>例如：现要匹配一个数据包，它的源IP为A，中途经过交换机S，其中输入端口不能是P。对应PF可写作如下：</p>
+<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">--bpf</span> <span class="string">"ip src A"</span> <span class="built_in">--dpid</span> S <span class="built_in">--inport</span> <span class="string">not </span>P</span><br></pre></td></tr></table></figure>
+<h2 id="Challenge"><a href="#Challenge" class="headerlink" title="Challenge"></a>Challenge</h2><hr>
+<ol>
+<li><strong>Path Visibility</strong>，即<strong>路径可见性</strong>，我们必须以某种方式观察到并记录每个数据包采用的路径</li>
+<li><strong>State Visibility</strong>，即<strong>状态可见性</strong>，我们必须重新构建每个数据包在每一跳观察到的准确的交换机状态</li>
+<li><strong>Modification Visibility</strong>，即<strong>(首部)修改可见性</strong>，我们必须知道数据包在何处以及如何被修改</li>
+<li><strong>Collection Scale</strong>，即<strong>信息收集可扩展性</strong>，上述功能都必须在最大网络速率环境中正常运行</li>
+<li><strong>Storage Scale</strong>，即<strong>信息存储可扩展性</strong>，在某些时候，提供<strong>Packet History</strong>查询功能需要存储几乎所有信息</li>
+<li><strong>Processing Scale</strong>，即<strong>信息处理可扩展性</strong>，查询处理必须与信息收集与存储的速度相匹配</li>
+</ol>
+<h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><hr>
+<h3 id="ndb-Interactive-Network-Debugger"><a href="#ndb-Interactive-Network-Debugger" class="headerlink" title="ndb: Interactive Network Debugger"></a>ndb: Interactive Network Debugger</h3><hr>
+<p><strong>ndb</strong>是一种交互式的网络调试工具，允许网络应用开发者基于异常网络事件设置相应的<strong>PHF</strong>，一旦事件发生，返回得到的<strong>Packet History</strong>将会包含一系列的造成该异常事件的交换机转发事件，从而帮助诊断如下常见问题：</p>
+<ol>
+<li>Reachability Error(可达性错误)</li>
+<li>Race Condition(竞争条件)</li>
+<li>Incorrect Packet Modification(不正确的数据包修改)</li>
+</ol>
+<h3 id="netwatch-Live-Invariant-Monitor"><a href="#netwatch-Live-Invariant-Monitor" class="headerlink" title="netwatch: Live Invariant Monitor"></a>netwatch: Live Invariant Monitor</h3><hr>
+<p><strong>netwatch</strong>允许运维人员以不变体(不变式，invariant)的形式指明其所关注的网络行为，并在某数据包违反该不变式时触发警告。<br><strong>netwatch</strong>本质上是一个不变式的库，包含了各种用<strong>PHF</strong>写就的不变式，用于匹配违反不变式的数据包。一旦对应的<strong>PHF</strong>被推送至<strong>NetSight</strong>系统中并被下发配置完成后，回调(callback)就会将违反此不变式行为的<strong>Packet History</strong>返回。<br><strong>netwatch</strong>现能支持以下网络不变式：</p>
+<ol>
+<li>Isolation(通信区域隔离)</li>
+<li>Loop Freedom(无环路径)</li>
+<li>Waypoint Routing(路径点路由)</li>
+<li>Max Path Length(最大路径长度)</li>
+</ol>
+<h3 id="netshark-Network-wide-Path-Aware-Packet-Logger"><a href="#netshark-Network-wide-Path-Aware-Packet-Logger" class="headerlink" title="netshark: Network-wide Path-Aware Packet Logger"></a>netshark: Network-wide Path-Aware Packet Logger</h3><hr>
+<p><strong>netshark</strong>允许用户对整个<strong>Packet History</strong>设置过滤器，包括它们在每一跳的路径和首部字段值。<br><strong>netshark</strong>接受一个来自用户定义的<strong>PHF</strong>，返回匹配该查询的<strong>Packet History</strong>，它还包括一个<strong>wireshark</strong>组件用于解析收集到的结果。用户能够观察到某一跳处的数据包属性(包头字段值、交换机ID、输入/输出端口号和其所匹配的流表的版本号)，以及<strong>Packet History</strong>的属性(所属路径、所属路径长度等)。</p>
+<h3 id="nprof-Hierachial-Network-Profiler"><a href="#nprof-Hierachial-Network-Profiler" class="headerlink" title="nprof: Hierachial Network Profiler"></a>nprof: Hierachial Network Profiler</h3><hr>
+<p><strong>nprof</strong>帮助用户分析任意链路集合，以理解造成当前链路利用率情况的流量特征和路由决定。<br><strong>nprof</strong>会将收集到的<strong>Packet History</strong>与拓扑信息组合起来已提供一个生动的分层视图，表明是哪些交换机在发送流量给当前链路，以及流量大小。</p>
+<h2 id="Achitecture"><a href="#Achitecture" class="headerlink" title="Achitecture"></a>Achitecture</h2><hr>
+<img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-netsight/architecture.png">
+<p><strong>NetSight</strong>使用一个<strong>Central Coordinator</strong>来管理多个<strong>Worker(NetSight Server)</strong>。<strong>NetSight Application(应用程序)</strong>将基于<strong>PHF</strong>的钩子(Trigger)和查询发送至<strong>Coordinator</strong>，后者则将匹配得到的<strong>Packet History</strong>返回给前者。</p>
+<p><strong>Coordinator</strong>设置从<strong>Switch</strong>到<strong>NetSight Server</strong>的<strong>Postcard</strong>传输和从网络控制平面到<strong>Coordinator</strong>的<strong>State Change Record(状态变化记录)</strong>传输。</p>
+<p>最后，<strong>Coordinator</strong>会对其所管理的<strong>Worker</strong>们执行周期性的存活检测、查询与钩子的广播，并在组装<strong>Packet History</strong>时与之交换拓扑信息。</p>
+<h2 id="Work-Flow"><a href="#Work-Flow" class="headerlink" title="Work Flow"></a>Work Flow</h2><hr>
+<h3 id="Postcard-Generation"><a href="#Postcard-Generation" class="headerlink" title="Postcard Generation"></a>Postcard Generation</h3><hr>
+<blockquote>
+<p>Goal: Record all information relevant to a forwarding event and send for analysis.</p>
+</blockquote>
+<p>当一个数据包经过一个交换机时，交换机通过复制(<strong>Duplicate</strong>)该包生成一个<strong>Postcard</strong>，随后将其裁剪(<strong>Truncate</strong>)至最小包大小(<strong>Minimun Packet Size</strong>)，使用相关状态对其进行标记(<strong>Marking</strong>)，并将其转发(<strong>Forwarding</strong>)至<strong>NetSight Servers</strong>进行分析。</p>
+<h3 id="Postcard-Collection"><a href="#Postcard-Collection" class="headerlink" title="Postcard Collection"></a>Postcard Collection</h3><hr>
+<blockquote>
+<p>Goal: To send all postcards for a packet to one server, so that its packet history can be assembled.</p>
+</blockquote>
+<p>为了重建某一个数据包的<strong>History</strong>，<strong>NetSight</strong>需要在单个<strong>Server</strong>中收集到与该数据包相关的所有<strong>Postcard</strong>(一组<strong>Postcard</strong>)。而为了扩展集群的处理能力，<strong>NetSight</strong>需要确保这些<strong>Postcard</strong>组在集群服务器之间实现负载均衡，通过对数据包的<strong>Flow ID</strong>，即五元组(5-tuple:Src/Dest IP, Src/Dest Port, Protocol)进行哈希操作来确保局部性(同一个流的数据包的<strong>Postcard</strong>会被最终发往同一个服务器进行处理)。</p>
+<p>为实现负载均衡而执行的<strong>洗牌(Shuffle)</strong>过程，是基于时间划分的，每个时间段称作一个<strong>Round</strong>，只有在每一个<strong>Round</strong>末尾，服务器会将在这个<strong>Round</strong>时间段内收集到的<strong>Postcard</strong>发送至其通过<strong>Shuffle</strong>过程确定的最终目的地服务器，在那里等待被装配。</p>
+<p>而在<strong>Shuffle</strong>之前，利用相同流和相邻流之间的数据包在头部字段的冗余，还可实现<strong>Postcard</strong>的压缩处理，进一步减小<strong>Shuffling</strong>过程中的带宽开销。</p>
+<h3 id="History-Assembly"><a href="#History-Assembly" class="headerlink" title="History Assembly"></a>History Assembly</h3><hr>
+<blockquote>
+<p>Goal: To assemble packet histories from out-of-order postcards.</p>
+</blockquote>
+<p>在某台<strong>NetSight</strong>服务器上，由于从交换机发来数据不同的传播与排队时延(Propagation and Queuing Delay)，同一个数据包的<strong>Postcards</strong>很有可能是乱序到达的，在装配成<strong>History</strong>之前，<strong>NetSight</strong>会利用拓扑信息而非时间戳来将属于各个数据包的<strong>Postcards</strong>排好序。</p>
+<p>一旦某<strong>NetSight</strong>服务器从所有其它服务器上收到了某个数据包在全部<strong>Round</strong>时段的<strong>Postcards</strong>，它将会对这些<strong>Postcards</strong>执行解压缩，并将其合并至一个称作<strong>Path Table</strong>的数据结构中，该结构帮助将同一个数据包的全部<strong>Postcards</strong>组成成为一个组(<strong>Group</strong>)。为了标识某个数据包的全部<strong>Postcards</strong>，<strong>NetSight</strong>使用数据包中从不会被更改的头部字段，如<strong>IP ID</strong>、<strong>Fragment Offset</strong>和<strong>TCP Sequence Number</strong>等，组合成为一个新字段，叫作<strong>Packet ID</strong>，它可用来唯一标识某个流中的一个数据包。<strong>Path Table</strong>简单地采用<strong>Packet ID</strong>作为索引(<strong>Key</strong>)，而对应的值(<strong>Value</strong>)则为此数据包对应的全部<strong>Postcard</strong>组成的列表。</p>
+<p><strong>NetSight</strong>服务器随后会提取这些已组织好的<strong>Postcard</strong>组，一次提取一组，即一个数据包的全部<strong>Postcard</strong>信息，将其组装成为该数据包的<strong>Packet History</strong>。对于每一组，<strong>NetSight</strong>使用<strong>Switch ID</strong>和<strong>Output Port</strong>，以及实际的拓扑信息，对其执行拓扑排序。而最终排序好的<strong>Postcard</strong>列表即该数据包的<strong>Packet History</strong>。</p>
+<h3 id="Filter-Trigger"><a href="#Filter-Trigger" class="headerlink" title="Filter Trigger"></a>Filter Trigger</h3><hr>
+<blockquote>
+<p>Goal: To immediately notify applications of fresh packet histories matching a pre-installed PHF.</p>
+</blockquote>
+<p>一旦某个数据包的<strong>Packet History</strong>被组装完成，<strong>NetSight</strong>会将其与所有由如<strong>netwatch</strong>等应用程序预先安装下发的(活跃的、实时的)<strong>Live PHF</strong>进行匹配，并在成功匹配某项后立即触发向对应应用程序的通知。</p>
+<h3 id="History-Achival"><a href="#History-Achival" class="headerlink" title="History Achival"></a>History Achival</h3><hr>
+<blockquote>
+<p>Goal: To efficiently store the full set of the packet histories.</p>
+</blockquote>
+<p>在每一个<strong>Round</strong>中生成的<strong>Packet History</strong>的数据流将被写入到一个文件。在写入持久化存储的过程中，<strong>NetSight</strong>会采用与之前提到的一样的压缩算法，都是利用了同一个数据包的<strong>Postcard</strong>之间的与同个流中的数据包之间的头部信息冗余，来实现压缩以减小存储开销。</p>
+<h3 id="Histort-Queries"><a href="#Histort-Queries" class="headerlink" title="Histort Queries"></a>Histort Queries</h3><hr>
+<blockquote>
+<p>Goal: To enable applications to issure PHF queries against archived packet histories.</p>
+</blockquote>
+<p>当一个应用程序下发对于某一具体时间范围内的历史性的<strong>Historical PHF</strong>查询需求时，该查询会在所有<strong>NetSight</strong>服务器上并行执行。在这里，由于压缩帮助提高了有效磁盘吞吐率，从而也缩短了查询完成时间。</p>
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><hr>
+<p><strong>NetSight</strong>实现分为两个过程：</p>
+<ol>
+<li>插入到<strong>OpenFlow Controller</strong>与<strong>Switches</strong>之前的<strong>Control Channel Proxy(控制通道代理)</strong>，用于记录配置更改，使用Python实现。</li>
+<li><strong>NetSight Server</strong>，用于执行全部的<strong>Postcard</strong>与<strong>History</strong>相关操作，使用C++实现。</li>
+</ol>
+<h3 id="Flow-Table-State-Recorder"><a href="#Flow-Table-State-Recorder" class="headerlink" title="Flow Table State Recorder"></a>Flow Table State Recorder</h3><hr>
+<p>在SDN环境下，任何网络状态的更改都是由控制器参与和协调完成的，这就提供了一个监控与截获交换机配置更改的绝佳地点。<strong>NetSight</strong>在控制器与<strong>OpenFlow</strong>交换机的控制路径上，实现了一个透明代理，称作<strong>Flow Table State Recorder</strong>，每当控制器向交换机们下发新的流表项，<strong>Recorder</strong>都会截获此信息并存储到数据库中。</p>
+<p>具体来说，<strong>Recorder</strong>工作流程如下：对于每条由控制器发送给交换机的<strong>OpenFlow</strong>规则，即<strong>OpenFlow</strong>流表项，<strong>Recorder</strong>都会将其截获并存储，同时在该规则对应的<strong>Action</strong>操作中追加一个新<strong>Action</strong>，令交换机除了对其所接收到匹配该规则的数据包进行正常转发之外，还为其生成一个<strong>Postcard</strong>并发送至<strong>NetSight</strong>服务器。这些追加的<strong>Action</strong>实际就是指示交换机创建一个匹配本条目的数据包的一份拷贝，并用当前交换机ID、输出端口号以及所匹配的流表项的版本号对其进行标记。其中，流表项的版本号就是一个简单的计数器，随着每条流修改信息的到来而递增。这些标记会覆盖原数据包的目的MAC地址字段，因此此数据包，实际就是<strong>Postcard</strong>无需像原数据包一样转发，只需发送到指定<strong>NetSight</strong>服务器处即可，因此目的MAC地址实际就没有作用了。一旦该<strong>Postcard</strong>被生成，随后会基于一个单独的VLAN字段值转发至对应的<strong>NetSight</strong>服务器。<strong>Postcard</strong>可采用两种网络转发模式，通过一个单独的网络处理即<strong>Out-of-band(带外)</strong>传输，和在普通网络中传输即<strong>In-band</strong>传输。当采用后者时，交换机会通过一个特殊的VLAN字段标记识别出<strong>Postcard</strong>，从而避免为<strong>Postcard</strong>再生成<strong>Postcard</strong>，造成不必要的带宽开销。</p>
+<h3 id="NetSight-Server"><a href="#NetSight-Server" class="headerlink" title="ＮetSight Server"></a>ＮetSight Server</h3><hr>
+<p>作为实际的<strong>End-host(端系统)</strong>测量解决方案，本文提出的<strong>NetSight</strong>系统并没有涉及对交换机的修改，转而充分利用了<strong>OpenFlow</strong>交换机提供的已有特性，相比<strong>Flow Table State Recorder</strong>仅仅追加规则使得交换机能够生成<strong>per-packet</strong>的<strong>Postcard</strong>，整个<strong>NetSight Server</strong>集群才是整个<strong>NetSight</strong>系统的核心，毕竟是它完成了全部<strong>Postcard</strong>的收集、组装、存储和查询的任务。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>我知道是不会有人点的，但万一有人想不开呢？！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Sun Dongxu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Measurement/" rel="tag"><i class="fa fa-tag"></i> Measurement</a>
+          
+            <a href="/tags/NSDI/" rel="tag"><i class="fa fa-tag"></i> NSDI</a>
+          
+            <a href="/tags/End-Host/" rel="tag"><i class="fa fa-tag"></i> End-Host</a>
+          
+            <a href="/tags/Packet-Level/" rel="tag"><i class="fa fa-tag"></i> Packet-Level</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/12/Algorithm/Algorithm/primer/" rel="next" title="素数筛选算法">
+                <i class="fa fa-chevron-left"></i> 素数筛选算法
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59f1e74daa26cba5" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments"></div>
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='/lib/Valine.min.js'></script>
+    <script>
+        new Valine({
+            av: AV,
+            el: '.comments' ,
+            verify: true,
+            app_id: '',
+            app_key: '',
+            placeholder: 'Welcome to teach me something!'
+        });
+    </script>
+    
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/la.png"
+                alt="Sun Dongxu" />
+            
+              <p class="site-author-name" itemprop="name">Sun Dongxu</p>
+              <p class="site-description motion-element" itemprop="description">Consistency refines Efficiency.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/sundongxu" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/sun-dong-xu-6/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/2864802550" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.cnblogs.com/burningTheStar" title="秋波园" target="_blank">秋波园</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全文概要"><span class="nav-number">1.</span> <span class="nav-text">全文概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Paper"><span class="nav-number">2.</span> <span class="nav-text">Paper</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Idea"><span class="nav-number">3.</span> <span class="nav-text">Idea</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Terminology"><span class="nav-number">4.</span> <span class="nav-text">Terminology</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Challenge"><span class="nav-number">5.</span> <span class="nav-text">Challenge</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Application"><span class="nav-number">6.</span> <span class="nav-text">Application</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#ndb-Interactive-Network-Debugger"><span class="nav-number">6.1.</span> <span class="nav-text">ndb: Interactive Network Debugger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#netwatch-Live-Invariant-Monitor"><span class="nav-number">6.2.</span> <span class="nav-text">netwatch: Live Invariant Monitor</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#netshark-Network-wide-Path-Aware-Packet-Logger"><span class="nav-number">6.3.</span> <span class="nav-text">netshark: Network-wide Path-Aware Packet Logger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#nprof-Hierachial-Network-Profiler"><span class="nav-number">6.4.</span> <span class="nav-text">nprof: Hierachial Network Profiler</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Achitecture"><span class="nav-number">7.</span> <span class="nav-text">Achitecture</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Work-Flow"><span class="nav-number">8.</span> <span class="nav-text">Work Flow</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Postcard-Generation"><span class="nav-number">8.1.</span> <span class="nav-text">Postcard Generation</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Postcard-Collection"><span class="nav-number">8.2.</span> <span class="nav-text">Postcard Collection</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#History-Assembly"><span class="nav-number">8.3.</span> <span class="nav-text">History Assembly</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Filter-Trigger"><span class="nav-number">8.4.</span> <span class="nav-text">Filter Trigger</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#History-Achival"><span class="nav-number">8.5.</span> <span class="nav-text">History Achival</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#Histort-Queries"><span class="nav-number">8.6.</span> <span class="nav-text">Histort Queries</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Implementation"><span class="nav-number">9.</span> <span class="nav-text">Implementation</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Flow-Table-State-Recorder"><span class="nav-number">9.1.</span> <span class="nav-text">Flow Table State Recorder</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#NetSight-Server"><span class="nav-number">9.2.</span> <span class="nav-text">ＮetSight Server</span></a></li></ol></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sun Dongxu</span>
+</div>
+
+
+  <div class="powered-by">
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    访客数  <span id="busuanzi_value_site_uv"></span></span>
+  <span class="post-meta-divider">|</span>
+  </div>
+
+  <div class="powered-by">
+    <i class="fa fa-bolt"></i><span id="busuanzi_container_site_pv">
+    点击量  <span id="busuanzi_value_site_pv"></span></span>
+  <span class="post-meta-divider">|</span>
+  </div>
+
+  <div class="powered-by">
+    
+      <span class="post-meta-item-icon">
+      <i class="fa fa-pencil"></i></span>
+      博客全站共
+      <span title="Site words total count">82.8k 字</span>
+    
+   </div>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.7-rc3/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'GahxsYhy86LRoRJ6jNOKbsjd-gzGzoHsz',
+        app_key: '3LFhgQbpJqib03QEIBwCbAN4',
+        placeholder: ''
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("YGwn9ugsopQVcGsCsO02SAak-gzGzoHsz", "lpK3dw1VUUeKtFIouqwCMjuz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>

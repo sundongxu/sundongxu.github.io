@@ -1,0 +1,1659 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="VPN,Shadowsocks,Amazon EC2,Proxychain,Privoxy,SwitchyOmega," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Sun Dongxu's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="全文概要 正为各种 VPN 被封或是网上那些不太靠谱的翻墙教程所困扰？ 刚好，这里有一份 Shadowsocks 指南，包含 Linux 和 MacOS 系统下的安装与配置，以及在 浏览器 和 终端 下翻墙的姿势介绍。 没错，这很可能就是你见过的最完整、最易懂的VPN搭建教程。">
+<meta name="keywords" content="VPN,Shadowsocks,Amazon EC2,Proxychain,Privoxy,SwitchyOmega">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Shadowsocks 搭梯全教程">
+<meta property="og:url" content="dongdongdong.me/2018/01/31/OS/Installation/Ubuntu/ladder/index.html">
+<meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
+<meta property="og:description" content="全文概要 正为各种 VPN 被封或是网上那些不太靠谱的翻墙教程所困扰？ 刚好，这里有一份 Shadowsocks 指南，包含 Linux 和 MacOS 系统下的安装与配置，以及在 浏览器 和 终端 下翻墙的姿势介绍。 没错，这很可能就是你见过的最完整、最易懂的VPN搭建教程。">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/gfw.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/gfw-before.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/gfw-now.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/gfw-ssh-tunnel.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/gfw-shadowsocks.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocks-basics-cn.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-ec2.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-ec2-boot.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-ami-ubuntu.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-instance-type.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-tag.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-security-group.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-key-download.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-boot-successful.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-public-ip-dns.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-connect-ssh.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocks-Qt5.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocks-Qt5-add-connection.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocks-Qt5-server-config.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocks-Qt5-connect.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/google-assistant-icon.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/google-assistant-disable.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-enable.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-icon.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-new-profile.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-ss.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-autoswitch.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-autoswitch-config.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-confirm.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-gfwlist-head.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-gfwlist-google.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-finish.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/network-proxy-automatic.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/firefox-preference-proxy.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/firefox-use-system-proxy.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocksX-NG.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocksX-NG-add-server.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocksX-NG-server-config.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocksX-NG-settings.png">
+<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/privoxy-listen.png">
+<meta property="og:updated_time" content="2018-04-27T08:17:36.932Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Shadowsocks 搭梯全教程">
+<meta name="twitter:description" content="全文概要 正为各种 VPN 被封或是网上那些不太靠谱的翻墙教程所困扰？ 刚好，这里有一份 Shadowsocks 指南，包含 Linux 和 MacOS 系统下的安装与配置，以及在 浏览器 和 终端 下翻墙的姿势介绍。 没错，这很可能就是你见过的最完整、最易懂的VPN搭建教程。">
+<meta name="twitter:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/gfw.png">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="dongdongdong.me/2018/01/31/OS/Installation/Ubuntu/ladder/"/>
+
+
+
+
+
+  <title>Shadowsocks 搭梯全教程 | Sun Dongxu's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6b59978ef5e74a1232a0ca20456b8fda";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+      <a href="https://github.com/sundongxu"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sun Dongxu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Reorganizing the Organization, Rebuilding the Building.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="dongdongdong.me/2018/01/31/OS/Installation/Ubuntu/ladder/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sun Dongxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/la.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sun Dongxu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Shadowsocks 搭梯全教程</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-01-31T11:11:11+08:00">
+                2018-01-31
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Operating-System/" itemprop="url" rel="index">
+                    <span itemprop="name">Operating System</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/01/31/OS/Installation/Ubuntu/ladder/" class="leancloud_visitors" data-flag-title="Shadowsocks 搭梯全教程">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  5,399
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  20
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="全文概要"><a href="#全文概要" class="headerlink" title="全文概要"></a>全文概要</h2><hr>
+<p>正为各种 <a href="https://zh.wikipedia.org/wiki/Vpn" target="_blank" rel="noopener"><strong>VPN</strong></a> 被封或是网上那些不太靠谱的翻墙教程所困扰？</p>
+<p>刚好，这里有一份 <a href="https://zh.wikipedia.org/wiki/Shadowsocks" target="_blank" rel="noopener"><strong>Shadowsocks</strong></a> 指南，包含 <strong>Linux</strong> 和 <strong>MacOS</strong> 系统下的安装与配置，以及在 <strong>浏览器</strong> 和 <strong>终端</strong> 下翻墙的姿势介绍。</p>
+<p>没错，这很可能就是你见过的最完整、最易懂的VPN搭建教程。<br><a id="more"></a></p>
+<h2 id="前面的话"><a href="#前面的话" class="headerlink" title="前面的话"></a>前面的话</h2><hr>
+<img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/gfw.png">
+<p>在当前这个知识爆炸的时代，作为一名学术研究者或技术钻研者，搜索引擎无疑是最好的学习工具，而 <a href="https://www.google.com" target="_blank" rel="noopener"><strong>Google</strong></a>正是个中翘楚。但早在互联网广泛流行于中国之前，出于一些不可抗原因，<a href="https://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E" target="_blank" rel="noopener"><strong>GFW</strong></a> 横空出世，国外网站对于内地网民从此遥不可及。好在技术无极限，更无国界，防火墙挡住了我们通往外界的视野，搭个梯子翻过去便是。</p>
+<p>于是，科学上网正成为当今知识分子的必备技能。而市场上已经有不少搭好的“梯子”，各类付费 <strong>VPN</strong> 琳琅满目，购买套餐后按照提示配置即可，方便快捷，但问题是不够稳妥安全。换句话说，购买这些 <strong>VPN</strong> 是比较危险的，很容易就被…你懂的。例如，笔者亲身经历过头天刚下决心买了某老牌付费 <strong>VPN</strong> 的两年会员，第二天就被封的…</p>
+<p>所以最好的方法是购买小众 <a href="https://zh.wikipedia.org/wiki/%E8%99%9A%E6%8B%9F%E4%B8%93%E7%94%A8%E6%9C%8D%E5%8A%A1%E5%99%A8" target="_blank" rel="noopener"><strong>VPS</strong></a> 搭建自己的海外服务器，防止被误伤。作为第一次捣鼓这些的新手，我是十分不建议上来就花个几十美金购买 <strong>VPS</strong> 的，最好的方案是找一个免费的服务器来练练手，那么，亚马逊就站出来了，他家的 <a href="https://amazonaws-china.com/cn/" target="_blank" rel="noopener"><strong>Amazon Web Services</strong></a>，在一定条件下能免费使用一年。</p>
+<p>当然，你必须有一张信用卡，没有的话，上某宝买张虚拟信用卡，操作也很easy的啦。</p>
+<p>注：</p>
+<blockquote>
+<p>Virtual Private Server, 简称 VPS，虚拟专用服务器<br>Virtual Private Network, 简称 VPN，虚拟专用网络</p>
+</blockquote>
+<h2 id="Shadowsocks"><a href="#Shadowsocks" class="headerlink" title="Shadowsocks"></a>Shadowsocks</h2><hr>
+<h3 id="前世今生"><a href="#前世今生" class="headerlink" title="前世今生"></a>前世今生</h3><p><a href="https://github.com/shadowsocks/shadowsocks/tree/master" target="_blank" rel="noopener"><strong>Shadowsocks</strong></a> 是目前最好的科学上网方式，它的流量经过加密，所以没有流量特征不会被GFW阻断；关键是，它的实现原理也通俗易懂。</p>
+<h4 id="long-long-ago"><a href="#long-long-ago" class="headerlink" title="long long ago"></a>long long ago</h4><p>在很久很久以前，我们访问各种网站都是简单而直接的，用户的请求通过互联网发送到服务提供方，服务提供方直接将信息反馈给用户。<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/gfw-before.png"></p>
+<h4 id="when-devil-comes"><a href="#when-devil-comes" class="headerlink" title="when devil comes"></a>when devil comes</h4><p>然后有一天，<strong>GFW</strong> 就出现了，他像一个收过路费的强盗一样夹在了在用户和服务之间，每当用户需要获取信息，都经过了 <strong>GFW</strong>，<strong>GFW</strong>将它不喜欢的内容统统过滤掉，于是客户当触发 <strong>GFW</strong> 的过滤规则的时候，就会收到 <strong>Connection Reset</strong> 这样的响应内容，而无法接收到正常的内容。<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/gfw-now.png"></p>
+<h4 id="ssh-tunnel"><a href="#ssh-tunnel" class="headerlink" title="ssh tunnel"></a>ssh tunnel</h4><p>聪明的人们想到了利用境外服务器代理的方法来绕过 <strong>GFW</strong> 的过滤，其中包含了各种 <strong>HTTP</strong> 代理服务、<strong>Socks</strong> 服务、<strong>VPN</strong> 服务… 其中以 <strong>ssh tunnel</strong> 的方法比较有代表性：</p>
+<blockquote>
+<p>1) 首先用户和境外服务器基于 ssh 建立起一条加密的通道<br>2-3) 用户通过建立起的隧道进行代理，通过 ssh server 向真实的服务发起请求<br>4-5) 服务通过 ssh server，再通过创建好的隧道返回给用户</p>
+</blockquote>
+<img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/gfw-ssh-tunnel.png">
+<p>由于 <strong>ssh</strong> 本身就是基于 <strong>RSA</strong> 加密技术，所以 <strong>GFW</strong> 无法从数据传输的过程中的加密数据内容进行关键词分析，避免了被重置链接的问题，但由于创建隧道和数据传输的过程中，<strong>ssh</strong> 本身的特征是明显的，所以 <strong>GFW</strong> 一度通过分析连接的特征进行干扰，导致 <strong>ssh</strong> 存在被定向进行干扰的问题。</p>
+<h4 id="shadowsocks"><a href="#shadowsocks" class="headerlink" title="shadowsocks"></a>shadowsocks</h4><p>@<a href="https://github.com/clowwindy" target="_blank" rel="noopener"><strong>clowwindy</strong></a> 大神分享并开源了他的解决方案</p>
+<p>简单理解的话，<strong>Shadowsocks</strong> 是将原来 <strong>ssh</strong> 创建的 <strong>socks5</strong> 协议拆开成 <strong>server</strong> 端和 <strong>client</strong> 端，所以下面这个原理图基本上和利用 <strong>ssh tunnel</strong> 大致类似。</p>
+<blockquote>
+<p>1、6) 客户端发出的请求基于 Socks5 协议跟 ss-local 端进行通讯，由于这个 ss-local 一般是本机或路由器或局域网的其他机器，不经过 GFW，所以解决了上面被 GFW 通过特征分析进行干扰的问题<br>2、5) ss-local 和 ss-server 两端通过多种可选的加密方法进行通讯，经过 GFW 的时候是常规的TCP包，没有明显的特征码而且 GFW 也无法对通讯数据进行解密<br>3、4) ss-server 将收到的加密数据进行解密，还原原来的请求，再发送到用户需要访问的服务，获取响应原路返回</p>
+</blockquote>
+<img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/gfw-shadowsocks.png">
+<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>从源码角度分析，<strong>Shadowsocks</strong> 的工作原理并不复杂。<strong>Shadowsocks</strong> 包括 <strong>local.py</strong> 和 <strong>server.py</strong> 两个程序：<strong>local</strong> 运行在用户自己的机器上，<strong>server</strong> 运行在墙外的服务器上。正常工作模式下，<strong>local</strong> 通常会监听本地 <strong>1080</strong> 端口，提供 <strong>socks5</strong> 协议接口。其工作流程简述如下：</p>
+<blockquote>
+<ol>
+<li>在用户本机进程和 local 的 1080 端口建立 TCP 连接之后，首先会发送一个 hello 包，或称 handshake 握手包；</li>
+<li>local 程序接收到这个包之后，进行简单的包数据检查之后就返回一个确认包；</li>
+<li>本机进程收到确认的包之后，会再发送一个请求包，包的主要内容就是目标服务的地址和端口号；</li>
+<li>local 程序接收到请求包之后，会和 server 程序建立一个 TCP 连接，连接建立之后会把上面的目标服务的地址和端口号传给 server。这个连接是穿墙的关键，连接里面传输的数据都是经过加密的，最常用的就是 aes-256-cfb；</li>
+<li>local 程序会对请求包返回一个确认包，告知本机进程其与 server 程序的连接已建立，等待数据请求的传输；</li>
+<li>然后本机进程就开始向 local 传输实际的数据，local 接收到之后加密继续传给 server；</li>
+<li>server 接收到之后把数据解密出来，然后和目标服务建立 TCP 连接，并把解密后的数据请求发送出去；</li>
+<li>server 接收到请求的数据后最终返回给本机进程就是上述的反过程。</li>
+</ol>
+</blockquote>
+<h3 id="实例图解"><a href="#实例图解" class="headerlink" title="实例图解"></a>实例图解</h3><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocks-basics-cn.png">
+<p>ss要求本机运行local.py，海外服务器运行server.py。local.py默认监听localhost的1080端口，该端口代理浏览器的请求。browser要访问google时，会和localhost:1080进行一次基于sock5协议的通信，如上图的红色虚线框，sock5协议可以去了解下，维基百科有不错的介绍。</p>
+<p>代理的流程如下：</p>
+<blockquote>
+<ol>
+<li>localhost:1080经过sock5协议后，就知道要访问google了</li>
+<li>local程序会把流量加密，然后把普通的TCP流量发往海外服务器；</li>
+<li>海外服务器收到请求后，解密得到要访问google</li>
+<li>海外服务器请求google后把得到的数据加密返回给local</li>
+<li>local解密返回给browser。</li>
+</ol>
+</blockquote>
+<p><strong>ss</strong> 的解密和加密都基于用户设置的密码，所以 <strong>local</strong> 和 <strong>server</strong> 之间可以做到加密和解密的一致。</p>
+<p>因此，<strong>Shadowsocks</strong> 的优点在于它通过流量混淆隐秘解决了 <strong>GFW</strong> 通过分析流量特征从而干扰的问题，这是它优于 <strong>SSH</strong> 和 <strong>VPN</strong> 翻墙的地方（但 <strong>VPN</strong> 更注重加密安全性）。缺点也依然明显，需要一点点技术和资源（墙外 <strong>VPS服务器</strong>）来搭建 <strong>Shadowsocks服务</strong>，好在已经有人搭建相应的服务出售翻墙服务了。当然你也完全可以搭建一个专属于自己的 <strong>Shadowsocks</strong> 服务，后文介绍了完整的安装与配置教程以供参考。</p>
+<h2 id="Shadowsocks-服务器"><a href="#Shadowsocks-服务器" class="headerlink" title="Shadowsocks 服务器"></a>Shadowsocks 服务器</h2><hr>
+<p>从前文了解到，<strong>Shadowsocks</strong> 服务由 <strong>local(客户端)</strong> 和 <strong>server(墙外服务器)</strong> 组成，先来看看如何搭建个人墙外 <strong>VPS</strong>。</p>
+<p>作为初学者，<strong>Amazon EC2</strong> 提供的免费海外服务器已经完全够用，本节介绍利用其搭建 <strong>Shadowsocks</strong> 服务器的步骤。</p>
+<h3 id="注册Amazon"><a href="#注册Amazon" class="headerlink" title="注册Amazon"></a>注册Amazon</h3><p>点击<a href="http://aws.amazon.com/cn/" target="_blank" rel="noopener"><strong>此处</strong></a> 右上角注册，一路下来资料照填，之前有亚马逊账号的话就直接登录。</p>
+<p>需要注意的一点是：<strong>注册过程需要绑定信用卡</strong>。</p>
+<p>说好是免费的，怎么还要绑定信用卡扣费呢？所谓免费，就是在你没有用超的情况下（作为 <strong>Shadowsocks</strong> 服务器，唯一能超限使用的就是网络流量，每月15G流量）。绑定信用卡应该会扣两笔钱，都是1美元，一笔是预授权，一笔应该是押金，1年后会返还，如果超限使用，顺便用着1美金抵扣。实在没有信用卡的学生党，到某宝上买一个一美元的虚拟信用卡，按要求输入店家发来的卡号、有效期，持卡人写“匿名”即可。</p>
+<p>注册完会需要输入你的手机号，<strong>AWS</strong> 会拨通你的手机号，让你输入网页提示的一串数字即完成注册。</p>
+<h3 id="创建EC2实例"><a href="#创建EC2实例" class="headerlink" title="创建EC2实例"></a>创建EC2实例</h3><p>用刚才注册好的账号登录并进入 <strong>AWS</strong> 控制台，点击 <strong>EC2 (云中的虚拟服务器)</strong>，如果需要改变服务器节点(地区)的话，右上角可以选择：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-ec2.png"></p>
+<p>进入 <strong>EC2</strong> 管理控制台后，点击 <strong>启动实例</strong>：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-ec2-boot.png"></p>
+<p>上图中可以看到已经有一个正在运行的实例，那是我之前创建的不用在意，新用户的话，已运行实例数量应为0。</p>
+<p>之后进入 <strong>Amazon 系统映像(AMI)</strong> 选择，我选的是 <strong>Ubuntu Server 16.04 LTS(HVM)，SSD Volume Type</strong>：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-ami-ubuntu.png"></p>
+<p>然后选择 <strong>实例类型</strong>，默认的 <strong>符合条件的免费套餐</strong> 即可，点击 <strong>下一步：配置实例详细信息</strong>：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-instance-type.png"></p>
+<p><strong>步骤3：配置实例</strong> 和 <strong>步骤4：添加存储</strong> 都是默认选项，直接点下一步跳过，直至 <strong>步骤5：添加标签</strong>，新建标签，键为 <strong>name</strong>，值为 <strong>ss-vpn</strong>，其实都可以任意指定，之后 <strong>创建密钥对</strong> 时会用到，之后下一步：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-tag.png"></p>
+<p><strong>步骤6：配置安全组</strong>，添加规则如图所示，其中端口 <strong>8388</strong> 是与 <strong>Shadowsocks</strong> 相关的，也可以自由指定：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-security-group.png"></p>
+<p>最后确定开始审核。这时候会提示生成密钥对，这个很重要，一定要保存好，没有这个密钥对是无法远程登录(如SSH)管理你的服务器的，下载密钥对 <strong>.pem</strong> 文件后才能启动实例：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-key-download.png"></p>
+<p>查看启动日志，发现 <strong>EC2</strong> 实例成功启动：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-boot-successful.png"></p>
+<h3 id="连接到服务器"><a href="#连接到服务器" class="headerlink" title="连接到服务器"></a>连接到服务器</h3><p>实例初始化完成后，就可以进行远程连接了，右键你的实例，点击连接。会弹出连接提示，如果你使用的是 <strong>Windows</strong>，可以查看使用 <strong>PuTTY</strong> 从 <strong>Windows</strong> 连接到 <strong>Linux</strong> 实例，如果你是 <strong>Linux</strong> 或者 <strong>Mac OS</strong>，可以直接通过 <strong>SSH</strong> 连接到你的服务器，具体可以查看亚马逊给出的文档 <strong>使用 SSH 连接到 Linux 实例</strong>。</p>
+<p>记住下图中所示位置这个 <strong>公有IP</strong>，它是你的 <strong>Shadowsocks</strong> 的服务器IP：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-public-ip-dns.png"></p>
+<p>按弹窗提示 <strong>SSH</strong> 连接到远程实例：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/ss-server-connect-ssh.png"></p>
+<h3 id="配置Shadowsocks"><a href="#配置Shadowsocks" class="headerlink" title="配置Shadowsocks"></a>配置Shadowsocks</h3><p><strong>SSH</strong> 连接到服务器之后，执行如下命令：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo -s                                          <span class="comment"># 获取超级管理员权限</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> apt-get update                                   <span class="comment"># 更新源</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> apt-get install python-pip                       <span class="comment"># 安装pip工具，用于安装shadowsocks</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> pip install shadowsocks                          <span class="comment"># 安装shadowsocks</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> vim /etc/shadowsocks_conf.json                   <span class="comment"># 编辑shadowsocks配置，内容见后文</span></span></span><br><span class="line"><span class="meta">#</span><span class="bash"> ssserver -c /etc/shadowsocks_conf.json -d start  <span class="comment"># 启动shadowsocks服务器</span></span></span><br></pre></td></tr></table></figure></p>
+<p><strong>shadowsocks_conf.json</strong> 配置内容如下：<br><figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&#123;</span><br><span class="line">    <span class="attr">"server"</span>:<span class="string">"0.0.0.0"</span>,</span><br><span class="line">    <span class="attr">"port_password"</span>: &#123;</span><br><span class="line">        <span class="attr">"[这里写你的端口号，通常为8388]"</span>: <span class="string">"[密码1]"</span>,</span><br><span class="line">        <span class="attr">"[其他端口号]"</span>: <span class="string">"[密码2]"</span> # 一个其实就够了...可能这里也是可以多端口登录吧</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">"local_address"</span>: <span class="string">"127.0.0.1"</span>,</span><br><span class="line">    <span class="attr">"local_port"</span>:<span class="number">1080</span>,</span><br><span class="line">    <span class="attr">"timeout"</span>:<span class="number">600</span>,</span><br><span class="line">    <span class="attr">"method"</span>:<span class="string">"aes-256-cfb"</span>,</span><br><span class="line">    <span class="attr">"auth"</span>: <span class="literal">true</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>配置字段说明如下：</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">字段</th>
+<th style="text-align:left">含义</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left">server</td>
+<td style="text-align:left">服务端监听地址(IPv4或IPv6)</td>
+</tr>
+<tr>
+<td style="text-align:left">server_port</td>
+<td style="text-align:left">服务端端口</td>
+</tr>
+<tr>
+<td style="text-align:left">local_address</td>
+<td style="text-align:left">本地监听地址，缺省为443</td>
+</tr>
+<tr>
+<td style="text-align:left">local_port</td>
+<td style="text-align:left">本地监听端口，一般为1080</td>
+</tr>
+<tr>
+<td style="text-align:left">password</td>
+<td style="text-align:left">用以加密的密钥</td>
+</tr>
+<tr>
+<td style="text-align:left">timeout</td>
+<td style="text-align:left">超时时间(秒)</td>
+</tr>
+<tr>
+<td style="text-align:left">method</td>
+<td style="text-align:left">加密方法，默认为 aes-256-cfb</td>
+</tr>
+<tr>
+<td style="text-align:left">fast_open</td>
+<td style="text-align:left">是否启用 TCP-Fast-Open, true or false</td>
+</tr>
+<tr>
+<td style="text-align:left">workers</td>
+<td style="text-align:left">worker数量，仅在Unix和Linux下有效</td>
+</tr>
+</tbody>
+</table>
+<p> 编辑完上述配置文件后，一定记得执行最后一条命令以启动 <strong>Shadowsocks</strong> 服务。</p>
+<p>至此，<strong>Shadowsocks</strong> 服务器，即位于墙外的 <strong>server</strong> 配置全部完成。</p>
+<p>那么 <strong>local</strong>，也就是客户端呢？别着急，下一节就是啦~</p>
+<h2 id="Shadowsocks-客户端"><a href="#Shadowsocks-客户端" class="headerlink" title="Shadowsocks 客户端"></a>Shadowsocks 客户端</h2><hr>
+<h3 id="Linux"><a href="#Linux" class="headerlink" title="Linux"></a>Linux</h3><p>以 <strong>Ubuntu</strong> 为例，图形化客户端无疑最方便，推荐 <a href="https://github.com/shadowsocks/shadowsocks-qt5/releases" target="_blank" rel="noopener"><strong>Shadowsocks-qt5</strong></a>，安装也十分简单：<br><figure class="highlight smali"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo<span class="built_in"> add-apt-repository </span>ppa:hzwhuang/ss-qt5</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install shadowsocks-qt5</span><br></pre></td></tr></table></figure></p>
+<p>安装成功之后，按 <strong>win</strong> 键输入关键字后应该能找到该客户端，如图所示：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocks-Qt5.png"></p>
+<p>启动客户端后，点击：connection -&gt; add，新建到 <strong>Shadowsocks Server</strong> 的连接：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocks-Qt5-add-connection.png"></p>
+<p>在弹窗中填入早前配置好的 <strong>Shadowsocks</strong> 服务器信息：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocks-Qt5-server-config.png"></p>
+<p>保存设置后右键点击刚添加的条目，点击连接：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocks-Qt5-connect.png"></p>
+<p>到这里，在 <strong>Ubuntu</strong> 下已经启动 <strong>local</strong> 程序，尽管它已经与墙外的 <strong>server</strong> 建立起连接并可以完成通信，但是如浏览器、终端等需要访问外网的本机进程而言，却仍然无法达到翻墙成功的效果，这是因为这些本机进程在试图直接访问外网服务，而这些访问请求都会被 <strong>GFW</strong> 根据其特殊的流量特征而被屏蔽过滤掉，导致访问失败。</p>
+<p>解决方案无疑就是 <strong>Shadowsocks</strong> ：浏览器、终端等本机进程需要以 <strong>Shadowsocks</strong> 为中间人将数据请求发送出去，即需要将发往被墙掉的外网服务的流量重定向到本地 <strong>Shadowsocks</strong> 客户端进程(<strong>local</strong>)。该进程默认监听本地端口 <strong>1080</strong>，因此需要将本机进程的流量发送至该端口上，这就涉及到特定进程的配置工作，主要是 <strong>浏览器</strong> 和 <strong>终端</strong>。</p>
+<h4 id="浏览器"><a href="#浏览器" class="headerlink" title="浏览器"></a>浏览器</h4><h5 id="Chrome"><a href="#Chrome" class="headerlink" title="Chrome"></a>Chrome</h5><p>配置代理，将对被墙的服务的流量重定向至本地 <strong>Shadowsocks</strong> 客户端，即 <strong>local</strong> 。<strong>Chrome</strong> 插件 <strong>SwitchyOmega</strong> 即可实现流量选择性代理，需要从官方插件商店中下载安装，操作过程中你很快会发现一个问题：访问官方商店这一行为本身就需要翻墙…</p>
+<p>好在 <strong>Chrome</strong> 还有另一款插件 <a href=""><strong>谷歌访问助手</strong></a> ，下载安装后浏览器即可访问 <strong>Google</strong> 相关服务，安装完成后在浏览器右上角插件栏可以看到：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/google-assistant-icon.png"></p>
+<p>看到这里你或许又有了问题：那为啥不干脆就使用 <strong>谷歌助手</strong> 插件翻墙就好了，还要 <strong>SwitchyOmega</strong> 干啥？</p>
+<p>答案是：<strong>谷歌助手</strong> 只能让浏览器可以访问 <strong>Google</strong> 相关服务，如搜索、学术、地图、商店等等，但是其余被墙网站如 <strong>Youtobe</strong>、<strong>Facebook</strong> 和 <strong>Twitter</strong> 等仍然不可访问，而 <strong>SwitchyOmega</strong> 则帮助我们可以通过浏览器访问到世界上任何网站，再也不用受 <strong>GFW</strong> 的拦截。</p>
+<p>下载安装好后，开始配置 <strong>SwitchyOmega</strong> 之前，首先需禁用 <strong>谷歌访问助手</strong>，原因是两个插件本质都是代理功能，会发生冲突，要想使 <strong>SwitchyOmega</strong> 生效，就必须先禁用冲突项 <strong>谷歌访问助手</strong>：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/google-assistant-disable.png"></p>
+<p>然后启用 <strong>SwitchyOmega</strong>：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-enable.png"></p>
+<p>之后浏览器右上角插件栏出现一个黑色圆圈图标，点击并选择 <strong>选项</strong>：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-icon.png"></p>
+<p>新建名为 <strong>ss</strong> 的情景模式，当然名称也可以自己起：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-new-profile.png"></p>
+<p>保存配置后是这样：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-ss.png"></p>
+<p>在 <strong>情景模式</strong> 下选择 <strong>auto switch</strong>：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-autoswitch.png"></p>
+<p>点击 <strong>添加规则列表</strong>，将以下链接粘贴至网址框：</p>
+<blockquote>
+<p><a href="https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt" target="_blank" rel="noopener">https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt</a></p>
+</blockquote>
+<p>并一定完全按下图配置：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-autoswitch-config.png"></p>
+<p>点击 <strong>立即更新情景模式</strong>，此时由于未保存修改会弹出如下窗口：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-confirm.png"></p>
+<p>点击 <strong>应用选项</strong>，<strong>规则列表正文</strong> 框内显示出 <strong>gfwlist.txt</strong> 文件中包含的过滤域名列表：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-gfwlist-head.png"></p>
+<p>搜索关键字 <strong>google</strong> 会找到对应过滤项：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-gfwlist-google.png"></p>
+<p>往下翻还能找到很多平时“可望不可即“的站点，如 <strong>Facebook</strong>、<strong>Youtube</strong>、<strong>Vimeo</strong>、<strong>Steam</strong>…甚至 <strong>Tensorflow</strong>、<strong>GitHub</strong> 还有 <strong>Android</strong> … 这个恕我不是太能理解，学习都不让嘛…</p>
+<p>保存修改后，点击浏览器右上角的 <strong>SwitchyOmega</strong> 插件图标，选中 <strong>auto switch</strong> 模式：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/switchy-omega-finish.png"></p>
+<p>测试相关被墙网站，成功访问，搞定！</p>
+<h5 id="Firefox"><a href="#Firefox" class="headerlink" title="Firefox"></a>Firefox</h5><p>网上很多人推荐代理插件 <strong>FoxyProxy</strong>，配置过程参见<a href="http://www.aichengxu.com/linux/11086629.htm" target="_blank" rel="noopener"><strong>此篇</strong></a>，不过我反正搞了很久没弄好，只好放弃…</p>
+<p>下面教你个简单好用的方法，为 <strong>FireFox</strong> 配置 <strong>Shadowsocks</strong> 的非全局代理：</p>
+<p>先安装 <strong>Genpac</strong>，可以用 <strong>pip</strong> 安装：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo pip install genpac</span></span><br></pre></td></tr></table></figure></p>
+<p>新建 <strong>Shadowsocks</strong> 文件夹存放 <strong>pac</strong> 文件：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> mkdir ~/shadowsocks</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">cd</span> shadowsocks</span></span><br></pre></td></tr></table></figure></p>
+<p>生成 <strong>pac</strong> 文件：<br><figure class="highlight jboss-cli"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ genpac <span class="params">--proxy=</span><span class="string">"SOCKS5 127.0.0.1:1080"</span> <span class="params">--gfwlist-proxy=</span><span class="string">"SOCKS5 127.0.0.1:1080"</span> -o autoproxy.pac <span class="params">--gfwlist-url=</span><span class="string">"https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt"</span></span><br></pre></td></tr></table></figure></p>
+<p>设置系统网络代理为 <strong>Automatic</strong>，即自动模式，配置 <strong>URL</strong> 则填入本地 <strong>pac</strong> 文件地址：</p>
+<blockquote>
+<p>file:///home/sundongxu/shadowsocks/autoproxy.pac</p>
+</blockquote>
+<p>具体见下图：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/network-proxy-automatic.png"></p>
+<p>最后点击在系统范围内应用：<strong>Apply System Wide</strong>，并按要求输入密码修改这一设置。</p>
+<p>之后配置 <strong>Firefox</strong> 使用系统代理，进入浏览器 <strong>Preferences(偏好设置)</strong>：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/firefox-preference-proxy.png"></p>
+<img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/firefox-use-system-proxy.png">
+<p>至此，<strong>Ubuntu</strong> 下的 <strong>Firefox</strong> 浏览器也应该能够成功翻墙啦~</p>
+<h4 id="终端"><a href="#终端" class="headerlink" title="终端"></a>终端</h4><p>相比浏览器而言，<strong>Ubuntu</strong> 下的终端翻墙则要容易得多，推荐 <strong>proxychains</strong>，安装配置极为简单：</p>
+<p><strong>proxychains</strong> 安装：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> sudo apt install proxychain</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>proxychains</strong> 配置：<br>编辑配置文件 <strong>/etc/proxychains.conf</strong>：<br><figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ sudo vim /etc/proxychains.conf</span><br><span class="line"># 注释最后一行：socks4 <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="number">9050</span></span><br><span class="line"># 添加一行：socks5 <span class="number">127.0</span><span class="number">.0</span><span class="number">.1</span> <span class="number">1080</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>proxychains</strong> 测试：<br><figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ proxychains curl www<span class="selector-class">.google</span><span class="selector-class">.com</span></span><br></pre></td></tr></table></figure></p>
+<p><strong>proxychains</strong> 使用：<br>用命令行启动软件，在前面加上 <strong>proxychains</strong>，如：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> proxychains firefox</span></span><br></pre></td></tr></table></figure></p>
+<p>使用 <strong>Shadowsocks</strong> + <strong>proxychains</strong> 代理打开新的 <strong>firefox</strong> 实现浏览器翻墙。当然，最方便的就是直接输入 <strong>proxychain bash/zsh</strong> 新建一个新的 <strong>Shell</strong>，在新 <strong>Shell</strong> 中运行的所有命令都将使用代理成功翻墙。</p>
+<h3 id="MacOS"><a href="#MacOS" class="headerlink" title="MacOS"></a>MacOS</h3><hr>
+<p>同样推荐使用带 <strong>GUI</strong> 的 <strong>Shadowsocks</strong> 客户端，最好用的当属 <a href="https://github.com/shadowsocks/ShadowsocksX-NG/releases/" target="_blank" rel="noopener"><strong>ShadowsocksX-NG</strong></a>，下载 <strong>zip</strong> 文件后直接安装即可。</p>
+<p>安装完成后会在 <strong>Launchpad</strong> 中找到其应用图标：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocksX-NG.png"></p>
+<p>点击启动应用，<strong>Mac</strong> 桌面右上角会出现一个<strong>纸飞机</strong>图标，点击该图标，选择：服务器 -&gt; 服务器设置：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocksX-NG-add-server.png"></p>
+<p>之后在窗口中填入早先配置好的 <strong>Shadowsocks</strong> 服务器信息：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocksX-NG-server-config.png"></p>
+<p>点击确定后保存配置。再次点击<strong>纸飞机</strong>图标，选择 <strong>PAC自动模式</strong> 或 <strong>全局模式</strong>，然后点击打开 <strong>Shadowsocks</strong> 启动本客户端，之后就可以愉快在 <strong>Mac</strong> 上翻墙啦~</p>
+<h4 id="终端-1"><a href="#终端-1" class="headerlink" title="终端"></a>终端</h4><p>使用过程中不知道你够不够细心，因为完成上述配置后，浏览器确实可以成功访问外网，但是终端却仍然无法翻墙，这里推荐一款 <strong>Mac</strong> 下终端翻墙利器：<a href="https://www.google.com.hk/search?q=privoxy&amp;oq=privoxy&amp;aqs=chrome.0.0j69i61j0l4.2324j0j7&amp;sourceid=chrome&amp;ie=UTF-8" target="_blank" rel="noopener"><strong>privoxy</strong></a>，原理就不讲了，直接上配置教程：</p>
+<p><strong>privoxy</strong> 安装：<br>很简单，用 <strong>brew</strong> 安装即可：<br><figure class="highlight mipsasm"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="keyword">brew </span><span class="keyword">install </span>privoxy</span><br></pre></td></tr></table></figure></p>
+<p><strong>privoxy</strong> 配置：<br>打开配置文件 <strong>/usr/local/etc/privoxy/config</strong>，加入下面两个配置项：<br><figure class="highlight less"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-tag">listen-address</span> <span class="selector-tag">0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-class">.0</span><span class="selector-pseudo">:8118</span></span><br><span class="line"><span class="selector-tag">forward-socks5</span> / <span class="selector-tag">localhost</span><span class="selector-pseudo">:1086</span> .</span><br></pre></td></tr></table></figure></p>
+<p>第一行设置privoxy监听任意IP地址的 <strong>8118</strong> 端口。第二行设置本地socks5代理客户端端口 <strong>1086</strong>，可以通过 <strong>ShadowsocksX-NG</strong> 的设置页面确定，见下图：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/shadowsocksX-NG-settings.png"></p>
+<p><strong>privoxy</strong> 启动：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo <span class="regexp">/usr/</span>local<span class="regexp">/sbin/</span>privoxy <span class="regexp">/usr/</span>local<span class="regexp">/etc/</span>privoxy<span class="regexp">/config</span></span><br></pre></td></tr></table></figure></p>
+<p>查看是否启动成功：<br><figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="symbol">$</span> netstat -<span class="literal">na</span> | grep <span class="number">8118</span></span><br></pre></td></tr></table></figure></p>
+<p>查询结果如下则表明启动成功：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/ladder/privoxy-listen.png"></p>
+<p>如果没有，可以查看日志信息，判断哪里出了问题。打开配置文件找到 <strong>logdir</strong> 配置项，查看 <strong>log</strong> 文件。</p>
+<p><strong>privoxy</strong> 使用：<br>在命令行终端中输入如下命令后，该终端即可翻墙了：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ <span class="builtin-name">export</span> <span class="attribute">http_proxy</span>=<span class="string">'http://localhost:8118'</span></span><br><span class="line">$ <span class="builtin-name">export</span> <span class="attribute">https_proxy</span>=<span class="string">'http://localhost:8118'</span></span><br></pre></td></tr></table></figure></p>
+<p>他的原理是讲socks5代理转化成http代理给命令行终端使用。</p>
+<p>如果不想用了取消即可：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">unset</span> http_proxy</span></span><br><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">unset</span> https_proxy</span></span><br></pre></td></tr></table></figure></p>
+<p>如果关闭终端窗口，功能就会失效，如果需要代理一直生效，则可以把上述两行代码添加到 <strong>~/.bash_profile</strong> 文件最后(或任意<strong>Shell</strong>配置文件，我用的就是 <strong>.zshrc</strong>)：<br><figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">vim ~/.bash_profile</span><br><span class="line"><span class="comment"># 将以下内容追加到配置文件末尾</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">http_proxy</span>=<span class="string">'http://localhost:8118'</span></span><br><span class="line"><span class="builtin-name">export</span> <span class="attribute">https_proxy</span>=<span class="string">'http://localhost:8118'</span></span><br></pre></td></tr></table></figure></p>
+<p>使配置立即生效：<br><figure class="highlight shell"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">$</span><span class="bash"> <span class="built_in">source</span> ~/.bash_profile <span class="comment"># source ~/.zshrc</span></span></span><br></pre></td></tr></table></figure></p>
+<p>还可以在 <strong>~/.bash_profile(或我的.zshrc)</strong> 里加入开关函数，使用起来更方便<br><figure class="highlight php"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">proxy_off</span><span class="params">()</span></span>&#123;</span><br><span class="line">    <span class="keyword">unset</span> http_proxy</span><br><span class="line">    <span class="keyword">unset</span> https_proxy</span><br><span class="line">    <span class="keyword">echo</span> -e <span class="string">"已关闭代理"</span></span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="function"><span class="keyword">function</span> <span class="title">proxy_on</span><span class="params">()</span> </span>&#123;</span><br><span class="line">    export no_proxy=<span class="string">"localhost,127.0.0.1,localaddress,.localdomain.com"</span></span><br><span class="line">    export http_proxy=<span class="string">"http://127.0.0.1:8118"</span></span><br><span class="line">    export https_proxy=$http_proxy</span><br><span class="line">    <span class="keyword">echo</span> -e <span class="string">"已开启代理"</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></p>
+<p>最后，<strong>Mac</strong>下终端翻墙的流程为：</p>
+<blockquote>
+<p>打开 ShadowsocksX-NG -&gt; 启动 privoxy -&gt; 执行命令：proxy_on -&gt; 终端成功翻墙</p>
+</blockquote>
+<p>自此，全文终。</p>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><hr>
+<p>[1]<a href="http://www.tyrion.wang/2017/02/04/VPN%E6%90%AD%E5%BB%BA-%E4%BA%9A%E9%A9%AC%E9%80%8AEC2-Shadowsocks/" target="_blank" rel="noopener">VPN搭建 - Amazon EC2 + Shadowsocks</a><br>[2]<a href="https://vc2tea.com/whats-shadowsocks/" target="_blank" rel="noopener">写给非专业人士看的Shadowsocks简介</a><br>[3]<a href="https://loggerhead.me/posts/shadowsocks-yuan-ma-fen-xi-xie-yi-yu-jie-gou.html" target="_blank" rel="noopener">Shadowsocks源码分析——协议和结构</a><br>[4]<a href="http://celerysoft.github.io/2016-01-15.html" target="_blank" rel="noopener">使用亚马逊AWS搭建免费的Shadowsocks服务器</a><br>[5]<a href="http://blog.csdn.net/xienaoban/article/details/54772942" target="_blank" rel="noopener">我的Linux入门之路 - 02.Shadowsocks-Qt5配置</a><br>[6]<a href="https://www.mystery0.vip/2017/01/12/Ubuntu%E4%BD%BF%E7%94%A8Shadowsocks-qt5%E7%A7%91%E5%AD%A6%E4%B8%8A%E7%BD%91/" target="_blank" rel="noopener">Ubuntu使用Shadowsocks-qt5科学上网</a><br>[7]<a href="http://www.cashqian.net/blog/001486989831982332565298e4942a2bb8f56b08f9d2475000" target="_blank" rel="noopener">Mac命令行终端下使用shadowsocks翻墙</a><br>[8]<a href="https://github.com/shadowsocks/shadowsocks/wiki/Ports-and-Clients#windows%20SS%E5%85%A8%E5%B9%B3%E5%8F%B0%E5%90%84%E4%B8%AA%E7%89%88%E6%9C%AC" target="_blank" rel="noopener">各版本Shadowsocks-GitHub</a><br>[9]<a href="http://blog.leanote.com/post/sxdeveloper/Ubuntu%E4%B8%8B%E8%AE%BE%E7%BD%AEShadowsocks%E7%9A%84%E9%9D%9E%E5%85%A8%E5%B1%80%E4%BB%A3%E7%90%86%EF%BC%88PAC%E8%87%AA%E5%8A%A8%E4%BB%A3%E7%90%86%EF%BC%89" target="_blank" rel="noopener">Ubuntu下设置Shadowsocks的非全局代理（PAC自动代理）</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>我知道是不会有人点的，但万一有人想不开呢？！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Sun Dongxu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/VPN/" rel="tag"><i class="fa fa-tag"></i> VPN</a>
+          
+            <a href="/tags/Shadowsocks/" rel="tag"><i class="fa fa-tag"></i> Shadowsocks</a>
+          
+            <a href="/tags/Amazon-EC2/" rel="tag"><i class="fa fa-tag"></i> Amazon EC2</a>
+          
+            <a href="/tags/Proxychain/" rel="tag"><i class="fa fa-tag"></i> Proxychain</a>
+          
+            <a href="/tags/Privoxy/" rel="tag"><i class="fa fa-tag"></i> Privoxy</a>
+          
+            <a href="/tags/SwitchyOmega/" rel="tag"><i class="fa fa-tag"></i> SwitchyOmega</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/01/25/OS/Installation/Ubuntu/blog-github-hexo/" rel="next" title="Ubuntu + GitHub Pages + Hexo 搭建个人博客">
+                <i class="fa fa-chevron-left"></i> Ubuntu + GitHub Pages + Hexo 搭建个人博客
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/28/Algorithm/LeetCode/memo/" rel="prev" title="LeetCode 刷题纪要">
+                LeetCode 刷题纪要 <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59f1e74daa26cba5" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments"></div>
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='/lib/Valine.min.js'></script>
+    <script>
+        new Valine({
+            av: AV,
+            el: '.comments' ,
+            verify: true,
+            app_id: '',
+            app_key: '',
+            placeholder: 'Welcome to teach me something!'
+        });
+    </script>
+    
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/la.png"
+                alt="Sun Dongxu" />
+            
+              <p class="site-author-name" itemprop="name">Sun Dongxu</p>
+              <p class="site-description motion-element" itemprop="description">Consistency refines Efficiency.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">19</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">4</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">59</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/sundongxu" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/sun-dong-xu-6/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/2864802550" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.cnblogs.com/burningTheStar" title="秋波园" target="_blank">秋波园</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全文概要"><span class="nav-number">1.</span> <span class="nav-text">全文概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#前面的话"><span class="nav-number">2.</span> <span class="nav-text">前面的话</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shadowsocks"><span class="nav-number">3.</span> <span class="nav-text">Shadowsocks</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#前世今生"><span class="nav-number">3.1.</span> <span class="nav-text">前世今生</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#long-long-ago"><span class="nav-number">3.1.1.</span> <span class="nav-text">long long ago</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#when-devil-comes"><span class="nav-number">3.1.2.</span> <span class="nav-text">when devil comes</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#ssh-tunnel"><span class="nav-number">3.1.3.</span> <span class="nav-text">ssh tunnel</span></a></li><li class="nav-item nav-level-4"><a class="nav-link" href="#shadowsocks"><span class="nav-number">3.1.4.</span> <span class="nav-text">shadowsocks</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理"><span class="nav-number">3.2.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#实例图解"><span class="nav-number">3.3.</span> <span class="nav-text">实例图解</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shadowsocks-服务器"><span class="nav-number">4.</span> <span class="nav-text">Shadowsocks 服务器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#注册Amazon"><span class="nav-number">4.1.</span> <span class="nav-text">注册Amazon</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#创建EC2实例"><span class="nav-number">4.2.</span> <span class="nav-text">创建EC2实例</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#连接到服务器"><span class="nav-number">4.3.</span> <span class="nav-text">连接到服务器</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#配置Shadowsocks"><span class="nav-number">4.4.</span> <span class="nav-text">配置Shadowsocks</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Shadowsocks-客户端"><span class="nav-number">5.</span> <span class="nav-text">Shadowsocks 客户端</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#Linux"><span class="nav-number">5.1.</span> <span class="nav-text">Linux</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#浏览器"><span class="nav-number">5.1.1.</span> <span class="nav-text">浏览器</span></a><ol class="nav-child"><li class="nav-item nav-level-5"><a class="nav-link" href="#Chrome"><span class="nav-number">5.1.1.1.</span> <span class="nav-text">Chrome</span></a></li><li class="nav-item nav-level-5"><a class="nav-link" href="#Firefox"><span class="nav-number">5.1.1.2.</span> <span class="nav-text">Firefox</span></a></li></ol></li><li class="nav-item nav-level-4"><a class="nav-link" href="#终端"><span class="nav-number">5.1.2.</span> <span class="nav-text">终端</span></a></li></ol></li><li class="nav-item nav-level-3"><a class="nav-link" href="#MacOS"><span class="nav-number">5.2.</span> <span class="nav-text">MacOS</span></a><ol class="nav-child"><li class="nav-item nav-level-4"><a class="nav-link" href="#终端-1"><span class="nav-number">5.2.1.</span> <span class="nav-text">终端</span></a></li></ol></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sun Dongxu</span>
+</div>
+
+
+  <div class="powered-by">
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    访客数  <span id="busuanzi_value_site_uv"></span></span>
+  <span class="post-meta-divider">|</span>
+  </div>
+
+  <div class="powered-by">
+    <i class="fa fa-bolt"></i><span id="busuanzi_container_site_pv">
+    点击量  <span id="busuanzi_value_site_pv"></span></span>
+  <span class="post-meta-divider">|</span>
+  </div>
+
+  <div class="powered-by">
+    
+      <span class="post-meta-item-icon">
+      <i class="fa fa-pencil"></i></span>
+      博客全站共
+      <span title="Site words total count">82.8k 字</span>
+    
+   </div>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.7-rc3/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'GahxsYhy86LRoRJ6jNOKbsjd-gzGzoHsz',
+        app_key: '3LFhgQbpJqib03QEIBwCbAN4',
+        placeholder: ''
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("YGwn9ugsopQVcGsCsO02SAak-gzGzoHsz", "lpK3dw1VUUeKtFIouqwCMjuz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
