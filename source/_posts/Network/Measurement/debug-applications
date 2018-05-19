@@ -1,0 +1,68 @@
+---
+title: 网络测量中的异常检测
+date: 2018-05-07 15:00:00
+categories:
+- Network
+tags:
+- Measurement
+- Debugging Application
+- Trouble Shooting
+---
+
+### 全文概要
+
+<!--more-->
+
+
+基于优先级的流竞争(红灯多)
+
+流量级联
+
+瞬时拥塞
+
+ECMP负载不均衡
+
+活跃的TCP连接数量
+
+静默随机丢包
+
+静默黑洞
+
+路径合法性
+
+流量测量
+
+DDoS/广播者(superspreader)
+
+带宽占用过大的流
+
+隔离
+
+超时过大的连接
+
+TCP包乱序
+
+TCP非单调
+
+Flowlet大小分布图
+
+数据包计数
+
+丢包源
+
+环路检测
+
+Overlay环路检测
+
+协议漏洞(PFC、RDMA)
+
+不正确的包修改(交换机)
+
+流量矩阵
+
+新创建的TCP连接
+
+未完成的TCP流(链接)
+
+SYN洪泛攻击
+

@@ -93,7 +93,6 @@ qiniu:
     update_exist: true
     image:
         folder: images
-        extend:
     js:
         folder: js
     css:
