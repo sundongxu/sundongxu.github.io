@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="Switch,Router,Interconnect," />
+  <meta name="keywords" content="Linux,Kernel,Tuning," />
 
 
 
@@ -87,18 +87,18 @@
 
 
 
-<meta name="description" content="全文概要 计算机网络往往由多种不同类型的网络通过特殊的设备相互连接而成，本文简要介绍了转发器、集线器、网桥、桥接器、交换机、路由器等多种网络互连设备的功能原理。">
-<meta name="keywords" content="Switch,Router,Interconnect">
+<meta name="description" content="全文概要本文介绍了Linux系统下部分常用内核参数含义及其调优方式。">
+<meta name="keywords" content="Linux,Kernel,Tuning">
 <meta property="og:type" content="article">
-<meta property="og:title" content="网络互连设备小结">
-<meta property="og:url" content="dongdongdong.me/2017/10/30/Network/Hardware/relay/index.html">
+<meta property="og:title" content="Linux内核调优参数对比与解释">
+<meta property="og:url" content="dongdongdong.me/2018/05/20/OS/Kernel/kernel-parameter-tuning/index.html">
 <meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
-<meta property="og:description" content="全文概要 计算机网络往往由多种不同类型的网络通过特殊的设备相互连接而成，本文简要介绍了转发器、集线器、网桥、桥接器、交换机、路由器等多种网络互连设备的功能原理。">
+<meta property="og:description" content="全文概要本文介绍了Linux系统下部分常用内核参数含义及其调优方式。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-04-27T08:17:36.922Z">
+<meta property="og:updated_time" content="2018-05-20T07:10:57.569Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="网络互连设备小结">
-<meta name="twitter:description" content="全文概要 计算机网络往往由多种不同类型的网络通过特殊的设备相互连接而成，本文简要介绍了转发器、集线器、网桥、桥接器、交换机、路由器等多种网络互连设备的功能原理。">
+<meta name="twitter:title" content="Linux内核调优参数对比与解释">
+<meta name="twitter:description" content="全文概要本文介绍了Linux系统下部分常用内核参数含义及其调优方式。">
 
 
 
@@ -128,13 +128,13 @@
 
 
 
-  <link rel="canonical" href="dongdongdong.me/2017/10/30/Network/Hardware/relay/"/>
+  <link rel="canonical" href="dongdongdong.me/2018/05/20/OS/Kernel/kernel-parameter-tuning/"/>
 
 
 
 
 
-  <title>网络互连设备小结 | Sun Dongxu's Blog</title>
+  <title>Linux内核调优参数对比与解释 | Sun Dongxu's Blog</title>
   
 
 
@@ -314,7 +314,7 @@
   
   
   <div class="post-block">
-    <link itemprop="mainEntityOfPage" href="dongdongdong.me/2017/10/30/Network/Hardware/relay/">
+    <link itemprop="mainEntityOfPage" href="dongdongdong.me/2018/05/20/OS/Kernel/kernel-parameter-tuning/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
       <meta itemprop="name" content="Sun Dongxu">
@@ -331,7 +331,7 @@
 
         
         
-          <h1 class="post-title" itemprop="name headline">网络互连设备小结</h1>
+          <h1 class="post-title" itemprop="name headline">Linux内核调优参数对比与解释</h1>
         
 
         <div class="post-meta">
@@ -343,8 +343,8 @@
               
                 <span class="post-meta-item-text">发表于</span>
               
-              <time title="创建于" itemprop="dateCreated datePublished" datetime="2017-10-30T15:18:30+08:00">
-                2017-10-30
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-05-20T15:00:00+08:00">
+                2018-05-20
               </time>
             
 
@@ -366,8 +366,8 @@
               
               
                 <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
-                  <a href="/categories/Network/" itemprop="url" rel="index">
-                    <span itemprop="name">Network</span>
+                  <a href="/categories/Operating-System/" itemprop="url" rel="index">
+                    <span itemprop="name">Operating System</span>
                   </a>
                 </span>
 
@@ -383,7 +383,7 @@
 
           
           
-             <span id="/2017/10/30/Network/Hardware/relay/" class="leancloud_visitors" data-flag-title="网络互连设备小结">
+             <span id="/2018/05/20/OS/Kernel/kernel-parameter-tuning/" class="leancloud_visitors" data-flag-title="Linux内核调优参数对比与解释">
                <span class="post-meta-divider">|</span>
                <span class="post-meta-item-icon">
                  <i class="fa fa-eye"></i>
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  5,467
+                  1,850
                 </span>
               
 
@@ -424,7 +424,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  19
+                  8
                 </span>
               
             </div>
@@ -445,106 +445,173 @@
       
 
       
-        <h2 id="全文概要"><a href="#全文概要" class="headerlink" title="全文概要"></a>全文概要</h2><hr>
-<p>计算机网络往往由多种不同类型的网络通过特殊的设备相互连接而成，本文简要介绍了转发器、集线器、网桥、桥接器、交换机、路由器等多种网络互连设备的功能原理。</p>
-<a id="more"></a>
-<h2 id="网络互连设备"><a href="#网络互连设备" class="headerlink" title="网络互连设备"></a>网络互连设备</h2><hr>
-<p>计算机网络往往由多种不同类型的网络互连(Interconnect)连接而成。如果几个计算机网络只是物理上连接在一起，它们之间并不能进行通信，那么这种形式上的“互连”毫无意义。因此在描述这些网络“互连”的同时，实际暗示这些相互连接的计算机是可以以某种方式进行通信的，由约定共同遵守的网络协议决定通信的方式和细节。换句话说，从逻辑和功能上来讲，这些计算机已经组成了一个大型的计算机网络，或称为“互联网络”(internet，注意首字母小写，Internet已经用来形容全球范围内最大的互联网络)。</p>
-<p>将网络互相连接起来要使用一些中间设备(中间系统)，ISO中术语称之为“中继”(Relay)系统，根据中继系统所在的层次，大致由如下五种中继系统：</p>
-<ul>
-<li>物理层(第一层)中继系统，即<strong>转发器(Repeater)</strong></li>
-<li>数据链路层(第二层)中继系统，即<strong>网桥</strong>或<strong>桥接器(Bridge)</strong></li>
-<li>网络层(第三层)中继系统，即<strong>路由器(Router)</strong></li>
-<li>网桥和路由器混合物：<strong>桥路器(Brouter)</strong>，兼有网桥和路由器的功能</li>
-<li>网络层以上的中继系统，即<strong>网关(Gateway)</strong></li>
-</ul>
-<p>当中继系统是转发器时，一般不称之为“网络互连”，因为这仅仅是把一个网络从物理上扩展了，本身仍只是一个网络。高层网关由于比较复杂，目前使用较少。因此通常在讨论网络互连时都是指利用交换机和路由器进行互连的网络。下面会简要介绍各种网络互连设备的基本功能和原理。</p>
-<h2 id="转发器"><a href="#转发器" class="headerlink" title="转发器"></a>转发器</h2><hr>
-<p>转发器(Repeater)又被称为中继器、放大器，执行物理层协议，负责第一层即物理层的数据中继。由于电信号在传输过程中会不断衰减，为了不让信号到达通信目的地时强度太小甚至完全消失，必须每传输一段距离就使用中继器放大电信号，使其能够传输到偏远的通信对端。</p>
-<p>转发器用于互连两个相同类型的网段，主要功能是延伸网段和改变传输媒体，从而实现信息位的转发，它本身并不执行信号的过滤功能。</p>
-<h2 id="集线器"><a href="#集线器" class="headerlink" title="集线器"></a>集线器</h2><hr>
-<h3 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h3><p>集线器(HUB)是一种典型的特殊的转发器，它的作用简单来说就是将一些机器连接起来组成一个局域网。HUB本身是“中心”的意思，多用于建立星型或树型网络拓扑。它不具有智能处理能力，处理的数据只是电流而已，采用共享带宽的工作方式，连接到同一个集线器的所有计算机采用CSMA/CD方式竞争带宽。</p>
-<p>集线器处于纯硬件网络底层设备，基本上不具有类似于交换机的“智能记忆”和“自学习”能力，更不具有交换机维护的MAC地址端口映射表(转发表,Forwarding Table)，所以它发送数据时都是没有目的性的，直接采用广播方式发送。也就是说当它要向某节点发送数据时，不是直接把数据发送到目的节点，而是把数据包发送到所有与集线器物理相连的所有节点，因此它也可以叫做多端口转发器(Multiport Repeater)。</p>
-<h3 id="核心功能"><a href="#核心功能" class="headerlink" title="核心功能"></a>核心功能</h3><p>集线器的主要功能就是对接收到的信号进行再生、整形和放大，以扩大网络信号的传输距离，同时把所有节点集中在以它为中心的节点上。它同样工作于物理层，与网卡(网络适配器)、网线等传输介质一样，属于局域网中的基础设备，采用CSMA/CD介质访问控制协议，即具有碰撞检测功能，有碰撞发生则需要避让，一个说完了，另一个人再说，通信效率较低。</p>
-<h3 id="不足"><a href="#不足" class="headerlink" title="不足"></a>不足</h3><p>集线器的这种广播数据发送方式很明显有四点不足：</p>
-<ol>
-<li>用户数据包向所有节点发送，数据通信的安全性无法保证；</li>
-<li>由于所有数据包都是向所有节点同时发送，加上其共享带宽的方式，带宽资源浪费严重，容易造成网络拥塞，降低整体网络性能；</li>
-<li>非双工(半双工)传输，任意节点要么只发不收，要么只收不发；</li>
-<li>连接到同一个集线器不同端口的多个主机，任意时刻只能有一个在发送数据，其余会由于检测到碰撞(信道竞争)而阻塞发送。</li>
-</ol>
-<h3 id="应用趋势"><a href="#应用趋势" class="headerlink" title="应用趋势"></a>应用趋势</h3><p>由于集线器会把收到的任何数字信号，经过再生和放大，再向集线器的所有端口提交，这会造成信号之间碰撞的机会很大，而且信号也很有可能被窃听。这还意味着所有连接到该集线器的设备，都是属于同一个碰撞域和广播域，因此大部分集线器现在都已经被交换机所取代。</p>
-<h3 id="小结"><a href="#小结" class="headerlink" title="小结"></a>小结</h3><p>集线器工作在物理层，负责局域网内部通信，将其接收到的数据帧广播至全部端口，与其相连的全部网络节点属于同一个冲突域。</p>
-<h2 id="网桥"><a href="#网桥" class="headerlink" title="网桥"></a>网桥</h2><hr>
-<h3 id="基本原理-1"><a href="#基本原理-1" class="headerlink" title="基本原理"></a>基本原理</h3><p>网桥(Bridge)负责数据链路层的数据中继，互连两个独立的、仅在低两层(物理层和数据链路层)实现上有差异的子网。</p>
-<h3 id="核心功能-1"><a href="#核心功能-1" class="headerlink" title="核心功能"></a>核心功能</h3><p>数据链路层的作用包括：链路建立、维护和拆除、帧封装、帧传输、帧同步、帧错误控制以及流量控制。网桥工作在数据链路层，将两个局域网(LAN)连接起来，根据MAC地址(物理地址)来转发帧，可以看做是一个“低层路由器”(说路由器是三层交换机是一个道理，路由器工作在网络层，根据网络地址即IP地址进行转发)。它可以有效连接两个LAN，将本地通信范围限制在本网段内，并转发相应的信号到另一网段。网桥通常用于连接数量不多的、同一类型的网段。</p>
-<h3 id="隔离冲突域"><a href="#隔离冲突域" class="headerlink" title="隔离冲突域"></a>隔离冲突域</h3><p>多个集线器连接在一起时，由于是广播通信，碰撞几率极大，所以需要一种设备，能够有效隔离子网，即不同网段，让各网段的广播通信仅仅发生在自身内部，网桥正好起到了隔离冲突域的作用。</p>
-<h3 id="存储转发"><a href="#存储转发" class="headerlink" title="存储转发"></a>存储转发</h3><p>网桥能够识别数据链路层中的数据帧，并将这些帧临时存储于自身内存之中，再重新生成信号作为一个全新的数据帧转发给相连的另一个网段，由于网桥可以对数据帧进行拆包、暂存和重新打包(称为“存储转发机制”,Store-and-Forward)，网桥能够连接不同技术参数、传输速率的数据链路。</p>
-<h3 id="优缺点"><a href="#优缺点" class="headerlink" title="优缺点"></a>优缺点</h3><p>网桥的存储和转发功能与中继器相比有优点也有缺点：</p>
-<ul>
-<li><p>优点：使用网桥互连克服了物理限制，这意味着构成LAN的数据站总数和网段数很容易扩充。网桥纳入存储和转发功能可使其适应于连接使用不同MAC协议的两个LAN，从而构成一个不同LAN混连在一起的网络环境。网桥的中继功能仅仅依赖于MAC地址(具有交换机一样的转发机制，通过自学习维护转发表(MAC地址到网桥端口的映射)，根据目的MAC地址查找转发表决定要转发至的端口)，因此对高层协议完全透明。网桥将一个较大的LAN分成段，有利于改善可靠性、可用性和安全性。</p>
-</li>
-<li><p>缺点：由于网桥会在执行转发之前先接收帧并进行缓冲，与中继器相比会引入更多时延。并且网桥不提供流量控制功能，在流量爆发时容易过载，严重时会丢失帧。123</p>
-</li>
-</ul>
-<p>不过，网桥的优点多过于缺点正是其广泛使用的原因。</p>
-<h3 id="小结-1"><a href="#小结-1" class="headerlink" title="小结"></a>小结</h3><p>网桥工作在数据链路层，负责跨局域网的主机通信，根据其所维护转发表(MAC表)完成转发，隔离冲突域。局域网内部通信不过网桥。</p>
-<p>网桥相当于二层交换机，它可以在数据链路层“桥接”两个网段。它比HUB强一点的在于它分离了两个网段，不会把某网段内部(LAN内部)的数据包广播到另一个网段。因此，两个网段之间不会产生不必要的信号冲突碰撞，例如：AB在桥东，CD在桥西，AB对话时，CD也可以对话；但AC对话时，BD要避让。</p>
-<h2 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h2><hr>
-<h3 id="基本原理-2"><a href="#基本原理-2" class="headerlink" title="基本原理"></a>基本原理</h3><p>交换机(Switch)是一种简化的网桥，互连相同类型的网络，也工作在数据链路层。它采用独享带宽的工作方式，比集线器更智能，它关注数据包的MAC地址部分：目的地址和源地址，采用一种“自学习”的方式：根据收到的数据帧中的源MAC地址以及其进入交换机的端口两者之间建立映射，并将其写入所维护的一张MAC转发表(Forwarding Table based on MAC)，定期更新或废弃表项。每次新到来一个数据包，交换机抽取其头部中的目的MAC地址，查找转发表对应项，随后将该数据包转发到表项指示的交换机端口。而对于无法在转发表中找到对应项的数据帧，尤其是在交换机刚刚加入网络初期时，交换机便将此帧转发至除其进入端口以外的全部交换机端口。</p>
-<h3 id="工作流"><a href="#工作流" class="headerlink" title="工作流"></a>工作流</h3><p>特别地，对于转发表项指示将该数据帧发往此帧进入交换机的端口时，表明是源主机想向同一个LAN中的目的主机发包，通常LAN由集线器连接多个主机构成，而一旦其中某个主机想要通信，首先会把数据包发往与其直连的集线器，而集线器会进行全端口转发，这样与该集线器相连的，也就是同一局域网段内的所有主机实际都收到了一份数据包的一份拷贝，所以如果该数据包最终被集线器也广播至交换机处，那么交换机通过查找转发表发现源端口和转发端口是一样的，那么交换机就知道该包之前已在同一网段中广播，也就是说目的主机早就收到了数据包，因此，面对这样的数据包，交换机的处理方法很简单：直接丢弃。</p>
-<h3 id="物理构造"><a href="#物理构造" class="headerlink" title="物理构造"></a>物理构造</h3><p>在交换机内部存有一条背部总线和内部交换矩阵，其中，背部总线用于连接交换机的所有端口，内部交换矩阵用于查找数据包所需传送的目的地址所在端口。控制电路受到数据包后，首先通过内部交换矩阵对其目的端口进行查询，若查询到则立刻将数据包发往该端口，若没有查询到，则广播至所有端口，接受端口发出回应后，将数据包发往该端口，并将其添加至内部交换矩阵中。</p>
-<h3 id="自学习"><a href="#自学习" class="headerlink" title="自学习"></a>自学习</h3><p>交换机的转发表(又称为MAC表)是自动地、动态地、自治地建立的，即没有任何来自网络管理员或配置协议的任何干预，因此，通常称交换机创建并维护转发表的过程称为是“自学习”(Self-learning)的，具体步骤如下：</p>
-<ol>
-<li>交换机初始化为空，即没有任何表项； </li>
-<li>对于在某接口接收到的每个入帧，该交换机为其在转发表中存储①帧源地址字段中的源MAC地址②该帧到达的交换机端口③当前时间戳，交换机以这种方式在它的表中记录发送节点所在的LAN字段(与某个交换机端口直接相连)，若在LAN中的每个节点最终都发送了一个帧，则每个节点在转发表中都会被记录下来；</li>
-<li>如果在一段时间，称为“老化期”(Aging Time)之后(此时间由交换机中的一个定时器维护)，交换机都没有接收到以某个表项中的MAC地址作为源地址的帧，那么就删除该表项。</li>
-</ol>
-<p>由于交换机只会将数据包发往转发表中该目的MAC对应的端口，而不是广播至其所有端口，因此，交换机可以用来隔离链路层广播域，即冲突域，每个交换机端口都与一个冲突域相连。但它工作在数据链路层，从而无法处理网络地址，如IP地址，因此无法划分网络层广播域，即广播域。</p>
-<ul>
-<li>冲突域：在同一个冲突域中的每一个节点都能收到任意内部节点发送的任何帧(会通过集线器转发)，即冲突域是一个网段(LAN)，或者说该网段内全部节点的集合；</li>
-<li>广播域：网络中能接收到任意设备发出的广播帧的所有设备的集合。</li>
-</ul>
-<p>看到这里，势必需要把网桥和交换机比较一番：</p>
-<ol>
-<li>从网络数据包的转发层面，两者都是通过建立、维护和查询转发表完成转发工作；</li>
-<li>网桥的端口数较少，通常只有2个，当然也有多端口的网桥设备，交换机则一般拥有多个物理端口；</li>
-<li>交换机工作时，实际上允许许多组端口间的数据转发通道同时工作，相当于多个网桥集成在一个设备中同时完成转发工作，所以交换机的转发能力远强于一般仅有两个端口的网桥；</li>
-<li>由于交换机能够支持多端口，因此可以把网络系统划分为更多的物理网网段，使得整个网络系统具有更高的带宽；</li>
-<li>交换机内部一般使用<a href="https://en.wikipedia.org/wiki/Application-specific_integrated_circuit" target="_blank" rel="noopener">ASIC(Application Specific Integrated Circuit， 特定用途集成电路)</a>的硬件芯片来实现转发，同时由于是硬件转发，其转发性能非常高，数据传输速率要快于网桥；</li>
-<li>网桥在发送数据帧前，通常要接收到完整的数据帧并执行帧检测序列FCS后，才开始转发该数据帧。交换机具有存储转发和直接转发两种帧转发方式。直接转发方式在发送数据以前，不需要在接收完整个数据帧和经过32BIT循环冗余校验码CRC的计算检查后的等待时间。</li>
-</ol>
-<h3 id="小结-2"><a href="#小结-2" class="headerlink" title="小结"></a>小结</h3><p>交换机可以认为是网桥的全方位加强版：同样通过自学习维护转发表确定数据帧转发的目的端口，用来隔离冲突域，每个与交换机的一个物理端口相连的LAN就是一个冲突域。但交换机拥有更多物理端口从而支持更多网段，其多组端口并行工作以及通过ASIC硬件芯片转发从而具有更强的转发能力(数据帧处理能力、传输速率)。</p>
-<h2 id="路由器"><a href="#路由器" class="headerlink" title="路由器"></a>路由器</h2><hr>
-<h3 id="基本原理-3"><a href="#基本原理-3" class="headerlink" title="基本原理"></a>基本原理</h3><p>路由器(Router)负责网络层的数据中继。它能够理解数据包头部字段中的IP地址(又称为网络地址，或者相对于MAC地址被称为物理地址，也可称作是逻辑地址)，如果它接收到一个数据包，就会首先检查其中的IP地址，查询其维护的路由表(Routing Table)中对应表项，如果目标地址是本地网络的就不予理会，而如果是在其它网络中的某台主机，就把该数据包转发出本地网络。</p>
-<h3 id="核心功能-2"><a href="#核心功能-2" class="headerlink" title="核心功能"></a>核心功能</h3><p>路由器的作用在于连接不同类型(相同当然可以)的网络，并且能够在网络中通过运行路由算法为数据包传输找出最合适的路径(代价最小)，这一过程称作“路由选择”。</p>
-<p>路由器的存储器里存放着路由表，这些表是易失的并且容易改变，路由表项的内容包括目的地址的下一跳(Next Hop)的路由地址，不同地址的距离等。这些内容都是路由器启动后经过学习得到的。路由器启动之后便根据设定的路由协议与其它路由器交换信息，在交换信息的过程中，学习路由并填充路由表。</p>
-<p>因此，路由器虽然是基于硬件转发数据包的专用网络设备，但是路由器上配置支持的路由算法才是最核心的东西。</p>
-<h3 id="选路算法"><a href="#选路算法" class="headerlink" title="选路算法"></a>选路算法</h3><p>选路/路由算法分为两大类：</p>
-<ol>
-<li><p>距离向量算法(Distance Vector Algorithm， 即DV算法)</p>
-<ul>
-<li>RIP(Routing Information Protocol，路由信息协议)</li>
-<li>IGRP(Interior Gateway Routing Protocol，内部网关路由协议)</li>
-</ul>
-</li>
-<li><p>链路状态算法(Link State Algorithm，即LS算法)</p>
-<ul>
-<li>OSPF(Open Shortest Path First Interior Gateway Protocol，开放式最短路径优先内部网关协议 )</li>
-</ul>
-</li>
-</ol>
-<p>还有一种综合两种算法的混合路由方案，如EIGRP(Enhanced Interior Gateway Routing Protocol，加强型内部网关路由协议)。</p>
-<p>路由器使用距离矢量算法，判断到达目的地址的优先路径的标准就只有一个，那就是跳数，认为具有最小跳数的路径是最短/优路径，而不理会其带宽，可靠性，时延等因素。并且认为跳数大于15跳的目的地址是不可到达的。</p>
-<p>另外，路由还有一个二层设备不具有的功能，那就是隔绝广播，它可以将广播限制在一个网络之内，进而增大网络之间的带宽。</p>
-<h3 id="小结-3"><a href="#小结-3" class="headerlink" title="小结"></a>小结</h3><p>路由器工作在网络层，负责连接不同类型的网络，构造广域网(Wide Area Network, WAN)，隔离广播域，根据数据包的IP地址查找路由表对应表项完成转发。</p>
-<h2 id="网关"><a href="#网关" class="headerlink" title="网关"></a>网关</h2><hr>
-<h3 id="简介"><a href="#简介" class="headerlink" title="简介"></a>简介</h3><p>网关（Gateway）负责网络层以上的数据中继服务，实现不同体系结构的网络协议转换，它通常采用<strong>软件</strong>的方法实现，并且与特定的应用服务一一对应。比如：OSI的文件传输服务FTAM与TCP/IP的文件传输服务FTP，尽管二者都是文件传输但是由于所执行的协议不同不能直接进行通信，而需要网关将两个文件传输系统互连，达到相互进行文件传输的目的。 </p>
-<p>网关是一种复杂的网络连接设备，可以支持不同协议之间的转换，实现不同协议网络之间的互连。<strong>网关具有对不兼容的高层协议进行转换的能力，为了实现异构设备之间的通信，网关需要对不同的链路层、专用会话层、表示层和应用层协议进行翻译和转换</strong>。所以网关兼有路由器、网桥、中继器的特性。</p>
-<p>若要使两个完全不同的网络(异构网)连接在一起，一般使用网关，在Internet中两个网络也要通过一台称为网关的计算机实现互联。这台计算机能根据用户通信目标计算机的IP地址，决定是否将用户发出的信息送出本地网络，同时，它还将外界发送给属于本地网络计算机的信息接收过来，它是一个网络与另一个网络相联的通道。为了使TCP/IP协议能够寻址，该通道被赋予一个IP地址，这个IP地址称为网关地址。</p>
-<h3 id="小结-4"><a href="#小结-4" class="headerlink" title="小结"></a>小结</h3><p>网关的作用就是将两个使用不同协议的网络段连接在一起的设备，对两个网络段中的使用不同传输协议的数据进行互相的翻译转换。在互连设备中，由于协议转换的复杂性，一般只能进行一对一的转换，或是少数几种特定应用协议的转换。</p>
+        <h2 id="全文概要"><a href="#全文概要" class="headerlink" title="全文概要"></a>全文概要</h2><p>本文介绍了Linux系统下部分常用内核参数含义及其调优方式。<br><a id="more"></a></p>
+<p>具体情况要具体分析，此处只是收集通常会利用到的一些参数的调整，做一些简单的对比和解释。<br>全部系统变量默认值测试均在 <strong>Ubuntu 16.03</strong> 系统下进行，内核版本为<strong>4.13.0-42-generic</strong>。</p>
+<h2 id="net"><a href="#net" class="headerlink" title="net"></a>net</h2><hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.tcp_syncookies</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_syncookies</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：1<br>作用：是否打开SYN Cookie功能，该功能可以防止部分SYN攻击</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.ip_local_port_range</span> = <span class="number">1024</span>  <span class="number">65535</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/ip_local_port_range</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：32768   60999<br>作用：可用端口的范围</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.tcp_fin_timeout</span> = <span class="number">30</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_fin_timeout</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：60(s)<br>作用：TCP挥手阶段FIN报文超时时间</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.tcp_timestamps</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_timestamps</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：1<br>作用：TCP时间戳</p>
+<hr>
+<figure class="highlight nix"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.<span class="attr">tcp_tw_recycle</span> = <span class="number">0</span>  <span class="comment"># Ubuntu系统下未找到该变量</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_tw_recycle</span></span><br></pre></td></tr></table></figure>
+<p>默认值：0<br>作用：针对TIME-WAIT，不要开启。不少文章提到同时开启tcp_tw_recycle和tcp_tw_reuse，会带来C/S在NAT方面的异常。个人接受的做法是，开启tcp_tw_reuse，增加ip_local_port_range的范围，减小tcp_max_tw_buckets和tcp_fin_timeout的值(参考<a href="http://ju.outofmemory.cn/entry/91121" target="_blank" rel="noopener"><strong>这里</strong></a>和<a href="http://www.cnblogs.com/lulu/p/4149312.html" target="_blank" rel="noopener"><strong>这里</strong></a>)</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.tcp_tw_reuse</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_tw_reuse</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：0<br>作用：针对TIME-WAIT，做为客户端可以启用(例如，作为nginx-proxy前端代理，要访问后端的服务)</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.tcp_max_tw_buckets</span> = <span class="number">262144</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_max_tw_buckets</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：32768<br>作用：针对TIME-WAIT，配置其上限。如果降低这个值，可以显著的发现time-wait的数量减少，但系统日志中可能出现如下记录：<br><figure class="highlight verilog"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kernel: TCP: <span class="keyword">time</span> <span class="keyword">wait</span> bucket <span class="keyword">table</span> overflow.<span class="string">"</span></span><br></pre></td></tr></table></figure></p>
+<p>对应的，如果升高这个值，可以显著的发现time-wait的数量增加。综合考虑，保持默认值。</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.tcp_max_orphans</span> = <span class="number">3276800</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_max_orphans</span></span><br></pre></td></tr></table></figure>
+<p>默认值：32768<br>作用：orphans的最大值</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.tcp_max_syn_backlog</span> = <span class="number">819200</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_max_syn_backlog</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：256<br>作用：增大SYN队列的长度(SYN_REVD状态的连接个数)，容纳更多连接</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.tcp_keepalive_intvl</span> = <span class="number">30</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_keepalive_intvl</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：75<br>作用：TCP保活机制，探测失败后，间隔若干秒后重新探测</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.tcp_keepalive_probes</span> = <span class="number">3</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_keepalive_probes</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：9<br>作用：TCP保活机制，探测失败后，最多尝试探测几次</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.tcp_keepalive_time</span> = <span class="number">1200</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：</p>
+<figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_keepalive_time</span></span><br></pre></td></tr></table></figure>
+<p>默认值：7200<br>作用：TCP保活机制，间隔多久发送1次keepalive探测包</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.netfilter</span><span class="selector-class">.nf_conntrack_tcp_timeout_established</span> = <span class="number">600</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/</span>netfilter<span class="regexp">/nf_conntrack_tcp_timeout_established</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：432000<br>作用：设置 conntrack tcp 状态的超时时间，如果系统出现下述异常时要考虑调整：</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ping: sendmsg: Operation <span class="keyword">not</span> permitted.</span><br><span class="line">kernel: nf_conntrack: <span class="keyword">table</span> full, dropping <span class="comment">packet.</span></span><br></pre></td></tr></table></figure>
+<p>参考<a href="http://www.linuxidc.com/Linux/2012-11/75151.htm" target="_blank" rel="noopener"><strong>这里</strong></a>还有<a href="http://blog.csdn.net/dog250/article/details/9318843" target="_blank" rel="noopener"><strong>这里</strong></a></p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.netfilter</span><span class="selector-class">.nf_conntrack_max</span> = <span class="number">655350</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/</span>netfilter<span class="regexp">/nf_conntrack_max</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：262144<br>作用：设置 conntrack 的上限，如果系统出现下述异常时要考虑调整：</p>
+<figure class="highlight gams"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">ping: sendmsg: Operation <span class="keyword">not</span> permitted.</span><br><span class="line">kernel: nf_conntrack: <span class="keyword">table</span> full, dropping <span class="comment">packet.</span></span><br></pre></td></tr></table></figure>
+<p>参考<a href="https://blog.yorkgu.me/2012/02/09/kernel-nf_conntrack-table-full-dropping-packet/" target="_blank" rel="noopener"><strong>这里</strong></a>还有<a href="http://www.cnblogs.com/mydomain/archive/2013/05/19/3087153.html" target="_blank" rel="noopener"><strong>这里</strong></a></p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.core</span><span class="selector-class">.netdev_max_backlog</span> = <span class="number">500000</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/</span>core<span class="regexp">/netdev_max_backlog</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：1000<br>作用：网卡设备队列长度(请求个数)</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.core</span><span class="selector-class">.somaxconn</span> = <span class="number">65536</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/</span>core<span class="regexp">/somaxconn</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：128<br>作用：已经成功建立连接等待被应用程序接受(accept调用)的(ESTABLISHED)队列长度(等待被接受的连接个数)</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.core</span><span class="selector-class">.rmem_default</span> = <span class="number">8388608</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/</span>core<span class="regexp">/rmem_default</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：212992<br>作用：默认的TCP数据接收窗口大小字节数</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.core</span><span class="selector-class">.wmem_default</span> = <span class="number">8388608</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/</span>core<span class="regexp">/wmem_default</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：212992<br>作用：默认的TCP数据发送窗口大小字节数</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.core</span><span class="selector-class">.wmem_max</span> = <span class="number">16777216</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/</span>core<span class="regexp">/wmem_max</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：212992<br>作用：最大的TCP数据发送窗口大小字节数</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.core</span><span class="selector-class">.rmem_max</span> = <span class="number">16777216</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/</span>core<span class="regexp">/rmem_max</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：212992<br>作用：最大的TCP数据接收窗口大小字节数</p>
+<hr>
+<figure class="highlight dns"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_mem = <span class="number">94500000</span>   <span class="number">915000000</span>   <span class="number">927000000</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_mem</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：93381  124511  186762<br>作用：内存使用的下限  警戒值  上限</p>
+<hr>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_rmem = <span class="number">4096</span>   <span class="number">87380</span>   <span class="number">16777216</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_rmem</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：4096    87380   6291456<br>作用：socket接收缓冲区内存使用的下限  警戒值  上限</p>
+<hr>
+<figure class="highlight lsl"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net.ipv4.tcp_wmem = <span class="number">4096</span>   <span class="number">16384</span>   <span class="number">16777216</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_wmem</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：4096    16384   4194304<br>作用：socket发送缓冲区内存使用的下限  警戒值  上限</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.tcp_thin_dupack</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight dts"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="meta-keyword">/proc/</span>sys<span class="meta-keyword">/net/</span>ipv4/tcp_thin_dupack <span class="meta"># Ubuntu系统中未找到此变量</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：0<br>作用：收到dupACK时要去检查tcp stream是不是thin(less than 4 packets in flight)</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.ipv4</span><span class="selector-class">.tcp_thin_linear_timeouts</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/i</span>pv4<span class="regexp">/tcp_thin_linear_timeouts</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：0<br>作用：重传超时后要去检查tcp stream是不是thin(less than 4 packets in flight) </p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">net<span class="selector-class">.unix</span><span class="selector-class">.max_dgram_qlen</span> = <span class="number">30000</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/net/u</span>nix<span class="regexp">/max_dgram_qlen</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：512<br>作用：UDP队列里数据报的最大个数</p>
+<hr>
+<p>针对lvs，关闭网卡LRO/GRO功能。现在大多数网卡都具有LRO/GRO功能，即网卡收包时将同一流的小包合并成大包 (tcpdump抓包可以看到&gt;MTU 1500bytes的数据包) 交给内核协议栈。LVS内核模块在处理 &gt;MTU 的数据包时，会将其丢弃。因此，如果我们用LVS来传输大文件，很容易出现丢包，传输速度慢。</p>
+<p>解决方法，关闭LRO/GRO功能，命令：<br><figure class="highlight nginx"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="attribute">ethtool</span> -k eth0          <span class="comment">#查看LRO/GRO当前是否打开</span></span><br><span class="line">ethtool -K eth0 lro <span class="literal">off</span>  <span class="comment">#关闭GRO</span></span><br><span class="line">ethtool -K eth0 gro <span class="literal">off</span>  <span class="comment">#关闭GRO</span></span><br></pre></td></tr></table></figure></p>
+<hr>
+<h2 id="Kernel"><a href="#Kernel" class="headerlink" title="Kernel"></a>Kernel</h2><hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kernel<span class="selector-class">.randomize_va_space</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/kernel/</span>randomize_va_space</span><br></pre></td></tr></table></figure></p>
+<p>默认值：2<br>作用：内核的随机地址保护模式</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kernel<span class="selector-class">.panic</span> = <span class="number">1</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/kernel/</span>panic</span><br></pre></td></tr></table></figure></p>
+<p>默认值：0<br>作用：内核panic时，1秒后自动重启</p>
+<hr>
+<figure class="highlight cos"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kernel.core_pattern = core_<span class="built_in">%e</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/kernel/</span>core_pattern</span><br></pre></td></tr></table></figure></p>
+<p>默认值：|/usr/share/apport/apport %p %s %c %d %P<br>作用：程序生成core时的文件名格式</p>
+<hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">kernel<span class="selector-class">.sysrq</span> = <span class="number">0</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/kernel/</span>sysrq</span><br></pre></td></tr></table></figure></p>
+<p>默认值：176<br>作用：是否启用sysrq功能</p>
+<hr>
+<h2 id="VM"><a href="#VM" class="headerlink" title="VM"></a>VM</h2><hr>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.<span class="attribute">min_free_kbytes</span>=901120</span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/vm/mi</span>n_free_kbytes</span><br></pre></td></tr></table></figure></p>
+<p>默认值：67584<br>作用：保留内存的最低值</p>
+<hr>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.<span class="attribute">panic_on_oom</span>=1</span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/vm/</span>panic_on_oom</span><br></pre></td></tr></table></figure></p>
+<p>默认值：0<br>作用：发生oom时，自动转换为panic</p>
+<hr>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.<span class="attribute">min_free_kbytes</span>=1048576</span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/vm/mi</span>n_free_kbytes</span><br></pre></td></tr></table></figure></p>
+<p>默认值：67584<br>作用：保留最低可用内存</p>
+<hr>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vm.<span class="attribute">swappiness</span>=20</span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/vm/</span>swappiness</span><br></pre></td></tr></table></figure></p>
+<p>默认值：60<br>作用：数值(0-100)越高，越可能发生swap交换</p>
+<hr>
+<h2 id="File-System"><a href="#File-System" class="headerlink" title="File System"></a>File System</h2><hr>
+<figure class="highlight stylus"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs<span class="selector-class">.inotify</span><span class="selector-class">.max_user_watches</span>=<span class="number">8192000</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/fs/i</span>notify<span class="regexp">/max_user_watches</span></span><br></pre></td></tr></table></figure></p>
+<p>默认值：524288<br>作用：inotify的watch数量</p>
+<hr>
+<figure class="highlight routeros"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.<span class="attribute">aio-max-nr</span>=1048576</span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight awk"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/fs/</span>aio-max-nr</span><br></pre></td></tr></table></figure></p>
+<p>默认值：65536<br>作用：aio最大值</p>
+<hr>
+<figure class="highlight fortran"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">fs.<span class="keyword">file</span>-<span class="built_in">max</span> = <span class="number">1048575</span></span><br></pre></td></tr></table></figure>
+<p>查询命令：<br><figure class="highlight gradle"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">cat <span class="regexp">/proc/</span>sys<span class="regexp">/fs/</span><span class="keyword">file</span>-max</span><br></pre></td></tr></table></figure></p>
+<p>默认值：804894<br>作用：文件描述符的最大值</p>
+<hr>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><hr>
-<p>[1] <a href="http://blog.csdn.net/gongda2014306/article/details/52442981" target="_blank" rel="noopener">网络设备解析：中继器、集线器、网桥、交换机、路由器、网关的区别</a><br>[2] <a href="http://blog.csdn.net/u012243115/article/details/47008903" target="_blank" rel="noopener">转发器、集线器、网桥、交换机、路由器和网关简介</a><br>[3] <a href="http://blog.csdn.net/zhongyou2009/article/details/4768807" target="_blank" rel="noopener">交换机和网桥的区别</a><br>[4] <a href="http://hextwolf.blog.51cto.com/59501/29696" target="_blank" rel="noopener">广播域与冲突域详细解析</a><br>[5] <a href="http://www.nowamagic.net/academy/detail/72150314" target="_blank" rel="noopener">集线器、交换机和路由器通俗点的解释</a><br>[6] <a href="http://www.eepw.com.cn/article/275540.htm" target="_blank" rel="noopener">交换机工作原理</a><br>[7] <a href="http://blog.sina.com.cn/s/blog_5e1a889d0101370d.html" target="_blank" rel="noopener">交换机的工作原理(二、三、四层交换原理)</a></p>
+<p>[1]<a href="http://yangrong.blog.51cto.com/6945369/1567427" target="_blank" rel="noopener">Linux内核高性能优化【生产环境实例】</a><br>[2]<a href="http://yangrong.blog.51cto.com/6945369/1321594" target="_blank" rel="noopener">linux内核参数解释说明</a><br>[3]<a href="http://www.cnblogs.com/lulu/p/4149312.html" target="_blank" rel="noopener">tcp_tw_reuse、tcp_tw_recycle 使用场景及注意事项</a><br>[4]<a href="http://blog.51cto.com/nosmoking/1684114" target="_blank" rel="noopener">linux内核调优参数对比和解释</a></p>
 
       
     </div>
@@ -586,11 +653,11 @@
       
         <div class="post-tags">
           
-            <a href="/tags/Switch/" rel="tag"><i class="fa fa-tag"></i> Switch</a>
+            <a href="/tags/Linux/" rel="tag"><i class="fa fa-tag"></i> Linux</a>
           
-            <a href="/tags/Router/" rel="tag"><i class="fa fa-tag"></i> Router</a>
+            <a href="/tags/Kernel/" rel="tag"><i class="fa fa-tag"></i> Kernel</a>
           
-            <a href="/tags/Interconnect/" rel="tag"><i class="fa fa-tag"></i> Interconnect</a>
+            <a href="/tags/Tuning/" rel="tag"><i class="fa fa-tag"></i> Tuning</a>
           
         </div>
       
@@ -603,8 +670,8 @@
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/10/28/Network/SDN/Language/P4/origin-background/" rel="next" title="P4学习笔记：背景起源与基本原理">
-                <i class="fa fa-chevron-left"></i> P4学习笔记：背景起源与基本原理
+              <a href="/2018/05/18/Network/Measurement/related-work-netsight/" rel="next" title="网络测量之NetSight(NSDI-2014)">
+                <i class="fa fa-chevron-left"></i> 网络测量之NetSight(NSDI-2014)
               </a>
             
           </div>
@@ -612,10 +679,6 @@
           <span class="post-nav-divider"></span>
 
           <div class="post-nav-prev post-nav-item">
-            
-              <a href="/2017/10/31/VC/Git/working_directory-repository-stage/" rel="prev" title="Git工作区、版本库与暂存区">
-                Git工作区、版本库与暂存区 <i class="fa fa-chevron-right"></i>
-              </a>
             
           </div>
         </div>
@@ -812,7 +875,7 @@
             
 
             
-              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全文概要"><span class="nav-number">1.</span> <span class="nav-text">全文概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网络互连设备"><span class="nav-number">2.</span> <span class="nav-text">网络互连设备</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#转发器"><span class="nav-number">3.</span> <span class="nav-text">转发器</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#集线器"><span class="nav-number">4.</span> <span class="nav-text">集线器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理"><span class="nav-number">4.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心功能"><span class="nav-number">4.2.</span> <span class="nav-text">核心功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#不足"><span class="nav-number">4.3.</span> <span class="nav-text">不足</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#应用趋势"><span class="nav-number">4.4.</span> <span class="nav-text">应用趋势</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结"><span class="nav-number">4.5.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网桥"><span class="nav-number">5.</span> <span class="nav-text">网桥</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理-1"><span class="nav-number">5.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心功能-1"><span class="nav-number">5.2.</span> <span class="nav-text">核心功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#隔离冲突域"><span class="nav-number">5.3.</span> <span class="nav-text">隔离冲突域</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#存储转发"><span class="nav-number">5.4.</span> <span class="nav-text">存储转发</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#优缺点"><span class="nav-number">5.5.</span> <span class="nav-text">优缺点</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结-1"><span class="nav-number">5.6.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#交换机"><span class="nav-number">6.</span> <span class="nav-text">交换机</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理-2"><span class="nav-number">6.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#工作流"><span class="nav-number">6.2.</span> <span class="nav-text">工作流</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#物理构造"><span class="nav-number">6.3.</span> <span class="nav-text">物理构造</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#自学习"><span class="nav-number">6.4.</span> <span class="nav-text">自学习</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结-2"><span class="nav-number">6.5.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#路由器"><span class="nav-number">7.</span> <span class="nav-text">路由器</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#基本原理-3"><span class="nav-number">7.1.</span> <span class="nav-text">基本原理</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#核心功能-2"><span class="nav-number">7.2.</span> <span class="nav-text">核心功能</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#选路算法"><span class="nav-number">7.3.</span> <span class="nav-text">选路算法</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结-3"><span class="nav-number">7.4.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#网关"><span class="nav-number">8.</span> <span class="nav-text">网关</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#简介"><span class="nav-number">8.1.</span> <span class="nav-text">简介</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#小结-4"><span class="nav-number">8.2.</span> <span class="nav-text">小结</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">9.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全文概要"><span class="nav-number">1.</span> <span class="nav-text">全文概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#net"><span class="nav-number">2.</span> <span class="nav-text">net</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#Kernel"><span class="nav-number">3.</span> <span class="nav-text">Kernel</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#VM"><span class="nav-number">4.</span> <span class="nav-text">VM</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#File-System"><span class="nav-number">5.</span> <span class="nav-text">File System</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">6.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
             
 
           </div>

@@ -2,9 +2,16 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   
   <url>
+    <loc>dongdongdong.me/2018/05/20/OS/Kernel/kernel-parameter-tuning/</loc>
+    
+    <lastmod>2018-05-20T07:10:57.569Z</lastmod>
+    
+  </url>
+  
+  <url>
     <loc>dongdongdong.me/2018/05/18/Network/Measurement/related-work-netsight/</loc>
     
-    <lastmod>2018-05-19T08:35:21.151Z</lastmod>
+    <lastmod>2018-05-20T07:04:28.681Z</lastmod>
     
   </url>
   
@@ -79,14 +86,14 @@
   </url>
   
   <url>
-    <loc>dongdongdong.me/categories/index.html</loc>
+    <loc>dongdongdong.me/about/index.html</loc>
     
     <lastmod>2018-04-27T08:17:36.938Z</lastmod>
     
   </url>
   
   <url>
-    <loc>dongdongdong.me/about/index.html</loc>
+    <loc>dongdongdong.me/categories/index.html</loc>
     
     <lastmod>2018-04-27T08:17:36.938Z</lastmod>
     
@@ -100,14 +107,14 @@
   </url>
   
   <url>
-    <loc>dongdongdong.me/2018/01/16/OS/Installation/Ubuntu/runtime/</loc>
+    <loc>dongdongdong.me/2018/01/22/OS/Installation/Ubuntu/vim/</loc>
     
     <lastmod>2018-04-27T08:17:36.933Z</lastmod>
     
   </url>
   
   <url>
-    <loc>dongdongdong.me/2018/01/22/OS/Installation/Ubuntu/vim/</loc>
+    <loc>dongdongdong.me/2018/01/16/OS/Installation/Ubuntu/runtime/</loc>
     
     <lastmod>2018-04-27T08:17:36.933Z</lastmod>
     
