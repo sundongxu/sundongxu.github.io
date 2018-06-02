@@ -1,0 +1,1486 @@
+<!DOCTYPE html>
+
+
+
+  
+
+
+<html class="theme-next mist use-motion" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+  
+  
+    
+    
+  <script src="/lib/pace/pace.min.js?v=1.0.2"></script>
+  <link href="/lib/pace/pace-theme-minimal.min.css?v=1.0.2" rel="stylesheet">
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.3" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.3">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.3">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.3" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="Segmentation,TCP,Fragmentation,IP," />
+
+
+
+
+
+  <link rel="alternate" href="/atom.xml" title="Sun Dongxu's Blog" type="application/atom+xml" />
+
+
+
+
+
+
+<meta name="description" content="全文概要 我们在学习TCP/IP协议时都知道，TCP报文段如果很长的话，会在发送时发生分段(Segmentation)，在接收时进行重组，同样IP数据报在长度超过一定值时也会发生分片(Fragmentation)，在接收端再将分片重组。如果之前你和曾经的我一样，经常混淆这两个概念，甚至一度以为两者表示的是同一个协议栈机制，那么本文就将通过详细介绍分段与分片的区别与联系，力图让你对此有一个更为完整、">
+<meta name="keywords" content="Segmentation,TCP,Fragmentation,IP">
+<meta property="og:type" content="article">
+<meta property="og:title" content="TCP分段与IP分片的区别与联系">
+<meta property="og:url" content="dongdongdong.me/2018/06/01/Network/Mechanism/segmentation-fragmentation/index.html">
+<meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
+<meta property="og:description" content="全文概要 我们在学习TCP/IP协议时都知道，TCP报文段如果很长的话，会在发送时发生分段(Segmentation)，在接收时进行重组，同样IP数据报在长度超过一定值时也会发生分片(Fragmentation)，在接收端再将分片重组。如果之前你和曾经的我一样，经常混淆这两个概念，甚至一度以为两者表示的是同一个协议栈机制，那么本文就将通过详细介绍分段与分片的区别与联系，力图让你对此有一个更为完整、">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:updated_time" content="2018-06-02T13:00:40.021Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="TCP分段与IP分片的区别与联系">
+<meta name="twitter:description" content="全文概要 我们在学习TCP/IP协议时都知道，TCP报文段如果很长的话，会在发送时发生分段(Segmentation)，在接收时进行重组，同样IP数据报在长度超过一定值时也会发生分片(Fragmentation)，在接收端再将分片重组。如果之前你和曾经的我一样，经常混淆这两个概念，甚至一度以为两者表示的是同一个协议栈机制，那么本文就将通过详细介绍分段与分片的区别与联系，力图让你对此有一个更为完整、">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.3',
+    sidebar: {"position":"left","display":"post","offset":12,"b2t":false,"scrollpercent":false,"onmobile":false},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":true,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="dongdongdong.me/2018/06/01/Network/Mechanism/segmentation-fragmentation/"/>
+
+
+
+
+
+  <title>TCP分段与IP分片的区别与联系 | Sun Dongxu's Blog</title>
+  
+
+
+
+
+
+  <script type="text/javascript">
+    var _hmt = _hmt || [];
+    (function() {
+      var hm = document.createElement("script");
+      hm.src = "https://hm.baidu.com/hm.js?6b59978ef5e74a1232a0ca20456b8fda";
+      var s = document.getElementsByTagName("script")[0];
+      s.parentNode.insertBefore(hm, s);
+    })();
+  </script>
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-left page-post-detail">
+    <div class="headband"></div>
+      <a href="https://github.com/sundongxu"><img style="position: absolute; top: 0; right: 0; border: 0;" src="https://s3.amazonaws.com/github/ribbons/forkme_right_darkblue_121621.png" alt="Fork me on GitHub"></a>    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">Sun Dongxu's Blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle">Reorganizing the Organization, Rebuilding the Building.</p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-about">
+          <a href="/about/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-user"></i> <br />
+            
+            关于
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-categories">
+          <a href="/categories/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-th"></i> <br />
+            
+            分类
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="dongdongdong.me/2018/06/01/Network/Mechanism/segmentation-fragmentation/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="Sun Dongxu">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/la.png">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="Sun Dongxu's Blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">TCP分段与IP分片的区别与联系</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-06-01T16:00:00+08:00">
+                2018-06-01
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+            <span class="post-category" >
+            
+              <span class="post-meta-divider">|</span>
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-folder-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">分类于</span>
+              
+              
+                <span itemprop="about" itemscope itemtype="http://schema.org/Thing">
+                  <a href="/categories/Network/" itemprop="url" rel="index">
+                    <span itemprop="name">Network</span>
+                  </a>
+                </span>
+
+                
+                
+              
+            </span>
+          
+
+          
+            
+          
+
+          
+          
+             <span id="/2018/06/01/Network/Mechanism/segmentation-fragmentation/" class="leancloud_visitors" data-flag-title="TCP分段与IP分片的区别与联系">
+               <span class="post-meta-divider">|</span>
+               <span class="post-meta-item-icon">
+                 <i class="fa fa-eye"></i>
+               </span>
+               
+                 <span class="post-meta-item-text">阅读次数&#58;</span>
+               
+                 <span class="leancloud-visitors-count"></span>
+             </span>
+          
+
+          
+
+          
+            <div class="post-wordcount">
+              
+                
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-file-word-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">字数统计&#58;</span>
+                
+                <span title="字数统计">
+                  4,021
+                </span>
+              
+
+              
+                <span class="post-meta-divider">|</span>
+              
+
+              
+                <span class="post-meta-item-icon">
+                  <i class="fa fa-clock-o"></i>
+                </span>
+                
+                  <span class="post-meta-item-text">阅读时长 &asymp;</span>
+                
+                <span title="阅读时长">
+                  14
+                </span>
+              
+            </div>
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h2 id="全文概要"><a href="#全文概要" class="headerlink" title="全文概要"></a>全文概要</h2><hr>
+<p>我们在学习TCP/IP协议时都知道，TCP报文段如果很长的话，会在发送时发生<strong>分段(Segmentation)</strong>，在接收时进行重组，同样IP数据报在长度超过一定值时也会发生<strong>分片(Fragmentation)</strong>，在接收端再将分片重组。如果之前你和曾经的我一样，经常混淆这两个概念，甚至一度以为两者表示的是同一个协议栈机制，那么本文就将通过详细介绍分段与分片的区别与联系，力图让你对此有一个更为完整、严谨的理解。<br><a id="more"></a></p>
+<h2 id="背景"><a href="#背景" class="headerlink" title="背景"></a>背景</h2><hr>
+<p>首先需要强调的一点是，不管你之前从什么渠道获取了关于分段/分片方面的知识，甚至会觉得两者只是叫法不同但实际意思相同，但在本文中，</p>
+<blockquote>
+<p><strong>分段特指发生在使用TCP协议的传输层中的数据切分行为</strong><br><strong>分片特指发生在使用IPv4协议的网络IP层中的数据切分行为</strong></p>
+</blockquote>
+<p>这一点在文章标题中已经表达得十分明显。</p>
+<p>正如上文所述，分段与分片发生在协议栈的不同层次，但目的都一样：</p>
+<blockquote>
+<p>都是为了能够传输上层交付的、数据量超过本层传输能力上限的数据，<strong>不得已</strong>才做的数据切分。</p>
+</blockquote>
+<p>注意到这里我用了修饰词，“不得已” — 也就是说在正常情况尽量避免做数据切分，能不分就不分，而只有在特殊场景下才不得不这么做。</p>
+<p>这么形容显然是有原因的，最起码有以下两点解释：</p>
+<ol>
+<li>数据切分对于协议栈而言，显然使处理逻辑变得更加复杂了，在发送端需要做切分，甚至在路径中的转发设备中也需要切分(后文会介绍这种情况)，在接收端又要做重组，处理开销明显增大，对设备的处理能力提出更高的要求；</li>
+<li>在切分过程过不可避免的要为每个数据分片增加必要的协议首部以完成网络传输，在首部中还需要携带必要的顺序、偏移、是否属于同一块大数据等元信息来帮助组装。<br><br></li>
+</ol>
+<p>上述额外的空间开销在没有分片的情况下，显然是不需要的，发一块收一块即可，为了传输该数据包仅为其添加协议栈各层首部各一份，更无须设置用于组装的各种元数据，不论是发送还是接收的处理逻辑都更加简单。所以，能不切分就不切分，毫无疑问是正确的。</p>
+<p>到此为止，关于数据切分技术出现的背景，包括其必要性和弊端都应该算是比较清晰了。</p>
+<p>回到文章主题，前文有提到分段和分片工作在不同协议层，这其实很容易会造成一些疑惑，这些疑惑也一度伴随着我，比如：</p>
+<ul>
+<li>分段和分片有没有可能同时发生？为什么可能/不能？</li>
+<li>如果可能，什么场景下会同时发生？</li>
+<li>如果不能，什么场景下会发生分段？什么场景下又会发生分片？</li>
+<li>分段和分片的切分与组装的过程是怎么样的？</li>
+</ul>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><hr>
+<p>要回答以上问题，首先要介绍两个概念：</p>
+<h3 id="最大传输单元-Maximum-Transmission-Unit"><a href="#最大传输单元-Maximum-Transmission-Unit" class="headerlink" title="最大传输单元(Maximum Transmission Unit)"></a>最大传输单元(Maximum Transmission Unit)</h3><hr>
+<p>最大传输单元(Maximum Transmission Unit)，即<strong>MTU</strong>，为数据链路层的最大载荷上限(即IP数据报最大长度)，每段链路的MTU可能都不相同，一条端到端路径的MTU由这条路径上MTU最小的那段链路的MTU决定。</p>
+<p>MTU是链路层中的网络对数据帧的一个限制，以以太网为例，MTU通常为1500字节，采用巨帧(Jumbo Frame)时可以达到9000字节。所谓的MTU，是二层协议的一个限制，对不同的二层协议可能有不同的值，只有二层协议为以太网(<strong>Ethernet</strong>)时，MTU一般才取1500字节，注意它不是物理链路介质的限制，只有工作在二层的设备才需要指定MTU的值，如网卡、转发设备端口(统称为<strong>网络接口</strong>)等，通过同一段线缆直连的通信端口或网卡，其MTU值一定相同。</p>
+<p>一个IP数据报在以太网中传输，如果它的长度大于当前链路MTU值，就要进行<strong>分片传输(这里指IP层分片)</strong>，使得每片数据报的长度都不超过MTU。分片传输的IP数据报不一定按序到达，但IP首部中的信息能让这些数据报片按序组装。IP数据报的分片与重组是在网络IP层完成的。</p>
+<h3 id="最大报文段长度-Maximum-Segment-Size"><a href="#最大报文段长度-Maximum-Segment-Size" class="headerlink" title="最大报文段长度(Maximum Segment Size)"></a>最大报文段长度(Maximum Segment Size)</h3><hr>
+<p>最大报文段长度(Maximum Segment Size)，即<strong>MSS</strong>，为TCP传输层的最大载荷上限(即应用层数据最大长度)，TCP三次握手期间通过TCP首部选项中的MSS字段通知对端，通常一条TCP连接的MSS取通信双方较小的那一个MSS值，与MTU的换算关系为：</p>
+<p><center><strong>MTU = MSS + TCP首部长度 + IP首部长度</strong></center><br></p>
+<p>故在以太网中(网络层以IPv4为例)：</p>
+<p><center><strong>MSS = 以太网MTU - TCP首部长度 - IPv4首部长度 = 1500 - 20 - 20 = 1460字节</strong></center><br></p>
+<p>未指定MSS时默认值为536字节，这是因为在Internet中标准的MTU值为576字节，576字节MTU = TCP首部长度20字节 + IPv4首部长度20字节 + 536字节MSS。</p>
+<p>一个应用程序如果要发送超过MSS大小的数据，就要进行<strong>分段传输(这里指TCP分段)</strong>，使得每个报文段长度都不超过MSS。分片传输的TCP报文段不一定按序到达，但实现可靠传输的TCP协议中有处理乱序的机制，即利用报文段序列号在接收缓冲区进行数据重排以实现重组。TCP分段的重组是在TCP传输层完成的。</p>
+<h2 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h2><hr>
+<p>有了前文的知识准备，不难得出结论：</p>
+<blockquote>
+<p><strong>TCP分段的原因是因为TCP报文段大小受MSS限制</strong><br><strong>IP分片的原因则是因为IP数据报大小受MTU限制</strong></p>
+</blockquote>
+<p>由于一直有 $MSS \leq MTU$ 成立，很明显，分段后的每一个TCP报文段再加上IP首部后的长度构造成的IP数据报长度都不可能超过MTU，因此也就不需要在网络层进行IP分片了。</p>
+<p>相比于为实现面向连接、提供可靠传输服务而具备各种复杂机制的TCP，UDP是简单至极的传输协议，就是在IP协议基础上增加了些无关痛痒的特性以实现端到端的数据传输服务，因此UDP提供的是类似IP的“尽力而为”的传输服务，是不可靠的。而由于UDP协议并不会自行分段，故MSS的限制对其没有作用，因此最终的IP数据报的长度超过了MTU时，网络层会负责执行IP分片。同样，(没有分段功能的)ICMP数据在网络层中同样会出现IP分片的情况。</p>
+<p>简而言之：</p>
+<blockquote>
+<p>UDP不会分段，就由IP来分片。TCP会分段，当然就不用IP来分了！</p>
+</blockquote>
+<p>另外一个值得注意的是，在分片的数据中，传输层的首部只会出现在第一个分片中，IP数据报分片后，只有第一片带有传输层首部(UDP或ICMP等)，后续分片只有IP首部和应用数据，到了目的地后根据IP首部中的信息在网络层进行重组，这一步骤对上层透明，即传输层根本不知道IP层发生了分片与重组。而TCP报文段的每个分段中都有TCP首部，到了目的地后根据TCP首部的信息在传输层进行重组。</p>
+<p>TCP分段仅发生在发送端，这是因为在传输过程中，TCP分段是先被封装成IP数据报，再封装在以太网帧中被链路所传输的，并且在端到端路径上通常不会有工作在三层以上，即传输层的设备，故TCP分段不会发生在传输路径中间的某个设备中，在发送端TCP传输层分段后，在接收端TCP传输层重组。</p>
+<p>IP分片不仅会发生在在使用UDP、ICMP等没有分段功能的传输层协议的数据发送方，更还会发生在传输途中，甚至有可能都会发生，这是因为原本的大数据报被分片后很可能会经过不同MTU大小的链路，一旦链路MTU大于当前IP分片大小，则需要在当前转发设备(如路由器)中再次分片，但是各个分片只有到达目的地后才会在其网络层重组，而不是像其他网络协议，在下一跳就要进行重组。</p>
+<p>所以有一点需要特别强调：</p>
+<blockquote>
+<p>发送端进行TCP分段后就一定不会在IP层进行分片，因为MSS本身就是基于MTU推导而来，TCP层分段满足了MSS限制，也就满足了MTU的物理限制。但在TCP分段发生后仍然可能发生IP分片，这是因为TCP分段仅满足了通信两端的MTU要求，传输路径上如经过MTU值比该MTU值更小的链路，那么在转发分片到该条链路的设备中仍会以更小的MTU值作为依据再次分片。当然如果两个通信主机直连，那么TCP连接协商得到的MTU值(两者网卡MTU较小值)就是端到端的路径MTU值，故发送端只要做了TCP分段，则在整个通信过程中一定不会发生IP分片。</p>
+</blockquote>
+<p>特别地，对中途发生分片的数据报而言，即使只丢失其中一片数据也要重传整个数据报(这里既然有重传，说明传输层使用的是具有重传功能的协议，如TCP协议。而UDP协议不可靠，即使丢包了也不在意更不会重传，所以必须在应用层实现可靠通信的逻辑），这是因为IP本身没有重传机制，只能由更高层，比如传输层的TCP协议，来负责重传以确保可靠传输。于是，当来自同一个TCP报文段封装得到的原始IP数据报中的的某一片丢失后，接收端TCP迟迟接受不到完整报文段，它就会认为该报文段(包括全部IP分片)已丢失，TCP之后由于超时会收到三个冗余ACK就会重传整个TCP报文段，该报文段对应于一份IP数据报，可能有多个IP分片，但没有办法单独重传其中某一个数据分片，只能重传整个报文段。</p>
+<h2 id="联系"><a href="#联系" class="headerlink" title="联系"></a>联系</h2><hr>
+<p>分片或分段发生的根源都在于MTU这一数据链路层限制，由于更靠近数据链路层的IP层在感知MTU方面相比于传输层具备天然的优势，在大小超过MTU的大数据报传输问题出现伊始，IP层分片技术就成为主流解决方案。而分片带来的诸多开销(额外首部、复杂处理逻辑)以及其甚至可能在端到端的传输过程中多次发生在网络转发设备(路由器)的问题，让网络协议设计者们又要费尽心思地在端到端通信过程中避免IP分片。</p>
+<p>TCP分段技术被提出后，在一定程度上减少了IP分片，但正如上一节末尾所言，TCP分段仅是在发送端避免了IP分片，但是却不能保证在整个端到端通信路径上不会发生IP分片，因为路径上经常会有MTU值小于该TCP连接协商得到的MTU值的链路，在转发至该段链路之前转发设备仍需分片，所以说TCP分段并不能完全避免IP分片。</p>
+<p>那么如何才能彻底避免分片呢？</p>
+<p>答案其实不难想到：如果能在TCP连接双方正式通信之前，就能通过某种方式预先知道端到端路径的MTU，即路径中包含的各条链路的MTU最小值(称为路径MTU，<strong>Path MTU</strong>)，这一预先获知路径MTU的过程，称为路径MTU发现(<strong>Path MTU Discovery</strong>)，这样此后每次通信都会基于此MTU推导得到的MSS值在发送方TCP层处执行分段。</p>
+<p>路径MTU发现如何实现呢？</p>
+<p>大家都记得IP首部中有三个标志位，第一位预留，第二位<strong>DF(Don’t Fragment)</strong>，第三位<strong>MF(More Fragments)</strong>。其中<strong>DF</strong>如果为1，意思是这个IP数据报在传输的过程中不能分片，如果此IP数据报大于网络接口的MTU，请直接丢弃，并发送消息告诉源主机已丢包。什么消息呢？<strong>ICMP</strong>的消息，告诉包因为太大了，因为不能分片所以丢弃了，并告诉源主机请重新发送不超过MTU的数据报，那发什么样的ICMP消息呢？再回顾一下ICMP首部结构，有一个<strong>Type</strong>字段，还有<strong>Code</strong>字段，发送<strong>Type=3, Code=4, MTU=该接口的MTU值X</strong>的消息既可以了。当这个ICMP消息到达IP数据报的源主机，源主机知道原来是IP数据报太大了，那最大可以发送多大的包呢？ICMP消息里有，那就是MTU=丢弃该包的网络接口的MTU值X，于是源主机再次发送不超过MTU=X的数据报就可以避免在传输路径上的IP分片。</p>
+<p>有人会说，如果这个大小不超过X的IP数据报在传输过程中又遇到更小的MTU怎么办？重复以上步骤即可~</p>
+<p>路径MTU发现看似完美避免了IP分片的问题，但同时又带来了新的问题：如果ICMP消息最终没能到达源主机怎么办？很显然该IP数据报就被静静丢弃了，TCP连接超时而被断开。ICMP为什么回不来？一般是被防火墙或路由器的访问控制列表(Access Control List, ACL)给无情拒绝了。如果你可以管理并配置这些设备，只要允许ICMP <strong>Type=3, Code=4</strong> 的消息可以通过即可，否则只有老老实实关闭路径MTU发现功能了，因为至少分片还能通信，而避免分片则彻底无法通信了…</p>
+<h2 id="实例"><a href="#实例" class="headerlink" title="实例"></a>实例</h2><hr>
+<p>参见<a href="https://blog.csdn.net/yusiguyuan/article/details/22782943" target="_blank" rel="noopener"><strong>2</strong></a>与<a href="http://www.cnblogs.com/diegodu/p/4647644.html" target="_blank" rel="noopener"><strong>3</strong></a></p>
+<h2 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h2><hr>
+<ol>
+<li>(TCP)分段和(IP)分片各自发生在不同的协议层(分段-TCP传输层，分片-IP层)</li>
+<li>切分的原因不尽相同(数据量超出上限，分段应用数据上限-MSS，分片上限-MTU)</li>
+<li>虽然分段和分片不会在发送方同时发生，但却可能在同一次通信过程中分别在发送主机(分段)和转发设备(分片)中发生</li>
+<li>发送端采用的传输层协议不同(分段-TCP，分片-UDP/ICMP…)</li>
+<li>分段仅可能发生在发送端，分片不仅可能发生在发送端，更还可能发生在路径上任何一台工作在三层或以上的设备中，而两者的重组都只会发生在接收端</li>
+</ol>
+<h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><hr>
+<p>1.<a href="https://blog.csdn.net/ns_code/article/details/30109789" target="_blank" rel="noopener">网络协议-TCP分段与IP分片</a><br>2.<a href="https://blog.csdn.net/yusiguyuan/article/details/22782943" target="_blank" rel="noopener">TCP层分段与IP层分片的关系</a><br>3.<a href="http://www.cnblogs.com/diegodu/p/4647644.html" target="_blank" rel="noopener">IP分片浅析</a><br>4.<a href="http://www.cnblogs.com/lshs/p/6038494.html" target="_blank" rel="noopener">TCP常见选项</a><br>5.<a href="https://www.zhihu.com/question/22181709" target="_blank" rel="noopener">TCP/IP协议栈中为什么选择IP层负责分片</a><br>6.<a href="https://blog.csdn.net/stpeace/article/details/74152332" target="_blank" rel="noopener">为什么IP层要分片而TCP层要分段？</a><br>7.<a href="https://www.cnblogs.com/wilber2013/p/4853674.html" target="_blank" rel="noopener">动手学习TCP-数据传输</a></p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+      <div>
+        <div style="padding: 10px 0; margin: 20px auto; width: 90%; text-align: center;">
+  <div>我知道是不会有人点的，但万一有人想不开呢？！</div>
+  <button id="rewardButton" disable="enable" onclick="var qr = document.getElementById('QR'); if (qr.style.display === 'none') {qr.style.display='block';} else {qr.style.display='none'}">
+    <span>打赏</span>
+  </button>
+  <div id="QR" style="display: none;">
+
+    
+      <div id="wechat" style="display: inline-block">
+        <img id="wechat_qr" src="/images/wechatpay.png" alt="Sun Dongxu 微信支付"/>
+        <p>微信支付</p>
+      </div>
+    
+
+    
+
+    
+
+  </div>
+</div>
+
+      </div>
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/Segmentation/" rel="tag"><i class="fa fa-tag"></i> Segmentation</a>
+          
+            <a href="/tags/TCP/" rel="tag"><i class="fa fa-tag"></i> TCP</a>
+          
+            <a href="/tags/Fragmentation/" rel="tag"><i class="fa fa-tag"></i> Fragmentation</a>
+          
+            <a href="/tags/IP/" rel="tag"><i class="fa fa-tag"></i> IP</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/05/25/Network/Measurement/related-work-everflow/" rel="next" title="网络测量之EverFlow(SIGCOMM-2015)">
+                <i class="fa fa-chevron-left"></i> 网络测量之EverFlow(SIGCOMM-2015)
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+        <!-- Go to www.addthis.com/dashboard to customize your tools -->
+<div class="addthis_inline_share_toolbox">
+  <script type = "text/javascript" src = "//s7.addthis.com/js/300/addthis_widget.js#pubid=ra-59f1e74daa26cba5" async = "async" ></script>
+</div>
+
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+  <div class="comments" id="comments"></div>
+    
+    <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+    <script src='/lib/Valine.min.js'></script>
+    <script>
+        new Valine({
+            av: AV,
+            el: '.comments' ,
+            verify: true,
+            app_id: '',
+            app_key: '',
+            placeholder: 'Welcome to teach me something!'
+        });
+    </script>
+    
+
+
+        </div>
+        
+          
+  
+  <div class="sidebar-toggle">
+    <div class="sidebar-toggle-line-wrap">
+      <span class="sidebar-toggle-line sidebar-toggle-line-first"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-middle"></span>
+      <span class="sidebar-toggle-line sidebar-toggle-line-last"></span>
+    </div>
+  </div>
+
+  <aside id="sidebar" class="sidebar">
+    
+    <div class="sidebar-inner">
+
+      
+
+      
+        <ul class="sidebar-nav motion-element">
+          <li class="sidebar-nav-toc sidebar-nav-active" data-target="post-toc-wrap">
+            文章目录
+          </li>
+          <li class="sidebar-nav-overview" data-target="site-overview-wrap">
+            站点概览
+          </li>
+        </ul>
+      
+
+      <section class="site-overview-wrap sidebar-panel">
+        <div class="site-overview">
+          <div class="site-author motion-element" itemprop="author" itemscope itemtype="http://schema.org/Person">
+            
+              <img class="site-author-image" itemprop="image"
+                src="/images/la.png"
+                alt="Sun Dongxu" />
+            
+              <p class="site-author-name" itemprop="name">Sun Dongxu</p>
+              <p class="site-description motion-element" itemprop="description">Consistency refines Efficiency.</p>
+          </div>
+
+          <nav class="site-state motion-element">
+
+            
+              <div class="site-state-item site-state-posts">
+              
+                <a href="/archives/">
+              
+                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-name">日志</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-categories">
+                <a href="/categories/index.html">
+                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-name">分类</span>
+                </a>
+              </div>
+            
+
+            
+              
+              
+              <div class="site-state-item site-state-tags">
+                <a href="/tags/index.html">
+                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-name">标签</span>
+                </a>
+              </div>
+            
+
+          </nav>
+
+          
+            <div class="feed-link motion-element">
+              <a href="/atom.xml" rel="alternate">
+                <i class="fa fa-rss"></i>
+                RSS
+              </a>
+            </div>
+          
+
+          <div class="links-of-author motion-element">
+            
+              
+                <span class="links-of-author-item">
+                  <a href="https://github.com/sundongxu" target="_blank" title="GitHub">
+                    
+                      <i class="fa fa-fw fa-github"></i>GitHub</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://www.zhihu.com/people/sun-dong-xu-6/activities" target="_blank" title="知乎">
+                    
+                      <i class="fa fa-fw fa-graduation-cap"></i>知乎</a>
+                </span>
+              
+                <span class="links-of-author-item">
+                  <a href="https://weibo.com/u/2864802550" target="_blank" title="微博">
+                    
+                      <i class="fa fa-fw fa-weibo"></i>微博</a>
+                </span>
+              
+            
+          </div>
+
+          
+          
+
+          
+          
+            <div class="links-of-blogroll motion-element links-of-blogroll-block">
+              <div class="links-of-blogroll-title">
+                <i class="fa  fa-fw fa-link"></i>
+                友情链接
+              </div>
+              <ul class="links-of-blogroll-list">
+                
+                  <li class="links-of-blogroll-item">
+                    <a href="http://www.cnblogs.com/burningTheStar" title="秋波园" target="_blank">秋波园</a>
+                  </li>
+                
+              </ul>
+            </div>
+          
+
+          
+
+        </div>
+      </section>
+
+      
+      <!--noindex-->
+        <section class="post-toc-wrap motion-element sidebar-panel sidebar-panel-active">
+          <div class="post-toc">
+
+            
+              
+            
+
+            
+              <div class="post-toc-content"><ol class="nav"><li class="nav-item nav-level-2"><a class="nav-link" href="#全文概要"><span class="nav-number">1.</span> <span class="nav-text">全文概要</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#背景"><span class="nav-number">2.</span> <span class="nav-text">背景</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#概念"><span class="nav-number">3.</span> <span class="nav-text">概念</span></a><ol class="nav-child"><li class="nav-item nav-level-3"><a class="nav-link" href="#最大传输单元-Maximum-Transmission-Unit"><span class="nav-number">3.1.</span> <span class="nav-text">最大传输单元(Maximum Transmission Unit)</span></a></li><li class="nav-item nav-level-3"><a class="nav-link" href="#最大报文段长度-Maximum-Segment-Size"><span class="nav-number">3.2.</span> <span class="nav-text">最大报文段长度(Maximum Segment Size)</span></a></li></ol></li><li class="nav-item nav-level-2"><a class="nav-link" href="#区别"><span class="nav-number">4.</span> <span class="nav-text">区别</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#联系"><span class="nav-number">5.</span> <span class="nav-text">联系</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#实例"><span class="nav-number">6.</span> <span class="nav-text">实例</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#总结"><span class="nav-number">7.</span> <span class="nav-text">总结</span></a></li><li class="nav-item nav-level-2"><a class="nav-link" href="#参考资料"><span class="nav-number">8.</span> <span class="nav-text">参考资料</span></a></li></ol></div>
+            
+
+          </div>
+        </section>
+      <!--/noindex-->
+      
+
+      
+
+    </div>
+  </aside>
+
+
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
+
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-heart"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">Sun Dongxu</span>
+</div>
+
+
+  <div class="powered-by">
+    <i class="fa fa-user-md"></i><span id="busuanzi_container_site_uv">
+    访客数  <span id="busuanzi_value_site_uv"></span></span>
+  <span class="post-meta-divider">|</span>
+  </div>
+
+  <div class="powered-by">
+    <i class="fa fa-bolt"></i><span id="busuanzi_container_site_pv">
+    点击量  <span id="busuanzi_value_site_pv"></span></span>
+  <span class="post-meta-divider">|</span>
+  </div>
+
+  <div class="powered-by">
+    
+      <span class="post-meta-item-icon">
+      <i class="fa fa-pencil"></i></span>
+      博客全站共
+      <span title="Site words total count">96.3k 字</span>
+    
+   </div>
+
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.3"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.3"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.3"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.3"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+  
+  <script src="//cdn1.lncld.net/static/js/3.0.4/av-min.js"></script>
+  <script src="//cdn.jsdelivr.net/gh/xcss/valine@v1.1.7-rc3/dist/Valine.min.js"></script>
+  <script type="text/javascript">
+    new Valine({
+        av: AV,
+        el: '#comments' ,
+        verify: false,
+        notify: false,
+        app_id: 'GahxsYhy86LRoRJ6jNOKbsjd-gzGzoHsz',
+        app_key: '3LFhgQbpJqib03QEIBwCbAN4',
+        placeholder: ''
+    });
+  </script>
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+  <script src="https://cdn1.lncld.net/static/js/av-core-mini-0.6.4.js"></script>
+  <script>AV.initialize("YGwn9ugsopQVcGsCsO02SAak-gzGzoHsz", "lpK3dw1VUUeKtFIouqwCMjuz");</script>
+  <script>
+    function showTime(Counter) {
+      var query = new AV.Query(Counter);
+      var entries = [];
+      var $visitors = $(".leancloud_visitors");
+
+      $visitors.each(function () {
+        entries.push( $(this).attr("id").trim() );
+      });
+
+      query.containedIn('url', entries);
+      query.find()
+        .done(function (results) {
+          var COUNT_CONTAINER_REF = '.leancloud-visitors-count';
+
+          if (results.length === 0) {
+            $visitors.find(COUNT_CONTAINER_REF).text(0);
+            return;
+          }
+
+          for (var i = 0; i < results.length; i++) {
+            var item = results[i];
+            var url = item.get('url');
+            var time = item.get('time');
+            var element = document.getElementById(url);
+
+            $(element).find(COUNT_CONTAINER_REF).text(time);
+          }
+          for(var i = 0; i < entries.length; i++) {
+            var url = entries[i];
+            var element = document.getElementById(url);
+            var countSpan = $(element).find(COUNT_CONTAINER_REF);
+            if( countSpan.text() == '') {
+              countSpan.text(0);
+            }
+          }
+        })
+        .fail(function (object, error) {
+          console.log("Error: " + error.code + " " + error.message);
+        });
+    }
+
+    function addCount(Counter) {
+      var $visitors = $(".leancloud_visitors");
+      var url = $visitors.attr('id').trim();
+      var title = $visitors.attr('data-flag-title').trim();
+      var query = new AV.Query(Counter);
+
+      query.equalTo("url", url);
+      query.find({
+        success: function(results) {
+          if (results.length > 0) {
+            var counter = results[0];
+            counter.fetchWhenSave(true);
+            counter.increment("time");
+            counter.save(null, {
+              success: function(counter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(counter.get('time'));
+              },
+              error: function(counter, error) {
+                console.log('Failed to save Visitor num, with error message: ' + error.message);
+              }
+            });
+          } else {
+            var newcounter = new Counter();
+            /* Set ACL */
+            var acl = new AV.ACL();
+            acl.setPublicReadAccess(true);
+            acl.setPublicWriteAccess(true);
+            newcounter.setACL(acl);
+            /* End Set ACL */
+            newcounter.set("title", title);
+            newcounter.set("url", url);
+            newcounter.set("time", 1);
+            newcounter.save(null, {
+              success: function(newcounter) {
+                var $element = $(document.getElementById(url));
+                $element.find('.leancloud-visitors-count').text(newcounter.get('time'));
+              },
+              error: function(newcounter, error) {
+                console.log('Failed to create');
+              }
+            });
+          }
+        },
+        error: function(error) {
+          console.log('Error:' + error.code + " " + error.message);
+        }
+      });
+    }
+
+    $(function() {
+      var Counter = AV.Object.extend("Counter");
+      if ($('.leancloud_visitors').length == 1) {
+        addCount(Counter);
+      } else if ($('.post-title-link').length > 1) {
+        showTime(Counter);
+      }
+    });
+  </script>
+
+
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+  
+  
+    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script>
+  
+</body>
+</html>
