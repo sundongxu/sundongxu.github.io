@@ -96,7 +96,7 @@
 <meta property="og:description" content="全文概要NSDI 2014年中，由斯坦福大学”SDN之父”，Nick Mckeown教授带领的实验室发表了题为《I Know What Yout Packet Did Last Hop: Using Packet Histories to Troubleshoot Networks》的论文。基于本文设计的NetSight系统，运行在端系统之上，并利用已有的OpenFlow交换机的功能特性，实现了P">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-netsight/architecture.png">
-<meta property="og:updated_time" content="2018-05-20T07:04:28.681Z">
+<meta property="og:updated_time" content="2018-05-25T14:30:45.935Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络测量之NetSight(NSDI-2014)">
 <meta name="twitter:description" content="全文概要NSDI 2014年中，由斯坦福大学”SDN之父”，Nick Mckeown教授带领的实验室发表了题为《I Know What Yout Packet Did Last Hop: Using Packet Histories to Troubleshoot Networks》的论文。基于本文设计的NetSight系统，运行在端系统之上，并利用已有的OpenFlow交换机的功能特性，实现了P">
@@ -410,7 +410,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  3,549
+                  3,559
                 </span>
               
 
@@ -451,7 +451,7 @@
 <h2 id="Paper"><a href="#Paper" class="headerlink" title="Paper"></a>Paper</h2><hr>
 <p>Proposed in <a href="https://www.usenix.org/conference/nsdi14" target="_blank" rel="noopener">NSDI.2014</a><br>-<a href="https://www.usenix.org/system/files/conference/nsdi14/nsdi14-paper-handigol.pdf" target="_blank" rel="noopener"><strong>《I Know What Yout Packet Did Last Hop: Using Packet Histories to Troubleshoot Networks》</strong></a></p>
 <h2 id="Idea"><a href="#Idea" class="headerlink" title="Idea"></a>Idea</h2><hr>
-<p>在网络中的每一个数据包流经的每一跳都会为该数据包产生一个称作<strong>Postcard</strong>的日志条目(包含Switch ID、输出端口号以及转发状态的版本号)，并发送至服务器集群，在集群内部实现负载均衡(压缩-&gt;洗牌-&gt;解压)，对于某个数据包，其<strong>Postcard</strong>最终会被发送至同一个服务器进行处理，在该服务器处，关于此数据包的全部<strong>Postcard</strong>会被根据网络拓扑信息组装成为<strong>Packet History</strong>并作持久化存储，它将可以回答所有关于此数据包在网络中的经历的问题。网络用户基于<strong>NetSight</strong>提供的API开发用于调试的各类应用程序，将其所关注的网络事件或行为通过文中提出的<strong>Packet History Filter(PHF)</strong>进行表达，并在已有的<strong>Packet History</strong>处执行查询匹配(分为实时的(Live)和历史的(Historical))，以获知网络事件是否发生。</p>
+<p>在本文提出的<strong>NetSight</strong>系统中，在网络中的每一个数据包流经的每一跳都会为该数据包产生一个称作<strong>Postcard</strong>的日志条目(包含Switch ID、输出端口号以及转发状态的版本号)，并发送至服务器集群，在集群内部实现负载均衡(压缩-&gt;洗牌-&gt;解压)，对于某个数据包，其<strong>Postcard</strong>最终会被发送至同一个服务器进行处理，在该服务器处，关于此数据包的全部<strong>Postcard</strong>会被根据网络拓扑信息组装成为<strong>Packet History</strong>并作持久化存储，它将可以回答所有关于此数据包在网络中的经历的问题。网络用户基于<strong>NetSight</strong>提供的API开发用于调试的各类应用程序，将其所关注的网络事件或行为通过文中提出的<strong>Packet History Filter(PHF)</strong>进行表达，并在已有的<strong>Packet History</strong>处执行查询匹配(分为实时的(Live)和历史的(Historical))，以获知网络事件是否发生。</p>
 <h2 id="Terminology"><a href="#Terminology" class="headerlink" title="Terminology"></a>Terminology</h2><hr>
 <p>① <strong>Packet History</strong> 定义如下：</p>
 <blockquote>
@@ -722,7 +722,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -744,7 +744,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -867,7 +867,7 @@
       <span class="post-meta-item-icon">
       <i class="fa fa-pencil"></i></span>
       博客全站共
-      <span title="Site words total count">84.7k 字</span>
+      <span title="Site words total count">92.3k 字</span>
     
    </div>
 

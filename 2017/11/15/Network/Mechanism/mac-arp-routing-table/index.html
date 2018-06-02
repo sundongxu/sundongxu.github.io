@@ -99,7 +99,7 @@
 <meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/forwarding-multiple-switch.png">
 <meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/example-topology-arp.png">
 <meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/example-topology-router.png">
-<meta property="og:updated_time" content="2018-04-27T08:17:36.923Z">
+<meta property="og:updated_time" content="2018-06-02T07:24:42.942Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="转发表(MAC表)、ARP表、路由表总结">
 <meta name="twitter:description" content="全文概要 计算机网络中一个关键步骤在于通信路径上不同节点对于流经本节点的数据包转发，常见的交换设备主要是交换机(第二层、三层)和路由器(第三层)，在实际运行时，它们各自维护一些表结构帮助完成数据包的正确寻址与转发，本文详细介绍了三张至关重要的表：转发表、ARP表与路由表的在网络数据包转发功能中发挥的作用，以及它们协同工作的原理，顺便也会接着之前的文章继续谈谈交换机和路由器的一些事儿。">
@@ -413,7 +413,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  7,784
+                  7,803
                 </span>
               
 
@@ -429,7 +429,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  27
+                  28
                 </span>
               
             </div>
@@ -540,7 +540,7 @@
 <li><strong>直连路由</strong>：直接连接到路由器端口的网段，该信息由路由器自动生成；</li>
 <li><strong>非直连路由</strong>：不是直接连接到路由器端口的网段，此记录需要手动添加或使用动态路由生成。</li>
 </ul>
-<p>本机Linux系统下, 双网卡em1(114.212.84.179)与virbr0(192.168.122.1)，执行命令：route -n，获取内核IP路由表如下：</p>
+<p>本机Linux系统下, 双网卡em1(114.212.84.179)与virbr0(192.168.122.1)，执行命令：route -n，获取到内核IP路由表的数值展示形式如下：</p>
 <style>
 table th:nth-of-type(1) {
     width: 100px;
@@ -607,9 +607,9 @@ table th:nth-of-type(3) {
 </table>
 <p>解析上述路由表：</p>
 <blockquote>
-<p>第一项：目的网络为114.212.80.0/21，网关地址为0.0.0.0，这表示该网段属于与路由器某端口直连的网段，数据包将从路由器em1接口输出；</p>
+<p>第一项：目的网络为114.212.80.0/21，网关地址为0.0.0.0(“<em>.</em>.<em>.</em>“的数值形式)，这表示该网段属于与路由器某端口直连的网段，数据包将从路由器em1接口输出；</p>
 <p>第二项：目的网络为192.168.122.0/24，网关地址同样为0.0.0.0，表示该网段属于与路由器某端口直连的网段，数据包将从路由器virbr0接口输出；</p>
-<p>第三项：目的网络为0.0.0.0时，即匹配任意网段，由于路由表匹配执行最先匹配策略，第三项就是当目的IP地址无法与前两项匹配时的成功匹配项，对应的网关称为默认网关，即路由器中没有存储某个目的网络的表项时应该转发至的下一跳地址，从em1端口输出。</p>
+<p>第三项：目的网络为0.0.0.0(“default”的数值形式)时，即匹配任意网段，由于路由表匹配执行最先匹配策略，第三项就是当目的IP地址无法与前两项匹配时的成功匹配项，对应的网关称为默认网关，即路由器中没有存储某个目的网络的表项时应该转发至的下一跳地址，从em1端口输出。</p>
 </blockquote>
 <p>路由器中记录的条目有的需要手动添加，称为静态路由；有的则是动态获取的，称为动态路由。表中的每个条目都有以下属性：</p>
 <ol>
@@ -702,8 +702,8 @@ table th:nth-of-type(3) {
         <div class="post-nav">
           <div class="post-nav-next post-nav-item">
             
-              <a href="/2017/11/05/Network/Hardware/switch-router/" rel="next" title="交换机与路由器详细比较">
-                <i class="fa fa-chevron-left"></i> 交换机与路由器详细比较
+              <a href="/2017/11/05/Network/Mechanism/communication/" rel="next" title="记一次完整的网络通信过程">
+                <i class="fa fa-chevron-left"></i> 记一次完整的网络通信过程
               </a>
             
           </div>
@@ -712,7 +712,7 @@ table th:nth-of-type(3) {
 
           <div class="post-nav-prev post-nav-item">
             
-              <a href="/2017/12/05/Network/Mechanism/Network-Layer/subnet/" rel="prev" title="细说子网">
+              <a href="/2017/12/05/Network/Mechanism/subnet/" rel="prev" title="细说子网">
                 细说子网 <i class="fa fa-chevron-right"></i>
               </a>
             
@@ -813,7 +813,7 @@ table th:nth-of-type(3) {
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">21</span>
+                  <span class="site-state-item-count">23</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -835,7 +835,7 @@ table th:nth-of-type(3) {
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">62</span>
+                  <span class="site-state-item-count">64</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -958,7 +958,7 @@ table th:nth-of-type(3) {
       <span class="post-meta-item-icon">
       <i class="fa fa-pencil"></i></span>
       博客全站共
-      <span title="Site words total count">84.7k 字</span>
+      <span title="Site words total count">92.3k 字</span>
     
    </div>
 
