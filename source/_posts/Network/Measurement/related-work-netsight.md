@@ -45,7 +45,7 @@ Proposed in [NSDI.2014](https://www.usenix.org/conference/nsdi14)
 --bpf [not] <BPF> --dpid [not] <switch ID> --inport [not] <input port> -- outport [not] <output port> --version [not] <version>
 ```
 
-**BPF**是Berkeley Packet Filter**表达式。**[not]**是可选项，表示当前字段不可取后面的值。一个**PF**至少应该包含上述字段的中的一个。
+**BPF**是Berkeley Packet Filter表达式。**[not]**是可选项，表示当前字段不可取后面的值。一个**PF**至少应该包含上述字段的中的一个。
 
 例如：现要匹配一个数据包，它的源IP为A，中途经过交换机S，其中输入端口不能是P。对应PF可写作如下：
 
@@ -103,6 +103,8 @@ Proposed in [NSDI.2014](https://www.usenix.org/conference/nsdi14)
 
 ## Work Flow
 ---
+{% qnimg Network/Measurement/related-work-netsight/workflow.png %}
+
 ### Postcard Generation
 ---
 > Goal: Record all information relevant to a forwarding event and send for analysis.
@@ -117,7 +119,17 @@ Proposed in [NSDI.2014](https://www.usenix.org/conference/nsdi14)
 
 为实现负载均衡而执行的**洗牌(Shuffle)**过程，是基于时间划分的，每个时间段称作一个**Round**，只有在每一个**Round**末尾，服务器会将在这个**Round**时间段内收集到的**Postcard**发送至其通过**Shuffle**过程确定的最终目的地服务器，在那里等待被装配。
 
-而在**Shuffle**之前，利用相同流和相邻流之间的数据包在头部字段的冗余，还可实现**Postcard**的压缩处理，进一步减小**Shuffling**过程中的带宽开销。
+而在**Shuffle**之前，利用相同流(**Within a flow**)和相邻流(**Between flow**)之间的数据包在头部字段的冗余，还可实现**Postcard**的压缩处理，进一步减小**Shuffling**过程中的带宽开销。
+
+从上图中可以看到，最先接收**Postcard**并对其做压缩和转发的服务器，和最终接收**Postcard**并做装配(以得到同一个数据包的**History**)和存储的服务器，其实是同一个集群，这相当于让**Postcards**分别以原型和被压缩后的形式在网络中被转发了两次，那既然你前面说了要基于流的五元组使得同一个流的数据包的**Postcards**会被发送到同一个服务器作存储，那我岂不是一开始就让交换机根据五元组的哈希值来对**Postcard**进行转发，这不是也可以保证流数据的局部性吗？为什么还要那么复杂地再加一个**Shuffle**的过程，直接发到目的服务器处理和存储不就好了吗？
+
+这个问题在论文后面的内容才有解释：数据包的五元组是可能被交换机修改的，比如经过NAT交换机时(交换机和路由器其实在网络差不多等价了，不用太在意二层还是三层，默认都有三层转发的功能)，数据包的源IP就会被修改，如果仅仅根据五元组哈希值进行转发，经过NAT交换机之前的(包括正在NAT交换机中的)数据包的五元组就是原始五元组，会被转发到某台服务器 $S_1$ 上，但是经过NAT交换机之后的数据包的五元组被修改了，又会被转发到另一台服务器 $S_2$ 上，即会使得同一个数据包在不同跳生成的**Postcard**被转发到不同服务器上去处理和存储，这就违背了流数据的局部性原则，不利于利用冗余进行压缩以减小存储开销的目的。
+
+为方便之后的装配和存储过程，对**Postcard**的转发有如下两个局部性要求：
+1. 同一个数据包的全部**Postcards**应该被转发至同一个服务器，便于将它们组装成该数据包的**History**，同时不同**Postcard**之间仅交换机元数据不同，存在大量数据冗余(如首部)，也便于后期压缩以减少存储开销
+2. 同一个流的所有数据包的全部**Postcards**应该被转发至同一个服务器，不同数据包的**Postcard**也存在数据冗余(如五元组)，便于后期压缩以减少存储开销
+
+基于这个问题，**NetSight**给出的解法就是：增加一个额外的**Shuffle**过程，也就是在交换机生成**Postcard**直到**Postcard**最终被发往目的服务器进行处理和转发的整个过程中，包含两个基于哈希的转发过程。具体来说是这样：针对NAT可能修改五元组这种流标识的问题，利用**IP ID**、**Offset**和**TCP Sequence Number**构成一个组合字段，称为**Packet ID**，这些头部字段显然不会被转发过程中任何一跳修改，NAT也不会修改，所以为**Immutable Headers**，那么第一个转发过程，即交换机发送**Postcard**到服务器时，就基于**Packet ID**的哈希值转发，显然这能够保证同一个数据包的全部**Postcards**会被发送到同一个服务器，这很好。但是，同一个流中的不同数据包的**Packet ID**显然不同，因此还是会被转发到不同服务器，于是加入第二个转发过程，即**Shuffle**过程，服务器现在接收到了某个数据包的全部**Postcards**，将它们关联起来用一个数据结构存储(类似链表)，并根据拓扑信息将其排序，而第一跳**Postcard**的五元组，由于它一定未被NAT修改，还是原始的五元组，那么就根据第一跳**Postcard**的五元组的哈希值进行二次转发，是将这个**Postcard**对应数据包的全部**Postcards**都转发到该哈希值对应的服务器处，这样就能够保证同一个流的所有数据包的全部**Postcards**最终被转发到同一个服务器。
 
 ### History Assembly
 ---

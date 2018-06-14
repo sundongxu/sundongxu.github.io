@@ -1,0 +1,63 @@
+---
+title: 网络测量之SwitchPointer(NSDI-2018)
+date: 2018-05-29 18:00:00
+categories:
+- Network
+tags:
+- Measurement
+- NSDI
+- OpenFlow
+- VLAN
+---
+
+## 全文概要
+[**NSDI 2014**](https://www.usenix.org/conference/nsdi14)年中，由斯坦福大学"SDN之父"，**Nick Mckeown**教授带领的实验室发表了题为《I Know What Yout Packet Did Last Hop: Using Packet Histories to Troubleshoot Networks》的论文。基于本文设计的**NetSight**系统，运行在端系统之上，并利用已有的**OpenFlow**交换机的功能特性，实现了**Packet-Level**的网络数据监测。本文尝试概述了该系统的核心思想，作为网络测量领域相关工作的一次备忘。
+<!--more-->
+
+## Paper
+---
+Proposed in [NSDI.2014](https://www.usenix.org/conference/nsdi14)
+-[**《I Know What Yout Packet Did Last Hop: Using Packet Histories to Troubleshoot Networks》**](https://www.usenix.org/system/files/conference/nsdi14/nsdi14-paper-handigol.pdf)
+
+## Idea
+---
+在本文提出的**NetSight**系统中，在网络中的每一个数据包流经的每一跳都会为该数据包产生一个称作**Postcard**的日志条目(包含Switch ID、输出端口号以及转发状态的版本号)，并发送至服务器集群，在集群内部实现负载均衡(压缩->洗牌->解压)，对于某个数据包，其**Postcard**最终会被发送至同一个服务器进行处理，在该服务器处，关于此数据包的全部**Postcard**会被根据网络拓扑信息组装成为**Packet History**并作持久化存储，它将可以回答所有关于此数据包在网络中的经历的问题。网络用户基于**NetSight**提供的API开发用于调试的各类应用程序，将其所关注的网络事件或行为通过文中提出的**Packet History Filter(PHF)**进行表达，并在已有的**Packet History**处执行查询匹配(分为实时的(Live)和历史的(Historical))，以获知网络事件是否发生。
+
+## Challenge
+---
+1. **Path Visibility**，即**路径可见性**，我们必须以某种方式观察到并记录每个数据包采用的路径
+
+## Application
+---
+### ndb: Interactive Network Debugger
+---
+**ndb**是一种交互式的网络调试工具，允许网络应用开发者基于异常网络事件设置相应的**PHF**，一旦事件发生，返回得到的**Packet History**将会包含一系列的造成该异常事件的交换机转发事件，从而帮助诊断如下常见问题：
+1. Reachability Error(可达性错误)
+2. Race Condition(竞争条件)
+3. Incorrect Packet Modification(不正确的数据包修改)
+
+## Achitecture
+---
+{% qnimg Network/Measurement/related-work-netsight/architecture.png %}
+
+**NetSight**使用一个**Central Coordinator**来管理多个**Worker(NetSight Server)**。**NetSight Application(应用程序)**将基于**PHF**的钩子(Trigger)和查询发送至**Coordinator**，后者则将匹配得到的**Packet History**返回给前者。
+
+**Coordinator**设置从**Switch**到**NetSight Server**的**Postcard**传输和从网络控制平面到**Coordinator**的**State Change Record(状态变化记录)**传输。
+
+最后，**Coordinator**会对其所管理的**Worker**们执行周期性的存活检测、查询与钩子的广播，并在组装**Packet History**时与之交换拓扑信息。
+
+## Work Flow
+---
+{% qnimg Network/Measurement/related-work-netsight/workflow.png %}
+
+### Postcard Generation
+---
+> Goal: Record all information relevant to a forwarding event and send for analysis.
+
+当一个数据包经过一个交换机时，交换机通过复制(**Duplicate**)该包生成一个**Postcard**，随后将其裁剪(**Truncate**)至最小包大小(**Minimun Packet Size**)，使用相关状态对其进行标记(**Marking**)，并将其转发(**Forwarding**)至**NetSight Servers**进行分析。
+
+## Implementation
+---
+**NetSight**实现分为两个过程：
+1. 插入到**OpenFlow Controller**与**Switches**之前的**Control Channel Proxy(控制通道代理)**，用于记录配置更改，使用Python实现。
+2. **NetSight Server**，用于执行全部的**Postcard**与**History**相关操作，使用C++实现。
