@@ -65,11 +65,11 @@
     
       <category term="Measurement" scheme="dongdongdong.me/tags/Measurement/"/>
     
+      <category term="SIGCOMM" scheme="dongdongdong.me/tags/SIGCOMM/"/>
+    
       <category term="End-Host" scheme="dongdongdong.me/tags/End-Host/"/>
     
       <category term="Packet-Level" scheme="dongdongdong.me/tags/Packet-Level/"/>
-    
-      <category term="SIGCOMM" scheme="dongdongdong.me/tags/SIGCOMM/"/>
     
   </entry>
   
@@ -146,11 +146,11 @@
     
       <category term="Measurement" scheme="dongdongdong.me/tags/Measurement/"/>
     
-      <category term="NSDI" scheme="dongdongdong.me/tags/NSDI/"/>
-    
       <category term="End-Host" scheme="dongdongdong.me/tags/End-Host/"/>
     
       <category term="Packet-Level" scheme="dongdongdong.me/tags/Packet-Level/"/>
+    
+      <category term="NSDI" scheme="dongdongdong.me/tags/NSDI/"/>
     
   </entry>
   
@@ -439,11 +439,11 @@
     
       <category term="Linux" scheme="dongdongdong.me/tags/Linux/"/>
     
+      <category term="Zsh" scheme="dongdongdong.me/tags/Zsh/"/>
+    
       <category term="MacOS" scheme="dongdongdong.me/tags/MacOS/"/>
     
       <category term="Shell" scheme="dongdongdong.me/tags/Shell/"/>
-    
-      <category term="Zsh" scheme="dongdongdong.me/tags/Zsh/"/>
     
   </entry>
   
