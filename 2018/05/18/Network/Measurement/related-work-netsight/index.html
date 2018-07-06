@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="Measurement,End-Host,Packet-Level,NSDI," />
+  <meta name="keywords" content="Measurement,NSDI,End-Host,Packet-Level," />
 
 
 
@@ -88,7 +88,7 @@
 
 
 <meta name="description" content="全文概要NSDI 2014年中，由斯坦福大学”SDN之父”，Nick Mckeown教授带领的实验室发表了题为《I Know What Yout Packet Did Last Hop: Using Packet Histories to Troubleshoot Networks》的论文。基于本文设计的NetSight系统，运行在端系统之上，并利用已有的OpenFlow交换机的功能特性，实现了P">
-<meta name="keywords" content="Measurement,End-Host,Packet-Level,NSDI">
+<meta name="keywords" content="Measurement,NSDI,End-Host,Packet-Level">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络测量之NetSight(NSDI-2014)">
 <meta property="og:url" content="dongdongdong.me/2018/05/18/Network/Measurement/related-work-netsight/index.html">
@@ -468,10 +468,10 @@
 <p>② <strong>Packet History Filter(PHF)</strong>：一种类似正则表达式的语言，可十分方便简洁地为所关注的数据包历史指定需匹配的 <strong>数据包路径</strong>、<strong>交换机状态</strong>和<strong>数据包首部字段</strong>。</p>
 <p>③ <strong>Postcard</strong>：每个数据包在流经每个交换机时，都会生成一个称作 <strong>Postcard</strong> 的事件记录，它是包括数据包首部、交换机ID、输出端口号以及交换机转发状态的版本号等信息的一个拷贝。最终，同一个数据包流经各个交换机时产生的<strong>Postcard</strong>都在同一台处理服务器处，根据事先知道的网络拓扑信息，重新组装成为一个关于此数据包的<strong>Packet History</strong>，用于匹配用户查询。</p>
 <p>④ <strong>Postcard Filter(PF)</strong>：<strong>PHF</strong>语言中的原子元素(最小元素)，用于在某一跳处匹配一个数据包。<strong>PF</strong>实际上是以下字段过滤器的联合：数据包首部、交换机ID(数据路径ID，dpid)、输入端口号(inport)、输出端口号(outport)和该数据包“遭遇”的交换机状态(用一个版本号表示，version)。<strong>PF</strong>可写作如下形式：</p>
-<figure class="highlight hsp"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--bpf [<span class="keyword">not</span>] &lt;BPF&gt; --dpid [<span class="keyword">not</span>] &lt;<span class="keyword">switch</span> ID&gt; --inport [<span class="keyword">not</span>] &lt;<span class="keyword">input</span> port&gt; -- outport [<span class="keyword">not</span>] &lt;output port&gt; --version [<span class="keyword">not</span>] &lt;version&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--bpf [not] &lt;BPF&gt; --dpid [not] &lt;switch ID&gt; --inport [not] &lt;input port&gt; -- outport [not] &lt;output port&gt; --version [not] &lt;version&gt;</span><br></pre></td></tr></table></figure>
 <p><strong>BPF</strong>是Berkeley Packet Filter表达式。<strong>[not]</strong>是可选项，表示当前字段不可取后面的值。一个<strong>PF</strong>至少应该包含上述字段的中的一个。</p>
 <p>例如：现要匹配一个数据包，它的源IP为A，中途经过交换机S，其中输入端口不能是P。对应PF可写作如下：</p>
-<figure class="highlight dsconfig"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="built_in">--bpf</span> <span class="string">"ip src A"</span> <span class="built_in">--dpid</span> S <span class="built_in">--inport</span> <span class="string">not </span>P</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">--bpf &quot;ip src A&quot; --dpid S --inport not P</span><br></pre></td></tr></table></figure>
 <h2 id="Challenge"><a href="#Challenge" class="headerlink" title="Challenge"></a>Challenge</h2><hr>
 <ol>
 <li><strong>Path Visibility</strong>，即<strong>路径可见性</strong>，我们必须以某种方式观察到并记录每个数据包采用的路径</li>
@@ -604,11 +604,11 @@
           
             <a href="/tags/Measurement/" rel="tag"><i class="fa fa-tag"></i> Measurement</a>
           
+            <a href="/tags/NSDI/" rel="tag"><i class="fa fa-tag"></i> NSDI</a>
+          
             <a href="/tags/End-Host/" rel="tag"><i class="fa fa-tag"></i> End-Host</a>
           
             <a href="/tags/Packet-Level/" rel="tag"><i class="fa fa-tag"></i> Packet-Level</a>
-          
-            <a href="/tags/NSDI/" rel="tag"><i class="fa fa-tag"></i> NSDI</a>
           
         </div>
       
@@ -732,7 +732,7 @@
               
                 <a href="/archives/">
               
-                  <span class="site-state-item-count">24</span>
+                  <span class="site-state-item-count">25</span>
                   <span class="site-state-item-name">日志</span>
                 </a>
               </div>
@@ -743,7 +743,7 @@
               
               <div class="site-state-item site-state-categories">
                 <a href="/categories/index.html">
-                  <span class="site-state-item-count">5</span>
+                  <span class="site-state-item-count">6</span>
                   <span class="site-state-item-name">分类</span>
                 </a>
               </div>
@@ -754,7 +754,7 @@
               
               <div class="site-state-item site-state-tags">
                 <a href="/tags/index.html">
-                  <span class="site-state-item-count">68</span>
+                  <span class="site-state-item-count">70</span>
                   <span class="site-state-item-name">标签</span>
                 </a>
               </div>
@@ -877,7 +877,7 @@
       <span class="post-meta-item-icon">
       <i class="fa fa-pencil"></i></span>
       博客全站共
-      <span title="Site words total count">97.3k 字</span>
+      <span title="Site words total count">99.5k 字</span>
     
    </div>
 
