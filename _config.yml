@@ -40,7 +40,7 @@ future: true
 highlight:
   enable: true
   line_number: true
-  auto_detect: true
+  auto_detect: false
   tab_replace: true
 
 # Home page setting
@@ -109,8 +109,7 @@ math:
 search: 
   path: search.xml
   field: post
-  format: html
-  limit: 10000
+
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
