@@ -95,7 +95,7 @@
 <meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
 <meta property="og:description" content="全文概要 在Linux系统中，命令行下编译C/C++代码是不二选择，GCC则是编译工具首选，提供了丰富的编译、调试特性，功能十分强大。本文介绍了使用GCC编译时，与头文件及库文件搜索路径相关的命令行参数及环境变量。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:updated_time" content="2018-07-06T12:30:00.718Z">
+<meta property="og:updated_time" content="2018-07-07T06:43:27.952Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="库&#x2F;头文件搜索路径相关GCC参数及环境变量">
 <meta name="twitter:description" content="全文概要 在Linux系统中，命令行下编译C/C++代码是不二选择，GCC则是编译工具首选，提供了丰富的编译、调试特性，功能十分强大。本文介绍了使用GCC编译时，与头文件及库文件搜索路径相关的命令行参数及环境变量。">
@@ -408,7 +408,7 @@
                   <span class="post-meta-item-text">字数统计&#58;</span>
                 
                 <span title="字数统计">
-                  2,195
+                  2,553
                 </span>
               
 
@@ -424,7 +424,7 @@
                   <span class="post-meta-item-text">阅读时长 &asymp;</span>
                 
                 <span title="阅读时长">
-                  8
+                  10
                 </span>
               
             </div>
@@ -477,8 +477,13 @@
 <p>这是因为：可执行文件在被装载运行时，会在系统默认的相关路径下去查找所依赖的动态库文件，如<strong>/usr/lib</strong>和<strong>/lib</strong>等目录。若能在这些路径下找到库，则将其装载，程序成功运行。否则就将出现上述错误导致程序终止。</p>
 <p>解决方案：配置环境变量<code>LD_LIBRARY_PATH</code>，用于指定运行时的动态库的实际路径，使得程序在运行时能够找到并装载动态库。<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">export LD_LIBRARY_PATH=$LD_LIBRARY_PATH:. # 在当前终端中临时配置环境变量，新增当前目录(即&quot;.&quot;)为动态库运行时搜索位置</span><br></pre></td></tr></table></figure></p>
 <p>这里其实还有另外一个环境变量<code>LIBRARY_PATH</code>，用于指定编译链接时的动态库的实际路径，效果类似于后文马上要介绍的<strong>GCC</strong>参数<strong>“-Ldir”</strong>，但两者同时存在时，会优先搜索<strong>“-Ldir”</strong>指定的路径。</p>
-<p>此外，跟动态库搜路路径相关的还有一个配置文件<code>/etc/ld.conf.d</code>，也会指定一些库搜索路径，在Ubuntu 16.04.3系统下，该文件初始内容为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include /etc/ld.so.conf.d/*.conf</span><br></pre></td></tr></table></figure></p>
+<p>此外，跟动态库搜路路径相关的还有一个配置文件<code>/etc/ld.conf</code>，也会指定一些库搜索路径，在Ubuntu 16.04.3系统下，该文件初始内容为：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">include /etc/ld.so.conf.d/*.conf</span><br></pre></td></tr></table></figure></p>
 <p>进入到目录/etc/ld.so.conf.d下，发现有如下5个.conf文件：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">- fakeroot-x86_64-linux-gnu.conf # /usr/lib/x86_64-linux-gnu/libfakeroot</span><br><span class="line">- libc.conf # /usr/local/lib</span><br><span class="line">- x86_64-linux-gnu.conf # /lib/x86_64-linux-gnu 和 /usr/lib/x86_64-linux-gnu</span><br><span class="line">- x86_64-linux-gnu_EGL.conf -&gt; /etc/alternatives/x86_64-linux-gnu_egl_conf</span><br><span class="line">- x86_64-linux-gnu_GL.conf -&gt; /etc/alternatives/x86_64-linux-gnu_gl_conf</span><br></pre></td></tr></table></figure></p>
+<p>编辑<code>/etc/ld.so.conf</code>文件，在其中增加一行本机中<strong>boost</strong>库所在路径，如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">/include /etc/ld.so.conf.d/*.conf</span><br><span class="line">/usr/local/boost-1.55/lib</span><br></pre></td></tr></table></figure></p>
+<p>并执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">sudo ldconfig # 根据配置文件/etc/ld.so.conf内容更新动态链接库搜索路径</span><br></pre></td></tr></table></figure></p>
+<p>即可新增该路径为链接器<strong>ld</strong>的动态库的搜索路径，这样依赖于<strong>boost</strong>的可执行文件在运行就可定位到其动态库，装载后成功运行。</p>
+<p>至于环境变量<code>LD_LIBRARY_PATH</code>与配置文件<code>/etc/ld.so.conf</code>之间的关系，如是同时生效先后加载还是存在覆盖，暂时没有查到太权威的资料，因为本人就层遇到过配置了<code>LD_LIBRARY_PATH</code>环境变量，并且<code>ldd</code>已经准确定位到某可执行文件所依赖的动态链接库的位置，但在运行该可执行文件时依然报错：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ./netsight: error while loading shared libraries: libboost_thread-mt.so.1.55.0: cannot open shared object file: No such file or directory</span><br></pre></td></tr></table></figure></p>
+<p>后来我将该boost库的路径<code>/usr/local/boost-1.55/lib</code>增加到配置文件<code>/etc/ld.so.conf</code>中，执行<strong>sudo ldconfig</strong>后，再次运行才成功。所以友情提示大家，凡是遇到运行时找不到动态库的问题时，最直接也是最有效的方法就是新增库搜索路径到配置文件<code>/etc/ld.so.conf</code>，记得<strong>sudo ldconfig</strong>也是必不可少的。</p>
 <p>注：在同名静态库和动态库同时存在时，<strong>GCC</strong>编译时默认优先链接动态库，但可通过<strong>“-static”</strong>选项强制其链接静态库。</p>
 <p><strong>GCC</strong>中与链接器<strong>ld</strong>相关的参数，还有一些参数也非常重要：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-rpath=dir，增加运行时库的搜索路径，即动态库的搜索路径，在编译链接和运行时均有效。</span><br><span class="line">-rpath-link=dir，增加运行时库的搜索路径，即动态库的搜索路径，仅在编译链接时有效。</span><br></pre></td></tr></table></figure></p>
 <p>链接器<strong>ld</strong>会按照下列顺序搜索所需动态库：</p>
@@ -816,7 +821,7 @@
       <span class="post-meta-item-icon">
       <i class="fa fa-pencil"></i></span>
       博客全站共
-      <span title="Site words total count">99.5k 字</span>
+      <span title="Site words total count">99.9k 字</span>
     
    </div>
 
