@@ -38,8 +38,7 @@ void Print(ElemType e)
 ---
 根据二叉树的结构特征，可以有三类搜索路径：先上而下的按层次遍历、先左(子树)后右(子树)的遍历、先右(子树)后左(子树)的遍历。设访问根结点记作 $D$，遍历根左子树记作 $L$，遍历根的右子树记作 $R$，则可能的遍历次序有：$DLR、LDR、LRD、DRL、RDL、RLD$ 及层次遍历。若规定先左后右，则只剩下4种遍历方式：$DLR、LDR、LRD$ 及层次遍历，根据根结点被遍历的次序，通常称 $DLR、LDR和LRD$ 这3种遍历为前序遍历、中序遍历和后序遍历。
 
-给出如下二叉树实例：
-{% qnimg Algorithm/Algorithm/traversal-binary-tree/example-bintree.png %}
+给出如下二叉树实例：![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Algorithm/Algorithm/traversal-binary-tree/example-bintree.png)
 
 则其不同方式的遍历序列分别为：
 - 层次遍历结果序列：ABCDEFG

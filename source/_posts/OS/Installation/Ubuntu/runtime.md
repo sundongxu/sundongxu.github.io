@@ -257,7 +257,7 @@ $ g++ [options] [filenames]
 11. 退出gdb：quit
 
 再放一张 **GDB** 命令示意图：
-{% qnimg OS/Installation/Ubuntu/runtime/gdb-commands-list.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/runtime/gdb-commands-list.png %}
 
 ### Java
 高级编程语言都会有自己专门的开发环境，即 **Software Development Kit**，简称 **SDK**，对于 **Java** 而言，最常用的就是 **Oracle** 公司提供的 **[JDK](http://www.oracle.com/technetwork/java/javase/downloads/jdk8-downloads-2133151.html)**，全称是 **Java SE Development Kit**，现在官网最新版本是 **jdk-8u161**。

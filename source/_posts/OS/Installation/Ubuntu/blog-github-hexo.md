@@ -20,7 +20,7 @@ tags:
 **[Github Pages](https://pages.github.com/)** 是 **GitHub** 公司提供的免费的静态网站托管服务，用起来方便而且功能强大，不仅没有空间限制，还可以绑定自己的域名。**Git** 及 **GitHub** 的配置与使用就不多说了，将博客托管到 **GitHub** 上，首先需要新建仓库，名称必须为：
 > **username.github.io**
 
-{% qnimg OS/Installation/Ubuntu/blog-github-hexo/sundongxu.github.io.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/blog-github-hexo/sundongxu.github.io.png)
 
 这是特殊的命名约定，创建完毕后可以通过 **[http://username.github.io](dongdongdong.me)** 来访问你的个人主页。
 
@@ -220,7 +220,7 @@ qiniu:
 ### 引用资源
 以图片引用为例，这也是最常见的情形。如果你想引用存储在 **cdn/images** 下的图片 **demo.jpg**，只需在文章中插入：
 ```
-{% qnimg demo.jpg %}  # 如果 cdn/image 目录下有更深层子目录，则加上后面的路径
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/demo.jpg)  # 如果 cdn/image 目录下有更深层子目录，则加上后面的路径
 ```
 
 生成网页时将被解析为：
@@ -261,7 +261,7 @@ $ hexo deploy/d
 即可将本地博客内容发布到 **GitHub** 上，其中 **仓库** 与 **分支名** 由 **_config.yml** 中的 **deploy** 字段的子参数 **repo** 和 **branch** 显式指定。
 
 此时在 **GitHub** 个人仓库 **username.github.io** 的 **master**分支的页面即可看到上传记录：
-{% qnimg OS/Installation/Ubuntu/blog-github-hexo/sundongxu.github.io-publish.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/blog-github-hexo/sundongxu.github.io-publish.png)
 
 不难发现这个博客仓库是不包含原始文件的，比如博文对应的 **.md** 文件，而该文件都只保存在配置 **Hexo** 的机器本地，而上传到 **GitHub** 的只是转换渲染过后的 **.html** 网页文件。那么这就带来一个问题：如何能在原始机器以外的机器上继续编辑博文(.md文档)呢？
 
@@ -339,7 +339,7 @@ $ hexo clean && hexo g && hexo s
 
 本步骤**替代方案**：直接设置 **GitHub Pages** 的 **Custom Domain (自定义域)**：
 进入名为 **username.github.io** 的仓库的设置(Setting)页面，在 **Custom Domain** 下面的方框里填入域名：
-{% qnimg OS/Installation/Ubuntu/blog-github-hexo/setting-custom-domain.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/blog-github-hexo/setting-custom-domain.png)
 
 **第二步**：向你的 **DNS** 配置中添加三条记录：
 
@@ -353,12 +353,12 @@ $ hexo clean && hexo g && hexo s
 （1）[**腾讯云**](https://cloud.tencent.com/)
 > 腾讯云主页 -> 控制台 -> 域名管理 -> 选择指定域名 -> 域名解析 -> 添加记录
 
-{% qnimg OS/Installation/Ubuntu/blog-github-hexo/dns-tencent-cloud.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/blog-github-hexo/dns-tencent-cloud.png)
 
 （2）[**DNSPOD**](https://www.dnspod.cn/)
 > DNSPOD主页 -> 管理控制台 -> 已开通的服务 -> 域名解析 -> 选择指定域名 -> 添加记录
 
-{% qnimg OS/Installation/Ubuntu/blog-github-hexo/dns-dnspod.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/blog-github-hexo/dns-dnspod.png)
 
 配置完成后你会发现，无论按照哪一种方式添加 **DNS** 记录，都会在另一种方式的网页上被同步添加，其实腾讯云与**DNSPOD**早就打通数据通道啦。
 

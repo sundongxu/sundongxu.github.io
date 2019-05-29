@@ -29,7 +29,7 @@ tags:
 网内通信，即通信双方都位处同一网段中，数据传输无需经过路由器(或三层交换机)，即可由本网段自主完成。
 
 以下图拓扑为例：
-{% qnimg Network/Mechanism/mac-arp-routing-table/example-topology-arp.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/example-topology-arp.png)
 
 在第一节的两个步骤基础上，若目的主机与发送主机属于同一网段，假设发送主机的ARP表中并无目的主机对应的表项，则发送主机会以目的主机IP地址为内容，广播ARP请求以期获知目的主机MAC地址，并通过交换机(除到达端口之外的所有端口发送，即洪泛(Flooding))向全网段主机转发，而只有目的主机接收到此ARP请求后会将自己的MAC地址和IP地址装入ARP应答后将其回复给发送主机，发送主机接收到此ARP应答后，从中提取目的主机的MAC地址，并在其ARP表中建立目的主机的对应表项(IP地址到MAC地址的映射)，之后即可向目的主机发送数据，将待发送数据封装成帧，并通过二层设备(如交换机)转发至本网段内的目的主机，自此完成通信。
 
@@ -41,7 +41,7 @@ tags:
 网际通信，即通信双方分处不同网段，数据传输需经过路由器(或三层交换机)才能完成不同网段的通信。
 
 以下图拓扑为例：
-{% qnimg Network/Mechanism/mac-arp-routing-table/example-topology-router.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/example-topology-router.png)
 
 在第一节的两个步骤基础上，若目的主机与发送主机不在同一网段，则需进行以下五个步骤：
 

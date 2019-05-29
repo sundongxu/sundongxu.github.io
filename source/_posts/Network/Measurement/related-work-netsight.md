@@ -93,7 +93,7 @@ Proposed in [NSDI.2014](https://www.usenix.org/conference/nsdi14)
 
 ## Achitecture
 ---
-{% qnimg Network/Measurement/related-work-netsight/architecture.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-netsight/architecture.png)
 
 **NetSight**使用一个**Central Coordinator**来管理多个**Worker(NetSight Server)**。**NetSight Application(应用程序)**将基于**PHF**的钩子(Trigger)和查询发送至**Coordinator**，后者则将匹配得到的**Packet History**返回给前者。
 
@@ -103,7 +103,7 @@ Proposed in [NSDI.2014](https://www.usenix.org/conference/nsdi14)
 
 ## Work Flow
 ---
-{% qnimg Network/Measurement/related-work-netsight/workflow.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-netsight/workflow.png)
 
 ### Postcard Generation
 ---
@@ -153,7 +153,7 @@ Proposed in [NSDI.2014](https://www.usenix.org/conference/nsdi14)
 
 在每一个**Round**中生成的**Packet History**的数据流将被写入到一个文件。在写入持久化存储的过程中，**NetSight**会采用与之前提到的一样的压缩算法，都是利用了同一个数据包的**Postcard**之间的与同个流中的数据包之间的头部信息冗余，来实现压缩以减小存储开销。
 
-### Histort Queries
+### History Queries
 ---
 > Goal: To enable applications to issure PHF queries against archived packet histories.
 

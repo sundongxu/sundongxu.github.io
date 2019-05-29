@@ -38,7 +38,7 @@ Proposed in [NSDI.2014](https://www.usenix.org/conference/nsdi14)
 
 ## Achitecture
 ---
-{% qnimg Network/Measurement/related-work-netsight/architecture.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-netsight/architecture.png)
 
 **NetSight**使用一个**Central Coordinator**来管理多个**Worker(NetSight Server)**。**NetSight Application(应用程序)**将基于**PHF**的钩子(Trigger)和查询发送至**Coordinator**，后者则将匹配得到的**Packet History**返回给前者。
 
@@ -48,7 +48,7 @@ Proposed in [NSDI.2014](https://www.usenix.org/conference/nsdi14)
 
 ## Work Flow
 ---
-{% qnimg Network/Measurement/related-work-netsight/workflow.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-netsight/workflow.png)
 
 ### Postcard Generation
 ---

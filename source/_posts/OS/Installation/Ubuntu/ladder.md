@@ -23,7 +23,7 @@ tags:
 
 ## 前面的话
 ---
-{% qnimg OS/Installation/Ubuntu/ladder/gfw.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/gfw.png)
 
 在当前这个知识爆炸的时代，作为一名学术研究者或技术钻研者，搜索引擎无疑是最好的学习工具，而 [**Google**](https://www.google.com)正是个中翘楚。但早在互联网广泛流行于中国之前，出于一些不可抗原因，[**GFW**](https://zh.wikipedia.org/wiki/%E9%98%B2%E7%81%AB%E9%95%BF%E5%9F%8E) 横空出世，国外网站对于内地网民从此遥不可及。好在技术无极限，更无国界，防火墙挡住了我们通往外界的视野，搭个梯子翻过去便是。
 
@@ -44,11 +44,11 @@ tags:
 
 #### long long ago
 在很久很久以前，我们访问各种网站都是简单而直接的，用户的请求通过互联网发送到服务提供方，服务提供方直接将信息反馈给用户。
-{% qnimg OS/Installation/Ubuntu/ladder/gfw-before.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/gfw-before.png)
 
 #### when devil comes
 然后有一天，**GFW** 就出现了，他像一个收过路费的强盗一样夹在了在用户和服务之间，每当用户需要获取信息，都经过了 **GFW**，**GFW**将它不喜欢的内容统统过滤掉，于是客户当触发 **GFW** 的过滤规则的时候，就会收到 **Connection Reset** 这样的响应内容，而无法接收到正常的内容。
-{% qnimg OS/Installation/Ubuntu/ladder/gfw-now.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/gfw-now.png)
 
 #### ssh tunnel
 聪明的人们想到了利用境外服务器代理的方法来绕过 **GFW** 的过滤，其中包含了各种 **HTTP** 代理服务、**Socks** 服务、**VPN** 服务… 其中以 **ssh tunnel** 的方法比较有代表性：
@@ -56,7 +56,7 @@ tags:
 2-3) 用户通过建立起的隧道进行代理，通过 ssh server 向真实的服务发起请求
 4-5) 服务通过 ssh server，再通过创建好的隧道返回给用户
 
-{% qnimg OS/Installation/Ubuntu/ladder/gfw-ssh-tunnel.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/gfw-ssh-tunnel.png)
 
 由于 **ssh** 本身就是基于 **RSA** 加密技术，所以 **GFW** 无法从数据传输的过程中的加密数据内容进行关键词分析，避免了被重置链接的问题，但由于创建隧道和数据传输的过程中，**ssh** 本身的特征是明显的，所以 **GFW** 一度通过分析连接的特征进行干扰，导致 **ssh** 存在被定向进行干扰的问题。
 
@@ -69,7 +69,7 @@ tags:
 2、5) ss-local 和 ss-server 两端通过多种可选的加密方法进行通讯，经过 GFW 的时候是常规的TCP包，没有明显的特征码而且 GFW 也无法对通讯数据进行解密 
 3、4) ss-server 将收到的加密数据进行解密，还原原来的请求，再发送到用户需要访问的服务，获取响应原路返回
 
-{% qnimg OS/Installation/Ubuntu/ladder/gfw-shadowsocks.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/gfw-shadowsocks.png)
 
 ### 基本原理
 从源码角度分析，**Shadowsocks** 的工作原理并不复杂。**Shadowsocks** 包括 **local.py** 和 **server.py** 两个程序：**local** 运行在用户自己的机器上，**server** 运行在墙外的服务器上。正常工作模式下，**local** 通常会监听本地 **1080** 端口，提供 **socks5** 协议接口。其工作流程简述如下：
@@ -84,7 +84,7 @@ tags:
 8. server 接收到请求的数据后最终返回给本机进程就是上述的反过程。
 
 ### 实例图解
-{% qnimg OS/Installation/Ubuntu/ladder/shadowsocks-basics-cn.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/shadowsocks-basics-cn.png)
 
 ss要求本机运行local.py，海外服务器运行server.py。local.py默认监听localhost的1080端口，该端口代理浏览器的请求。browser要访问google时，会和localhost:1080进行一次基于sock5协议的通信，如上图的红色虚线框，sock5协议可以去了解下，维基百科有不错的介绍。
 
@@ -116,39 +116,39 @@ ss要求本机运行local.py，海外服务器运行server.py。local.py默认�
 
 ### 创建EC2实例
 用刚才注册好的账号登录并进入 **AWS** 控制台，点击 **EC2 (云中的虚拟服务器)**，如果需要改变服务器节点(地区)的话，右上角可以选择：
-{% qnimg OS/Installation/Ubuntu/ladder/ss-server-ec2.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/ss-server-ec2.png)
 
 进入 **EC2** 管理控制台后，点击 **启动实例**：
-{% qnimg OS/Installation/Ubuntu/ladder/ss-server-ec2-boot.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/ss-server-ec2-boot.png)
 
 上图中可以看到已经有一个正在运行的实例，那是我之前创建的不用在意，新用户的话，已运行实例数量应为0。
 
 之后进入 **Amazon 系统映像(AMI)** 选择，我选的是 **Ubuntu Server 16.04 LTS(HVM)，SSD Volume Type**：
-{% qnimg OS/Installation/Ubuntu/ladder/ss-server-ami-ubuntu.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/ss-server-ami-ubuntu.png)
 
 然后选择 **实例类型**，默认的 **符合条件的免费套餐** 即可，点击 **下一步：配置实例详细信息**：
-{% qnimg OS/Installation/Ubuntu/ladder/ss-server-instance-type.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/ss-server-instance-type.png)
 
 **步骤3：配置实例** 和 **步骤4：添加存储** 都是默认选项，直接点下一步跳过，直至 **步骤5：添加标签**，新建标签，键为 **name**，值为 **ss-vpn**，其实都可以任意指定，之后 **创建密钥对** 时会用到，之后下一步：
-{% qnimg OS/Installation/Ubuntu/ladder/ss-server-tag.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/ss-server-tag.png)
 
 **步骤6：配置安全组**，添加规则如图所示，其中端口 **8388** 是与 **Shadowsocks** 相关的，也可以自由指定：
-{% qnimg OS/Installation/Ubuntu/ladder/ss-server-security-group.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/ss-server-security-group.png)
 
 最后确定开始审核。这时候会提示生成密钥对，这个很重要，一定要保存好，没有这个密钥对是无法远程登录(如SSH)管理你的服务器的，下载密钥对 **.pem** 文件后才能启动实例：
-{% qnimg OS/Installation/Ubuntu/ladder/ss-server-key-download.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/ss-server-key-download.png)
 
 查看启动日志，发现 **EC2** 实例成功启动：
-{% qnimg OS/Installation/Ubuntu/ladder/ss-server-boot-successful.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/ss-server-boot-successful.png)
 
 ### 连接到服务器
 实例初始化完成后，就可以进行远程连接了，右键你的实例，点击连接。会弹出连接提示，如果你使用的是 **Windows**，可以查看使用 **PuTTY** 从 **Windows** 连接到 **Linux** 实例，如果你是 **Linux** 或者 **Mac OS**，可以直接通过 **SSH** 连接到你的服务器，具体可以查看亚马逊给出的文档 **使用 SSH 连接到 Linux 实例**。
 
 记住下图中所示位置这个 **公有IP**，它是你的 **Shadowsocks** 的服务器IP：
-{% qnimg OS/Installation/Ubuntu/ladder/ss-server-public-ip-dns.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/ss-server-public-ip-dns.png)
 
 按弹窗提示 **SSH** 连接到远程实例：
-{% qnimg OS/Installation/Ubuntu/ladder/ss-server-connect-ssh.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/ss-server-connect-ssh.png)
 
 ### 配置Shadowsocks
 **SSH** 连接到服务器之后，执行如下命令：
@@ -208,16 +208,16 @@ $ sudo apt-get install shadowsocks-qt5
 {% endcodeblock %}
 
 安装成功之后，按 **win** 键输入关键字后应该能找到该客户端，如图所示：
-{% qnimg OS/Installation/Ubuntu/ladder/shadowsocks-Qt5.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/shadowsocks-Qt5.png)
 
 启动客户端后，点击：connection -> add，新建到 **Shadowsocks Server** 的连接：
-{% qnimg OS/Installation/Ubuntu/ladder/shadowsocks-Qt5-add-connection.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/shadowsocks-Qt5-add-connection.png)
 
 在弹窗中填入早前配置好的 **Shadowsocks** 服务器信息：
-{% qnimg OS/Installation/Ubuntu/ladder/shadowsocks-Qt5-server-config.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/shadowsocks-Qt5-server-config.png)
 
 保存设置后右键点击刚添加的条目，点击连接：
-{% qnimg OS/Installation/Ubuntu/ladder/shadowsocks-Qt5-connect.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/shadowsocks-Qt5-connect.png)
 
 到这里，在 **Ubuntu** 下已经启动 **local** 程序，尽管它已经与墙外的 **server** 建立起连接并可以完成通信，但是如浏览器、终端等需要访问外网的本机进程而言，却仍然无法达到翻墙成功的效果，这是因为这些本机进程在试图直接访问外网服务，而这些访问请求都会被 **GFW** 根据其特殊的流量特征而被屏蔽过滤掉，导致访问失败。
 
@@ -228,53 +228,52 @@ $ sudo apt-get install shadowsocks-qt5
 配置代理，将对被墙的服务的流量重定向至本地 **Shadowsocks** 客户端，即 **local** 。**Chrome** 插件 **SwitchyOmega** 即可实现流量选择性代理，需要从官方插件商店中下载安装，操作过程中你很快会发现一个问题：访问官方商店这一行为本身就需要翻墙...
 
 好在 **Chrome** 还有另一款插件 [**谷歌访问助手**]() ，下载安装后浏览器即可访问 **Google** 相关服务，安装完成后在浏览器右上角插件栏可以看到：
-{% qnimg OS/Installation/Ubuntu/ladder/google-assistant-icon.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/google-assistant-icon.png)
 
 看到这里你或许又有了问题：那为啥不干脆就使用 **谷歌助手** 插件翻墙就好了，还要 **SwitchyOmega** 干啥？
 
 答案是：**谷歌助手** 只能让浏览器可以访问 **Google** 相关服务，如搜索、学术、地图、商店等等，但是其余被墙网站如 **Youtobe**、**Facebook** 和 **Twitter** 等仍然不可访问，而 **SwitchyOmega** 则帮助我们可以通过浏览器访问到世界上任何网站，再也不用受 **GFW** 的拦截。
 
 下载安装好后，开始配置 **SwitchyOmega** 之前，首先需禁用 **谷歌访问助手**，原因是两个插件本质都是代理功能，会发生冲突，要想使 **SwitchyOmega** 生效，就必须先禁用冲突项 **谷歌访问助手**：
-{% qnimg OS/Installation/Ubuntu/ladder/google-assistant-disable.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/google-assistant-disable.png)
 
 然后启用 **SwitchyOmega**：
-{% qnimg OS/Installation/Ubuntu/ladder/switchy-omega-enable.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/switchy-omega-enable.png)
 
 之后浏览器右上角插件栏出现一个黑色圆圈图标，点击并选择 **选项**：
-{% qnimg OS/Installation/Ubuntu/ladder/switchy-omega-icon.png %]}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/switchy-omega-icon.png)
 
 之后进入 **SwitchyOmega** 配置页面：
-{% qnimg OS/Installation/Ubuntu/ladder/switchy-omega-main.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/switchy-omega-main.png)
 
 新建名为 **ss** 的情景模式，当然名称也可以自己起：
-{% qnimg OS/Installation/Ubuntu/ladder/switchy-omega-new-profile.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/switchy-omega-new-profile.png)
 
 保存配置后是这样：
-{% qnimg OS/Installation/Ubuntu/ladder/switchy-omega-ss.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/switchy-omega-ss.png)
 
 在 **情景模式** 下选择 **auto switch**：
-{% qnimg OS/Installation/Ubuntu/ladder/switchy-omega-autoswitch.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/switchy-omega-autoswitch.png)
 
 点击 **添加规则列表**，将以下链接粘贴至网址框：
 > https://raw.githubusercontent.com/gfwlist/gfwlist/master/gfwlist.txt
 
 并一定完全按下图配置：
-{% qnimg OS/Installation/Ubuntu/ladder/switchy-omega-autoswitch-config.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/switchy-omega-autoswitch-config.png)
 
 点击 **立即更新情景模式**，此时由于未保存修改会弹出如下窗口：
-{% qnimg OS/Installation/Ubuntu/ladder/switchy-omega-confirm.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/switchy-omega-confirm.png)
 
 点击 **应用选项**，**规则列表正文** 框内显示出 **gfwlist.txt** 文件中包含的过滤域名列表：
-{% qnimg OS/Installation/Ubuntu/ladder/switchy-omega-gfwlist-head.png
- %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/switchy-omega-gfwlist-head.png)
 
 搜索关键字 **google** 会找到对应过滤项：
-{% qnimg OS/Installation/Ubuntu/ladder/switchy-omega-gfwlist-google.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/switchy-omega-gfwlist-google.png)
 
 往下翻还能找到很多平时“可望不可即“的站点，如 **Facebook**、**Youtube**、**Vimeo**、**Steam**...甚至 **Tensorflow**、**GitHub** 还有 **Android** ... 这个恕我不是太能理解，学习都不让嘛...
 
 保存修改后，点击浏览器右上角的 **SwitchyOmega** 插件图标，选中 **auto switch** 模式：
-{% qnimg OS/Installation/Ubuntu/ladder/switchy-omega-finish.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/switchy-omega-finish.png)
 
 测试相关被墙网站，成功访问，搞定！
 
@@ -303,14 +302,14 @@ $ genpac --proxy="SOCKS5 127.0.0.1:1080" --gfwlist-proxy="SOCKS5 127.0.0.1:1080"
 > file:///home/sundongxu/shadowsocks/autoproxy.pac
 
 具体见下图：
-{% qnimg OS/Installation/Ubuntu/ladder/network-proxy-automatic.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/network-proxy-automatic.png)
 
 最后点击在系统范围内应用：**Apply System Wide**，并按要求输入密码修改这一设置。
 
 之后配置 **Firefox** 使用系统代理，进入浏览器 **Preferences(偏好设置)**：
-{% qnimg OS/Installation/Ubuntu/ladder/firefox-preference-proxy.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/firefox-preference-proxy.png)
 
-{% qnimg OS/Installation/Ubuntu/ladder/firefox-use-system-proxy.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/firefox-use-system-proxy.png)
 
 至此，**Ubuntu** 下的 **Firefox** 浏览器也应该能够成功翻墙啦~
 
@@ -348,13 +347,13 @@ $ proxychains firefox
 同样推荐使用带 **GUI** 的 **Shadowsocks** 客户端，最好用的当属 [**ShadowsocksX-NG**](https://github.com/shadowsocks/ShadowsocksX-NG/releases/)，下载 **zip** 文件后直接安装即可。
 
 安装完成后会在 **Launchpad** 中找到其应用图标：
-{% qnimg OS/Installation/Ubuntu/ladder/shadowsocksX-NG.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/shadowsocksX-NG.png)
 
 点击启动应用，**Mac** 桌面右上角会出现一个**纸飞机**图标，点击该图标，选择：服务器 -> 服务器设置：
-{% qnimg OS/Installation/Ubuntu/ladder/shadowsocksX-NG-add-server.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/shadowsocksX-NG-add-server.png)
 
 之后在窗口中填入早先配置好的 **Shadowsocks** 服务器信息：
-{% qnimg OS/Installation/Ubuntu/ladder/shadowsocksX-NG-server-config.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/shadowsocksX-NG-server-config.png)
 
 点击确定后保存配置。再次点击**纸飞机**图标，选择 **PAC自动模式** 或 **全局模式**，然后点击打开 **Shadowsocks** 启动本客户端，之后就可以愉快在 **Mac** 上翻墙啦~
 
@@ -375,7 +374,7 @@ forward-socks5 / localhost:1086 .
 {% endcodeblock %}
 
 第一行设置privoxy监听任意IP地址的 **8118** 端口。第二行设置本地socks5代理客户端端口 **1086**，可以通过 **ShadowsocksX-NG** 的设置页面确定，见下图：
-{% qnimg OS/Installation/Ubuntu/ladder/shadowsocksX-NG-settings.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/shadowsocksX-NG-settings.png)
 
 **privoxy** 启动：
 {% codeblock %}
@@ -388,7 +387,7 @@ $ netstat -na | grep 8118
 {% endcodeblock %}
 
 查询结果如下则表明启动成功：
-{% qnimg OS/Installation/Ubuntu/ladder/privoxy-listen.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/ladder/privoxy-listen.png)
 
 如果没有，可以查看日志信息，判断哪里出了问题。打开配置文件找到 **logdir** 配置项，查看 **log** 文件。
 

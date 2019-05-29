@@ -83,7 +83,7 @@ $ cd -
 （3）不在Github上的插件，需要写出git全路径。
 
 之后想要为 **Vim** 添加新插件，只需编辑 **.vimrc** 文件，在下图对应位置处添加插件的下载地址路径：
-{% qnimg OS/Installation/Ubuntu/vim/vimplus-vimrc-vundle.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vimplus-vimrc-vundle.png)
 
 保存 **.vimrc** 文件后，有以下两种方式开始下载安装插件：
 （1）运行 vim ,再运行 :PluginInstall：
@@ -100,7 +100,7 @@ $ vim -c "PluginInstall" -c "qall"
 {% endcodeblock %}
 
 开始安装插件时应该是这个样子：
-{% qnimg OS/Installation/Ubuntu/vim/vimplus-plugins.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vimplus-plugins.png)
 
 其中要提一下的是 [**YouCompleteMe**](http://valloric.github.io/YouCompleteMe/) 这个插件，用于 **Vim** 自动补全，可由于某种不可描述的缘故，下载安装它非常慢。着急的话，可以采用下面介绍的离线安装方法：
 将 **vimrc** 中 **YouCompleteMe**那一行注释掉，之后再从下面的地址下载后进行离线安装：
@@ -146,16 +146,16 @@ $ ./install.py --clang-completer
 这里放几张 **Vim** 使用技巧的示意图，便于学习掌握：
 
 先来张 **Vi/Vim** 键盘图： 
-{% qnimg OS/Installation/Ubuntu/vim/vi-vim-cheat-sheet.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vi-vim-cheat-sheet.png)
 
 英文看不懂？没关系，下面是中文版：
-{% qnimg OS/Installation/Ubuntu/vim/vi-vim-cheat-sheet-cn.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vi-vim-cheat-sheet-cn.png)
 
 程序员或许更喜欢这样的：
-{% qnimg OS/Installation/Ubuntu/vim/vim-cheat-sheet-for-programmers-screen.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vim-cheat-sheet-for-programmers-screen.png)
 
 还有这样的：
-{% qnimg OS/Installation/Ubuntu/vim/vim-cheat-sheet-en-visual.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vim-cheat-sheet-en-visual.png)
 
 总而言之，**Vim** 是一款功能超乎想象地强大齐全的编辑器。然而，使用者不可能会用到其所有的特性，我们只需掌握基本常用的操作命令，其余的在要使用时再去查阅教程或者攻略即可。
 

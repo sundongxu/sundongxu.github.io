@@ -78,7 +78,7 @@ HMux能够利用交换机全部的转发能力(通常大于1 Tbps)来对流量�
 文中还提到，针对不同测量场景或需求，基于**EverFlow**还设计了以下四种应用程序帮助网络故障的调试。
 ### Latency Profiler
 ---
-{% qnimg Network/Measurement/related-work-everflow/measuring-link-latency.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-everflow/measuring-link-latency.png)
 
 许多数据中心网络服务，诸如搜索和分布式缓存都要求低延迟响应。应用**Latency Profiler**专门用于分析某对通信结点之间的通信延迟过高的问题。
 
@@ -86,7 +86,7 @@ HMux能够利用交换机全部的转发能力(通常大于1 Tbps)来对流量�
 
 ### Packet Drop Debugger
 ---
-{% qnimg Network/Measurement/related-work-everflow/debugging-packet-drops.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-everflow/debugging-packet-drops.png)
 
 丢包会严重降低应用性能，进而导致吞吐量低、超时甚至不可达等故障。丢包问题难以调试的原因在于产生丢包的可能原因有很多，如拥塞、软件错误或配置错误等。应用**Packet Drop Debugger**专门用于分析网络中的丢包问题。
 
@@ -112,7 +112,7 @@ HMux能够利用交换机全部的转发能力(通常大于1 Tbps)来对流量�
 
 ## Achitecture
 ---
-{% qnimg Network/Measurement/related-work-everflow/architecture.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-everflow/architecture.png)
 
 如上图所示，**EverFlow**中包含四个核心组件：**Controller**、**Analyzer**、**Storage**和**Reshuffler**。在这些组件之上，还编写了一系列利用**EverFlow**提供的数据包级别信息来检测网络故障的应用程序，下一节会重点介绍。
 
@@ -168,7 +168,7 @@ HMux能够利用交换机全部的转发能力(通常大于1 Tbps)来对流量�
 
 **"Match-and-Mirror"**完全在交换机的数据平面实现，利用了交换机**ASIC**芯片强大的数据处理能力，并对交换机的CPU没有造成任何开销。
 
-{% qnimg Network/Measurement/related-work-everflow/mirrored-packet-format-gre.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-everflow/mirrored-packet-format-gre.png)
 
 ### Guided Prober
 ---

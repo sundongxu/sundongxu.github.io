@@ -71,16 +71,16 @@ $ echo $SHELL
 显示为 **Zsh** 即可。
 
 **Zsh** 的配置主要集中在用户home目录的 **.zshrc** 里，可以在此处定义自己的环境变量和别名，当然，**oh my zsh** 在安装时已经自动读取当前的环境变量并进行了设置，你可以继续追加其他环境变量：
-{% qnimg OS/Installation/Ubuntu/zsh/environmental-variables.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/zsh/environmental-variables.png)
 
 接下来进行别名的设置，部分常用别名设置如下：
-{% qnimg OS/Installation/Ubuntu/zsh/alias.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/zsh/alias.png)
 
 设置完环境变量和别名之后，**Zsh** 基本上就很好用了。如果你是个主题控，还可以玩玩 **Zsh** 的主题。在 .zshrc 里找到ZSH_THEME，就可以设置主题了，默认主题是：
 > ZSH_THEME="robbyrussell"
 
 **oh my zsh** 提供了数十种主题，相关文件在 **~/.oh-my-zsh/themes** 目录下，默认提供了100多种，你可以随意选择，主题效果可在[**这里**]预览，也可以编辑主题满足自己的变态需求，我就用的默认主题 **robbyrussell**，大致效果如下：
-{% qnimg OS/Installation/Ubuntu/zsh/theme-robbyrussell.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/zsh/theme-robbyrussell.png)
 
 ## 插件
 ---

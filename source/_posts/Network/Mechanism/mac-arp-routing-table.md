@@ -43,7 +43,7 @@ MAC地址共48位，即6个字节，通常每4位构成一个16进制数，从�
 * 接着，交换机检查自己的MAC表是否有数据帧中目的MAC地址的匹配条目，如果有，则会根据MAC表中记录的对应端口将数据帧转发出去，这一转发方式称为“单播”(Unicast)。而如果没有，则会将该数据帧从非达到端口的其它全部端口发送出去，这一转发方式程序称为“广播”(Broadcast)。
 
 下面会以图示的方式详细讲解交换机传输数据帧的过程，下面先来看看单个交换机转发的情形：
-{% qnimg Network/Mechanism/mac-arp-routing-table/forwarding-single-switch.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/forwarding-single-switch.png)
 
 步骤如下：
 1. 主机A会将一个源MAC地址为本机网卡物理地址，目的MAC地址为主机B网卡物理地址的数据帧发送给交换机1；
@@ -53,7 +53,7 @@ MAC地址共48位，即6个字节，通常每4位构成一个16进制数，从�
 5. 当交换机收到主机B回应的数据帧后，也会记录数据帧中的源MAC地址，即主机B网络设备的MAC地址，这时，再当主机A和主机B相互通信时，交换机就根据MAC地址表中的记录，实现单播了，一趟转发流程实际交换机就“学习”到了两个转发表条目。
 
 那么当局域网内存在多个交换机互连时，交换机的MAC地址表要如何记录呢？下图就展示了该种情形：
-{% qnimg Network/Mechanism/mac-arp-routing-table/forwarding-multiple-switch.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/forwarding-multiple-switch.png)
 
 步骤如下：
 1. 主机A将一个源MAC地址为本机网卡物理地址，目的MAC地址为主机C网卡物理地址的数据帧发送给交换机1；
@@ -78,7 +78,7 @@ ARP协议，即地址解析协议，它是一个网络层协议，运行在各�
 
 ### 工作流
 接下来根据下图，详细讲解一下ARP协议的工作原理：
-{% qnimg Network/Mechanism/mac-arp-routing-table/example-topology-arp.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/example-topology-arp.png)
 
 步骤如下：
 1. 如果主机A想发送数据包给同一网段内的另一台主机B(通过交换机相连的节点处于同一网段)，很明显，A的用户应用程序要么已经知道B的IP地址，或者说域名(Domain Name，DNS协议会完成主机名到IP地址的映射，这里不是重点)，那么主机A首先会检查自己的ARP缓存表(ARP Cache)，查看是否有主机B的IP地址与其MAC地址的对应关系，如果有，则直接将主机B网络设备的MAC地址作为目的MAC地址封装到数据帧中，无需进一步操作即获取到数据帧封装所需的全部信息，此后完成封装并发送数据帧到目的MAC地址。如果没有，主机A则会发送一个ARP请求信息(ARP Request)，请求的目的IP地址是主机B的IP地址，目的MAC地址是MAC层的广播地址(即ff:ff:ff:ff:ff:ff)，源IP地址和MAC地址是主机A的IP地址及其MAC地址；
@@ -200,7 +200,7 @@ table th:nth-of-type(3) {
 路由器是工作在网络层的，在网络层可以识别逻辑地址，即IP地址，也就是说数据包解析时最多可将数据帧拆包成IP数据包，路由器无法操作数据报的载荷字段，但是可以针对IP首部做些事情：当路由器的某个端口收到一个包时，路由器就会读取包中的目地IP地址，然后在路由表中进行查找。如果在路由表中找到目的IP地址对应条目，则把包转发到路由器的对应端口。如果没找到，那么如果路由器配置默认路由(默认网关)，就默认将所有无法解析的目的网段主机的数据包都先发往该默认网关做进一步转发，如果没有配置默认路由，则将该包丢弃，并返回源主机以不可达(Unreachable)的信息。这就是数据包路由的过程。
 
 利用下图详细介绍路由器的工作原理：
-{% qnimg Network/Mechanism/mac-arp-routing-table/example-topology-router.png %}
+![image](https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/example-topology-router.png)
 
 步骤如下：
 1. 主机A在网络层将来自上层的报文封装成IP数据报，IP首部中的源IP地址为自己的IP地址，目的IP地址为主机B的IP地址。主机A会用本机配置的24位子网掩码与目的地址进行“与”运算，得出目的地址与本机不在同一个网段(主机A位于192.168.1.0/24网段，主机B位于192.168.2.0/24网段，或称属于不同子网)，因此发送给主机B的数据包需要经过网关路由器1的转发；
