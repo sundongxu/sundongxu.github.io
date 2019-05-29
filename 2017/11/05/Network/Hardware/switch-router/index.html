@@ -95,14 +95,14 @@
 <meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
 <meta property="og:description" content="全文概要 作为计算机网络中最重要的两种数据包转发设备，交换机和路由器在功能设计方面既存在本质差别，又包含诸多相似之处，本文从两种设备的工作原理出发，详细介绍了它们之间的种种区别与联系。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Hardware/switch-router/collision-domain-hub.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Hardware/switch-router/collision-domain-switch.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Hardware/switch-router/broadcast-domain-router.png">
-<meta property="og:updated_time" content="2018-04-27T08:17:36.923Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Hardware/switch-router/collision-domain-hub.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Hardware/switch-router/collision-domain-switch.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Hardware/switch-router/broadcast-domain-router.png">
+<meta property="og:updated_time" content="2019-05-29T13:23:29.464Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="交换机与路由器详细比较">
 <meta name="twitter:description" content="全文概要 作为计算机网络中最重要的两种数据包转发设备，交换机和路由器在功能设计方面既存在本质差别，又包含诸多相似之处，本文从两种设备的工作原理出发，详细介绍了它们之间的种种区别与联系。">
-<meta name="twitter:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Hardware/switch-router/collision-domain-hub.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Hardware/switch-router/collision-domain-hub.png">
 
 
 
@@ -499,9 +499,9 @@
 <p>简单来说，在以太网中，如果某个CSMA/CD网络上的任意两个节点在同时通信，即发送数据时会发送冲突，它们几乎同时检测到冲突且只好都放弃传输，那么这个CSMA/CD网络内的全部节点就构成了一个冲突域。如果以太网中的各个网段内部都是以集线器连接，因为集线器会把接收到的帧转发至自身的全部端口，还是会引起冲突，所以即使包含集线器，该网段仍然是一个冲突域。</p>
 <p>显然，同一个冲突域中的节点竞争信道，就会导致冲突和退避。而不同冲突域的节点不会竞争公共信道，则不会发生冲突。在交换式局域网中，每个交换机端口就对应一个冲突域，端口就是冲突域终点。由于交换机具有交换功能，在不同端口之间都有专门的信道，故不同端口的节点之间不会产生冲突。如果每个端口只连接一个节点，那么在任何一对节点之间都不会发生冲突。若一个端口连接到一个共享式局域网(内部多台计算机相连，或直连，或与集线器相连等等方式构成局域网)，那么在与该端口直连局域网中的任意节点之间都会产生冲突，但与该端口直连的节点和与交换机其它端口相连的节点之间通信则不会发生冲突，这样交换机就隔离了不同的冲突域，使得冲突只发生在各个冲突域内部，而不会影响其它冲突域。</p>
 <h4 id="集线器"><a href="#集线器" class="headerlink" title="集线器"></a>集线器</h4><p>集线器是一种物理层设备，本身不能识别MAC地址和IP地址，当集线器连接的主机设备之间传输数据时，数据包是以广播方式进行传播，即集线器会将收到的数据包广播至其所有端口，而由每台主机根据数据包与自身MAC地址是否匹配来决定是否接收。</p>
-<p>这种情况下，同一时刻由集线器连接的网络中只能有一个节点在占用信道传输数据，即所谓的”Top Talker“，其它节点在检测到信道忙碌则退避等待，若信道空闲时同时有两个或多个节点开始传输，则会发生冲突，各自放弃数据传输。集线器所有端口共享集线器的整个带宽，即所有端口为一个冲突域，如下图所示：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Hardware/switch-router/collision-domain-hub.png"></p>
+<p>这种情况下，同一时刻由集线器连接的网络中只能有一个节点在占用信道传输数据，即所谓的”Top Talker“，其它节点在检测到信道忙碌则退避等待，若信道空闲时同时有两个或多个节点开始传输，则会发生冲突，各自放弃数据传输。集线器所有端口共享集线器的整个带宽，即所有端口为一个冲突域，如下图所示：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Hardware/switch-router/collision-domain-hub.png" alt="image"></p>
 <h4 id="交换机"><a href="#交换机" class="headerlink" title="交换机"></a>交换机</h4><p>交换机工作在数据链路层，在接收数据帧后，通过查找自身维护的MAC地址转发表找出对应输出端口，并把数据传送到目的端口。</p>
-<p>交换机在同一时刻可进行多个端口之间的数据传输，即支持“并发传输”，这是由于交换机不同端口之间都有专门的链路相连，且独享全部带宽。每一端口相连的都是独立的物理网段，连接在端口上的网络设备独自享有全部带宽，因此，交换机起到了分割不同冲突域的作用，每一个端口相连的网段为一个独立的冲突域，如下图所示：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Hardware/switch-router/collision-domain-switch.png"></p>
+<p>交换机在同一时刻可进行多个端口之间的数据传输，即支持“并发传输”，这是由于交换机不同端口之间都有专门的链路相连，且独享全部带宽。每一端口相连的都是独立的物理网段，连接在端口上的网络设备独自享有全部带宽，因此，交换机起到了分割不同冲突域的作用，每一个端口相连的网段为一个独立的冲突域，如下图所示：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Hardware/switch-router/collision-domain-switch.png" alt="image"></p>
 <h4 id="小结-2"><a href="#小结-2" class="headerlink" title="小结"></a>小结</h4><p>集线器是一个标准的共享式设备，也就是同一时刻只有一个端口下联的设备可以发送数据。正常工作时，集线器随机选出某一端口设备并让它独占全部带宽与集线器上联设备(如交换机、路由器等)进行通信。因此，集线器设备的所有端口即形成了一个冲突域。</p>
 <p>为了有效避免冲突，局域网中使用交换机(Switch)来分割冲突域。对网络进行分割的原因是为了分离流量并创建更小的冲突域来使用户获得更高的带宽，否则同一时刻数据太多容易导致网络拥挤形成阻塞。</p>
 <h3 id="广播域-Broadcast-Domain"><a href="#广播域-Broadcast-Domain" class="headerlink" title="广播域(Broadcast Domain)"></a>广播域(Broadcast Domain)</h3><p>常见广播情形有如下两种：</p>
@@ -516,7 +516,7 @@
 <li>如果没找到则提取数据包头的目的IP地址，与自身路由表进行比较，这里又分两种情况：<br> (1) 存在对应的路由表项，则按路由表转发(与查到MAC表很像)；<br> (2) 没找到对应路由表项，则按缺省路由转发至默认网关(自始自终没有出现过广播！)。</li>
 </ol>
 <p>路由表和MAC的区别在于，路由表存放的是目的IP，即下一步要去地方的IP地址。</p>
-<p>广播在路由器能够结束，原因就在于路由器会在查找不到对应MAC表时，根据目的IP进行路由。路由过程的两种情况都不存在广播。因此，路由器可以隔离广播域，如下图所示：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Hardware/switch-router/broadcast-domain-router.png"></p>
+<p>广播在路由器能够结束，原因就在于路由器会在查找不到对应MAC表时，根据目的IP进行路由。路由过程的两种情况都不存在广播。因此，路由器可以隔离广播域，如下图所示：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Hardware/switch-router/broadcast-domain-router.png" alt="image"></p>
 <h4 id="小结-3"><a href="#小结-3" class="headerlink" title="小结"></a>小结</h4><p>以太网中，冲突域通常是由集线器组织的，与同一个集线器相连的全部节点就组成了一个冲突域。交换机的每个端口相连的网络都是一个单独的冲突域。</p>
 <p>广播域是指一个节点发出一个广播信号后，能够接收到该信号的全部节点的集合。通常来说一个局域网就是一个广播域。交换机的所有端口都在同一个广播域内。</p>
 <ul>
@@ -850,7 +850,7 @@
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -875,7 +875,7 @@
       <span class="post-meta-item-icon">
       <i class="fa fa-pencil"></i></span>
       博客全站共
-      <span title="Site words total count">99.9k 字</span>
+      <span title="Site words total count">100.0k 字</span>
     
    </div>
 
@@ -930,8 +930,6 @@
   
 
 
-  
-
 
 
 
@@ -970,11 +968,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -1508,7 +1501,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -1517,8 +1510,6 @@
   
 
   
-  
-    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </body>
 </html>

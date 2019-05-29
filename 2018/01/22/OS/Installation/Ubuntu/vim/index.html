@@ -95,17 +95,17 @@
 <meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
 <meta property="og:description" content="全文概要 关于Vim ，不消多说，熟练了就是Linux上最好的文本代码编辑器，丰富的命令和强大的插件支持几乎能满足即使最挑剔的那一部分人的需求。本文详细介绍了安装 Vim 的正确姿势以及一款超强大的 Vim 插件 VimPlus 的配置过程，更多的 Vim 使用技巧会在后续的博文随本文学习总结的进度同步推出。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/vim/vimplus-vimrc-vundle.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/vim/vimplus-plugins.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/vim/vi-vim-cheat-sheet.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/vim/vi-vim-cheat-sheet-cn.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/vim/vim-cheat-sheet-for-programmers-screen.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/vim/vim-cheat-sheet-en-visual.png">
-<meta property="og:updated_time" content="2018-04-27T08:17:36.933Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vimplus-vimrc-vundle.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vimplus-plugins.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vi-vim-cheat-sheet.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vi-vim-cheat-sheet-cn.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vim-cheat-sheet-for-programmers-screen.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vim-cheat-sheet-en-visual.png">
+<meta property="og:updated_time" content="2019-05-29T13:43:10.844Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Ubuntu 16.04 最好用的 Vim 配置">
 <meta name="twitter:description" content="全文概要 关于Vim ，不消多说，熟练了就是Linux上最好的文本代码编辑器，丰富的命令和强大的插件支持几乎能满足即使最挑剔的那一部分人的需求。本文详细介绍了安装 Vim 的正确姿势以及一款超强大的 Vim 插件 VimPlus 的配置过程，更多的 Vim 使用技巧会在后续的博文随本文学习总结的进度同步推出。">
-<meta name="twitter:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/vim/vimplus-vimrc-vundle.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vimplus-vimrc-vundle.png">
 
 
 
@@ -473,10 +473,10 @@
 <p>以上，<strong>Vim</strong> 安装完成，接下来是 <strong>VimPlus</strong> 插件的安装，根据 <strong>install.sh</strong> 安装脚本，<strong>VimPlus</strong> 使用 <a href="https://github.com/VundleVim/Vundle.vim" target="_blank" rel="noopener"><strong>Vundle</strong></a> 来管理 <strong>Vim</strong> 插件。</p>
 <p><strong>Vim</strong> 有三种类型的插件：<br>（1）Github上 vim-scripts 仓库的插件；<br>（2）Github上非 vim-scripts 仓库的插件；<br>（3）不在Github上的插件。</p>
 <p>而对于不同的插件，<strong>vundle</strong> 自动管理和下载插件的时候，有不同的地址填写方法，有如下三类：<br>（1）在Github上vim-scripts用户下的仓库,只需要写出repos（仓库）名称；<br>（2）在Github其他用户下的repos, 需要写出”用户名/repos名”；<br>（3）不在Github上的插件，需要写出git全路径。</p>
-<p>之后想要为 <strong>Vim</strong> 添加新插件，只需编辑 <strong>.vimrc</strong> 文件，在下图对应位置处添加插件的下载地址路径：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/vim/vimplus-vimrc-vundle.png"></p>
+<p>之后想要为 <strong>Vim</strong> 添加新插件，只需编辑 <strong>.vimrc</strong> 文件，在下图对应位置处添加插件的下载地址路径：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vimplus-vimrc-vundle.png" alt="image"></p>
 <p>保存 <strong>.vimrc</strong> 文件后，有以下两种方式开始下载安装插件：<br>（1）运行 vim ,再运行 :PluginInstall：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ vim</span><br><span class="line">: PluginInstall</span><br></pre></td></tr></table></figure></p>
 <p>（2）命令行执行或编辑以下内容到脚本中执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$ vim -c &quot;PluginInstall&quot; -c &quot;q&quot; -c &quot;q&quot;</span><br><span class="line"># 或</span><br><span class="line">$ vim -c &quot;PluginInstall&quot; -c &quot;qall&quot; </span><br></pre></td></tr></table></figure></p>
-<p>开始安装插件时应该是这个样子：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/vim/vimplus-plugins.png"></p>
+<p>开始安装插件时应该是这个样子：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vimplus-plugins.png" alt="image"></p>
 <p>其中要提一下的是 <a href="http://valloric.github.io/YouCompleteMe/" target="_blank" rel="noopener"><strong>YouCompleteMe</strong></a> 这个插件，用于 <strong>Vim</strong> 自动补全，可由于某种不可描述的缘故，下载安装它非常慢。着急的话，可以采用下面介绍的离线安装方法：<br>将 <strong>vimrc</strong> 中 <strong>YouCompleteMe</strong>那一行注释掉，之后再从下面的地址下载后进行离线安装：<br><a href="/2018/01/22/OS/Installation/Ubuntu/vim/YouCompleteMe.tar.gz" title="YouCompleteMe下载">YouCompleteMe下载</a></p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ cd ~/Downloads # 浏览器下载后默认放在此路径下</span><br><span class="line">$ mv YouCompleteMe.tar.gz ~/.vim/bundle</span><br><span class="line">$ cd ~/.vim/bundle</span><br><span class="line">$ tar zxvf YouCompleteMe.tar.gz</span><br><span class="line">$ cd YouCompleteMe</span><br><span class="line">$ ./install.py --clang-completer</span><br></pre></td></tr></table></figure>
 <p>到这一步，安装已经完成，你会发现~目录有两个文件，一个是vim的配置文件 <strong>.vimrc</strong>，一个是 <strong>YouCompleteMe</strong> 的配置文件 <strong>.ycm_extra_conf.py</strong>，一般来说新建一个 main.cpp 来写C、C++程序来说是没有问题的，都会有语法补全，当你需要写一些项目并涉及到第三方库时，就需要修改 <strong>.ycm_extra_conf.py</strong> 了，具体步骤如下：<br>（1）将 <strong>.ycm_extra_conf.py</strong> 拷贝的项目的根目录。<br>（2）更改 <strong>.ycm_extra_conf.py</strong> 里面的 <strong>flags</strong>变量，添加 <strong>第三方库</strong> 路径和<strong>工程子目录</strong> 路径。</p>
@@ -489,10 +489,10 @@
 <h2 id="Vim教程"><a href="#Vim教程" class="headerlink" title="Vim教程"></a>Vim教程</h2><hr>
 <p>入门教程就放 <a href="https://coolshell.cn/articles/5426.html" target="_blank" rel="noopener"><strong>简明 Vim 练级教程 - 酷壳</strong></a></p>
 <p>这里放几张 <strong>Vim</strong> 使用技巧的示意图，便于学习掌握：</p>
-<p>先来张 <strong>Vi/Vim</strong> 键盘图：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/vim/vi-vim-cheat-sheet.png"></p>
-<p>英文看不懂？没关系，下面是中文版：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/vim/vi-vim-cheat-sheet-cn.png"></p>
-<p>程序员或许更喜欢这样的：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/vim/vim-cheat-sheet-for-programmers-screen.png"></p>
-<p>还有这样的：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/vim/vim-cheat-sheet-en-visual.png"></p>
+<p>先来张 <strong>Vi/Vim</strong> 键盘图：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vi-vim-cheat-sheet.png" alt="image"></p>
+<p>英文看不懂？没关系，下面是中文版：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vi-vim-cheat-sheet-cn.png" alt="image"></p>
+<p>程序员或许更喜欢这样的：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vim-cheat-sheet-for-programmers-screen.png" alt="image"></p>
+<p>还有这样的：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/vim/vim-cheat-sheet-en-visual.png" alt="image"></p>
 <p>总而言之，<strong>Vim</strong> 是一款功能超乎想象地强大齐全的编辑器。然而，使用者不可能会用到其所有的特性，我们只需掌握基本常用的操作命令，其余的在要使用时再去查阅教程或者攻略即可。</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><hr>
 <p>[1]<a href="http://feihu.me/blog/2014/intro-to-vim/#%E4%B8%BA%E4%BB%80%E4%B9%88%E9%80%89%E5%85%B6%E5%AE%83" target="_blank" rel="noopener">跟我一起学Vim—The life-changing Editor</a><br>[2]<a href="http://www.cnblogs.com/highway-9/p/5414465.html" target="_blank" rel="noopener">超级强大的vim配置-vimplus</a><br>[3]<a href="http://www.cnblogs.com/highway-9/p/5984285.html" target="_blank" rel="noopener">超级强大的vim配置-vimplus(续集)</a><br>[4]<a href="http://www.cnblogs.com/burningTheStar/p/6961220.html" target="_blank" rel="noopener">打造一流编辑器vimplus</a></p>
@@ -785,7 +785,7 @@
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -810,7 +810,7 @@
       <span class="post-meta-item-icon">
       <i class="fa fa-pencil"></i></span>
       博客全站共
-      <span title="Site words total count">99.9k 字</span>
+      <span title="Site words total count">100.0k 字</span>
     
    </div>
 
@@ -865,8 +865,6 @@
   
 
 
-  
-
 
 
 
@@ -905,11 +903,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -1443,7 +1436,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -1452,8 +1445,6 @@
   
 
   
-  
-    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </body>
 </html>

@@ -95,16 +95,16 @@
 <meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
 <meta property="og:description" content="全文概要 最近闲来无事，抄起本《Wireshark网络分析就是这么简单》想了解下数据包粒度(Packet-level)的网络测量及分析方法，书开篇提出一个面试题，与子网掩码相关，乍看心觉easy，咱好歹也是计算机专业学生，本科算是很认真学习过计算机网络课，且不说研究多么深入，但至少对于基础概念及重点问题，诸如OSI分层模型、TCP可靠传输机制、子网划分、路由算法甚至CSMA都如数家珍(毕竟好像教科">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/subnet/wireshark-ping-arp.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/subnet/wireshark-ping-icmp.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/subnet/triangle-loop.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/subnet/subnet-mask-example-part1.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/subnet/subnet-mask-example-part2.png">
-<meta property="og:updated_time" content="2018-06-02T06:29:21.179Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/subnet/wireshark-ping-arp.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/subnet/wireshark-ping-icmp.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/subnet/triangle-loop.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/ Network/Mechanism/subnet/subnet-mask-example-part1.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/subnet/subnet-mask-example-part2.png">
+<meta property="og:updated_time" content="2019-05-29T13:28:20.343Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="细说子网">
 <meta name="twitter:description" content="全文概要 最近闲来无事，抄起本《Wireshark网络分析就是这么简单》想了解下数据包粒度(Packet-level)的网络测量及分析方法，书开篇提出一个面试题，与子网掩码相关，乍看心觉easy，咱好歹也是计算机专业学生，本科算是很认真学习过计算机网络课，且不说研究多么深入，但至少对于基础概念及重点问题，诸如OSI分层模型、TCP可靠传输机制、子网划分、路由算法甚至CSMA都如数家珍(毕竟好像教科">
-<meta name="twitter:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/subnet/wireshark-ping-arp.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/subnet/wireshark-ping-arp.png">
 
 
 
@@ -570,7 +570,7 @@
 <blockquote>
 <p>echo 1 &gt; /proc/sys/net/ipv4/ip_forward</p>
 </blockquote>
-<p>得到的抓包结果如下图所示：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/subnet/wireshark-ping-arp.png"><br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/subnet/wireshark-ping-icmp.png"></p>
+<p>得到的抓包结果如下图所示：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/subnet/wireshark-ping-arp.png" alt="image"><br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/subnet/wireshark-ping-icmp.png" alt="image"></p>
 <p>根据以上Wireshark的抓包结果，结合其中数据包出现的先后顺序，可将<strong>B ping A</strong>的通信流程作如下分析：</p>
 <ol>
 <li><p>在B处，计算B的IP地址，即<strong>源IP地址</strong>，与A的IP地址，即<strong>目的IP地址</strong>，分别和B的子网掩码<strong>按位与</strong>的结果，即应用上文介绍的计算网络地址的唯一方法，发现：</p>
@@ -608,7 +608,7 @@
 <li>之后，主机B终于收到了来自A的ICMP Reply回包，即在抓到<strong>第七个相关数据包</strong>后，一次ping过程成功完成。<br><br></li>
 <li>后来的过程中，主机A、B由于清楚地知道了对方的联系方式(各自以及默认网关的IP地址、MAC地址以及路由信息)，此后的就没必要再发ARP包了，于是此后都是直接抓到双方由于ping产生ICMP数据包。<br><br></li>
 </ol>
-<p>分析完这几个包，面试题的答案有了，原来通信流程是这样：B先把ping请求交给默认网关，默认网关再转发给A，而A收到请求后直接把ping回复给B，形成如下所示的三角环路：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/subnet/triangle-loop.png"></p>
+<p>分析完这几个包，面试题的答案有了，原来通信流程是这样：B先把ping请求交给默认网关，默认网关再转发给A，而A收到请求后直接把ping回复给B，形成如下所示的三角环路：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/subnet/triangle-loop.png" alt="image"></p>
 <p>让我们再回到之前的那个问题：为什么以<strong>B ping A</strong>为例，而不是<strong>A ping B</strong>呢？</p>
 <p>其实答案已经一目了然：<strong>A ping B</strong>时，A通过子网掩码运算后发现B和自己在同一网段，广播ARP请求从来自主机B的ARP应答报文中获取其MAC地址，于是直接发送ICMP Request包给B。此后B进行回复，于是重复上述步骤1～4，随后默认网关将此ICMP Reply包转发至A，完成一次ping过程。</p>
 <p>以上，算是完整解答了面试题的各种情况，但我们的目的绝不仅限于此，不是吗？</p>
@@ -657,7 +657,7 @@
 </li>
 </ol>
 <p>出于安全等多方面的考虑，分配地址仍只能以网络为单位，故这种分配机制的不灵活性和浪费问题无法从根本上解决，CIDR就是提供了一种缓和机制：划分IP地址时以1位作为递增步长，这样不仅支持8、16、24三种网络位数，网络位数位小于32位的任意位数都为合法IP地址，这时的网络位数还是由子网掩码来确定。</p>
-<p>下图展示了将子网掩码应用于A、B、C等类别(Classful)网络，以及无类别(Classless)网络的情况：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/subnet/subnet-mask-example-part1.png"><br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/subnet/subnet-mask-example-part2.png"></p>
+<p>下图展示了将子网掩码应用于A、B、C等类别(Classful)网络，以及无类别(Classless)网络的情况：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/ Network/Mechanism/subnet/subnet-mask-example-part1.png" alt="image"><br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/subnet/subnet-mask-example-part2.png" alt="image"></p>
 <p>当然，CIDR机制仅仅只是缓和了IPv4地址消耗过快的事实，使得IP地址能够以一种更加高校的方式被管理结构分配给网络服务提供商(Internet Service Provider，ISP)和用户，但是正如上文所说，随着互联网设备和用户规模与日俱增，这“治标不治本”。到目前为止，要想真正解决网络地址短缺的问题，及早普及在1993年引入的IPv6协议才是终极方法，在IPv6协议下，网络地址为IPv6地址，包含128位(bit)，支持的独立地址数量达到了2^128这一根本无法企及的天文数字。</p>
 <h2 id="参考资源"><a href="#参考资源" class="headerlink" title="参考资源"></a>参考资源</h2><hr>
 <p>[1] <a href="https://www.iplocation.net/subnet-mask" target="_blank" rel="noopener">What is a Subnet Mask</a><br>[2]<a href="https://www.zhihu.com/question/21064101" target="_blank" rel="noopener">如何理解子网掩码中的“子网”</a><br>[3]<a href="https://wizardforcel.gitbooks.io/network-basic/content/6.html" target="_blank" rel="noopener">网络基本功：细说IP地址与子网</a></p>
@@ -948,7 +948,7 @@
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -973,7 +973,7 @@
       <span class="post-meta-item-icon">
       <i class="fa fa-pencil"></i></span>
       博客全站共
-      <span title="Site words total count">99.9k 字</span>
+      <span title="Site words total count">100.0k 字</span>
     
    </div>
 
@@ -1028,8 +1028,6 @@
   
 
 
-  
-
 
 
 
@@ -1068,11 +1066,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -1606,7 +1599,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -1615,8 +1608,6 @@
   
 
   
-  
-    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </body>
 </html>

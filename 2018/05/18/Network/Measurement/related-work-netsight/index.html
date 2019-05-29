@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="Measurement,NSDI,End-Host,Packet-Level," />
+  <meta name="keywords" content="Measurement,End-Host,Packet-Level,NSDI," />
 
 
 
@@ -88,20 +88,20 @@
 
 
 <meta name="description" content="全文概要NSDI 2014年中，由斯坦福大学”SDN之父”，Nick Mckeown教授带领的实验室发表了题为《I Know What Yout Packet Did Last Hop: Using Packet Histories to Troubleshoot Networks》的论文。基于本文设计的NetSight系统，运行在端系统之上，并利用已有的OpenFlow交换机的功能特性，实现了P">
-<meta name="keywords" content="Measurement,NSDI,End-Host,Packet-Level">
+<meta name="keywords" content="Measurement,End-Host,Packet-Level,NSDI">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络测量之NetSight(NSDI-2014)">
 <meta property="og:url" content="dongdongdong.me/2018/05/18/Network/Measurement/related-work-netsight/index.html">
 <meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
 <meta property="og:description" content="全文概要NSDI 2014年中，由斯坦福大学”SDN之父”，Nick Mckeown教授带领的实验室发表了题为《I Know What Yout Packet Did Last Hop: Using Packet Histories to Troubleshoot Networks》的论文。基于本文设计的NetSight系统，运行在端系统之上，并利用已有的OpenFlow交换机的功能特性，实现了P">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-netsight/architecture.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-netsight/workflow.png">
-<meta property="og:updated_time" content="2018-08-02T07:44:41.578Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-netsight/architecture.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-netsight/workflow.png">
+<meta property="og:updated_time" content="2019-05-29T13:24:55.862Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络测量之NetSight(NSDI-2014)">
 <meta name="twitter:description" content="全文概要NSDI 2014年中，由斯坦福大学”SDN之父”，Nick Mckeown教授带领的实验室发表了题为《I Know What Yout Packet Did Last Hop: Using Packet Histories to Troubleshoot Networks》的论文。基于本文设计的NetSight系统，运行在端系统之上，并利用已有的OpenFlow交换机的功能特性，实现了P">
-<meta name="twitter:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-netsight/architecture.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-netsight/architecture.png">
 
 
 
@@ -502,12 +502,12 @@
 <h3 id="nprof-Hierachial-Network-Profiler"><a href="#nprof-Hierachial-Network-Profiler" class="headerlink" title="nprof: Hierachial Network Profiler"></a>nprof: Hierachial Network Profiler</h3><hr>
 <p><strong>nprof</strong>帮助用户分析任意链路集合，以理解造成当前链路利用率情况的流量特征和路由决定。<br><strong>nprof</strong>会将收集到的<strong>Packet History</strong>与拓扑信息组合起来已提供一个生动的分层视图，表明是哪些交换机在发送流量给当前链路，以及流量大小。</p>
 <h2 id="Achitecture"><a href="#Achitecture" class="headerlink" title="Achitecture"></a>Achitecture</h2><hr>
-<img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-netsight/architecture.png">
+<p><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-netsight/architecture.png" alt="image"></p>
 <p><strong>NetSight</strong>使用一个<strong>Central Coordinator</strong>来管理多个<strong>Worker(NetSight Server)</strong>。<strong>NetSight Application(应用程序)</strong>将基于<strong>PHF</strong>的钩子(Trigger)和查询发送至<strong>Coordinator</strong>，后者则将匹配得到的<strong>Packet History</strong>返回给前者。</p>
 <p><strong>Coordinator</strong>设置从<strong>Switch</strong>到<strong>NetSight Server</strong>的<strong>Postcard</strong>传输和从网络控制平面到<strong>Coordinator</strong>的<strong>State Change Record(状态变化记录)</strong>传输。</p>
 <p>最后，<strong>Coordinator</strong>会对其所管理的<strong>Worker</strong>们执行周期性的存活检测、查询与钩子的广播，并在组装<strong>Packet History</strong>时与之交换拓扑信息。</p>
 <h2 id="Work-Flow"><a href="#Work-Flow" class="headerlink" title="Work Flow"></a>Work Flow</h2><hr>
-<img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-netsight/workflow.png">
+<p><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-netsight/workflow.png" alt="image"></p>
 <h3 id="Postcard-Generation"><a href="#Postcard-Generation" class="headerlink" title="Postcard Generation"></a>Postcard Generation</h3><hr>
 <blockquote>
 <p>Goal: Record all information relevant to a forwarding event and send for analysis.</p>
@@ -604,11 +604,11 @@
           
             <a href="/tags/Measurement/" rel="tag"><i class="fa fa-tag"></i> Measurement</a>
           
-            <a href="/tags/NSDI/" rel="tag"><i class="fa fa-tag"></i> NSDI</a>
-          
             <a href="/tags/End-Host/" rel="tag"><i class="fa fa-tag"></i> End-Host</a>
           
             <a href="/tags/Packet-Level/" rel="tag"><i class="fa fa-tag"></i> Packet-Level</a>
+          
+            <a href="/tags/NSDI/" rel="tag"><i class="fa fa-tag"></i> NSDI</a>
           
         </div>
       
@@ -852,7 +852,7 @@
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -877,7 +877,7 @@
       <span class="post-meta-item-icon">
       <i class="fa fa-pencil"></i></span>
       博客全站共
-      <span title="Site words total count">99.9k 字</span>
+      <span title="Site words total count">100.0k 字</span>
     
    </div>
 
@@ -932,8 +932,6 @@
   
 
 
-  
-
 
 
 
@@ -972,11 +970,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -1510,7 +1503,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -1519,8 +1512,6 @@
   
 
   
-  
-    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </body>
 </html>

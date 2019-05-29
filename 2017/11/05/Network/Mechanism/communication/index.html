@@ -95,13 +95,13 @@
 <meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
 <meta property="og:description" content="全文概要写完前面几篇对网络硬件设备以及对应工作机制的介绍之后，我觉得有必要再多有一篇博文对网络中的端到端通信过程进行完整的解析，本文对同一网段内、跨网段主机通信两种情形分别列举两个简单示例，分别描述了通信过程中各硬件设备和网络协议的协同工作流程。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/example-topology-arp.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/example-topology-router.png">
-<meta property="og:updated_time" content="2018-06-02T08:14:41.180Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/example-topology-arp.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/example-topology-router.png">
+<meta property="og:updated_time" content="2019-05-29T13:25:31.333Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次完整的网络通信过程">
 <meta name="twitter:description" content="全文概要写完前面几篇对网络硬件设备以及对应工作机制的介绍之后，我觉得有必要再多有一篇博文对网络中的端到端通信过程进行完整的解析，本文对同一网段内、跨网段主机通信两种情形分别列举两个简单示例，分别描述了通信过程中各硬件设备和网络协议的协同工作流程。">
-<meta name="twitter:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/example-topology-arp.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/example-topology-arp.png">
 
 
 
@@ -460,12 +460,12 @@
 <p><strong>注意</strong>：网关通常指的是路由器的一个物理端口，此时路由器称为“网关路由器”。路由器转发数据包时不会对它的源IP地址和目的IP地址做修改，只会修改MAC地址。</p>
 <h2 id="网内通信"><a href="#网内通信" class="headerlink" title="网内通信"></a>网内通信</h2><hr>
 <p>网内通信，即通信双方都位处同一网段中，数据传输无需经过路由器(或三层交换机)，即可由本网段自主完成。</p>
-<p>以下图拓扑为例：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/example-topology-arp.png"></p>
+<p>以下图拓扑为例：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/example-topology-arp.png" alt="image"></p>
 <p>在第一节的两个步骤基础上，若目的主机与发送主机属于同一网段，假设发送主机的ARP表中并无目的主机对应的表项，则发送主机会以目的主机IP地址为内容，广播ARP请求以期获知目的主机MAC地址，并通过交换机(除到达端口之外的所有端口发送，即洪泛(Flooding))向全网段主机转发，而只有目的主机接收到此ARP请求后会将自己的MAC地址和IP地址装入ARP应答后将其回复给发送主机，发送主机接收到此ARP应答后，从中提取目的主机的MAC地址，并在其ARP表中建立目的主机的对应表项(IP地址到MAC地址的映射)，之后即可向目的主机发送数据，将待发送数据封装成帧，并通过二层设备(如交换机)转发至本网段内的目的主机，自此完成通信。</p>
 <p>具体分析过程参见<a href="http://dongdongdong.me/2017/11/15/Network/Mechanism/mac-arp-routing-table"><strong>此篇</strong></a></p>
 <h2 id="网际通信"><a href="#网际通信" class="headerlink" title="网际通信"></a>网际通信</h2><hr>
 <p>网际通信，即通信双方分处不同网段，数据传输需经过路由器(或三层交换机)才能完成不同网段的通信。</p>
-<p>以下图拓扑为例：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/example-topology-router.png"></p>
+<p>以下图拓扑为例：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/example-topology-router.png" alt="image"></p>
 <p>在第一节的两个步骤基础上，若目的主机与发送主机不在同一网段，则需进行以下五个步骤：</p>
 <ol>
 <li><p>假设发送主机的路由表中也无目的主机所在网段对应的表项，发送主机会将此数据包先发送至默认网关，由默认网关完成转发，假设发送主机的ARP表中并无默认网关对应的表项，则进行上一节中相同的ARP过程以获知默认网关MAC地址，之后根据此MAC地址，本机将数据包封装成帧后发送给默认网关。值得注意的是，此数据包的目的MAC地址为默认网关的MAC地址，而目的IP地址仍为目的主机的IP地址，即：源、目的MAC地址在帧转发过程中会被修改为本跳和下一跳的MAC地址，而源、目的IP地址则始终不变；</p>
@@ -771,7 +771,7 @@
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -796,7 +796,7 @@
       <span class="post-meta-item-icon">
       <i class="fa fa-pencil"></i></span>
       博客全站共
-      <span title="Site words total count">99.9k 字</span>
+      <span title="Site words total count">100.0k 字</span>
     
    </div>
 
@@ -851,8 +851,6 @@
   
 
 
-  
-
 
 
 
@@ -891,11 +889,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -1429,7 +1422,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -1438,8 +1431,6 @@
   
 
   
-  
-    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </body>
 </html>

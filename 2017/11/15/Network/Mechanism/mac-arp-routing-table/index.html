@@ -95,15 +95,15 @@
 <meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
 <meta property="og:description" content="全文概要 计算机网络中一个关键步骤在于通信路径上不同节点对于流经本节点的数据包转发，常见的交换设备主要是交换机(第二层、三层)和路由器(第三层)，在实际运行时，它们各自维护一些表结构帮助完成数据包的正确寻址与转发，本文详细介绍了三张至关重要的表：转发表、ARP表与路由表的在网络数据包转发功能中发挥的作用，以及它们协同工作的原理，顺便也会接着之前的文章继续谈谈交换机和路由器的一些事儿。">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/forwarding-single-switch.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/forwarding-multiple-switch.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/example-topology-arp.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/example-topology-router.png">
-<meta property="og:updated_time" content="2018-06-02T07:24:42.942Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/forwarding-single-switch.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/forwarding-multiple-switch.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/example-topology-arp.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/example-topology-router.png">
+<meta property="og:updated_time" content="2019-05-29T13:27:56.160Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="转发表(MAC表)、ARP表、路由表总结">
 <meta name="twitter:description" content="全文概要 计算机网络中一个关键步骤在于通信路径上不同节点对于流经本节点的数据包转发，常见的交换设备主要是交换机(第二层、三层)和路由器(第三层)，在实际运行时，它们各自维护一些表结构帮助完成数据包的正确寻址与转发，本文详细介绍了三张至关重要的表：转发表、ARP表与路由表的在网络数据包转发功能中发挥的作用，以及它们协同工作的原理，顺便也会接着之前的文章继续谈谈交换机和路由器的一些事儿。">
-<meta name="twitter:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/forwarding-single-switch.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/forwarding-single-switch.png">
 
 
 
@@ -474,7 +474,7 @@
 <li><p>接着，交换机检查自己的MAC表是否有数据帧中目的MAC地址的匹配条目，如果有，则会根据MAC表中记录的对应端口将数据帧转发出去，这一转发方式称为“单播”(Unicast)。而如果没有，则会将该数据帧从非达到端口的其它全部端口发送出去，这一转发方式程序称为“广播”(Broadcast)。</p>
 </li>
 </ul>
-<p>下面会以图示的方式详细讲解交换机传输数据帧的过程，下面先来看看单个交换机转发的情形：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/forwarding-single-switch.png"></p>
+<p>下面会以图示的方式详细讲解交换机传输数据帧的过程，下面先来看看单个交换机转发的情形：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/forwarding-single-switch.png" alt="image"></p>
 <p>步骤如下：</p>
 <ol>
 <li>主机A会将一个源MAC地址为本机网卡物理地址，目的MAC地址为主机B网卡物理地址的数据帧发送给交换机1；</li>
@@ -483,7 +483,7 @@
 <li>这时，局域网的所有主机(通过交换机相连的全部主机)都会收到此数据帧，但是只有主机B收到此数据帧时会响应这个广播帧，并回应一个数据帧(这个回应由什么机制确定的，需要再查资料确定一下～TCP的ACK包？)，此数据帧中包括主机B网络设备的MAC地址；</li>
 <li>当交换机收到主机B回应的数据帧后，也会记录数据帧中的源MAC地址，即主机B网络设备的MAC地址，这时，再当主机A和主机B相互通信时，交换机就根据MAC地址表中的记录，实现单播了，一趟转发流程实际交换机就“学习”到了两个转发表条目。</li>
 </ol>
-<p>那么当局域网内存在多个交换机互连时，交换机的MAC地址表要如何记录呢？下图就展示了该种情形：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/forwarding-multiple-switch.png"></p>
+<p>那么当局域网内存在多个交换机互连时，交换机的MAC地址表要如何记录呢？下图就展示了该种情形：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/forwarding-multiple-switch.png" alt="image"></p>
 <p>步骤如下：</p>
 <ol>
 <li>主机A将一个源MAC地址为本机网卡物理地址，目的MAC地址为主机C网卡物理地址的数据帧发送给交换机1；</li>
@@ -498,7 +498,7 @@
 <h3 id="ARP协议"><a href="#ARP协议" class="headerlink" title="ARP协议"></a>ARP协议</h3><p>首先明确一点，<strong>在以太网环境下，同一个网段的主机之间需要知道对方的MAC地址，才能进行通信</strong>。</p>
 <p>上一节介绍了交换机的工作原理，了解到交换机是根据MAC寻址，查表确认输出端口以完成本节点转发任务的。看到这里其实应该可以抛出从一开始就被我们忽视了的问题：在初始构造数据包准备发送时，源主机究竟要如何获得目的主机网络设备MAC地址的呢？这时，就需要使用到ARP协议。在网络拓扑中的每个节点或说主机上，实际都维护有一张ARP表，它记录着主机的IP地址(网络地址)到MAC地址(物理地址)的映射关系。</p>
 <p>ARP协议，即地址解析协议，它是一个网络层协议，运行在各网络节点上，负责完成主机IP地址到MAC地址的映射。</p>
-<h3 id="工作流-1"><a href="#工作流-1" class="headerlink" title="工作流"></a>工作流</h3><p>接下来根据下图，详细讲解一下ARP协议的工作原理：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/example-topology-arp.png"></p>
+<h3 id="工作流-1"><a href="#工作流-1" class="headerlink" title="工作流"></a>工作流</h3><p>接下来根据下图，详细讲解一下ARP协议的工作原理：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/example-topology-arp.png" alt="image"></p>
 <p>步骤如下：</p>
 <ol>
 <li>如果主机A想发送数据包给同一网段内的另一台主机B(通过交换机相连的节点处于同一网段)，很明显，A的用户应用程序要么已经知道B的IP地址，或者说域名(Domain Name，DNS协议会完成主机名到IP地址的映射，这里不是重点)，那么主机A首先会检查自己的ARP缓存表(ARP Cache)，查看是否有主机B的IP地址与其MAC地址的对应关系，如果有，则直接将主机B网络设备的MAC地址作为目的MAC地址封装到数据帧中，无需进一步操作即获取到数据帧封装所需的全部信息，此后完成封装并发送数据帧到目的MAC地址。如果没有，主机A则会发送一个ARP请求信息(ARP Request)，请求的目的IP地址是主机B的IP地址，目的MAC地址是MAC层的广播地址(即ff:ff:ff:ff:ff:ff)，源IP地址和MAC地址是主机A的IP地址及其MAC地址；</li>
@@ -631,7 +631,7 @@ table th:nth-of-type(3) {
 </li>
 </ol>
 <p>路由器是工作在网络层的，在网络层可以识别逻辑地址，即IP地址，也就是说数据包解析时最多可将数据帧拆包成IP数据包，路由器无法操作数据报的载荷字段，但是可以针对IP首部做些事情：当路由器的某个端口收到一个包时，路由器就会读取包中的目地IP地址，然后在路由表中进行查找。如果在路由表中找到目的IP地址对应条目，则把包转发到路由器的对应端口。如果没找到，那么如果路由器配置默认路由(默认网关)，就默认将所有无法解析的目的网段主机的数据包都先发往该默认网关做进一步转发，如果没有配置默认路由，则将该包丢弃，并返回源主机以不可达(Unreachable)的信息。这就是数据包路由的过程。</p>
-<p>利用下图详细介绍路由器的工作原理：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Mechanism/mac-arp-routing-table/example-topology-router.png"></p>
+<p>利用下图详细介绍路由器的工作原理：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Mechanism/mac-arp-routing-table/example-topology-router.png" alt="image"></p>
 <p>步骤如下：</p>
 <ol>
 <li>主机A在网络层将来自上层的报文封装成IP数据报，IP首部中的源IP地址为自己的IP地址，目的IP地址为主机B的IP地址。主机A会用本机配置的24位子网掩码与目的地址进行“与”运算，得出目的地址与本机不在同一个网段(主机A位于192.168.1.0/24网段，主机B位于192.168.2.0/24网段，或称属于不同子网)，因此发送给主机B的数据包需要经过网关路由器1的转发；</li>
@@ -933,7 +933,7 @@ table th:nth-of-type(3) {
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -958,7 +958,7 @@ table th:nth-of-type(3) {
       <span class="post-meta-item-icon">
       <i class="fa fa-pencil"></i></span>
       博客全站共
-      <span title="Site words total count">99.9k 字</span>
+      <span title="Site words total count">100.0k 字</span>
     
    </div>
 
@@ -1013,8 +1013,6 @@ table th:nth-of-type(3) {
   
 
 
-  
-
 
 
 
@@ -1053,11 +1051,6 @@ table th:nth-of-type(3) {
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -1591,7 +1584,7 @@ table th:nth-of-type(3) {
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -1600,8 +1593,6 @@ table th:nth-of-type(3) {
   
 
   
-  
-    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </body>
 </html>

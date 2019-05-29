@@ -95,33 +95,33 @@
 <meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
 <meta property="og:description" content="全文概要 前几天实验室PC网络功能出Bug，有线网连不上nju登录站点，而加载内核驱动模块后的无线网卡却妥妥的没有问题，本来懒癌发作打算用一世无线网…可又想到之后虚拟机中的虚拟网卡NAT上网会有坑，且无线网本身速度不够稳定，考虑再三，拉上Quber一起“愉快”地开始了找坑之旅。然而，嗯…虽然折腾的结果并不总是那么令人振奋，但付出总有回报。谨以此文纪念本人各种努(chui)力(si)尝(zheng)">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wireless-openwrt.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wired.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/ethernet-controller-type.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/driver-8169.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/update-manager.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/chrome-bookmark.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-mine.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-code.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-software.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-flatabulou-desktop-terminal.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-flatabulous-search.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-unity-tweak-tool.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/sougou-ibus-to-fcitx.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/sougou-fcitx-add-sougou.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/ide-markdown-remarkable.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/reader-okular.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/screenshot-shutter.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/sudoers-secure-path.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dnsmasq-listen-addr.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-readonly.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-cannot-open-file-for-writing.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-help-e212.png">
-<meta property="og:updated_time" content="2018-04-27T08:17:36.928Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wireless-openwrt.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wired.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/ethernet-controller-type.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/driver-8169.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/update-manager.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/chrome-bookmark.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-mine.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-code.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-software.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-flatabulou-desktop-terminal.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-flatabulous-search.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-unity-tweak-tool.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/sougou-ibus-to-fcitx.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/sougou-fcitx-add-sougou.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/ide-markdown-remarkable.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/reader-okular.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/screenshot-shutter.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/sudoers-secure-path.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/dnsmasq-listen-addr.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-readonly.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-cannot-open-file-for-writing.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-help-e212.png">
+<meta property="og:updated_time" content="2019-05-29T13:35:51.754Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="记一次 Ubuntu 16.04 重装前后">
 <meta name="twitter:description" content="全文概要 前几天实验室PC网络功能出Bug，有线网连不上nju登录站点，而加载内核驱动模块后的无线网卡却妥妥的没有问题，本来懒癌发作打算用一世无线网…可又想到之后虚拟机中的虚拟网卡NAT上网会有坑，且无线网本身速度不够稳定，考虑再三，拉上Quber一起“愉快”地开始了找坑之旅。然而，嗯…虽然折腾的结果并不总是那么令人振奋，但付出总有回报。谨以此文纪念本人各种努(chui)力(si)尝(zheng)">
-<meta name="twitter:image" content="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wireless-openwrt.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wireless-openwrt.png">
 
 
 
@@ -482,19 +482,19 @@
 <p>以上，在我的水平范围内委实只能想到这么多，毕竟…知识总有盲点，宋公常这么安(chao)慰(feng)我们。可很快，它们还是被我一一否决了！</p>
 <p>具体我是这么做的：<br>对于硬件故障，easy，网线坏了换几根好的，网口坏了插几个好的，排除！网卡嘛…暂时咱不折腾了，还得把主机拆开，有点小麻烦，并且可能性微乎其微，讲道理一插上网线就可以<strong>ifconfig</strong>查到已自动分配好校园网IP或者<strong>wireshark</strong>抓到DHCP包的话，其实硬件基本就没毛病了。</p>
 <p>网站无法连接，很大可能是域名解析出了问题，Ubuntu中两个与DNS相关的配置文件出错，测试发现最重要的一个配置文件——<strong>/etc/resolv.conf</strong>，“居然”会根据连接的网络的不同而动态变化：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ cat /etc/resolv.conf</span><br></pre></td></tr></table></figure></p>
-<p>呐，连接到无线网OpenWrt的时候，是这样：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wireless-openwrt.png"></p>
-<p>连接到有线网的时候，又变成介样：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wired.png"></p>
+<p>呐，连接到无线网OpenWrt的时候，是这样：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wireless-openwrt.png" alt="image"></p>
+<p>连接到有线网的时候，又变成介样：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/resolv-conf-wired.png" alt="image"></p>
 <p>网上的建议都是增加新的<strong>nameserver</strong>，比如全国通用DNS地址<strong>114.114.114.114(114.114.115.115备用)</strong>，还有全球通用的Google的DNS服务器IP：<strong>8.8.8.8(8.8.4.4备用)</strong>，OK，每个都试了下，都在这里不管用，可见问题并不出在这里。在后文总结部分再回来讨论这些配置文件。</p>
 <p>至于软件故障，驱动程序首当其冲，google搜索相同系统和网卡，类似不能上网的故障还不少，解决方案也都还完备，一度来了信心，完全把“之前为啥是好的”抛诸脑后，试呗。</p>
 <p>根据<a href="http://www.cnblogs.com/duwanjiang/p/5907634.html" target="_blank" rel="noopener"><strong>经验帖</strong></a>，先确定当前以太网卡型号(注意<strong>grep</strong>命令对大小写敏感，搜关键字<strong>ethernet</strong>你是真的找不到网卡…)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo lspci | grep Ethernet</span><br></pre></td></tr></table></figure></p>
-<p>网卡型号如下图所示，很普通的以太网卡：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/ethernet-controller-type.png"></p>
+<p>网卡型号如下图所示，很普通的以太网卡：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/ethernet-controller-type.png" alt="image"></p>
 <p>进一步查看网卡所用驱动：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo lshw -C network</span><br></pre></td></tr></table></figure></p>
-<p>注意输出中的driver字段：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/driver-8169.png"></p>
+<p>注意输出中的driver字段：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/driver-8169.png" alt="image"></p>
 <p>参考他人说法，更换驱动为r8168极有可能解决问题，于是去到官网找对应内核版本的<a href="http://www.realtek.com.tw/downloads/downloadsView.aspx?Langid=1&amp;PNid=13&amp;PFid=5&amp;Level=5&amp;Conn=4&amp;DownTypeID=3&amp;GetDown=false#2" target="_blank" rel="noopener"><strong>驱动</strong></a>，发现提供Linux内核版本最新至4.7的驱动。<br><a href="/2018/01/15/OS/Installation/Ubuntu/before-after-reinstallation/0010-r8168-8.045.08.tar.bz2" title="r8168驱动下载">r8168驱动下载</a></p>
 <p>解压后，进入驱动源码目录进行安装：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ cd r8168-8.045.08</span><br><span class="line">$ sudo ./autorun.sh</span><br></pre></td></tr></table></figure></p>
 <p>驱动安装完成后重启系统，重复上述命令，或者执行<strong>lsmod</strong>可以发现<strong>r8168</strong>驱动已经生效，然而，联网问题依然存在，也许是我与原博主发生的故障原因根本就不一样，自然不能适用。</p>
 <p>驱动问题应该是可以排除了，痛定思痛，决定在线升级系统，兴许能解决网络模块故障：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get dist-upgrade</span><br><span class="line">$ sudo reboot # 重启完成上述更新的安装</span><br><span class="line">$ sudo update-manager -d # 打开更新管理器</span><br></pre></td></tr></table></figure></p>
-<p>一连串更新操作之后，应该是这个界面：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/update-manager.png"></p>
+<p>一连串更新操作之后，应该是这个界面：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/update-manager.png" alt="image"></p>
 <p>然后在某人的怂恿下…冒着软件配置在新系统Ubuntu 18(连官网都没有release…)上面各种不兼容报错的风险，我还是干了，其实这时候已经做好重装的准备了。</p>
 <p>然后你还问然后？死心了！<br>一顿操作猛如虎，殊途同归重装苦/(ㄒoㄒ)/~~。</p>
 <h3 id="辩证地看问题"><a href="#辩证地看问题" class="headerlink" title="辩证地看问题"></a>辩证地看问题</h3><p>重装系统这个事儿吧，熟练了就是很简单的一件事儿，无非就是这么几步：</p>
@@ -506,20 +506,20 @@
 <p>既然无可避免，何不带着享(xiang)受(shi)的心情，重新打造自己的虚拟空间？</p>
 <h2 id="重装进行时"><a href="#重装进行时" class="headerlink" title="重装进行时"></a>重装进行时</h2><hr>
 <p>俗话说：“年轻不怕重来，生命在于折腾”，那么，开始吧！<br>(以下系统配置与本人喜好有关，仅供参考)</p>
-<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>PC里面的文件目录将被设计成和浏览器中的书签一样都是精心整理过的，一是强迫症，二是方便找。<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/chrome-bookmark.png"></p>
+<h3 id="目录结构"><a href="#目录结构" class="headerlink" title="目录结构"></a>目录结构</h3><p>PC里面的文件目录将被设计成和浏览器中的书签一样都是精心整理过的，一是强迫症，二是方便找。<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/chrome-bookmark.png" alt="image"></p>
 <p>主要在用户<strong>home</strong>目录下新建若干常用目录<strong>Mine</strong>、<strong>Code</strong>、<strong>Software</strong>。<br>安装<strong>tree</strong>命令<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install tree</span><br></pre></td></tr></table></figure></p>
-<p>查看目录树型结构如下：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-mine.png"><br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-code.png"><br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-software.png"><br><a href="/2018/01/15/OS/Installation/Ubuntu/before-after-reinstallation/dir.sh" title="目录配置脚本下载">目录配置脚本下载</a></p>
-<h3 id="桌面主题"><a href="#桌面主题" class="headerlink" title="桌面主题"></a>桌面主题</h3><p>平时看厌了Ubuntu默认的玫红色桌面和终端，就想换个口味，这里推荐一款Ubuntu的扁平化桌面主题<strong>Flatabulous</strong>，加上扁平化的<strong>icon</strong>，显示效果是这样：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-flatabulou-desktop-terminal.png"></p>
-<p>按下win键触发搜索，界面是这样的：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-flatabulous-search.png"></p>
+<p>查看目录树型结构如下：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-mine.png" alt="image"><br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-code.png" alt="image"><br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/dir-software.png" alt="image"><br><a href="/2018/01/15/OS/Installation/Ubuntu/before-after-reinstallation/dir.sh" title="目录配置脚本下载">目录配置脚本下载</a></p>
+<h3 id="桌面主题"><a href="#桌面主题" class="headerlink" title="桌面主题"></a>桌面主题</h3><p>平时看厌了Ubuntu默认的玫红色桌面和终端，就想换个口味，这里推荐一款Ubuntu的扁平化桌面主题<strong>Flatabulous</strong>，加上扁平化的<strong>icon</strong>，显示效果是这样：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-flatabulou-desktop-terminal.png" alt="image"></p>
+<p>按下win键触发搜索，界面是这样的：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-flatabulous-search.png" alt="image"></p>
 <p>怎么样，喜不喜欢？只需三步你值得拥有：</p>
 <p>第一步，安装<strong>Unity Tweak Tool</strong>：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install unity-tweak-tool</span><br></pre></td></tr></table></figure></p>
-<p>win键搜索后<strong>Unity Tweak Tool</strong>打开后是这样，其中<strong>theme</strong>和<strong>icon</strong>是在第三步要配置的：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-unity-tweak-tool.png"></p>
+<p>win键搜索后<strong>Unity Tweak Tool</strong>打开后是这样，其中<strong>theme</strong>和<strong>icon</strong>是在第三步要配置的：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/theme-unity-tweak-tool.png" alt="image"></p>
 <p>第二步，配置PPA源安装<strong>Flatabulous</strong>主题和i<strong>Flat Icon</strong>图标：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># theme</span><br><span class="line">$ sudo add-apt-repository ppa:noobslab/themes</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install flatabulous-theme</span><br><span class="line"># icon</span><br><span class="line">$ sudo add-apt-repository ppa:noobslab/icons</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get install ultra-flat-icons</span><br></pre></td></tr></table></figure></p>
 <p>第三步，使用<strong>Unity Tweak Tool</strong>配置主题和图标：<br>打开<strong>Unity Tweak Tool</strong>，设置<strong>theme</strong>为<strong>Flatabulou</strong>，<strong>icon</strong>为<strong>Ultra Flat</strong>即可。</p>
 <h3 id="输入法"><a href="#输入法" class="headerlink" title="输入法"></a>输入法</h3><p>Ubuntu上面的中文输入法不是很好用，可以安装<a href="https://pinyin.sogou.com/linux/?r=pinyin" target="_blank" rel="noopener"><strong>搜狗输入法</strong></a>进行替代，配置如下：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">$ sudo add-apt-repository ppa:fcitx-team/nightly</span><br><span class="line">$ sudo apt-get update</span><br><span class="line">$ sudo apt-get -y install fcitx</span><br><span class="line">$ sudo apt-get -y install fcitx-config-gtk</span><br><span class="line">$ sudo apt-get -y install fcitx-table-all</span><br><span class="line">$ sudo apt-get -y install im-switch</span><br></pre></td></tr></table></figure></p>
 <p>检查<strong>fcitx</strong>是否安装完成：win键搜索fcitx，再安装搜狗官网下载linux版本的deb包：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo dpkg -i  文件名.deb</span><br></pre></td></tr></table></figure></p>
-<p>在系统设置里面点击语言支持，将输入法从<strong>ibus</strong>改为<strong>fcitx</strong>：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/sougou-ibus-to-fcitx.png"></p>
-<p>注销一次，找到fcitx的配置，添加<strong>sougou pinyin</strong>并设为第一输入法即可：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/sougou-fcitx-add-sougou.png"></p>
+<p>在系统设置里面点击语言支持，将输入法从<strong>ibus</strong>改为<strong>fcitx</strong>：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/sougou-ibus-to-fcitx.png" alt="image"></p>
+<p>注销一次，找到fcitx的配置，添加<strong>sougou pinyin</strong>并设为第一输入法即可：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/sougou-fcitx-add-sougou.png" alt="image"></p>
 <p>配置完成即可使用，有细心的童鞋还会可能发现一个问题，那就是桌面右上角的任务栏会有两个输入法的图标，一个是搜狗的，另一个是fcitx，并且在打字时还会发现桌面同时出现两个输入框，觉得碍眼的朋友，请这么做，终端执行：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ ps aux | grep fcitx</span><br></pre></td></tr></table></figure></p>
 <p>在输入中找到<strong>fcitx-qimpanel</strong>那一行，然后将本行的第二个字段(pid，即进程号)对应数字记下，杀掉该进程即可：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ kill -9 进程号</span><br></pre></td></tr></table></figure></p>
 <p>好了，多余的输入框和任务栏图标都没啦～</p>
@@ -540,22 +540,17 @@
 <p>配置详见<a href="http://localhost:4000/2018/01/16/OS/Reinstallation/ubuntu-config-runtime/" target="_blank" rel="noopener"><strong>此篇</strong></a></p>
 <h3 id="工作利器"><a href="#工作利器" class="headerlink" title="工作利器"></a>工作利器</h3><p>顺便再安利几款Ubuntu下好用的利器：</p>
 <ol>
-<li><p><strong>IDE</strong><br><strong>JetBrains</strong>家的几个亲儿子就不用多说啦，选择合适量级的新版本装好：<br>（1）<a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener"><strong>Java - Intellij</strong></a><br>（2）<a href="https://www.jetbrains.com/clion/" target="_blank" rel="noopener"><strong>C/C++ - Clion</strong></a>（vim大神求放过…个人觉得用IDE来管理工程模块代码还是会方便一些）<br>（3）<a href="https://www.jetbrains.com/pycharm/" target="_blank" rel="noopener"><strong>Python - PyCharm</strong></a><br>（4）<a href="https://www.jetbrains.com/webstorm/" target="_blank" rel="noopener"><strong>Java Script - WebStorm</strong></a><br>下载后解压，进入<strong>bin</strong>目录执行<strong>x.sh</strong>(x为IDE名称)的脚本即可打开，回头固定到<strong>Launcher</strong>上就好。<br>觉得哪用得上这么多的看过来，<strong>Microsoft</strong>家的<a href="https://code.visualstudio.com/" target="_blank" rel="noopener"><strong>VSCode</strong></a>绝对能满足你，丰富的插件支持多种常见语言开发：C/C++、Java、Python等，文本编辑则有<strong>MarkDown</strong>和<strong>LaTex</strong>，配置简单，保证够用！<br>还嫌(re)弃(ai)麻(zhe)烦(teng)的，您出门右转那儿有个<a href="https://www.sublimetext.com/" target="_blank" rel="noopener"><strong>Sublimetext</strong></a>，我就不送了…<br>Markdown编辑器的话，比较喜欢<a href="https://remarkableapp.github.io/linux.html" target="_blank" rel="noopener"><strong>Remarkable</strong></a>的风格：</p>
-<img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/ide-markdown-remarkable.png">
-<p>伸手党据此配置同一效果：<strong>View -&gt; Night Mode，Style -&gt; Screen</strong></p>
+<li><p><strong>IDE</strong><br><strong>JetBrains</strong>家的几个亲儿子就不用多说啦，选择合适量级的新版本装好：<br>（1）<a href="https://www.jetbrains.com/idea/" target="_blank" rel="noopener"><strong>Java - Intellij</strong></a><br>（2）<a href="https://www.jetbrains.com/clion/" target="_blank" rel="noopener"><strong>C/C++ - Clion</strong></a>（vim大神求放过…个人觉得用IDE来管理工程模块代码还是会方便一些）<br>（3）<a href="https://www.jetbrains.com/pycharm/" target="_blank" rel="noopener"><strong>Python - PyCharm</strong></a><br>（4）<a href="https://www.jetbrains.com/webstorm/" target="_blank" rel="noopener"><strong>Java Script - WebStorm</strong></a><br>下载后解压，进入<strong>bin</strong>目录执行<strong>x.sh</strong>(x为IDE名称)的脚本即可打开，回头固定到<strong>Launcher</strong>上就好。<br>觉得哪用得上这么多的看过来，<strong>Microsoft</strong>家的<a href="https://code.visualstudio.com/" target="_blank" rel="noopener"><strong>VSCode</strong></a>绝对能满足你，丰富的插件支持多种常见语言开发：C/C++、Java、Python等，文本编辑则有<strong>MarkDown</strong>和<strong>LaTex</strong>，配置简单，保证够用！<br>还嫌(re)弃(ai)麻(zhe)烦(teng)的，您出门右转那儿有个<a href="https://www.sublimetext.com/" target="_blank" rel="noopener"><strong>Sublimetext</strong></a>，我就不送了…<br>Markdown编辑器的话，比较喜欢<a href="https://remarkableapp.github.io/linux.html" target="_blank" rel="noopener"><strong>Remarkable</strong></a>的风格：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/ide-markdown-remarkable.png" alt="image"><br>伸手党据此配置同一效果：<strong>View -&gt; Night Mode，Style -&gt; Screen</strong></p>
 </li>
 <li><p><strong>虚拟化</strong><br>（1）<a href="https://www.virtualbox.org/wiki/Linux_Downloads" target="_blank" rel="noopener"><strong>Virtualbox</strong></a><br>（2）<a href="https://my.vmware.com/cn/group/vmware/info/slug/desktop_end_user_computing/vmware_workstation_pro/14_0" target="_blank" rel="noopener"><strong>VMware</strong></a><br>下载官方.deb包使用命令<strong>sudo dpkg -i 文件名.deb</strong>安装即可，如有因缺乏依赖导致安装失败时，根据命令行提示，执行：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get -f install </span><br></pre></td></tr></table></figure>
 <p>一键安装之前缺乏的依赖，再次安装.deb包即可成功。</p>
 </li>
-<li><p><strong>阅读器</strong><br>推荐<a href="https://apps.ubuntu.com/cat/applications/quantal/okular/" target="_blank" rel="noopener"><strong>Okular</strong></a>，系统自带应用商店<strong>Ubuntu Software</strong>就有：</p>
-<img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/reader-okular.png">
-<p>快捷键F6进入文档操作模式，再按数字键4，即可高亮文档，但是有个坑就是它高亮部分的文件状态信息大概是维护在软件内部的，也就是说根本不会对源文件做修改…这导致换个程序换个机器打开文档后都只能看到未经处理的源文档…</p>
+<li><p><strong>阅读器</strong><br>推荐<a href="https://apps.ubuntu.com/cat/applications/quantal/okular/" target="_blank" rel="noopener"><strong>Okular</strong></a>，系统自带应用商店<strong>Ubuntu Software</strong>就有：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/reader-okular.png" alt="image"><br>快捷键F6进入文档操作模式，再按数字键4，即可高亮文档，但是有个坑就是它高亮部分的文件状态信息大概是维护在软件内部的，也就是说根本不会对源文件做修改…这导致换个程序换个机器打开文档后都只能看到未经处理的源文档…</p>
 </li>
 <li><p><strong>截图</strong><br>推荐<strong>Shutter</strong>，安装命令如下：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ sudo apt-get install shutter</span><br></pre></td></tr></table></figure>
-<p>为其配置系统快捷键<strong>Ctrl+Alt+A</strong>为调用<strong>shutter</strong>进行区域截图，快捷键Name随意起，Command填入<strong>shutter -s</strong>：</p>
-<img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/screenshot-shutter.png">
+<p>为其配置系统快捷键<strong>Ctrl+Alt+A</strong>为调用<strong>shutter</strong>进行区域截图，快捷键Name随意起，Command填入<strong>shutter -s</strong>：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/screenshot-shutter.png" alt="image"></p>
 </li>
 <li><p><strong>音乐、翻译</strong><br><a href="https://music.163.com/#/download" target="_blank" rel="noopener"><strong>网易云</strong></a>Ubuntu 16.04版和<a href="http://cidian.youdao.com/index-linux.html" target="_blank" rel="noopener"><strong>有道</strong></a>Deepin版，不多说，官网的.deb直接安装</p>
 </li>
@@ -600,17 +595,13 @@
 <h3 id="认识配置文件"><a href="#认识配置文件" class="headerlink" title="认识配置文件"></a>认识配置文件</h3><ol>
 <li><p><strong>环境变量配置文件：</strong><br>（1）<strong>/etc/profile</strong>：此文件为系统的<strong>每个用户</strong>设置环境信息。当用户登录时，该文件被执行一次，并从 <strong>/etc/profile.d</strong>目录的配置文件中搜集<strong>shell</strong>的设置。一般用于<strong>设置所有用户使用的全局变量</strong>；<br>（2）<strong>~/.bashrc</strong>：只对<strong>单个用户</strong>生效，当登录以及每次打开新的<strong>bash shell</strong>时，该文件被读取；<br>（3）<strong>~/.zshrc</strong>：只对<strong>单个用户</strong>生效，当登录以及每次打开新的<strong>zsh shell</strong>时，该文件被读取。<br>我的环境变量一般都配置在<strong>~/.zshrc</strong>中，保存文件后别忘了用<strong>source</strong>使之立即生效。</p>
 </li>
-<li><p><strong>sudo配置文件：</strong><br><strong>/etc/sudoers</strong>：从源码编译安装<a href="http://mininet.org/" target="_blank" rel="noopener"><strong>mininet</strong></a>时，执行安装脚本：<strong>sudo ./install.sh</strong>，怎么配置也找不到之前安装好的<strong>git</strong>和<strong>vim</strong>，我们都知道”Command Not Found”错误的原因就是没配置好对应命令的环境变量，于是我把上面提到的配置文件都加上了<strong>GIT_HOME</strong>和<strong>VIM_HOME</strong>，即使切换到<strong>root</strong>用户，仍然报错，于是猜想<strong>sudo</strong>命令虽然是让普通用户能够在执行命令时以<strong>root</strong>权限运行，但是仍不是真正的<strong>root</strong>，上述对所有用户都生效的环境变量都对<strong>sudo</strong>不适用，原因应该是<strong>sudo</strong>自己有特殊的环境变量定义。google到的结果证实了我这一想法，在<strong>/etc</strong>目录下有一个<strong>sudo</strong>命令的配置文件<strong>sudoers</strong>：</p>
-<img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/sudoers-secure-path.png">
-<p>以<strong>sudo</strong>执行命令都会从<strong>/etc/sudoers</strong>这个配置文件中变量<strong>secure_path</strong>的值作为<strong>sudo</strong>的<strong>PATH</strong>环境变量，会去这个变量指定的路径下去找命令对应的可执行文件。将<strong>GIT_HOME</strong>和<strong>VIM_HOME</strong>的添加到<strong>secure_path</strong>末尾，命令就能顺利找到执行了。</p>
+<li><p><strong>sudo配置文件：</strong><br><strong>/etc/sudoers</strong>：从源码编译安装<a href="http://mininet.org/" target="_blank" rel="noopener"><strong>mininet</strong></a>时，执行安装脚本：<strong>sudo ./install.sh</strong>，怎么配置也找不到之前安装好的<strong>git</strong>和<strong>vim</strong>，我们都知道”Command Not Found”错误的原因就是没配置好对应命令的环境变量，于是我把上面提到的配置文件都加上了<strong>GIT_HOME</strong>和<strong>VIM_HOME</strong>，即使切换到<strong>root</strong>用户，仍然报错，于是猜想<strong>sudo</strong>命令虽然是让普通用户能够在执行命令时以<strong>root</strong>权限运行，但是仍不是真正的<strong>root</strong>，上述对所有用户都生效的环境变量都对<strong>sudo</strong>不适用，原因应该是<strong>sudo</strong>自己有特殊的环境变量定义。google到的结果证实了我这一想法，在<strong>/etc</strong>目录下有一个<strong>sudo</strong>命令的配置文件<strong>sudoers</strong>：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/sudoers-secure-path.png" alt="image"><br>以<strong>sudo</strong>执行命令都会从<strong>/etc/sudoers</strong>这个配置文件中变量<strong>secure_path</strong>的值作为<strong>sudo</strong>的<strong>PATH</strong>环境变量，会去这个变量指定的路径下去找命令对应的可执行文件。将<strong>GIT_HOME</strong>和<strong>VIM_HOME</strong>的添加到<strong>secure_path</strong>末尾，命令就能顺利找到执行了。</p>
 </li>
 <li><p><strong>内核驱动文件：</strong><br><strong>/lib/modules/$(uname -r)/kernel/drivers/</strong>：网卡驱动会放在<strong>net</strong>文件夹中，<strong>ethernet</strong>表示以太网卡，<strong>wireless</strong>中放的是无线网卡驱动。</p>
 </li>
 <li><p><strong>DNS配置文件：</strong><br>（1）<strong>/etc/resolv.conf</strong><br>（2）<strong>/etc/resolvconf/resolvconf.d/base</strong><br>（3）<strong>/etc/resolvconf/resolvconf.d/head</strong><br>里面最关键的就是<strong>nameserver</strong>字段，在其<strong>IP</strong>所对应的<strong>DNS Server</strong>处<strong>search</strong>当前想要连接的<strong>域名</strong>，如<strong>nju.edu.cn</strong>或<strong>lan</strong>等，一般来讲在Ubuntu 16.04系统中，每次更换网络连接后，<strong>resolv.conf</strong>都会自动重新加载，<strong>nameserver</strong>一般为<strong>127.0.1.1</strong>，一个很奇怪的<strong>IP</strong>地址，我们知道本机的回环地址<strong>lo</strong>的<strong>IP</strong>为<strong>127.0.0.1</strong>。查找资料后才知道，原来Ubuntu下是有一个本地DNS服务，叫做<strong>dnsmasq</strong>，由NetworkManager控制，通过以下命令能发现此服务进程信息：</p>
 <figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$ ps aux | grep dnsmasq # 以下命令效果同上</span><br><span class="line">$ ps -ef | grep dnsmasq</span><br></pre></td></tr></table></figure>
-<p>输出如下：</p>
-<img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/dnsmasq-listen-addr.png">
-<p>可以看到它监听的本地地址，<strong>–listen-address=127.0.1.1</strong>(ubuntu12.04及之前的版本是 127.0.0.1)， 这个地址是一个本地回环地址，而你真实的dns服务器地址，是被这个服务管理维护着的。(之后我会写篇<a href="http://localhost:4000/2018/01/21/OS/Reinstallation/ubuntu-dns/" target="_blank" rel="noopener"><strong>文章</strong></a>专门讨论<strong>Ubuntu</strong>下的<strong>DNS</strong>配置)<br>即，用户进程想要访问某个<strong>IP</strong>未知、只知道主机名的服务器时，其发起DNS请求的流程如下：</p>
+<p>输出如下：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/dnsmasq-listen-addr.png" alt="image"><br>可以看到它监听的本地地址，<strong>–listen-address=127.0.1.1</strong>(ubuntu12.04及之前的版本是 127.0.0.1)， 这个地址是一个本地回环地址，而你真实的dns服务器地址，是被这个服务管理维护着的。(之后我会写篇<a href="http://localhost:4000/2018/01/21/OS/Reinstallation/ubuntu-dns/" target="_blank" rel="noopener"><strong>文章</strong></a>专门讨论<strong>Ubuntu</strong>下的<strong>DNS</strong>配置)<br>即，用户进程想要访问某个<strong>IP</strong>未知、只知道主机名的服务器时，其发起DNS请求的流程如下：</p>
 <blockquote>
 <p>local process -&gt; local dnsmasq -&gt; router -&gt; ISP DNS</p>
 </blockquote>
@@ -618,9 +609,9 @@
 <li><p><strong>软件源配置文件：</strong><br>（1）<strong>/etc/apt/source.list</strong>:通常放的是<a href="http://cn.archive.ubuntu.com/ubuntu/" target="_blank" rel="noopener"><strong>官方镜像源</strong></a>，但是中间偶然一天遇到了官方源挂掉的情况，考虑到教育网的缘故，我就更换成了<a href="https://mirror.tuna.tsinghua.edu.cn/help/ubuntu/" target="_blank" rel="noopener"><strong>清华的源</strong></a>；<br>（2）<strong>/etc/apt/source.list.d</strong>：通常放的是PPA等第三方镜像源。</p>
 </li>
 </ol>
-<h3 id="掌握实用操作"><a href="#掌握实用操作" class="headerlink" title="掌握实用操作"></a>掌握实用操作</h3><p>好奇之人对新知识总是充满着渴望，这次掌握几个小<strong>Trick</strong>，提(ke)高(xue)效(tou)率(lan)再进一步！<br>（1）<strong>vim中临时提升编辑者权限</strong><br>在Linux上工作的朋友很可能遇到过这样一种情况，当你用<strong>Vim</strong>编辑完一个文件时，运行<strong>:wq</strong>保存退出，突然蹦出一个错误：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-readonly.png"></p>
-<p>这表明文件是只读的，按照提示，加上!强制保存：:w!，结果又一个错误出现：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-cannot-open-file-for-writing.png"></p>
-<p>文件明明存在，为何提示无法打开？查看<strong>Vim帮助文档</strong>对<strong>E212</strong>错误的解释如下：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-help-e212.png"></p>
+<h3 id="掌握实用操作"><a href="#掌握实用操作" class="headerlink" title="掌握实用操作"></a>掌握实用操作</h3><p>好奇之人对新知识总是充满着渴望，这次掌握几个小<strong>Trick</strong>，提(ke)高(xue)效(tou)率(lan)再进一步！<br>（1）<strong>vim中临时提升编辑者权限</strong><br>在Linux上工作的朋友很可能遇到过这样一种情况，当你用<strong>Vim</strong>编辑完一个文件时，运行<strong>:wq</strong>保存退出，突然蹦出一个错误：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-readonly.png" alt="image"></p>
+<p>这表明文件是只读的，按照提示，加上!强制保存：:w!，结果又一个错误出现：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-cannot-open-file-for-writing.png" alt="image"></p>
+<p>文件明明存在，为何提示无法打开？查看<strong>Vim帮助文档</strong>对<strong>E212</strong>错误的解释如下：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/OS/Installation/Ubuntu/before-after-reinstallation/vim-help-e212.png" alt="image"></p>
 <p>原来是可能没有权限造成的，此时你才想起，这个文件需要<strong>root</strong>权限才能编辑，而当前登陆的只是普通用户，在编辑之前你忘了使用<strong>sudo</strong>来启动<strong>Vim</strong>，所以才保存失败。于是为了防止修改丢失，你只好先把它保存为另外一个临时文件<strong>temp-file-name</strong>，然后退出<strong>Vim</strong>，再运行<strong>sudo mv temp-file-name readonly-file-name</strong>覆盖原文件。<br>但这样操作过于繁琐。而且如果只是想暂存此文件，还需要接着修改，则希望保留<strong>Vim</strong>的工作状态，比如编辑历史，<strong>buffer</strong>状态等等，该怎么办？能不能在不退出<strong>Vim</strong>的情况下获得<strong>root</strong>权限来保存这个文件？<br>答案是肯定的，执行这样一条命令即可(原理参见<a href="http://feihu.me/blog/2014/vim-write-read-only-file/" target="_blank" rel="noopener"><strong>这篇</strong></a>)：<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">$ :w !sudo tee %</span><br></pre></td></tr></table></figure></p>
 <p>（2）待更…</p>
 <h2 id="参考资料"><a href="#参考资料" class="headerlink" title="参考资料"></a>参考资料</h2><hr>
@@ -914,7 +905,7 @@
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -939,7 +930,7 @@
       <span class="post-meta-item-icon">
       <i class="fa fa-pencil"></i></span>
       博客全站共
-      <span title="Site words total count">99.9k 字</span>
+      <span title="Site words total count">100.0k 字</span>
     
    </div>
 
@@ -994,8 +985,6 @@
   
 
 
-  
-
 
 
 
@@ -1034,11 +1023,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -1572,7 +1556,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -1581,8 +1565,6 @@
   
 
   
-  
-    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </body>
 </html>

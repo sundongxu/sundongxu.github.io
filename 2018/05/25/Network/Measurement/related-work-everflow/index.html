@@ -74,7 +74,7 @@
 
 
 
-  <meta name="keywords" content="Measurement,End-Host,Packet-Level,SIGCOMM," />
+  <meta name="keywords" content="Measurement,SIGCOMM,End-Host,Packet-Level," />
 
 
 
@@ -88,22 +88,22 @@
 
 
 <meta name="description" content="全文概要SIGCOMM 2015年中，由微软研究院发表了题为《Packet-Level Telemetry in Large Datacenter Networks》的论文。基于本文设计的EverFlow系统，运行在端系统之上，并利用已有的OpenFlow交换机的功能特性，实现了数据中心网络中Packet-Level的网络数据监测。本文尝试概述了该系统的核心思想，作为网络测量领域相关工作的一次备忘">
-<meta name="keywords" content="Measurement,End-Host,Packet-Level,SIGCOMM">
+<meta name="keywords" content="Measurement,SIGCOMM,End-Host,Packet-Level">
 <meta property="og:type" content="article">
 <meta property="og:title" content="网络测量之EverFlow(SIGCOMM-2015)">
 <meta property="og:url" content="dongdongdong.me/2018/05/25/Network/Measurement/related-work-everflow/index.html">
 <meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
 <meta property="og:description" content="全文概要SIGCOMM 2015年中，由微软研究院发表了题为《Packet-Level Telemetry in Large Datacenter Networks》的论文。基于本文设计的EverFlow系统，运行在端系统之上，并利用已有的OpenFlow交换机的功能特性，实现了数据中心网络中Packet-Level的网络数据监测。本文尝试概述了该系统的核心思想，作为网络测量领域相关工作的一次备忘">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-everflow/measuring-link-latency.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-everflow/debugging-packet-drops.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-everflow/architecture.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-everflow/mirrored-packet-format-gre.png">
-<meta property="og:updated_time" content="2018-05-25T14:30:45.934Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-everflow/measuring-link-latency.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-everflow/debugging-packet-drops.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-everflow/architecture.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-everflow/mirrored-packet-format-gre.png">
+<meta property="og:updated_time" content="2019-05-29T13:23:49.468Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="网络测量之EverFlow(SIGCOMM-2015)">
 <meta name="twitter:description" content="全文概要SIGCOMM 2015年中，由微软研究院发表了题为《Packet-Level Telemetry in Large Datacenter Networks》的论文。基于本文设计的EverFlow系统，运行在端系统之上，并利用已有的OpenFlow交换机的功能特性，实现了数据中心网络中Packet-Level的网络数据监测。本文尝试概述了该系统的核心思想，作为网络测量领域相关工作的一次备忘">
-<meta name="twitter:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-everflow/measuring-link-latency.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-everflow/measuring-link-latency.png">
 
 
 
@@ -489,11 +489,11 @@
 <h2 id="Application"><a href="#Application" class="headerlink" title="Application"></a>Application</h2><hr>
 <p>文中还提到，针对不同测量场景或需求，基于<strong>EverFlow</strong>还设计了以下四种应用程序帮助网络故障的调试。</p>
 <h3 id="Latency-Profiler"><a href="#Latency-Profiler" class="headerlink" title="Latency Profiler"></a>Latency Profiler</h3><hr>
-<img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-everflow/measuring-link-latency.png">
+<p><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-everflow/measuring-link-latency.png" alt="image"></p>
 <p>许多数据中心网络服务，诸如搜索和分布式缓存都要求低延迟响应。应用<strong>Latency Profiler</strong>专门用于分析某对通信结点之间的通信延迟过高的问题。</p>
 <p><strong>Latency Profiler</strong>会在源主机端标记该TCP连接的SYN数据包的<strong>Debug Bit</strong>，用于在全网范围内追踪该数据包的轨迹，从而可以获知其路径上经过的每个网络设备信息，之后就通过<strong>Controller</strong>提供的<strong>Probe()</strong>的API向每个网络设备注入探针，从探针包的轨迹信息中可计算出每跳的延迟(<strong>Per-Hop Latency</strong>)。对于端主机间延迟较高的问题，<strong>Latency Profiler</strong>利用类似“源路由”的方法，如上图(b)所示，发射预先指定路径为“S1-&gt;S2-&gt;S1”的探针，此时测量到的延迟数据实际是链路(S1,S2)的<strong>RTT</strong>(<strong>Round-trip Time</strong>)，即往返时延，而非单向链路延迟，如图(a)中所示，如果仅仅以该数据包从S1发出的镜像与从S2发出的镜像到达分析服务器的时间差作为链路(S1,S2)的延迟，一个很明显的缺陷在于从S1到达分析服务器的路径 <strong>Path 1</strong>，以及从S1经过S2再到达分析服务器的路径 <strong>Path 2</strong> 可能大相径庭，从而这两条路径中后者仅比前者多一条链路(S1,S2)的理想情况可能与现实相差甚远，测量结果更难言准确。</p>
 <h3 id="Packet-Drop-Debugger"><a href="#Packet-Drop-Debugger" class="headerlink" title="Packet Drop Debugger"></a>Packet Drop Debugger</h3><hr>
-<img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-everflow/debugging-packet-drops.png">
+<p><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-everflow/debugging-packet-drops.png" alt="image"></p>
 <p>丢包会严重降低应用性能，进而导致吞吐量低、超时甚至不可达等故障。丢包问题难以调试的原因在于产生丢包的可能原因有很多，如拥塞、软件错误或配置错误等。应用<strong>Packet Drop Debugger</strong>专门用于分析网络中的丢包问题。</p>
 <p><strong>Packet Drop Debugger</strong>会去检查判断为已丢失的数据包的轨迹，找到其轨迹显示的最后一跳 $S_n$，即该数据包最后被捕获的位置，可根据该跳的转发表中对应表项对应的输出端口来推断其下一跳，或者直接根据数据中心拓扑信息与路由策略来推断其下一跳。之后<strong>Packet Drop Debugger</strong>向 $S_n$ 注入探针，以确定该丢包是持续性的(重要，必须解决)还是暂时性的(不那么重要，甚至可忽略，大多数时候任其自行修复)，如果是持续性的则还需要判断该丢包是随机的(端口故障)还是具有某特定模式(如匹配固定五元组，可能因为路由表对应表项崩了)。</p>
 <h3 id="Loop-Debugger"><a href="#Loop-Debugger" class="headerlink" title="Loop Debugger"></a>Loop Debugger</h3><hr>
@@ -506,7 +506,7 @@
 <p>基于<a href="https://en.wikipedia.org/wiki/RDMA_over_Converged_Ethernet" target="_blank" rel="noopener"><strong>RoCEv2</strong></a>的<a href="https://en.wikipedia.org/wiki/Remote_direct_memory_access" target="_blank" rel="noopener"><strong>RDMA</strong></a>是一种新兴网络协议，可在低CPU开销情况下实现高吞吐量(40 Gbps)和极低时延(毫秒级)。通过采用<a href=""><strong>PFC</strong></a>来实现无丢包的以太网架构，<strong>RDMA</strong>协议的实现可被进一步简化并<strong>Offload</strong>到网卡上去。然而在文中提到的微软的数据中心网络中，由于网卡中的软件错误，<strong>RDMA</strong>经常难以获得其最理想的性能。而调试此类问题的困难在于网卡是由第三方厂商制造，调试网卡中的<strong>RDMA</strong>代码的工具十分有限。作者为此设计了应用<strong>RoCEv2-based RDMA Debugger</strong>专门用于分析<strong>RDMA</strong>流量问题。</p>
 <p><strong>RoCEv2-based RDMA Debugger</strong>会追踪所有<strong>RDMA</strong>相关的控制数据包，如<strong>PFC</strong>和<strong>NACK</strong>，这些控制报文的轨迹就提供了一个可靠且相对独立的方式使我们不仅能够观察到<strong>RDMA</strong>网络流的真实行为，也有助于调试第三方厂商在网卡中的实现代码。</p>
 <h2 id="Achitecture"><a href="#Achitecture" class="headerlink" title="Achitecture"></a>Achitecture</h2><hr>
-<img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-everflow/architecture.png">
+<p><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-everflow/architecture.png" alt="image"></p>
 <p>如上图所示，<strong>EverFlow</strong>中包含四个核心组件：<strong>Controller</strong>、<strong>Analyzer</strong>、<strong>Storage</strong>和<strong>Reshuffler</strong>。在这些组件之上，还编写了一系列利用<strong>EverFlow</strong>提供的数据包级别信息来检测网络故障的应用程序，下一节会重点介绍。</p>
 <p>在<strong>EverFlow</strong>中，<strong>Controller</strong>会与应用程序交互，并协调各个组件的工作。在初始化阶段，它将相关规则配置在交换机上，而匹配这些规则的数据包会被发送至<strong>Reshuffler</strong>处，然后被转发至<strong>Analyzer</strong>，并输出分析结果存储在本地。<strong>Controller</strong>还提供了API接口，供给上层应用程序查询分析结果、定制<strong>Analyzer</strong>上的计数器、注入<strong>Guided Probe</strong>以及在主机端标记<strong>Debug Bit</strong>。</p>
 <h3 id="Analyzer"><a href="#Analyzer" class="headerlink" title="Analyzer"></a>Analyzer</h3><hr>
@@ -535,7 +535,7 @@
 <p>综上，在交换机中配置的匹配规则大约20条左右，仅仅占用了<strong>TCAM</strong>表中很小部分的内存空间。</p>
 <p>当数据包匹配到上述任何一条规则，交换机就会将其镜像发送至<strong>ReShuffler</strong>，并且是以<strong>GRE(Generic Routing Encapsulation)</strong>格式封装，数据包格式如下图所示，可以看到有内外两层头部信息，其中外层源IP地址为镜像交换机的回环地址，目的IP地址为是<strong>Reshufflers</strong>的<strong>VIP</strong>，而外层数据包的载荷即为原数据包。在外层的<strong>GRE</strong>头部中有个协议字段，用于表示本数据包是<strong>EverFlow</strong>镜像数据包，而交换机会配置有一个黑名单以防止对镜像数据包再次镜像。</p>
 <p><strong>“Match-and-Mirror”</strong>完全在交换机的数据平面实现，利用了交换机<strong>ASIC</strong>芯片强大的数据处理能力，并对交换机的CPU没有造成任何开销。</p>
-<img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/Measurement/related-work-everflow/mirrored-packet-format-gre.png">
+<p><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/Measurement/related-work-everflow/mirrored-packet-format-gre.png" alt="image"></p>
 <h3 id="Guided-Prober"><a href="#Guided-Prober" class="headerlink" title="Guided Prober"></a>Guided Prober</h3><hr>
 <p><strong>Guided Prober</strong>的核心功能在于生成任意所需数据包并注入到指定目标交换机中。它使用 <strong>Raw Socket API</strong> 来修改任意的数据包字段，如IP和四层(TCP、UDP和ICMP等)等头部字段。探针的<strong>Debug Bit</strong>会被标记便于追踪，并且在其载荷中携带一个签名使其可被<strong>EverFlow Analyzers</strong>识别。</p>
 <p>要将某个探针 $p$ 发送给某个交换机 $S$，利用了商用交换机普遍具备的解封装(<strong>Decapsulation</strong>)的能力。首先，将探针 $p$ 封装在 $p’$ 内部，并以交换机 $S$ 的环回地址作为其目的IP地址，之后将其发出。交换机 $S$ 接收到 $p’$ 之后执行解封装得到原数据包 $p$，然后就可以根据正常转发逻辑对其进行转发并观测其行为。</p>
@@ -588,11 +588,11 @@
           
             <a href="/tags/Measurement/" rel="tag"><i class="fa fa-tag"></i> Measurement</a>
           
+            <a href="/tags/SIGCOMM/" rel="tag"><i class="fa fa-tag"></i> SIGCOMM</a>
+          
             <a href="/tags/End-Host/" rel="tag"><i class="fa fa-tag"></i> End-Host</a>
           
             <a href="/tags/Packet-Level/" rel="tag"><i class="fa fa-tag"></i> Packet-Level</a>
-          
-            <a href="/tags/SIGCOMM/" rel="tag"><i class="fa fa-tag"></i> SIGCOMM</a>
           
         </div>
       
@@ -836,7 +836,7 @@
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -861,7 +861,7 @@
       <span class="post-meta-item-icon">
       <i class="fa fa-pencil"></i></span>
       博客全站共
-      <span title="Site words total count">99.9k 字</span>
+      <span title="Site words total count">100.0k 字</span>
     
    </div>
 
@@ -916,8 +916,6 @@
   
 
 
-  
-
 
 
 
@@ -956,11 +954,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -1494,7 +1487,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -1503,8 +1496,6 @@
   
 
   
-  
-    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </body>
 </html>

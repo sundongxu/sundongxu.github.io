@@ -95,15 +95,15 @@
 <meta property="og:site_name" content="Sun Dongxu&#39;s Blog">
 <meta property="og:description" content="全文概要 软件定义网络(Software Defined Network, SDN)核心在于网络转发设备的数据转发平面(Data Plane)和控制平面(Control Plane)的分离和解耦，以实现可编程按需定制、集中式统一管理、动态流量监控、自动化部署。2014年P4语言横空出世，进一步提高了面向交换机编程的可行性和效率，成为SDN领域的又一里程碑式的成果。本文从宣告P4诞生的SIGCOMM">
 <meta property="og:locale" content="zh-Hans">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/SDN/Language/P4/origin-background/forwarding-model.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/SDN/Language/P4/origin-background/p4-vs-openflow.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/SDN/Language/P4/origin-background/control-flow-for-mTag.png">
-<meta property="og:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/SDN/Language/P4/origin-background/table-dependency-graph.png">
-<meta property="og:updated_time" content="2018-05-14T07:48:17.273Z">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/SDN/Language/P4/origin-background/forwarding-model.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/SDN/Language/P4/origin-background/p4-vs-openflow.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/SDN/Language/P4/origin-background/control-flow-for-mTag.png">
+<meta property="og:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/SDN/Language/P4/origin-background/table-dependency-graph.png">
+<meta property="og:updated_time" content="2019-05-29T13:29:44.914Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="P4学习笔记：背景起源与基本原理">
 <meta name="twitter:description" content="全文概要 软件定义网络(Software Defined Network, SDN)核心在于网络转发设备的数据转发平面(Data Plane)和控制平面(Control Plane)的分离和解耦，以实现可编程按需定制、集中式统一管理、动态流量监控、自动化部署。2014年P4语言横空出世，进一步提高了面向交换机编程的可行性和效率，成为SDN领域的又一里程碑式的成果。本文从宣告P4诞生的SIGCOMM">
-<meta name="twitter:image" content="http://oyj8xdeki.bkt.clouddn.com/images/Network/SDN/Language/P4/origin-background/forwarding-model.png">
+<meta name="twitter:image" content="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/SDN/Language/P4/origin-background/forwarding-model.png">
 
 
 
@@ -542,7 +542,7 @@
 </li>
 </ol>
 <h2 id="基本原理"><a href="#基本原理" class="headerlink" title="基本原理"></a>基本原理</h2><hr>
-<h3 id="转发模型-Forwarding-Model"><a href="#转发模型-Forwarding-Model" class="headerlink" title="转发模型(Forwarding Model)"></a>转发模型(Forwarding Model)</h3><p>论文中提出的数据包转发抽象模型如下图所示，交换机通过一个可编程的解析器(<strong>Parser</strong>)以及其后紧跟的多个”匹配-动作”操作阶段，或顺序，或并行，或组合两种模式，完成数据包的转发任务。<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/SDN/Language/P4/origin-background/forwarding-model.png"></p>
+<h3 id="转发模型-Forwarding-Model"><a href="#转发模型-Forwarding-Model" class="headerlink" title="转发模型(Forwarding Model)"></a>转发模型(Forwarding Model)</h3><p>论文中提出的数据包转发抽象模型如下图所示，交换机通过一个可编程的解析器(<strong>Parser</strong>)以及其后紧跟的多个”匹配-动作”操作阶段，或顺序，或并行，或组合两种模式，完成数据包的转发任务。<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/SDN/Language/P4/origin-background/forwarding-model.png" alt="image"></p>
 <p>模型概括了数据包是如何在<strong>不同转发设备</strong>(包括：以太网交换机、负载均衡器、路由器)中，通过<strong>不同技术</strong>(包括：固定功能交换机ASIC芯片、网络处理器(Network Processor Unit，NPU)、现场可编程门阵列(Field Programmable Gate Array，FPGA)、可重配置交换机、软件交换机)处理的。</p>
 <p>基于此转发模型，设计出P4这样一种数据平面编程语言，用于描述数据包处理逻辑。从此，开发人员只需编写高层抽象的目标无关(<strong>Target-Inpendent</strong>)的P4程序，而无需关心底层设备细节，编译器会负责将程序映射到不同的底层转发设备，支持设备的种类范围从转发相对较慢的软件交换机到最快的基于ASIC的交换机，编译器都能将P4程序最终翻译成设备能理解并执行的机器指令。</p>
 <p>转发模型由两种类型的操作所控制：</p>
@@ -559,8 +559,7 @@
 <ol>
 <li>P4可编程定制数据解析流程，即<strong>Programmable Parser</strong>，而OpenFlow交换机只支持固定的包处理解析逻辑，即<strong>Fixed Parser</strong>；</li>
 <li>P4可执行串行(<strong>Serial</strong>)和并行(<strong>Parallel</strong>)的Match-Action操作，而OpenFlow仅支持串行操作；</li>
-<li>由于P4模型包含程序编译器，负责完成将P4程序到具体交换设备配置的映射，从而支持协议无关的转发，而OpenFlow支持的协议需要在初始时配置，此后每次修改都需要宕机，编写新的协议数据包处理逻辑再配置到交换机，不能做到无转发中断的弹性增加所支持的协议。<img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/SDN/Language/P4/origin-background/p4-vs-openflow.png">
-</li>
+<li>由于P4模型包含程序编译器，负责完成将P4程序到具体交换设备配置的映射，从而支持协议无关的转发，而OpenFlow支持的协议需要在初始时配置，此后每次修改都需要宕机，编写新的协议数据包处理逻辑再配置到交换机，不能做到无转发中断的弹性增加所支持的协议。<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/SDN/Language/P4/origin-background/p4-vs-openflow.png" alt="image"></li>
 </ol>
 <h3 id="核心部件-Key-Component"><a href="#核心部件-Key-Component" class="headerlink" title="核心部件(Key Component)"></a>核心部件(Key Component)</h3><h4 id="头部-Header"><a href="#头部-Header" class="headerlink" title="头部(Header)"></a>头部(Header)</h4><p>对数据包的处理都需要根据包头的字段内容来决定对其采取什么操作，所以在P4程序中需要定义对应的包头。</p>
 <blockquote>
@@ -617,7 +616,7 @@
 <p>The control program determines the order of match+action tables that are applied to a packet. A simple imperative program describe the flow of control between match+action tables.</p>
 </blockquote>
 <p>控制程序决定了数据包处理阶段的具体顺序，即数据包在不同匹配表中间的跳转关系。当表和动作被定义和实现之后，还需要控制程序来确定不同表之间的控制流。P4的控制流包括用于数据处理的表、判决条件以及条件成立时所需采取的操作等组件。</p>
-<p>下图显示了在边缘交换机上<strong>mTag</strong>包处理逻辑示例的控制流：<br><img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/SDN/Language/P4/origin-background/control-flow-for-mTag.png"></p>
+<p>下图显示了在边缘交换机上<strong>mTag</strong>包处理逻辑示例的控制流：<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/SDN/Language/P4/origin-background/control-flow-for-mTag.png" alt="image"></p>
 <p>被解析(<strong>parser mTag</strong>)之后的数据包，先进入<strong>source_check</strong>表，验证接收到的包和进入端口(Ingress Port)是否和表中的匹配要求一致，即数据包是否包含<strong>mTag</strong>头部，进入端口是否与核心交换机相连。根据该表中的<strong>reads</strong>属性匹配到对应数据包后，由<strong>action</strong>属性指定要采取的动作是：<strong>strip_tag</strong>，即将<strong>mTag</strong>头部从数据包中剥落，并将该数据包是否包含<strong>mTag</strong>头部记录在元数据中，流水线后部分的表可能还会匹配到该元数据，从而避免再次给该数据包打上<strong>mTag</strong>。</p>
 <p>之后<strong>local_switching</strong>表被执行，如果该表未能成功匹配，发生了<strong>misses</strong>，则表示该数据包的目的地不是一个与本交换机相连的主机，这时候就需要执行<strong>mTag_table</strong>。而无论本地局部转发(边缘交换机)还是核心转发(核心交换机)，控制流都会进入<strong>egress_check</strong>表，用于处理发往未知目的地的数据包，它会向SDN控制栈发送一个通知。</p>
 <p>综上，可以将数据包处理流水线表示成如下P4程序：</p>
@@ -634,8 +633,7 @@
 <li>数据包到来后，首先进入可编程定制(<strong>Programmable</strong>)的解析器，用于实现自定义的数据解析流程(针对头部字段，可将网络字节流解析成对应的协议数据包；</li>
 <li><p>数据包解析完毕后是与OpenFlow类似的匹配-动作操作，其流水线(<strong>Pipeline</strong>)支持串行和并行两种模式。受OpenFlow 1.4启发，P4设计的匹配过程也分为入口流水线(<strong>Ingress Pipeline</strong>)和出口流水线(<strong>Egress Pipeline</strong>)两个分离的数据处理流水线；</p>
 </li>
-<li><p>在定义交换机的处理逻辑时，需要定义数据包处理的依赖关系(<strong>Dependency</strong>)，即数据包头部字段之间的依赖关系，比如要处理IPv4头部字段，可能需要依赖于以太网头部字段的处理。这些依赖关系可以通过P4描述出来，并编译生成表依赖图TDG，其中每个表都是对应的一种协议或者一个类别的数据包的处理。TDG描述了匹配表之间的逻辑关系，输入和对应操作等行为，用于指导交换机进行数据处理。TDG被定义出来之后，将被编译器翻译成交换机所能理解的逻辑(机器指令)，并写入到交换机等交换实体中去，从而完成自定义的数据包处理流程。</p>
-<img src="http://oyj8xdeki.bkt.clouddn.com/images/Network/SDN/Language/P4/origin-background/table-dependency-graph.png">
+<li><p>在定义交换机的处理逻辑时，需要定义数据包处理的依赖关系(<strong>Dependency</strong>)，即数据包头部字段之间的依赖关系，比如要处理IPv4头部字段，可能需要依赖于以太网头部字段的处理。这些依赖关系可以通过P4描述出来，并编译生成表依赖图TDG，其中每个表都是对应的一种协议或者一个类别的数据包的处理。TDG描述了匹配表之间的逻辑关系，输入和对应操作等行为，用于指导交换机进行数据处理。TDG被定义出来之后，将被编译器翻译成交换机所能理解的逻辑(机器指令)，并写入到交换机等交换实体中去，从而完成自定义的数据包处理流程。<br><img src="https://raw.githubusercontent.com/sundongxu/blog-img-hosting/master/images/Network/SDN/Language/P4/origin-background/table-dependency-graph.png" alt="image"></p>
 </li>
 </ol>
 <h2 id="发展趋势"><a href="#发展趋势" class="headerlink" title="发展趋势"></a>发展趋势</h2><hr>
@@ -937,7 +935,7 @@
       <div class="footer-inner">
         <script async src="https://dn-lbstatics.qbox.me/busuanzi/2.3/busuanzi.pure.mini.js"></script>
 
-<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2018</span>
+<div class="copyright">&copy; 2017 &mdash; <span itemprop="copyrightYear">2019</span>
   <span class="with-love">
     <i class="fa fa-heart"></i>
   </span>
@@ -962,7 +960,7 @@
       <span class="post-meta-item-icon">
       <i class="fa fa-pencil"></i></span>
       博客全站共
-      <span title="Site words total count">99.9k 字</span>
+      <span title="Site words total count">100.0k 字</span>
     
    </div>
 
@@ -1017,8 +1015,6 @@
   
 
 
-  
-
 
 
 
@@ -1057,11 +1053,6 @@
   
   
     <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
-  
-
-  
-  
-    <script type="text/javascript" src="/lib/canvas-nest/canvas-nest.min.js"></script>
   
 
 
@@ -1595,7 +1586,7 @@
         }
       });
     </script>
-    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script>
+    <script type="text/javascript" src="//cdn.bootcss.com/mathjax/2.7.1/latest.js?config=TeX-AMS-MML_HTMLorMML"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 
 
@@ -1604,8 +1595,6 @@
   
 
   
-  
-    <script type="text/javascript" src="//cdn.bootcss.com/canvas-nest.js/1.0.0/canvas-nest.min.js"></script><!-- hexo-inject:begin --><!-- hexo-inject:end -->
   
 </body>
 </html>
